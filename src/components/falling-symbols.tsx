@@ -46,7 +46,7 @@ export function FallingSymbols() {
     }, []);
 
     return (
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
             {symbols}
         </div>
     )
