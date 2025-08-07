@@ -41,9 +41,35 @@ const Sparkle = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2l2.35 6.94L22 10l-5.94 4.54L18.7 22 12 17.31 5.3 22l2.64-7.46L2 10l7.65.06z"/>
     </svg>
-)
+);
 
-const SYMBOLS = [Mandala, Aum, Sparkle];
+const DharmaChakra = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="2" />
+    <path d="M12 2v20M2 12h20M5.636 5.636l12.728 12.728M5.636 18.364L18.364 5.636" />
+  </svg>
+);
+
+const Lotus = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" opacity="0"/>
+      <path d="M12 4.1C7.64 4.1 4.1 7.64 4.1 12S7.64 19.9 12 19.9s7.9-3.54 7.9-7.9c0-1.84-.63-3.53-1.69-4.89C16.89 5.8 14.59 4.1 12 4.1zm0 14.2c-3.47 0-6.3-2.83-6.3-6.3s2.83-6.3 6.3-6.3 6.3 2.83 6.3 6.3-2.83 6.3-6.3 6.3z"/>
+      <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm2.93 5.93c-.4.4-1.05.4-1.45 0l-1.48-1.48-1.48 1.48c-.4.4-1.05.4-1.45 0-.4-.4-.4-1.05 0-1.45l1.48-1.48-1.48-1.48c-.4-.4-.4-1.05 0-1.45s1.05-.4 1.45 0l1.48 1.48 1.48-1.48c.4-.4 1.05-.4 1.45 0s.4 1.05 0 1.45l-1.48 1.48 1.48 1.48c.4.4.4 1.05 0 1.45z"/>
+  </svg>
+);
+
+const Trishul = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 22V5" />
+        <path d="M5 5h14" />
+        <path d="M5 5a7 7 0 0 1 7-3 7 7 0 0 1 7 3" />
+        <path d="M12 5c-2 3-2 5 0 8" />
+        <path d="M12 5c2 3 2 5 0 8" />
+    </svg>
+);
+
+const SYMBOLS = [Mandala, Aum, Sparkle, DharmaChakra, Lotus, Trishul];
 
 const Symbol = ({ Icon, style }: { Icon: React.ElementType; style: React.CSSProperties }) => (
   <Icon
