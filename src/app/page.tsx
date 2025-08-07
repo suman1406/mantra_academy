@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { FeaturedCourses } from "@/components/featured-courses";
 import { SocialFeed } from "@/components/social-feed";
-import { Mandala } from "@/components/mandala";
+import { Swastik } from "@/components/swastik";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <section className="text-center flex flex-col items-center space-y-6">
         <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
           <div className="absolute inset-0 bg-accent/10 rounded-full blur-3xl"></div>
-          <Mandala />
+          <Swastik />
         </div>
         <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-primary">
           Welcome to Your Inner Light Sanctuary
