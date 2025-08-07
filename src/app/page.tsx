@@ -27,11 +27,6 @@ export default function Home() {
             <p className="max-w-2xl text-lg text-foreground/80">
               Discover tranquility and wisdom. Embark on a journey of self-discovery through our curated courses and a supportive community.
             </p>
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full text-lg px-8 py-6 group transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:scale-105" asChild>
-              <Link href="/courses">
-                Begin Your Journey <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
         </div>
       </section>
 
