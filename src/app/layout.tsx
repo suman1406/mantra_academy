@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AIChatbot } from "@/components/ai-chatbot";
 import { Toaster } from "@/components/ui/toaster";
+import { FallingSymbols } from "@/components/falling-symbols";
 
 export const metadata: Metadata = {
   title: "Inner Light Sanctuary",
@@ -25,6 +26,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
       </head>
       <body className={cn("font-body antialiased bg-background text-foreground min-h-screen flex flex-col")}>
+        <FallingSymbols />
         <Header />
         <main className="flex-grow container mx-auto px-4">
           {children}

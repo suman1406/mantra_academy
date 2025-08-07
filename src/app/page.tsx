@@ -3,13 +3,11 @@ import { FeaturedCourses } from "@/components/featured-courses";
 import { SocialFeed } from "@/components/social-feed";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { FallingSymbols } from "@/components/falling-symbols";
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12">
       <section className="text-center flex flex-col items-center space-y-6 relative w-full">
-         <FallingSymbols />
         <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center z-10">
           <div className="absolute inset-0 bg-accent/10 rounded-full blur-3xl"></div>
            {/* The spinning logo was here */}
