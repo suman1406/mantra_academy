@@ -4,6 +4,9 @@ import { SocialFeed } from "@/components/social-feed";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
+import { Testimonials } from "@/components/testimonials";
+import { Philosophy } from "@/components/philosophy";
+import { Community } from "@/components/community";
 
 export default function Home() {
   return (
@@ -32,7 +35,13 @@ export default function Home() {
         </div>
       </section>
 
+      <Philosophy />
+
       <FeaturedCourses />
+
+      <Testimonials />
+
+      <Community />
 
       <SocialFeed />
     </div>
