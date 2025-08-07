@@ -61,40 +61,40 @@
 }
 
 @keyframes fall-base {
-  from { transform: translateY(-10vh) rotate(var(--initial-rotate, 0deg)); opacity: 0; }
-  to { transform: translateY(110vh) rotate(var(--final-rotate, 0deg)); opacity: 1; }
+  from { transform: translateY(-20vh) rotate(var(--initial-rotate, 0deg)); opacity: 0; }
+  to { transform: translateY(120vh) rotate(var(--final-rotate, 0deg)); opacity: 1; }
 }
 
 @keyframes float-rotate {
-  from { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-  to { transform: translateY(110vh) rotate(360deg); opacity: 1; }
+  from { transform: translateY(-20vh) rotate(0deg); opacity: 0; }
+  to { transform: translateY(120vh) rotate(360deg); opacity: 1; }
 }
 
 @keyframes spin-fall {
-  from { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-  to { transform: translateY(110vh) rotate(720deg); opacity: 1; }
+  from { transform: translateY(-20vh) rotate(0deg); opacity: 0; }
+  to { transform: translateY(120vh) rotate(720deg); opacity: 1; }
 }
 
 @keyframes fade-glow {
-  0%, 100% { opacity: 0; transform: translateY(-10vh) scale(0.5); }
+  0%, 100% { opacity: 0; transform: translateY(-20vh) scale(0.5); }
   50% { opacity: 0.08; transform: translateY(50vh) scale(1); }
-  99% { opacity: 0; transform: translateY(110vh) scale(0.5); }
+  99% { opacity: 0; transform: translateY(120vh) scale(0.5); }
 }
 
 @keyframes float-up {
-  from { transform: translateY(110vh); opacity: 0; }
-  to { transform: translateY(-10vh); opacity: 1; }
+  from { transform: translateY(120vh); opacity: 0; }
+  to { transform: translateY(-20vh); opacity: 1; }
 }
 
 @keyframes pulse-drop {
-  0% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  0% { transform: translateY(-20vh) scale(1); opacity: 0; }
   50% { transform: scale(1.2); }
-  100% { transform: translateY(110vh) scale(1); opacity: 1; }
+  100% { transform: translateY(120vh) scale(1); opacity: 1; }
 }
 
 @keyframes float-drift {
-  from { transform: translate(-10vw, -10vh); opacity: 0; }
-  to { transform: translate(10vw, 110vh); opacity: 1; }
+  from { transform: translate(-10vw, -20vh); opacity: 0; }
+  to { transform: translate(10vw, 120vh); opacity: 1; }
 }
 
 @keyframes glow-pulse {
