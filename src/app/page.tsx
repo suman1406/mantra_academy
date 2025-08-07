@@ -4,7 +4,6 @@ import { SocialFeed } from "@/components/social-feed";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { FallingSymbols } from "@/components/falling-symbols";
-import { Logo } from "@/components/logo";
 
 export default function Home() {
   return (
@@ -13,7 +12,7 @@ export default function Home() {
          <FallingSymbols />
         <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center z-10">
           <div className="absolute inset-0 bg-accent/10 rounded-full blur-3xl"></div>
-           <Logo className="w-2/3 h-2/3" />
+           {/* The spinning logo was here */}
         </div>
         <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-primary z-10">
           Welcome to Your Inner Light Sanctuary
