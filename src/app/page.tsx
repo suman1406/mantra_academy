@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FeaturedCourses } from "@/components/featured-courses";
 import { SocialFeed } from "@/components/social-feed";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { Testimonials } from "@/components/testimonials";
