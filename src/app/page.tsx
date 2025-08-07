@@ -16,7 +16,7 @@ export default function Home() {
            <div className="absolute inset-0 bg-accent/10 rounded-full animate-[hero-glow_8s_ease-in-out_infinite]" />
            <div className="absolute inset-8 bg-primary/5 rounded-full animate-[hero-glow_12s_ease-in-out_infinite_4s]" />
            <div className="absolute inset-0 flex items-center justify-center">
-                <Logo className="h-24 w-auto text-primary/80 opacity-80" />
+                <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-[glow_6s_ease-in-out_infinite]" />
            </div>
         </div>
 
