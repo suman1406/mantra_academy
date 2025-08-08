@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Quote } from "lucide-react";
 import Image from "next/image";
 
 const testimonials = [
@@ -27,6 +26,32 @@ const testimonials = [
   },
 ];
 
+const QuoteIcon = () => (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8 text-primary/80"
+    >
+      <path
+        d="M6 17C6 15.3431 7.34315 14 9 14C10.6569 14 12 15.3431 12 17C12 18.6569 10.6569 20 9 20C7.34315 20 6 18.6569 6 17ZM6 17V7H12"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 17C15 15.3431 16.3431 14 18 14C19.6569 14 21 15.3431 21 17C21 18.6569 19.6569 20 18 20C16.3431 20 15 18.6569 15 17ZM15 17V7H21"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
 export function Testimonials() {
   return (
     <section className="w-full max-w-6xl">
@@ -36,9 +61,9 @@ export function Testimonials() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (
-          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-accent/20 hover:shadow-lg hover:-translate-y-1 group">
+          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 group">
             <CardHeader className="p-0 mb-4">
-                <Quote className="h-8 w-8 text-accent" />
+                <QuoteIcon />
             </CardHeader>
             <CardContent className="p-0 flex-grow">
               <p className="text-foreground/80 italic">"{testimonial.quote}"</p>

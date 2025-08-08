@@ -75,25 +75,25 @@ export default function CoursesPage() {
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <Card key={course.title} className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-accent/20 hover:shadow-lg hover:-translate-y-1">
+            <Card key={course.title} className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 group">
               <CardHeader className="p-0">
-                <div className="relative h-56 w-full">
+                <div className="relative h-56 w-full overflow-hidden">
                   <Image
                     src={course.image}
                     alt={course.title}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                     data-ai-hint={course.aiHint}
                   />
                 </div>
               </CardHeader>
               <CardContent className="p-6 flex-grow">
-                <Badge variant="secondary" className="mb-2 bg-accent/20 text-accent-foreground">{course.category}</Badge>
+                <Badge variant="secondary" className="mb-2 bg-primary/10 text-primary">{course.category}</Badge>
                 <CardTitle className="font-headline text-2xl text-primary">{course.title}</CardTitle>
                 <p className="text-foreground/70 mt-2">{course.description}</p>
               </CardContent>
               <CardFooter className="p-6 pt-0">
-                <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">Enroll Now</Button>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Enroll Now</Button>
               </CardFooter>
             </Card>
           ))}
