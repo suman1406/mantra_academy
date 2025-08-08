@@ -1,7 +1,14 @@
+
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AnimatePresence, motion } from "framer-motion";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowRight } from "lucide-react";
 
 const courses = [
   {
@@ -62,41 +69,89 @@ const courses = [
   },
 ];
 
+const courseCategories = ["All", ...Array.from(new Set(courses.map(c => c.category)))];
+
 export default function CoursesPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredCourses = selectedCategory === "All"
+    ? courses
+    : courses.filter(course => course.category === selectedCategory);
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <div className="py-12 space-y-20">
-      <section className="text-center">
-        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">Our Courses</h1>
+    <div className="py-12 space-y-16">
+      <motion.section
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="text-center"
+      >
+        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
+          Expand Your Consciousness
+        </h1>
         <p className="mt-6 max-w-3xl mx-auto space-y-4 text-lg text-foreground/80">
-          Explore our offerings, designed to guide you on your spiritual journey.
+          Our courses are crafted to guide you through every stage of your spiritual awakening.
         </p>
-      </section>
+      </motion.section>
 
       <section>
+        <div className="flex justify-center mb-12">
+            <Tabs defaultValue="All" onValueChange={setSelectedCategory}>
+                <TabsList className="bg-card/80 backdrop-blur-sm border border-border/40">
+                    {courseCategories.map(category => (
+                        <TabsTrigger key={category} value={category} className="text-base px-4">
+                            {category}
+                        </TabsTrigger>
+                    ))}
+                </TabsList>
+            </Tabs>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course) => (
-            <Card key={course.title} className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 group">
-              <CardHeader className="p-0">
-                <div className="relative h-56 w-full overflow-hidden">
-                  <Image
-                    src={course.image}
-                    alt={course.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-ai-hint={course.aiHint}
-                  />
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 flex-grow">
-                <Badge variant="secondary" className="mb-2 bg-primary/10 text-primary">{course.category}</Badge>
-                <CardTitle className="font-headline text-2xl text-primary">{course.title}</CardTitle>
-                <p className="text-foreground/70 mt-2">{course.description}</p>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Enroll Now</Button>
-              </CardFooter>
-            </Card>
-          ))}
+          <AnimatePresence>
+            {filteredCourses.map((course, i) => (
+              <motion.div
+                key={course.title}
+                layout
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+              >
+                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 group hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
+                  <CardHeader className="p-0">
+                    <div className="relative h-56 w-full overflow-hidden">
+                      <Image
+                        src={course.image}
+                        alt={course.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        data-ai-hint={course.aiHint}
+                      />
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/50 transition-colors" />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-6 flex-grow flex flex-col">
+                    <Badge variant="secondary" className="mb-2 bg-primary/10 text-primary self-start">{course.category}</Badge>
+                    <CardTitle className="font-headline text-2xl text-primary">{course.title}</CardTitle>
+                    <p className="text-foreground/70 mt-2 flex-grow">{course.description}</p>
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0">
+                    <Button className="w-full bg-primary/90 text-primary-foreground hover:bg-primary group transition-all duration-300">
+                      Enroll Now
+                      <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </section>
     </div>
