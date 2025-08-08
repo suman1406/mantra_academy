@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const spiritualSymbols = [
-    { symbol: 'ॐ', label: 'Aum', className: "text-2xl" },
+    // { symbol: 'ॐ', label: 'Aum', className: "text-2xl" },
     { symbol: '✨', label: 'Light Particles', className: "text-sm" },
     { symbol: '☸️', label: 'Dharma Chakra', className: "text-2xl" },
-    { symbol: '🔱', label: 'Trishul', className: "text-2xl" },
+    // { symbol: '🔱', label: 'Trishul', className: "text-2xl" },
     { symbol: '🌸', label: 'Lotus', className: "text-2xl" },
     { symbol: '🌀', label: 'Sacred Geometry', className: "text-2xl" }
 ];
