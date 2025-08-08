@@ -117,8 +117,8 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
           <p className="text-foreground/70 mt-2 flex-grow">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
-          <Button className="w-full bg-primary/90 text-primary-foreground hover:bg-primary group transition-all duration-300 transform hover:scale-105">
-            Explore Course
+          <Button variant="outline" className="w-full group transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary">
+            Enroll Now
             <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
           </Button>
         </CardFooter>
