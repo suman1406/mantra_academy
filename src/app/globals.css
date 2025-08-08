@@ -65,30 +65,26 @@
 
 @keyframes fall {
   0% {
-    transform: translateY(-20vh) translateX(var(--tw-translate-x)) rotate(0deg);
+    transform: translateY(-20vh) translateX(0) rotate(0deg);
     opacity: 0;
   }
   10% {
     opacity: 1;
   }
+  25% {
+    transform: translateY(25vh) translateX(var(--drift-distance)) rotate(calc(var(--final-rotate) * 0.25));
+  }
+  50% {
+    transform: translateY(55vh) translateX(calc(var(--drift-distance) * -1)) rotate(calc(var(--final-rotate) * 0.5));
+  }
+  75% {
+     transform: translateY(85vh) translateX(var(--drift-distance)) rotate(calc(var(--final-rotate) * 0.75));
+  }
   100% {
-    transform: translateY(120vh) translateX(var(--tw-translate-x)) rotate(var(--final-rotate));
+    transform: translateY(120vh) translateX(0) rotate(var(--final-rotate));
     opacity: 0;
   }
 }
-
-@keyframes drift {
-  0% {
-    transform: translateX(0px);
-  }
-  50% {
-    transform: translateX(var(--drift-distance));
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
-
 
 @keyframes hero-glow {
   0%, 100% {

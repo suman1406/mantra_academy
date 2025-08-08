@@ -31,8 +31,6 @@ export function FallingSymbols() {
                 const spec = spiritualSymbols[i % spiritualSymbols.length];
                 const fallDuration = Math.random() * 12 + 8; // 8 to 20 seconds
                 const fallDelay = Math.random() * 15; // 0 to 15 seconds delay
-                const driftDuration = Math.random() * 6 + 4; // 4 to 10 seconds
-                const driftDelay = Math.random() * 5;
                 const finalRotate = `${(Math.random() - 0.5) * 720}deg`;
                 const driftDistance = `${(Math.random() - 0.5) * 100}px`;
 
@@ -42,7 +40,7 @@ export function FallingSymbols() {
                     opacity: 0,
                     '--final-rotate': finalRotate,
                     '--drift-distance': driftDistance,
-                    animation: `fall ${fallDuration}s linear ${fallDelay}s infinite, drift ${driftDuration}s ease-in-out ${driftDelay}s infinite`,
+                    animation: `fall ${fallDuration}s linear ${fallDelay}s infinite`,
                     animationFillMode: 'forwards',
                 };
 
