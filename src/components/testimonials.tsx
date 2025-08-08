@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote } from "lucide-react";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -35,7 +36,7 @@ export function Testimonials() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (
-          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-accent/20 hover:shadow-lg hover:-translate-y-1">
+          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-accent/20 hover:shadow-lg hover:-translate-y-1 group">
             <CardHeader className="p-0 mb-4">
                 <Quote className="h-8 w-8 text-accent" />
             </CardHeader>
@@ -43,8 +44,8 @@ export function Testimonials() {
               <p className="text-foreground/80 italic">"{testimonial.quote}"</p>
             </CardContent>
             <div className="flex items-center mt-6 p-0">
-              <Avatar className="h-12 w-12 mr-4">
-                <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} />
+              <Avatar className="h-12 w-12 mr-4 overflow-hidden">
+                <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-300" />
                 <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div>

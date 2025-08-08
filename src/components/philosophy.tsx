@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 export function Philosophy() {
   return (
     <section className="w-full max-w-6xl">
-      <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center">
+      <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
         <div className="p-8 md:p-12">
           <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Our Philosophy</h2>
           <div className="text-foreground/80 mt-4 space-y-4 text-lg">
@@ -16,12 +16,12 @@ export function Philosophy() {
             </p>
           </div>
         </div>
-        <div className="relative h-64 md:h-full w-full min-h-[300px]">
+        <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden">
            <Image
             src="https://placehold.co/600x800.png"
             alt="A serene sanctuary with soft light"
             fill
-            className="object-cover"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
             data-ai-hint="serene sanctuary soft light"
           />
         </div>

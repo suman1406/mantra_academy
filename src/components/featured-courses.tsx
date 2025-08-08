@@ -53,14 +53,14 @@ export function FeaturedCourses() {
           {courses.map((course, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <div className="p-1">
-                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-accent/20 hover:shadow-lg hover:-translate-y-1">
+                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-accent/20 hover:shadow-lg hover:-translate-y-1 group">
                   <CardHeader className="p-0">
-                    <div className="relative h-56 w-full">
+                    <div className="relative h-56 w-full overflow-hidden">
                       <Image
                         src={course.image}
                         alt={course.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                         data-ai-hint={course.aiHint}
                       />
                     </div>

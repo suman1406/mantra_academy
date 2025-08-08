@@ -20,7 +20,9 @@ export function SocialFeed() {
         {feedItems.map((item, index) => (
           <Card key={index} className="overflow-hidden group relative border-border/40 bg-card/80 backdrop-blur-sm">
             <CardContent className="p-0">
-              <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
+              <div className="overflow-hidden">
+                <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-4 left-4 text-white">
                 <div className="flex items-center space-x-2">
