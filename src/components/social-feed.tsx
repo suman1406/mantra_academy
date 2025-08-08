@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { Instagram, Youtube } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const feedItems = [
   { platform: "Instagram", image: "https://placehold.co/400x400.png", aiHint: "spiritual quote", handle: "@innerlight" },
@@ -8,6 +12,46 @@ const feedItems = [
   { platform: "Instagram", image: "https://placehold.co/400x400.png", aiHint: "yoga pose", handle: "@innerlight" },
   { platform: "Instagram", image: "https://placehold.co/400x400.png", aiHint: "mandala art", handle: "@innerlight" },
 ];
+
+const SocialCard = ({ item }: { item: typeof feedItems[0] }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - left - width / 2) / (width / 2);
+        const y = (e.clientY - top - height / 2) / (height / 2);
+        cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
+    };
+
+    const onMouseLeave = () => {
+        if (!cardRef.current) return;
+        cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+    };
+    return (
+         <motion.div
+            ref={cardRef}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+            style={{ transition: 'transform 0.1s ease-out' }}
+         >
+            <Card className="overflow-hidden group relative border-border/40 bg-card/80 backdrop-blur-sm">
+                <CardContent className="p-0">
+                  <div className="overflow-hidden">
+                    <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <div className="flex items-center space-x-2">
+                      {item.platform === "Instagram" ? <Instagram /> : <Youtube />}
+                      <span className="font-semibold">{item.handle}</span>
+                    </div>
+                  </div>
+                </CardContent>
+            </Card>
+        </motion.div>
+    )
+}
 
 export function SocialFeed() {
   return (
@@ -18,20 +62,7 @@ export function SocialFeed() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {feedItems.map((item, index) => (
-          <Card key={index} className="overflow-hidden group relative border-border/40 bg-card/80 backdrop-blur-sm">
-            <CardContent className="p-0">
-              <div className="overflow-hidden">
-                <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-4 left-4 text-white">
-                <div className="flex items-center space-x-2">
-                  {item.platform === "Instagram" ? <Instagram /> : <Youtube />}
-                  <span className="font-semibold">{item.handle}</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            <SocialCard key={index} item={item} />
         ))}
       </div>
     </section>

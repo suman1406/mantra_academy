@@ -6,10 +6,12 @@ import { Logo } from "@/components/logo";
 import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Community } from "@/components/community";
+import { FallingSymbols } from "@/components/falling-symbols";
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12">
+      <FallingSymbols />
       <section className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center">
         <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-0 mb-8">
            <div className="absolute inset-0 bg-accent/10 rounded-full animate-[hero-glow_8s_ease-in-out_infinite]" />

@@ -1,7 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Users, Calendar, Mic, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const communityFeatures = [
     {
@@ -21,6 +25,38 @@ const communityFeatures = [
     }
 ]
 
+const CommunityCard = ({ feature }: { feature: typeof communityFeatures[0] }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - left - width / 2) / (width / 2);
+        const y = (e.clientY - top - height / 2) / (height / 2);
+        cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
+    };
+
+    const onMouseLeave = () => {
+        if (!cardRef.current) return;
+        cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+    };
+
+    return (
+        <motion.div
+            ref={cardRef}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+            style={{ transition: 'transform 0.1s ease-out' }}
+        >
+            <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center text-center h-full">
+                <feature.icon className="h-12 w-12 text-accent mb-4"/>
+                <h3 className="text-2xl font-headline text-primary mb-2">{feature.title}</h3>
+                <p className="text-foreground/70 flex-grow">{feature.description}</p>
+            </Card>
+        </motion.div>
+    )
+}
+
 export function Community() {
   return (
     <section className="w-full max-w-6xl">
@@ -28,13 +64,9 @@ export function Community() {
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Join Our Vibrant Community</h2>
             <p className="text-foreground/80 mt-2">Grow and share your journey with others</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 text-center">
+        <div className="grid md:grid-cols-3 gap-8">
             {communityFeatures.map((feature, index) => (
-                 <Card key={index} className="p-8 border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center">
-                    <feature.icon className="h-12 w-12 text-accent mb-4"/>
-                    <h3 className="text-2xl font-headline text-primary mb-2">{feature.title}</h3>
-                    <p className="text-foreground/70 flex-grow">{feature.description}</p>
-                 </Card>
+                 <CommunityCard key={index} feature={feature} />
             ))}
         </div>
         <div className="text-center mt-12">
