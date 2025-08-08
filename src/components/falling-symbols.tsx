@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const spiritualSymbols = [
-    { symbol: 'ॐ', label: 'Aum', animation: 'float-rotate', opacity: 0.1, className: "text-2xl" },
-    { symbol: '✨', label: 'Light Particles', animation: 'fade-glow', opacity: 0.08, className: "text-sm" },
-    { symbol: '☸️', label: 'Dharma Chakra', animation: 'spin-fall', opacity: 0.1, className: "text-2xl" },
-    { symbol: '🔱', label: 'Trishul', animation: 'pulse-drop', opacity: 0.09, className: "text-2xl" },
-    { symbol: '🌸', label: 'Lotus', animation: 'float-drift', opacity: 0.1, className: "text-2xl" },
-    { symbol: '🌀', label: 'Sacred Geometry', animation: 'glow-pulse', opacity: 0.09, className: "text-2xl" }
+    { symbol: 'ॐ', label: 'Aum', className: "text-2xl" },
+    { symbol: '✨', label: 'Light Particles', className: "text-sm" },
+    { symbol: '☸️', label: 'Dharma Chakra', className: "text-2xl" },
+    { symbol: '🔱', label: 'Trishul', className: "text-2xl" },
+    { symbol: '🌸', label: 'Lotus', className: "text-2xl" },
+    { symbol: '🌀', label: 'Sacred Geometry', className: "text-2xl" }
 ];
 
 
@@ -27,17 +27,25 @@ export function FallingSymbols() {
 
     useEffect(() => {
         const generateSymbols = () => {
-            const newSymbols = Array.from({ length: 30 }).map((_, i) => {
+            const newSymbols = Array.from({ length: 40 }).map((_, i) => {
                 const spec = spiritualSymbols[i % spiritualSymbols.length];
-                const animationDuration = Math.random() * 15 + 10;
-                const animationDelay = Math.random() * 10;
-                
+                const fallDuration = Math.random() * 12 + 8; // 8 to 20 seconds
+                const fallDelay = Math.random() * 15; // 0 to 15 seconds delay
+                const driftDuration = Math.random() * 6 + 4; // 4 to 10 seconds
+                const driftDelay = Math.random() * 5;
+                const finalRotate = `${(Math.random() - 0.5) * 720}deg`;
+                const driftDistance = `${(Math.random() - 0.5) * 100}px`;
+
+
                 const style: React.CSSProperties = {
                     left: `${Math.random() * 100}vw`,
-                    opacity: spec.opacity,
-                    animation: `${spec.animation} ${animationDuration}s linear ${animationDelay}s infinite, glow 5s ease-in-out ${Math.random() * 5}s infinite`,
+                    opacity: 0,
+                    '--final-rotate': finalRotate,
+                    '--drift-distance': driftDistance,
+                    animation: `fall ${fallDuration}s linear ${fallDelay}s infinite, drift ${driftDuration}s ease-in-out ${driftDelay}s infinite`,
                     animationFillMode: 'forwards',
                 };
+
                 return <Symbol key={i} symbol={spec.symbol} style={style} className={spec.className} />;
             });
             setSymbols(newSymbols);
