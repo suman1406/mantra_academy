@@ -3,6 +3,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const courses = [
   {
@@ -53,7 +55,7 @@ export function FeaturedCourses() {
           {courses.map((course, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <div className="p-1">
-                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 group">
+                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 group hover:shadow-primary/20 hover:shadow-lg">
                   <CardHeader className="p-0">
                     <div className="relative h-56 w-full overflow-hidden">
                       <Image
@@ -71,7 +73,12 @@ export function FeaturedCourses() {
                     <p className="text-foreground/70 mt-2">{course.description}</p>
                   </CardContent>
                   <CardFooter className="p-6 pt-0">
-                    <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Enroll Now</Button>
+                     <Button variant="outline" className="w-full group transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
+                        <Link href="/courses">
+                           Explore Courses
+                           <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </Button>
                   </CardFooter>
                 </Card>
               </div>

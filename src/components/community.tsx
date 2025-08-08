@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Users, Calendar, Mic } from "lucide-react";
+import { Users, Calendar, Mic, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const communityFeatures = [
@@ -38,9 +38,10 @@ export function Community() {
             ))}
         </div>
         <div className="text-center mt-12">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full text-lg px-8 py-6 group transition-all duration-300 hover:shadow-lg hover:shadow-accent/40 hover:scale-105" asChild>
+            <Button variant="outline" size="lg" className="group transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
                 <Link href="#">
-                Become a Member
+                    Become a Member
+                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </Link>
             </Button>
         </div>

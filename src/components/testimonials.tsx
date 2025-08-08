@@ -61,7 +61,7 @@ export function Testimonials() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (
-          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 group">
+          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg group">
             <CardHeader className="p-0 mb-4">
                 <QuoteIcon />
             </CardHeader>
