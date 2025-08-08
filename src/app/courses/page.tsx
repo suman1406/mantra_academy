@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { AnimatePresence, motion } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight } from "lucide-react";
+import { FallingSymbols } from "@/components/falling-symbols";
 
 const courses = [
   {
@@ -71,6 +72,65 @@ const courses = [
 
 const courseCategories = ["All", ...Array.from(new Set(courses.map(c => c.category)))];
 
+const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - left - width / 2) / (width/2);
+    const y = (e.clientY - top - height / 2) / (height/2);
+    cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
+  };
+
+  const onMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3, delay: i * 0.05 }}
+      ref={cardRef}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ transition: 'transform 0.1s ease-out' }}
+      className="w-full"
+    >
+      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 group hover:shadow-primary/20 hover:shadow-2xl">
+        <CardHeader className="p-0">
+          <div className="relative h-56 w-full overflow-hidden">
+            <Image
+              src={course.image}
+              alt={course.title}
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-500"
+              data-ai-hint={course.aiHint}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 group-hover:from-black/60 transition-colors" />
+             <Badge variant="secondary" className="absolute top-4 right-4 bg-primary/20 text-primary border-primary/40">{course.category}</Badge>
+          </div>
+        </CardHeader>
+        <CardContent className="p-6 flex-grow flex flex-col">
+          <CardTitle className="font-headline text-2xl text-primary">{course.title}</CardTitle>
+          <p className="text-foreground/70 mt-2 flex-grow">{course.description}</p>
+        </CardContent>
+        <CardFooter className="p-6 pt-0">
+          <Button className="w-full bg-primary/90 text-primary-foreground hover:bg-primary group transition-all duration-300 transform hover:scale-105">
+            Explore Course
+            <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </CardFooter>
+      </Card>
+    </motion.div>
+  );
+};
+
+
 export default function CoursesPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -78,13 +138,9 @@ export default function CoursesPage() {
     ? courses
     : courses.filter(course => course.category === selectedCategory);
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <div className="py-12 space-y-16">
+    <div className="py-12 space-y-16 relative">
+      <FallingSymbols />
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -112,44 +168,10 @@ export default function CoursesPage() {
             </Tabs>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <AnimatePresence>
             {filteredCourses.map((course, i) => (
-              <motion.div
-                key={course.title}
-                layout
-                variants={cardVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-              >
-                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 group hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
-                  <CardHeader className="p-0">
-                    <div className="relative h-56 w-full overflow-hidden">
-                      <Image
-                        src={course.image}
-                        alt={course.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        data-ai-hint={course.aiHint}
-                      />
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/50 transition-colors" />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6 flex-grow flex flex-col">
-                    <Badge variant="secondary" className="mb-2 bg-primary/10 text-primary self-start">{course.category}</Badge>
-                    <CardTitle className="font-headline text-2xl text-primary">{course.title}</CardTitle>
-                    <p className="text-foreground/70 mt-2 flex-grow">{course.description}</p>
-                  </CardContent>
-                  <CardFooter className="p-6 pt-0">
-                    <Button className="w-full bg-primary/90 text-primary-foreground hover:bg-primary group transition-all duration-300">
-                      Enroll Now
-                      <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </motion.div>
+              <CourseCard key={course.title} course={course} i={i} />
             ))}
           </AnimatePresence>
         </div>
