@@ -1,13 +1,12 @@
 
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatePresence, motion } from "framer-motion";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight } from "lucide-react";
 import { FallingSymbols } from "@/components/falling-symbols";
 
@@ -70,8 +69,6 @@ const courses = [
   },
 ];
 
-const courseCategories = ["All", ...Array.from(new Set(courses.map(c => c.category)))];
-
 const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -132,12 +129,6 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
 
 
 export default function CoursesPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const filteredCourses = selectedCategory === "All"
-    ? courses
-    : courses.filter(course => course.category === selectedCategory);
-
   return (
     <div className="py-12 space-y-16 relative">
       <FallingSymbols />
@@ -156,21 +147,9 @@ export default function CoursesPage() {
       </motion.section>
 
       <section>
-        <div className="flex justify-center mb-12">
-            <Tabs defaultValue="All" onValueChange={setSelectedCategory}>
-                <TabsList className="bg-card/80 backdrop-blur-sm border border-border/40">
-                    {courseCategories.map(category => (
-                        <TabsTrigger key={category} value={category} className="text-base px-4">
-                            {category}
-                        </TabsTrigger>
-                    ))}
-                </TabsList>
-            </Tabs>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
           <AnimatePresence>
-            {filteredCourses.map((course, i) => (
+            {courses.map((course, i) => (
               <CourseCard key={course.title} course={course} i={i} />
             ))}
           </AnimatePresence>
