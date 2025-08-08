@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { FallingSymbols } from "@/components/falling-symbols";
 
 const courses = [
   {
@@ -131,7 +130,6 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
 export default function CoursesPage() {
   return (
     <div className="py-12 space-y-16 relative">
-      <FallingSymbols />
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}

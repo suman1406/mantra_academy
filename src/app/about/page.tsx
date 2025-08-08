@@ -5,7 +5,6 @@ import { useRef } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { FallingSymbols } from "@/components/falling-symbols";
 
 const teamMembers = [
   {
@@ -96,7 +95,6 @@ export default function AboutPage() {
 
   return (
     <div className="py-12 space-y-20">
-      <FallingSymbols />
       <motion.section
         initial="hidden"
         animate="visible"
