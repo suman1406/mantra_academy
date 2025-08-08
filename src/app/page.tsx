@@ -1,3 +1,6 @@
+
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { FeaturedCourses } from "@/components/featured-courses";
 import { SocialFeed } from "@/components/social-feed";
@@ -7,8 +10,21 @@ import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Community } from "@/components/community";
 import { FallingSymbols } from "@/components/falling-symbols";
+import { motion } from "framer-motion";
 
 export default function Home() {
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12">
       <FallingSymbols />
@@ -31,15 +47,25 @@ export default function Home() {
         </div>
       </section>
 
-      <Philosophy />
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+        <Philosophy />
+      </motion.div>
+      
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+        <FeaturedCourses />
+      </motion.div>
 
-      <FeaturedCourses />
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+        <Testimonials />
+      </motion.div>
+      
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+        <Community />
+      </motion.div>
 
-      <Testimonials />
-
-      <Community />
-
-      <SocialFeed />
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+        <SocialFeed />
+      </motion.div>
     </div>
   );
 }

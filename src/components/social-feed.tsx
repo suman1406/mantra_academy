@@ -13,7 +13,7 @@ const feedItems = [
   { platform: "Instagram", image: "https://placehold.co/400x400.png", aiHint: "mandala art", handle: "@innerlight" },
 ];
 
-const SocialCard = ({ item }: { item: typeof feedItems[0] }) => {
+const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -34,6 +34,10 @@ const SocialCard = ({ item }: { item: typeof feedItems[0] }) => {
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
             style={{ transition: 'transform 0.1s ease-out' }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
          >
             <Card className="overflow-hidden group relative border-border/40 bg-card/80 backdrop-blur-sm">
                 <CardContent className="p-0">
@@ -62,7 +66,7 @@ export function SocialFeed() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {feedItems.map((item, index) => (
-            <SocialCard key={index} item={item} />
+            <SocialCard key={index} item={item} index={index} />
         ))}
       </div>
     </section>

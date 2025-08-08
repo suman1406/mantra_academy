@@ -1,6 +1,9 @@
+"use client";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 
 const testimonials = [
   {
@@ -52,6 +55,55 @@ const QuoteIcon = () => (
     </svg>
   );
 
+const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - left - width / 2) / (width / 2);
+        const y = (e.clientY - top - height / 2) / (height / 2);
+        cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
+    };
+
+    const onMouseLeave = () => {
+        if (!cardRef.current) return;
+        cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+    };
+
+    return (
+        <motion.div
+            ref={cardRef}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+            style={{ transition: 'transform 0.1s ease-out' }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+        >
+            <Card className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg group h-full">
+              <CardHeader className="p-0 mb-4">
+                  <QuoteIcon />
+              </CardHeader>
+              <CardContent className="p-0 flex-grow">
+                <p className="text-foreground/80 italic">"{testimonial.quote}"</p>
+              </CardContent>
+              <div className="flex items-center mt-6 p-0">
+                <Avatar className="h-12 w-12 mr-4 overflow-hidden">
+                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-300" />
+                  <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-bold text-primary">{testimonial.name}</p>
+                  <p className="text-sm text-foreground/60">{testimonial.title}</p>
+                </div>
+              </div>
+            </Card>
+        </motion.div>
+    )
+}
+
 export function Testimonials() {
   return (
     <section className="w-full max-w-6xl">
@@ -61,24 +113,7 @@ export function Testimonials() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (
-          <Card key={index} className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg group">
-            <CardHeader className="p-0 mb-4">
-                <QuoteIcon />
-            </CardHeader>
-            <CardContent className="p-0 flex-grow">
-              <p className="text-foreground/80 italic">"{testimonial.quote}"</p>
-            </CardContent>
-            <div className="flex items-center mt-6 p-0">
-              <Avatar className="h-12 w-12 mr-4 overflow-hidden">
-                <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-300" />
-                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="font-bold text-primary">{testimonial.name}</p>
-                <p className="text-sm text-foreground/60">{testimonial.title}</p>
-              </div>
-            </div>
-          </Card>
+          <TestimonialCard key={index} testimonial={testimonial} />
         ))}
       </div>
     </section>

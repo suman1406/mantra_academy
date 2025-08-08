@@ -28,6 +28,10 @@ export function Philosophy() {
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
         style={{ transition: 'transform 0.1s ease-out' }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
       >
         <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
           <div className="p-8 md:p-12">

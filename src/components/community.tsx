@@ -25,7 +25,7 @@ const communityFeatures = [
     }
 ]
 
-const CommunityCard = ({ feature }: { feature: typeof communityFeatures[0] }) => {
+const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0], index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -47,6 +47,10 @@ const CommunityCard = ({ feature }: { feature: typeof communityFeatures[0] }) =>
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
             style={{ transition: 'transform 0.1s ease-out' }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
         >
             <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center text-center h-full">
                 <feature.icon className="h-12 w-12 text-accent mb-4"/>
@@ -66,7 +70,7 @@ export function Community() {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
             {communityFeatures.map((feature, index) => (
-                 <CommunityCard key={index} feature={feature} />
+                 <CommunityCard key={index} feature={feature} index={index} />
             ))}
         </div>
         <div className="text-center mt-12">
