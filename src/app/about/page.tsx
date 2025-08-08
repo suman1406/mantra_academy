@@ -94,7 +94,7 @@ export default function AboutPage() {
     };
 
   return (
-    <div className="py-12 space-y-20">
+    <div className="py-12 space-y-20 flex flex-col items-center">
       <motion.section
         initial="hidden"
         animate="visible"
@@ -117,6 +117,7 @@ export default function AboutPage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
+        className="w-full max-w-6xl"
       >
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Guides</h2>

@@ -129,7 +129,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
 
 export default function CoursesPage() {
   return (
-    <div className="py-12 space-y-16 relative">
+    <div className="py-12 space-y-16 relative flex flex-col items-center">
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export default function CoursesPage() {
         </p>
       </motion.section>
 
-      <section>
+      <section className="w-full max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
           <AnimatePresence>
             {courses.map((course, i) => (
