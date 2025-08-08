@@ -45,27 +45,28 @@ export default function Home() {
         </div>
       </section>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
         <Philosophy />
       </motion.div>
       
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
         <FeaturedCourses />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
         <Testimonials />
       </motion.div>
       
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
         <Community />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full">
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
         <SocialFeed />
       </motion.div>
     </div>
   );
 }
+
 
 
