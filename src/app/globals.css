@@ -6,48 +6,48 @@
 @layer base {
   :root {
     /* Light mode */
-    --background: 45 67% 94%; /* #FAF5E4 Light Cream */
-    --foreground: 0 11% 21%; /* #3B2F2F Body Text */
-    --card: 35 43% 88%; /* #EFE1D1 Warm Beige */
-    --card-foreground: 22 17% 26%; /* #5C3B28 Primary Text */
-    --popover: 45 67% 94%;
-    --popover-foreground: 0 11% 21%;
-    --primary: 4 54% 35%; /* #8B2E26 Crimson/Maroon */
-    --primary-foreground: 45 67% 94%;
-    --secondary: 21 58% 40%; /* #A0522D Burnt Sienna */
-    --secondary-foreground: 45 67% 94%;
-    --muted: 35 33% 83%; /* #E4D3C1 Slightly Darker Beige */
-    --muted-foreground: 30 18% 40%; /* #7A6654 Subtle Text */
-    --accent: 4 54% 35%; /* #8B2E26 Crimson/Maroon */
-    --accent-foreground: 45 67% 94%;
+    --background: 39 51% 95%; /* Light cream */
+    --foreground: 24 10% 25%; /* Dark, warm gray for text */
+    --card: 39 45% 92%; /* Slightly deeper cream for cards */
+    --card-foreground: 24 10% 25%;
+    --popover: 39 51% 95%;
+    --popover-foreground: 24 10% 25%;
+    --primary: 0 84% 60%; /* Bright Red */
+    --primary-foreground: 39 51% 95%; /* Cream text on red */
+    --secondary: 0 70% 50%; /* Slightly muted red */
+    --secondary-foreground: 39 51% 95%;
+    --muted: 39 40% 90%;
+    --muted-foreground: 24 10% 45%;
+    --accent: 0 84% 60%;
+    --accent-foreground: 39 51% 95%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 39 51% 95%;
-    --border: 35 33% 83%;
-    --input: 35 33% 83%;
-    --ring: 4 54% 35%;
+    --border: 39 30% 85%;
+    --input: 39 30% 90%;
+    --ring: 0 84% 60%;
   }
 
   .dark {
     /* Dark mode */
-    --background: 22 17% 10%; /* Dark Brown */
-    --foreground: 35 43% 88%; /* Light Beige */
-    --card: 22 17% 15%; /* Darker Brown */
-    --card-foreground: 35 43% 88%;
-    --popover: 22 17% 10%;
-    --popover-foreground: 35 43% 88%;
-    --primary: 4 54% 45%; /* Brighter Crimson/Maroon */
-    --primary-foreground: 35 43% 88%;
-    --secondary: 21 58% 50%; /* Brighter Burnt Sienna */
-    --secondary-foreground: 22 17% 10%;
-    --muted: 22 17% 20%;
-    --muted-foreground: 30 18% 60%;
-    --accent: 4 54% 45%;
-    --accent-foreground: 35 43% 88%;
+    --background: 24 10% 10%; /* Deep charcoal, almost black */
+    --foreground: 39 40% 90%; /* Light cream text */
+    --card: 24 10% 15%; /* Slightly lighter charcoal for cards */
+    --card-foreground: 39 40% 90%;
+    --popover: 24 10% 10%;
+    --popover-foreground: 39 40% 90%;
+    --primary: 0 84% 60%; /* Bright Red */
+    --primary-foreground: 39 51% 95%;
+    --secondary: 0 70% 50%;
+    --secondary-foreground: 39 51% 95%;
+    --muted: 24 10% 20%;
+    --muted-foreground: 39 30% 80%;
+    --accent: 0 84% 60%;
+    --accent-foreground: 39 51% 95%;
     --destructive: 0 63% 40%;
-    --destructive-foreground: 35 43% 88%;
-    --border: 22 17% 25%;
-    --input: 22 17% 25%;
-    --ring: 4 54% 45%;
+    --destructive-foreground: 39 40% 90%;
+    --border: 24 10% 25%;
+    --input: 24 10% 25%;
+    --ring: 0 84% 60%;
   }
 }
 
