@@ -7,17 +7,17 @@
   :root {
     /* Light mode */
     --background: 46 65% 94%; /* Light cream */
-    --foreground: 18 25% 25%; /* Warm dark brown */
+    --foreground: 18 25% 15%; /* Deeper warm dark brown */
     --card: 46 50% 88%; /* Slightly darker warm beige */
-    --card-foreground: 18 25% 25%;
+    --card-foreground: 18 25% 15%;
     --popover: 46 65% 94%;
-    --popover-foreground: 18 25% 25%;
+    --popover-foreground: 18 25% 15%;
     --primary: 348 83% 47%; /* Crimson */
     --primary-foreground: 46 65% 94%; /* Light cream text on crimson */
     --secondary: 355 45% 45%; /* Burnt sienna */
     --secondary-foreground: 46 65% 94%;
     --muted: 46 50% 90%;
-    --muted-foreground: 18 25% 45%;
+    --muted-foreground: 18 25% 40%;
     --accent: 348 83% 47%; /* Crimson accents */
     --accent-foreground: 46 65% 94%;
     --destructive: 348 83% 27%;
