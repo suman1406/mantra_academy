@@ -27,6 +27,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CourseCountdown } from "./course-countdown";
 import { Badge } from "./ui/badge";
 
+// Info card styled for spiritual beige-maroon theme
 const InfoCard = ({
   icon: Icon,
   title,
@@ -36,12 +37,12 @@ const InfoCard = ({
   title: string;
   text: string;
 }) => (
-  <Card className="bg-card/80 backdrop-blur-sm p-4 text-card-foreground">
+  <Card className="bg-[#EFE1D1] p-4 shadow-md rounded-xl border border-[#C9A368]/40">
     <div className="flex items-center gap-3">
-      <Icon className="h-8 w-8 text-primary" />
+      <Icon className="h-8 w-8 text-[#8B2E26]" />
       <div>
-        <p className="font-semibold text-card-foreground/80">{title}</p>
-        <p className="text-lg font-bold text-card-foreground">{text}</p>
+        <p className="font-semibold text-[#7A6654]">{title}</p>
+        <p className="text-lg font-bold text-[#5C3B28]">{text}</p>
       </div>
     </div>
   </Card>
@@ -60,24 +61,24 @@ export function CourseDetailClient({ course }: { course: Course }) {
   } = course;
 
   return (
-    <div className="py-12 md:py-16">
+    <div className="py-12 md:py-16 bg-[#FAF5E4]">
       {/* Hero Section */}
       <section className="container mx-auto">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary">
+            <h1 className="text-4xl md:text-5xl font-headline font-bold text-[#8B2E26]">
               {title}
             </h1>
-            <p className="text-xl text-foreground/80">{description}</p>
+            <p className="text-xl text-[#3B2F2F]/90">{description}</p>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-3">
-                <Avatar className="h-10 w-10">
+                <Avatar className="h-12 w-12 ring-2 ring-[#C9A368]/50">
                   <AvatarImage src={instructor.image} alt={instructor.name} />
                   <AvatarFallback>{instructor.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm text-muted-foreground">Instructor</p>
-                  <p className="font-bold text-lg text-foreground">
+                  <p className="text-sm text-[#7A6654]">Instructor</p>
+                  <p className="font-bold text-lg text-[#5C3B28]">
                     {instructor.name}
                   </p>
                 </div>
@@ -91,6 +92,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
       <div className="container mx-auto mt-8">
         <div className="grid lg:grid-cols-3 gap-8">
           <main className="lg:col-span-2">
+            {/* Info Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <InfoCard
                 icon={CalendarDays}
@@ -116,11 +118,11 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* About */}
             <section className="mb-12">
-              <Card className="p-6 md:p-8 bg-card/50 shadow-sm rounded-lg">
-                <h2 className="text-3xl font-headline text-primary mb-4">
+              <Card className="p-6 md:p-8 bg-[#EFE1D1] shadow-md rounded-xl border border-[#C9A368]/40">
+                <h2 className="text-3xl font-headline text-[#8B2E26] mb-4 border-b border-[#C9A368]/30 pb-2">
                   About this Course
                 </h2>
-                <div className="prose prose-lg max-w-none text-foreground/90">
+                <div className="prose prose-lg max-w-none text-[#3B2F2F]/90">
                   <p>{fullDescription}</p>
                 </div>
               </Card>
@@ -128,7 +130,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* Curriculum */}
             <section className="mb-12">
-              <h2 className="text-3xl font-headline text-primary mb-4">
+              <h2 className="text-3xl font-headline text-[#8B2E26] mb-4">
                 Course Curriculum
               </h2>
               <Accordion
@@ -140,11 +142,11 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`item-${index}`}
                     key={index}
-                    className="bg-card/50 border-border/40 rounded-lg px-4"
+                    className="bg-[#EFE1D1] border border-[#C9A368]/30 rounded-xl px-4"
                   >
-                    <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">
+                    <AccordionTrigger className="text-lg font-semibold text-[#5C3B28] hover:no-underline">
                       <div className="flex items-center gap-4">
-                        <BookOpen className="h-5 w-5 text-primary" />
+                        <BookOpen className="h-5 w-5 text-[#8B2E26]" />
                         {section.title}
                       </div>
                     </AccordionTrigger>
@@ -153,13 +155,13 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         {section.lessons.map((lesson, i) => (
                           <li
                             key={i}
-                            className="flex justify-between items-center p-2 rounded-md hover:bg-muted"
+                            className="flex justify-between items-center p-2 rounded-md hover:bg-[#E4D3C1]"
                           >
-                            <span className="flex items-center gap-2 text-foreground/80">
-                              <BadgeCheck className="h-4 w-4 text-primary" />
+                            <span className="flex items-center gap-2 text-[#3B2F2F]/80">
+                              <BadgeCheck className="h-4 w-4 text-[#8B2E26]" />
                               {lesson.title}
                             </span>
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-sm text-[#7A6654]">
                               {lesson.duration}
                             </span>
                           </li>
@@ -173,12 +175,12 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* Instructor */}
             <section className="mb-12">
-              <h2 className="text-3xl font-headline text-primary mb-4">
+              <h2 className="text-3xl font-headline text-[#8B2E26] mb-4">
                 Meet Your Instructor
               </h2>
-              <Card className="p-6 md:p-8 bg-card/50 shadow-sm rounded-lg">
+              <Card className="p-6 md:p-8 bg-[#EFE1D1] shadow-md rounded-xl border border-[#C9A368]/40">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <Avatar className="h-24 w-24">
+                  <Avatar className="h-24 w-24 ring-2 ring-[#C9A368]/50">
                     <AvatarImage
                       src={instructor.image}
                       alt={instructor.name}
@@ -188,11 +190,11 @@ export function CourseDetailClient({ course }: { course: Course }) {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground">
+                    <h3 className="text-2xl font-bold text-[#5C3B28]">
                       {instructor.name}
                     </h3>
-                    <p className="text-muted-foreground">{instructor.title}</p>
-                    <p className="mt-2 text-foreground/80">
+                    <p className="text-[#7A6654]">{instructor.title}</p>
+                    <p className="mt-2 text-[#3B2F2F]/80">
                       {instructor.bio}
                     </p>
                   </div>
@@ -202,7 +204,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* FAQs */}
             <section>
-              <h2 className="text-3xl font-headline text-primary mb-4">
+              <h2 className="text-3xl font-headline text-[#8B2E26] mb-4">
                 Frequently Asked Questions
               </h2>
               <Accordion
@@ -214,12 +216,12 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`faq-${index}`}
                     key={index}
-                    className="bg-card/50 border-border/40 rounded-lg px-4"
+                    className="bg-[#EFE1D1] border border-[#C9A368]/30 rounded-xl px-4"
                   >
-                    <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
+                    <AccordionTrigger className="text-lg text-left font-semibold text-[#5C3B28] hover:no-underline">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-foreground/80 text-base">
+                    <AccordionContent className="text-[#3B2F2F]/80 text-base">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -230,7 +232,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
           {/* Sidebar */}
           <aside className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
-            <Card className="shadow-lg rounded-lg overflow-hidden">
+            <Card className="shadow-lg rounded-xl overflow-hidden border border-[#C9A368]/40">
               <div className="relative aspect-video">
                 <Image
                   src={image}
@@ -240,9 +242,12 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   data-ai-hint={aiHint}
                 />
               </div>
-              <CardContent className="p-6 bg-card">
+              <CardContent className="p-6 bg-[#E4D3C1]">
                 <CourseCountdown />
-                <Button size="lg" className="w-full text-lg mt-4">
+                <Button
+                  size="lg"
+                  className="w-full text-lg mt-4 bg-[#8B2E26] hover:bg-[#A0522D] text-white rounded-lg shadow-md"
+                >
                   Enroll Now
                 </Button>
               </CardContent>
@@ -253,4 +258,3 @@ export function CourseDetailClient({ course }: { course: Course }) {
     </div>
   );
 }
-
