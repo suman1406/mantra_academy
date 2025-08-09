@@ -9,10 +9,22 @@ import { Logo } from "@/components/logo";
 import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Community } from "@/components/community";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Announcement } from "@/components/announcement";
+import { useRef } from "react";
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const logoY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const headingY = useTransform(scrollYProgress, [0, 1], ["0%", "70%"]);
+
+
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -34,12 +46,14 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12">
       <motion.section
+        ref={heroRef}
         className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center"
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
       >
         <motion.div
+          style={{ y: logoY }}
           className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-0 mb-8 flex items-center justify-center"
           variants={itemVariants}
         >
@@ -59,12 +73,14 @@ export default function Home() {
           }}
         >
           <motion.h1
+            style={{ y: headingY }}
             variants={itemVariants}
             className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
           <motion.p
+            style={{ y: textY }}
             variants={itemVariants}
             className="max-w-2xl text-lg text-foreground/80"
           >
