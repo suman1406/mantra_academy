@@ -5,8 +5,8 @@
 
 @layer base {
   :root {
-    --background: 45 40% 96%;         /* Warm ivory */
-    --foreground: 210 15% 20%;        /* Deep slate */
+    --background: 48 35% 94%;         /* Cream */
+    --foreground: 210 15% 15%;        /* Darker slate */
     --card: 45 40% 98%;               /* Light cream */
     --card-foreground: 210 15% 20%;
     --popover: 45 40% 98%;
@@ -19,8 +19,8 @@
     --muted-foreground: 210 10% 40%;
     --accent: 45 60% 80%;             /* Cream accent */
     --accent-foreground: 210 15% 20%;
-    --destructive: 0 70% 50%;         /* Calm coral for alerts */
-    --destructive-foreground: 45 40% 96%;
+    --destructive: 0 84% 60%;         /* Bright Red */
+    --destructive-foreground: 0 0% 100%;
     --border: 45 30% 85%;
     --input: 45 30% 90%;
     --ring: 45 60% 80%;               /* Cream ring */
@@ -40,7 +40,7 @@
     --muted-foreground: 45 30% 80%;
     --accent: 45 60% 80%;             /* Cream accent */
     --accent-foreground: 210 15% 20%;
-    --destructive: 0 70% 45%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 45 40% 96%;
     --border: 210 20% 25%;
     --input: 210 20% 25%;

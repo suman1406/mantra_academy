@@ -93,7 +93,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="lg:col-span-4">
+        <Card className="lg:col-span-4 border-destructive/20">
           <CardHeader>
             <CardTitle>Monthly Enrollments</CardTitle>
             <CardDescription>A look at new student sign-ups over the past six months.</CardDescription>
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
               )}
           </CardContent>
         </Card>
-        <Card className="lg:col-span-3">
+        <Card className="lg:col-span-3 border-destructive/20">
           <CardHeader>
             <CardTitle>Recent Users</CardTitle>
             <CardDescription>The latest members to join the academy.</CardDescription>
