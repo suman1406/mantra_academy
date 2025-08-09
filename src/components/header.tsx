@@ -12,9 +12,9 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
   { href: "/courses", label: "Courses" },
   { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About Us" },
 ];
 
 export function Header() {
@@ -39,29 +39,29 @@ export function Header() {
           <Logo />
           <span className="sr-only">Mantra Academy Home</span>
         </Link>
-        <nav className="hidden md:flex items-center space-x-6">
-          {navLinks.map((link) => (
-            <NavLink key={link.href} {...link} />
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-            <div className="md:hidden">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Menu className="h-6 w-6" />
-                    <span className="sr-only">Open menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                  <div className="flex flex-col space-y-6 pt-10">
-                    {navLinks.map((link) => (
-                      <NavLink key={link.href} {...link} />
-                    ))}
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
+        <div className="hidden md:flex items-center gap-6">
+          <nav className="flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <NavLink key={link.href} {...link} />
+            ))}
+          </nav>
+        </div>
+        <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <div className="flex flex-col space-y-6 pt-10">
+                  {navLinks.map((link) => (
+                    <NavLink key={link.href} {...link} />
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
         </div>
       </div>
     </header>
