@@ -11,6 +11,7 @@ import { Philosophy } from "@/components/philosophy";
 import { Community } from "@/components/community";
 import { motion } from "framer-motion";
 import { AnimatedMandala } from "@/components/animated-mandala";
+import { Announcement } from "@/components/announcement";
 
 export default function Home() {
   const sectionVariants = {
@@ -47,6 +48,10 @@ export default function Home() {
 
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
         <Philosophy />
+      </motion.div>
+
+      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
+        <Announcement />
       </motion.div>
       
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionVariants} className="w-full flex justify-center">
