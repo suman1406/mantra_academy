@@ -34,7 +34,7 @@ export default function AdminLayout({
       });
       router.replace("/admin/login");
     }
-  }, [router, toast, isLoginPage]);
+  }, [router, toast, isLoginPage, pathname]);
 
   if (isLoginPage) {
     return <>{children}</>;
@@ -43,7 +43,7 @@ export default function AdminLayout({
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />
-      <main className="flex-1 bg-muted/30 ml-64">
+      <main className="flex-1 bg-muted/30 pl-64">
         {children}
       </main>
     </div>
