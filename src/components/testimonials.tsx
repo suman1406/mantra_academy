@@ -1,3 +1,4 @@
+
 "use client";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -76,13 +77,13 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
             ref={cardRef}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            style={{ transition: 'transform 0.1s ease-out' }}
+            style={{ transition: 'transform 0.2s ease-out' }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.8 }}
         >
-            <Card className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg group h-full">
+            <Card className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-500 hover:shadow-primary/20 hover:shadow-lg group h-full">
               <CardHeader className="p-0 mb-4">
                   <QuoteIcon />
               </CardHeader>
@@ -91,7 +92,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
               </CardContent>
               <div className="flex items-center mt-6 p-0">
                 <Avatar className="h-12 w-12 mr-4 overflow-hidden">
-                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-300" />
+                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-500" />
                   <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>

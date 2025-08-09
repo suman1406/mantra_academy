@@ -39,7 +39,7 @@ const pageVariants = {
 const pageTransition = {
   type: "tween",
   ease: "anticipate",
-  duration: 0.5,
+  duration: 0.8,
 };
 
 const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], index: number }) => {
@@ -52,10 +52,10 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.8, delay: index * 0.15 }}
       className="w-full"
     >
-        <Card className="text-center border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-300">
+        <Card className="text-center border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-500">
             <div className="relative w-40 h-40 mb-4">
                 <Image
                     src={member.image}
@@ -63,7 +63,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
                     width={400}
                     height={400}
                     data-ai-hint={member.aiHint}
-                    className="rounded-full object-cover ring-4 ring-offset-4 ring-offset-background ring-accent/50 group-hover:scale-105 transition-transform duration-300"
+                    className="rounded-full object-cover ring-4 ring-offset-4 ring-offset-background ring-accent/50 group-hover:scale-105 transition-transform duration-500"
                 />
             </div>
             <CardHeader className="p-2">
@@ -87,7 +87,7 @@ export default function AboutPage() {
             transition: {
                 staggerChildren: 0.2,
                 delayChildren: i * 0.1,
-                duration: 0.5,
+                duration: 0.8,
                 ease: "easeInOut"
             }
         })
@@ -95,7 +95,7 @@ export default function AboutPage() {
 
     const itemVariants = {
       hidden: { opacity: 0, y: 20 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+      visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
     };
 
   return (

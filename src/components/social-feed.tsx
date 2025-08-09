@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -33,16 +34,16 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
             ref={cardRef}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            style={{ transition: 'transform 0.1s ease-out' }}
+            style={{ transition: 'transform 0.2s ease-out' }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.15 }}
          >
             <Card className="overflow-hidden group relative border-border/40 bg-card/80 backdrop-blur-sm">
                 <CardContent className="p-0">
                   <div className="overflow-hidden">
-                    <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
+                    <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-500 group-hover:scale-105" data-ai-hint={item.aiHint} />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 text-white">

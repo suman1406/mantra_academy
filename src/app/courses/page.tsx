@@ -90,21 +90,21 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3, delay: i * 0.05 }}
+      transition={{ duration: 0.5, delay: i * 0.1 }}
       ref={cardRef}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      style={{ transition: 'transform 0.1s ease-out' }}
+      style={{ transition: 'transform 0.2s ease-out' }}
       className="w-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-300 group hover:shadow-primary/20 hover:shadow-2xl">
+      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl">
         <CardHeader className="p-0">
           <div className="relative h-56 w-full overflow-hidden">
             <Image
               src={course.image}
               alt={course.title}
               fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
+              className="object-cover group-hover:scale-110 transition-transform duration-700"
               data-ai-hint={course.aiHint}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 group-hover:from-black/60 transition-colors" />
@@ -116,7 +116,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
           <p className="text-foreground/70 mt-2 flex-grow">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
-          <Button variant="outline" className="w-full group transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary">
+          <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary hover:text-primary-foreground hover:border-primary">
             Enroll Now
             <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
           </Button>
@@ -133,7 +133,7 @@ export default function CoursesPage() {
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
         className="text-center"
       >
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">

@@ -28,11 +28,11 @@ export function Philosophy() {
         ref={cardRef}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
-        style={{ transition: 'transform 0.1s ease-out' }}
+        style={{ transition: 'transform 0.2s ease-out' }}
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
       >
         <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
           <div className="p-8 md:p-12">
@@ -51,7 +51,7 @@ export function Philosophy() {
               src="https://placehold.co/600x800.png"
               alt="A serene sanctuary with soft light"
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
               data-ai-hint="sound waves abstract"
             />
           </div>

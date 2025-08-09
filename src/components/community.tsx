@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -46,11 +47,11 @@ const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0
             ref={cardRef}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            style={{ transition: 'transform 0.1s ease-out' }}
+            style={{ transition: 'transform 0.2s ease-out' }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.15 }}
         >
             <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center text-center h-full">
                 <feature.icon className="h-12 w-12 text-accent mb-4"/>
@@ -74,7 +75,7 @@ export function Community() {
             ))}
         </div>
         <div className="text-center mt-12">
-            <Button variant="outline" size="lg" className="group transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
+            <Button variant="outline" size="lg" className="group transition-all duration-500 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
                 <Link href="#">
                     Become a Member
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
