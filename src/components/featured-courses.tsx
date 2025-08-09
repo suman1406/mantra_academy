@@ -85,8 +85,8 @@ export function FeaturedCourses() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden sm:flex bg-background/50 hover:bg-background" />
-        <CarouselNext className="hidden sm:flex bg-background/50 hover:bg-background" />
+        <CarouselPrevious className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/80" />
+        <CarouselNext className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/80" />
       </Carousel>
     </section>
   );
