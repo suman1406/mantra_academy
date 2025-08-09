@@ -47,7 +47,7 @@ export function AdminSidebar() {
   };
 
   return (
-    <div className="hidden border-r bg-card md:block w-64">
+    <div className="hidden border-r bg-card md:block fixed top-0 left-0 h-screen w-64">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-16 items-center border-b px-6">
            <div className="flex items-center gap-2 font-semibold">
