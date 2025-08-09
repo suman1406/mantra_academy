@@ -12,8 +12,8 @@ import { KeyRound, LogIn } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@mantra.com");
+  const [password, setPassword] = useState("password");
   const [error, setError] = useState("");
   const router = useRouter();
   const { toast } = useToast();
@@ -21,13 +21,18 @@ export default function AdminLoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    // In a real app, you would handle authentication here.
+    
     if (email === "admin@mantra.com" && password === "password") {
-      toast({
-        title: "Login Successful",
-        description: "Welcome back, Admin!",
-      });
-      router.push('/admin/dashboard');
+      try {
+        sessionStorage.setItem("isAdminAuthenticated", "true");
+        toast({
+          title: "Login Successful",
+          description: "Welcome back, Admin!",
+        });
+        router.push('/admin/dashboard');
+      } catch (error) {
+        setError("Could not save session. Please enable storage in your browser.");
+      }
     } else {
       setError("Invalid email or password.");
     }
