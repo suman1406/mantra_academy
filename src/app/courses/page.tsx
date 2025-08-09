@@ -8,65 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const courses = [
-  {
-    title: "Foundations of Mantra Science",
-    category: "Beginner",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "ancient scroll",
-    description: "Learn the fundamentals of what mantras are, how they work, and correct pronunciation.",
-  },
-  {
-    title: "Ganesha Mantras for Success",
-    category: "Prosperity",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "ganesha statue",
-    description: "Invoke the energy of Ganesha to remove obstacles and attract success in your life.",
-  },
-  {
-    title: "Mantras for Healing",
-    category: "Wellness",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "healing energy",
-    description: "Explore powerful healing mantras to restore balance to your mind, body, and spirit.",
-  },
-  {
-    title: "Advanced Vedic Chanting",
-    category: "Advanced",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "vedic text",
-    description: "Deepen your practice with complex Vedic hymns and advanced chanting techniques.",
-  },
-   {
-    title: "Lakshmi Mantras for Abundance",
-    category: "Prosperity",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "gold coins",
-    description: "Attract wealth and abundance with the sacred sounds dedicated to Goddess Lakshmi.",
-  },
-  {
-    title: "The Bija Mantras",
-    category: "Chakras",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "chakra energy",
-    description: "Learn the seed sounds of the chakras to awaken and balance your energy centers.",
-  },
-  {
-    title: "Gayatri Mantra Masterclass",
-    category: "Advanced",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "sunrise meditation",
-    description: "Master the pronunciation, meaning, and deep spiritual significance of the Gayatri Mantra.",
-  },
-  {
-    title: "Mantras for Inner Peace",
-    category: "Wellness",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "serene landscape",
-    description: "Find your center and cultivate profound tranquility with these peace-giving mantras.",
-  },
-];
+import { courses } from "@/lib/course-data";
+import Link from "next/link";
 
 const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -116,9 +59,11 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
           <p className="text-card-foreground/70 mt-2 flex-grow">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
-          <Button variant="outline" className="w-full group">
-            Explore Now
-            <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+          <Button variant="outline" className="w-full group" asChild>
+            <Link href={`/courses/${course.slug}`}>
+              Explore Now
+              <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+            </Link>
           </Button>
         </CardFooter>
       </Card>
