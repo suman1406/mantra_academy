@@ -49,6 +49,9 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0 }
       }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="w-full"
     >
@@ -93,7 +96,7 @@ export default function AboutPage() {
     const itemVariants = {
       hidden: { opacity: 0, y: 20 },
       visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-    }
+    };
 
   return (
     <motion.div
@@ -174,7 +177,7 @@ export default function AboutPage() {
             <TeamMemberCard key={member.name} member={member} index={index} />
           ))}
         </motion.div>
-      </section>
+      </motion.section>
     </motion.div>
   );
 }
