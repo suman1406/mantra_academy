@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Megaphone } from "lucide-react";
 import Link from "next/link";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const announcements = [
     {
@@ -22,6 +23,11 @@ const announcements = [
         title: "Community Meditation This Sunday",
         description: "Join our free global community meditation session this Sunday at 11:00 AM EST. All are welcome.",
         link: "#"
+    },
+    {
+        title: "Advanced Chanting Techniques Webinar",
+        description: "A new webinar for our advanced students is scheduled for next month. Sign up now!",
+        link: "#"
     }
 ];
 
@@ -31,6 +37,7 @@ const AnnouncementCard = ({ announcement, index }: { announcement: typeof announ
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1, ease: "easeInOut", delay: index * 0.2 }}
+        className="h-full"
       >
         <Card className="border-border/40 bg-card backdrop-blur-sm overflow-hidden group p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-500 flex flex-col items-start h-full text-card-foreground">
           <div className="flex items-center gap-4 mb-4">
@@ -63,11 +70,25 @@ export function Announcement() {
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Announcements</h2>
             <p className="text-foreground/80 mt-2">Stay up to date with our latest news and events</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-            {announcements.map((item, index) => (
-                <AnnouncementCard key={index} announcement={item} index={index} />
-            ))}
-        </div>
+        <Carousel
+            opts={{
+                align: "start",
+                loop: true,
+            }}
+            className="w-full"
+        >
+            <CarouselContent>
+                {announcements.map((item, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <div className="p-1 h-full">
+                            <AnnouncementCard announcement={item} index={index} />
+                        </div>
+                    </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
+      </Carousel>
     </section>
   );
 }

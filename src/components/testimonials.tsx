@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const testimonials = [
   {
@@ -27,6 +28,13 @@ const testimonials = [
     quote: "Mantra Academy is an incredible resource. The community is supportive, and the depth of knowledge shared is unparalleled. It's a must for any serious spiritual seeker.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "woman portrait content",
+  },
+   {
+    name: "David Chen",
+    title: "Meditation Practitioner",
+    quote: "The clarity and precision of the teachings here are exceptional. It has brought a new dimension to my daily meditation practice. Highly recommended!",
+    avatar: "https://placehold.co/100x100.png",
+    aiHint: "asian man portrait",
   },
 ];
 
@@ -82,6 +90,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
+            className="h-full"
         >
             <Card className="border-border/40 bg-card backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-500 hover:shadow-primary/20 hover:shadow-lg group h-full">
               <CardHeader className="p-0 mb-4">
@@ -112,11 +121,25 @@ export function Testimonials() {
         <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Words of Power</h2>
         <p className="text-foreground/80 mt-2">What our students say about us</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {testimonials.map((testimonial, index) => (
-          <TestimonialCard key={index} testimonial={testimonial} />
-        ))}
-      </div>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        className="w-full"
+      >
+        <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                 <div className="p-1 h-full">
+                    <TestimonialCard testimonial={testimonial} />
+                 </div>
+              </CarouselItem>
+            ))}
+        </CarouselContent>
+        <CarouselPrevious className="hidden sm:flex" />
+        <CarouselNext className="hidden sm:flex" />
+      </Carousel>
     </section>
   );
 }
