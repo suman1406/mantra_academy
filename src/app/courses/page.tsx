@@ -97,7 +97,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
       style={{ transition: 'transform 0.2s ease-out' }}
       className="w-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl text-card-foreground">
+      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl text-card-foreground">
         <CardHeader className="p-0">
           <div className="relative h-56 w-full overflow-hidden">
             <Image
@@ -108,7 +108,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
               data-ai-hint={course.aiHint}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 group-hover:from-black/60 transition-colors" />
-             <Badge variant="secondary" className="absolute top-4 right-4 bg-primary/20 text-primary border-primary/40">{course.category}</Badge>
+             <Badge variant="default" className="absolute top-4 right-4 bg-card-foreground/20 text-card-foreground border-card-foreground/40">{course.category}</Badge>
           </div>
         </CardHeader>
         <CardContent className="p-6 flex-grow flex flex-col">

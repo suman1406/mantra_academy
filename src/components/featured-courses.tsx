@@ -55,7 +55,7 @@ export function FeaturedCourses() {
           {courses.map((course, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <div className="p-1">
-                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-lg text-card-foreground">
+                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-lg text-card-foreground">
                   <CardHeader className="p-0">
                     <div className="relative h-56 w-full overflow-hidden">
                       <Image
@@ -68,12 +68,12 @@ export function FeaturedCourses() {
                     </div>
                   </CardHeader>
                   <CardContent className="p-6 flex-grow">
-                    <Badge variant="secondary" className="mb-2 bg-primary/10 text-primary">{course.category}</Badge>
+                    <Badge variant="default" className="mb-2 bg-card-foreground/20 text-card-foreground">{course.category}</Badge>
                     <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
                     <p className="text-card-foreground/70 mt-2">{course.description}</p>
                   </CardContent>
                   <CardFooter className="p-6 pt-0">
-                     <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary" asChild>
+                     <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground" asChild>
                         <Link href="/courses">
                            Explore Courses
                            <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
