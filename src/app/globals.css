@@ -5,47 +5,47 @@
 
 @layer base {
   :root {
-    --background: 39 51% 95%; /* Cream */
-    --foreground: 0 30% 20%; /* Deep warm brownish-red text */
-    --card: 39 51% 95%; /* Cream */
-    --card-foreground: 0 30% 20%;
-    --popover: 39 51% 95%; /* Cream */
-    --popover-foreground: 0 30% 20%;
-    --primary: 0 70% 50%; /* Rich red */
-    --primary-foreground: 39 51% 95%; /* Cream text on red */
-    --secondary: 0 40% 35%; /* Muted dark red */
-    --secondary-foreground: 39 51% 95%;
-    --muted: 39 40% 90%; /* Muted Cream */
-    --muted-foreground: 0 20% 40%;
-    --accent: 0 70% 50%; /* Rich red accent */
-    --accent-foreground: 39 51% 95%;
+    --background: 40 80% 96%; /* Cream */
+    --foreground: 0 0% 10%; /* Dark Gray */
+    --card: 40 80% 96%; /* Cream */
+    --card-foreground: 0 0% 10%;
+    --popover: 40 80% 96%; /* Cream */
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 85% 60%; /* Bright Red */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 0 85% 50%; /* Darker Bright Red */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 40 50% 92%; /* Lighter Cream */
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 85% 60%; /* Bright Red */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%; /* Bright Red */
-    --destructive-foreground: 39 51% 95%;
-    --border: 0 25% 75%; /* Soft red-tan border */
-    --input: 0 25% 90%;
-    --ring: 0 70% 50%; /* Red ring focus */
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 85%; /* Light Gray */
+    --input: 0 0% 92%;
+    --ring: 0 85% 60%; /* Bright Red */
   }
 
   .dark {
-    --background: 0 30% 8%; /* Deep dark red/black mix */
-    --foreground: 39 40% 90%; /* Light Cream */
-    --card: 0 30% 12%; /* Very dark muted red */
-    --card-foreground: 39 40% 90%;
-    --popover: 0 30% 8%;
-    --popover-foreground: 39 40% 90%;
-    --primary: 0 70% 55%; /* Slightly brighter red for dark mode */
-    --primary-foreground: 39 51% 95%;
-    --secondary: 39 40% 80%; /* Light Cream secondary */
-    --secondary-foreground: 0 30% 8%;
-    --muted: 0 20% 20%;
-    --muted-foreground: 39 30% 80%;
-    --accent: 0 70% 55%; /* Brighter red accent */
-    --accent-foreground: 39 51% 95%;
-    --destructive: 0 63% 40%;
-    --destructive-foreground: 39 40% 90%;
-    --border: 0 25% 25%;
-    --input: 0 25% 25%;
-    --ring: 0 70% 55%;
+    --background: 0 0% 10%; /* Very Dark Gray */
+    --foreground: 0 0% 95%; /* Almost White */
+    --card: 0 0% 12%; /* Slightly Lighter Gray */
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 85% 65%; /* Bright Red */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 85% 55%; /* Darker Bright Red */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 85% 65%; /* Bright Red */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 0 85% 65%; /* Bright Red */
   }
 }
 
