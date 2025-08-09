@@ -28,24 +28,24 @@
 
   .dark {
     --background: 210 20% 12%;        /* Deep slate blue-gray */
-    --foreground: 45 50% 88%;         /* Creamish warm ivory for dark mode text */
-    --card: 5 35% 18%;                /* Dark muted reddish-tone for cards */
-    --card-foreground: 45 50% 88%;
+    --foreground: 45 65% 85%;         /* Warm cream */
+    --card: 5 35% 18%;                 /* Dark muted reddish-tone for cards */
+    --card-foreground: 45 65% 85%;
     --popover: 210 20% 12%;
-    --popover-foreground: 45 50% 88%;
-    --primary: 45 60% 80%;            /* Cream */
+    --popover-foreground: 45 65% 85%;
+    --primary: 45 70% 82%;             /* Cream */
     --primary-foreground: 210 15% 20%;
-    --secondary: 170 35% 35%;         /* Muted deep teal */
-    --secondary-foreground: 45 50% 88%;
+    --secondary: 170 35% 35%;          /* Muted deep teal */
+    --secondary-foreground: 45 65% 85%;
     --muted: 210 20% 20%;
-    --muted-foreground: 45 40% 80%;
-    --accent: 45 60% 80%;             /* Cream accent */
+    --muted-foreground: 45 50% 80%;
+    --accent: 45 70% 82%;              /* Cream accent */
     --accent-foreground: 210 15% 20%;
     --destructive: 0 63% 31%;
-    --destructive-foreground: 45 50% 88%;
+    --destructive-foreground: 45 65% 85%;
     --border: 210 20% 25%;
     --input: 210 20% 25%;
-    --ring: 45 60% 80%;
+    --ring: 45 70% 82%;
   }
 }
 
