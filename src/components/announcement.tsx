@@ -6,32 +6,46 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Megaphone } from "lucide-react";
 import Link from "next/link";
 
-export function Announcement() {
-  return (
-    <section className="w-full max-w-6xl">
-      <motion.div
+const announcements = [
+    {
+        title: "New Workshop: The Healing Power of Sound",
+        description: "Join us for a transformative 3-day live workshop with Rishi Varma. Limited spots available.",
+        link: "#"
+    },
+    {
+        title: "Early-Bird Discount for Foundations Course",
+        description: "Enroll in our Foundations of Mantra Science course by the end of the month and receive a 20% discount.",
+        link: "/courses"
+    },
+     {
+        title: "Community Meditation This Sunday",
+        description: "Join our free global community meditation session this Sunday at 11:00 AM EST. All are welcome.",
+        link: "#"
+    }
+];
+
+const AnnouncementCard = ({ announcement, index }: { announcement: typeof announcements[0], index: number }) => (
+     <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+        transition={{ duration: 1, ease: "easeInOut", delay: index * 0.2 }}
       >
-        <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden md:grid md:grid-cols-12 items-center group p-8 shadow-lg hover:shadow-primary/20 transition-shadow duration-500">
-          <div className="md:col-span-1 flex justify-center md:justify-start mb-4 md:mb-0">
-            <div className="p-4 bg-primary/20 rounded-full">
-              <Megaphone className="h-8 w-8 text-primary" />
+        <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden group p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-500 flex flex-col items-start h-full">
+          <div className="flex items-center gap-4 mb-4">
+             <div className="p-3 bg-primary/20 rounded-full">
+              <Megaphone className="h-6 w-6 text-primary" />
             </div>
+             <h3 className="text-xl font-headline font-bold text-primary">
+                {announcement.title}
+            </h3>
           </div>
-          <div className="md:col-span-8 text-center md:text-left">
-            <h2 className="text-2xl font-headline font-bold text-primary">
-              New Workshop: The Healing Power of Sound
-            </h2>
-            <p className="text-foreground/80 mt-2">
-              Join us for a transformative 3-day live workshop with Rishi Varma. Limited spots available.
-            </p>
-          </div>
-          <div className="md:col-span-3 flex justify-center md:justify-end mt-6 md:mt-0">
+          <p className="text-foreground/80 mt-2 flex-grow">
+            {announcement.description}
+          </p>
+          <div className="w-full mt-6">
             <Button variant="outline" className="w-full md:w-auto group transition-all duration-500 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
-                <Link href="#">
+                <Link href={announcement.link}>
                     Learn More
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -39,6 +53,20 @@ export function Announcement() {
           </div>
         </Card>
       </motion.div>
+)
+
+export function Announcement() {
+  return (
+    <section className="w-full max-w-6xl">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Announcements</h2>
+            <p className="text-foreground/80 mt-2">Stay up to date with our latest news and events</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8">
+            {announcements.map((item, index) => (
+                <AnnouncementCard key={index} announcement={item} index={index} />
+            ))}
+        </div>
     </section>
   );
 }
