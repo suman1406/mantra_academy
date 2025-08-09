@@ -17,7 +17,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Poppins', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
         headline: ['Cormorant Garamond', 'serif'],
         code: ['monospace'],
       },
