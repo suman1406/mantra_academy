@@ -44,7 +44,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-20 py-12">
+    <div className="flex flex-col items-center justify-center space-y-32 py-12">
       <motion.section
         ref={heroRef}
         className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center"
