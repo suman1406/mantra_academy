@@ -34,10 +34,10 @@ export function Philosophy() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
-        <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
+        <Card className="border-border/40 bg-destructive/80 text-destructive-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
           <div className="p-8 md:p-12">
-            <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Our Philosophy</h2>
-            <div className="text-foreground/80 mt-4 space-y-4 text-lg">
+            <h2 className="text-3xl md:text-5xl font-headline font-bold text-destructive-foreground">Our Philosophy</h2>
+            <div className="text-destructive-foreground/80 mt-4 space-y-4 text-lg">
               <p>
                 We believe that sound is the primordial creative force of the universe. Within every mantra lies a seed of potential—a source of boundless peace, power, and connection. Our purpose is to provide the keys to unlock that potential.
               </p>
