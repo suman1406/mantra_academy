@@ -5,9 +5,9 @@
 
 @layer base {
   :root {
-    --background: 48 35% 94%;         /* Cream */
-    --foreground: 210 15% 15%;        /* Darker slate */
-    --card: 45 40% 98%;               /* Light cream */
+    --background: 48 35% 94%;         /* Cream background */
+    --foreground: 210 15% 15%;        /* Darker slate text */
+    --card: 5 40% 92%;                /* Soft warm reddish-cream for cards */
     --card-foreground: 210 15% 20%;
     --popover: 45 40% 98%;
     --popover-foreground: 210 15% 20%;
@@ -23,25 +23,26 @@
     --destructive-foreground: 0 0% 100%;
     --border: 45 30% 85%;
     --input: 45 30% 90%;
-    --ring: 45 60% 80%;               /* Cream ring */
+    --ring: 45 60% 80%;
   }
+
   .dark {
     --background: 210 20% 12%;        /* Deep slate blue-gray */
-    --foreground: 45 40% 96%;         /* Light ivory text */
-    --card: 210 20% 16%;
-    --card-foreground: 45 40% 96%;
+    --foreground: 45 50% 88%;         /* Creamish warm ivory for dark mode text */
+    --card: 5 35% 18%;                /* Dark muted reddish-tone for cards */
+    --card-foreground: 45 50% 88%;
     --popover: 210 20% 12%;
-    --popover-foreground: 45 40% 96%;
+    --popover-foreground: 45 50% 88%;
     --primary: 45 60% 80%;            /* Cream */
     --primary-foreground: 210 15% 20%;
     --secondary: 170 35% 35%;         /* Muted deep teal */
-    --secondary-foreground: 45 40% 96%;
+    --secondary-foreground: 45 50% 88%;
     --muted: 210 20% 20%;
-    --muted-foreground: 45 30% 80%;
+    --muted-foreground: 45 40% 80%;
     --accent: 45 60% 80%;             /* Cream accent */
     --accent-foreground: 210 15% 20%;
     --destructive: 0 63% 31%;
-    --destructive-foreground: 45 40% 96%;
+    --destructive-foreground: 45 50% 88%;
     --border: 210 20% 25%;
     --input: 210 20% 25%;
     --ring: 45 60% 80%;
