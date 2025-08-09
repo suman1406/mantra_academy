@@ -54,7 +54,7 @@ const BlogPostCard = ({
       className={`h-full flex flex-col group manuscript-card rounded-none ${devanagari.className}`}
     >
       <CardContent className="flex-grow flex flex-col p-8">
-        <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-yellow-800 transition-colors">
+        <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-primary transition-colors">
           {post.title}
         </CardTitle>
         <div className="text-sm manuscript-subtext mt-2 mb-4">
@@ -67,7 +67,7 @@ const BlogPostCard = ({
       <CardFooter className="p-8 pt-0">
           <Button
             variant="link"
-            className="p-0 manuscript-text font-bold group-hover:text-yellow-700"
+            className="p-0 manuscript-text font-bold group-hover:text-primary"
           >
             Read More
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -91,13 +91,13 @@ export default function BlogPage() {
         transition={{ duration: 0.8 }}
         className="text-center flex flex-col items-center"
       >
-        <div className="p-4 bg-yellow-200/40 rounded-full inline-block mb-4 border-2 border-yellow-700">
-            <BookText className="h-10 w-10 text-yellow-800" />
+        <div className="p-4 bg-primary/20 rounded-full inline-block mb-4 border-2 border-primary">
+            <BookText className="h-10 w-10 text-primary" />
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold text-yellow-800 drop-shadow">
+        <h1 className="text-4xl md:text-6xl font-bold text-primary drop-shadow">
           From the Scribe's Desk
         </h1>
-        <p className="mt-4 max-w-2xl mx-auto text-lg manuscript-subtext">
+        <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/80">
           Exploring the timeless wisdom of sound, consciousness, and the sacred sciences.
         </p>
       </motion.section>

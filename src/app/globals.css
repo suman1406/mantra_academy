@@ -144,11 +144,10 @@
 }
 
 .manuscript-card {
-  background: url('/textures/parchment.jpg') center center / cover no-repeat;
-  border: 4px solid #b8860b;
-  border-image: url('/textures/vedic-border.png') 30 round;
+  background-color: hsl(var(--card));
+  border: 2px solid hsl(var(--border));
   font-family: 'Noto Serif Devanagari', serif;
-  box-shadow: 0 0 20px rgba(139, 69, 19, 0.3);
+  box-shadow: 0 0 20px hsla(var(--primary) / 0.15);
   position: relative;
   overflow: hidden;
 }
@@ -157,22 +156,22 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(rgba(255, 255, 255, 0.05), transparent 70%);
+  background: radial-gradient(hsla(var(--background) / 0.1), transparent 70%);
   pointer-events: none;
 }
 
 .manuscript-card:hover {
-  box-shadow: 0 0 30px rgba(184, 134, 11, 0.6);
+  box-shadow: 0 0 30px hsla(var(--primary) / 0.3);
   transform: translateY(-3px);
   transition: all 0.3s ease;
 }
 
 .manuscript-text {
-  color: #4a1c00;
+  color: hsl(var(--card-foreground));
 }
 
 .manuscript-subtext {
-  color: #5a3b1d;
+  color: hsl(var(--muted-foreground));
   font-style: italic;
 }
 
@@ -181,7 +180,7 @@
   font-size: 3.5rem;
   line-height: 1;
   margin-right: 0.25rem;
-  color: #b8860b;
+  color: hsl(var(--primary));
   font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 2px hsla(var(--foreground) / 0.2);
 }
