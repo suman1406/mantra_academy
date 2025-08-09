@@ -21,7 +21,7 @@ import {
   GraduationCap,
   HeartHandshake,
   AudioWaveform,
-  Lotus,
+  Flower2,
   BookHeart
 } from "lucide-react";
 import {
@@ -66,7 +66,7 @@ const whoCanAttendIcons = {
 const highlightIcons = {
     "Master the Art of Chanting": AudioWaveform,
     "Go Beyond the Words": BookHeart,
-    "Symbolism & Stories of the Devatās": Lotus,
+    "Symbolism & Stories of the Devatās": Flower2,
     "Free E-Guide for Daily Practice": Gift,
     "Interactive Q&A + Personal Mentoring": MessageSquare,
 }
