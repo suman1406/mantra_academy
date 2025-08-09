@@ -36,7 +36,7 @@ export function Philosophy() {
       >
         <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
           <div className="p-8 md:p-12">
-            <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Our Philosophy</h2>
+            <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Philosophy</h2>
             <div className="text-card-foreground/80 mt-4 space-y-4 text-lg">
               <p>
                 We believe that sound is the primordial creative force of the universe. Within every mantra lies a seed of potential—a source of boundless peace, power, and connection. Our purpose is to provide the keys to unlock that potential.

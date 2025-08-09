@@ -8,8 +8,8 @@
     /* Light mode */
     --background: 46 65% 94%; /* Light cream */
     --foreground: 18 25% 15%; /* Deeper warm dark brown */
-    --card: 46 50% 88%; /* Slightly darker warm beige */
-    --card-foreground: 18 25% 15%;
+    --card: 348 83% 47%; /* Crimson */
+    --card-foreground: 46 65% 94%; /* Light cream text on crimson */
     --popover: 46 65% 94%;
     --popover-foreground: 18 25% 15%;
     --primary: 348 83% 47%; /* Crimson */

@@ -97,7 +97,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
       style={{ transition: 'transform 0.2s ease-out' }}
       className="w-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl">
+      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card/80 backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl text-card-foreground">
         <CardHeader className="p-0">
           <div className="relative h-56 w-full overflow-hidden">
             <Image
@@ -112,11 +112,11 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
           </div>
         </CardHeader>
         <CardContent className="p-6 flex-grow flex flex-col">
-          <CardTitle className="font-headline text-2xl text-primary">{course.title}</CardTitle>
-          <p className="text-foreground/70 mt-2 flex-grow">{course.description}</p>
+          <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
+          <p className="text-card-foreground/70 mt-2 flex-grow">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
-          <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary hover:text-primary-foreground hover:border-primary">
+          <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground">
             Enroll Now
             <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
           </Button>
