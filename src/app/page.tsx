@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Community } from "@/components/community";
 import { motion } from "framer-motion";
+import { AnimatedMandala } from "@/components/animated-mandala";
 
 export default function Home() {
   const sectionVariants = {
@@ -18,7 +19,7 @@ export default function Home() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 1,
+        duration: 1.5,
         ease: "easeInOut"
       }
     }
@@ -27,9 +28,8 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center space-y-20 py-12">
       <section className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center">
-        <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-0 mb-8">
-           <div className="absolute inset-0 bg-accent/10 rounded-full animate-hero-glow" />
-           <div className="absolute inset-8 bg-primary/5 rounded-full animate-hero-glow animation-delay-[-6s]" />
+        <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-0 mb-8 flex items-center justify-center">
+          <AnimatedMandala />
            <div className="absolute inset-0 flex items-center justify-center">
                 <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&_span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
            </div>
