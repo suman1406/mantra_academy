@@ -4,26 +4,61 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const Shape = ({ index, totalShapes, radius }: { index: number, totalShapes: number, radius: number }) => {
+const Petal = ({ index, totalShapes, radius }: { index: number, totalShapes: number, radius: number }) => {
   const angle = (index / totalShapes) * 360;
   
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 w-8 h-16 bg-primary/30 rounded-full origin-bottom"
+      className="absolute top-1/2 left-1/2 w-12 h-24 origin-bottom"
       style={{
         transform: `rotate(${angle}deg) translateY(-${radius}px)`,
-        filter: `hue-rotate(${index * 15}deg)`,
+        filter: `hue-rotate(${index * 20}deg)`,
+        clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
       }}
       initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: [1, 1.1, 1], opacity: 1 }}
-      transition={{ 
-        duration: 2, 
-        ease: "easeInOut",
-        delay: index * 0.1 
+      animate={{ 
+          scale: [0, 1.1, 1], 
+          opacity: [0, 0.7, 0.5]
       }}
-    />
+      transition={{ 
+        duration: 2.5, 
+        ease: "easeInOut",
+        delay: index * 0.1,
+        repeat: Infinity,
+        repeatType: 'mirror',
+        repeatDelay: 5
+      }}
+    >
+        <div className="w-full h-full bg-gradient-to-b from-primary/60 to-accent/40" />
+    </motion.div>
   );
 };
+
+const Star = ({ index, totalShapes, radius, duration }: { index: number, totalShapes: number, radius: number, duration: number }) => {
+  const angle = (index / totalShapes) * 360;
+
+  return (
+     <motion.div
+      className="absolute top-1/2 left-1/2 w-2 h-2 bg-primary-foreground rounded-full"
+      style={{
+        transform: `rotate(${angle}deg) translateY(-${radius}px)`,
+      }}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ 
+        scale: [0, 1, 1.5, 1, 0], 
+        opacity: [0, 1, 0.5, 1, 0] 
+      }}
+      transition={{ 
+        duration: duration, 
+        ease: "linear",
+        delay: (duration / totalShapes) * index,
+        repeat: Infinity,
+        repeatType: 'loop',
+      }}
+    />
+  )
+}
+
 
 export const AnimatedMandala = () => {
     const [isMounted, setIsMounted] = useState(false);
@@ -34,9 +69,9 @@ export const AnimatedMandala = () => {
     }
 
     const layers = [
-        { shapes: 12, radius: 100, duration: 60 },
-        { shapes: 8, radius: 150, duration: 90 },
-        { shapes: 6, radius: 50, duration: 40 },
+        { component: Petal, shapes: 12, radius: 100, duration: 60 },
+        { component: Petal, shapes: 8, radius: 160, duration: 90 },
+        { component: Star, shapes: 20, radius: 200, duration: 20 },
     ];
 
     return (
@@ -54,12 +89,18 @@ export const AnimatedMandala = () => {
                         duration: layer.duration,
                         repeat: Infinity,
                         ease: 'linear',
-                        delay: layerIndex * 2,
+                        delay: layerIndex * -5, // Stagger layer rotation start
                         repeatType: 'loop',
                     }}
                 >
                     {Array.from({ length: layer.shapes }).map((_, i) => (
-                        <Shape key={i} index={i} totalShapes={layer.shapes} radius={layer.radius} />
+                        <layer.component 
+                            key={i} 
+                            index={i} 
+                            totalShapes={layer.shapes} 
+                            radius={layer.radius}
+                            duration={layer.duration}
+                        />
                     ))}
                 </motion.div>
             ))}
