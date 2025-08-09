@@ -15,19 +15,20 @@ export default function AdminLayout({
   const { toast } = useToast();
 
   useEffect(() => {
+    let isAuthenticated = false;
     try {
-      const isAuthenticated = sessionStorage.getItem("isAdminAuthenticated");
-      if (isAuthenticated !== "true") {
-        toast({
-          title: "Access Denied",
-          description: "Please log in to view the admin dashboard.",
-          variant: "destructive",
-        });
-        router.replace("/admin/login");
-      }
+      isAuthenticated = sessionStorage.getItem("isAdminAuthenticated") === "true";
     } catch (error) {
-        // This can happen in SSR or if sessionStorage is disabled
-        router.replace("/admin/login");
+      // sessionStorage is not available
+    }
+
+    if (!isAuthenticated) {
+      toast({
+        title: "Access Denied",
+        description: "Please log in to view the admin dashboard.",
+        variant: "destructive",
+      });
+      router.replace("/admin/login");
     }
   }, [router, toast]);
 
