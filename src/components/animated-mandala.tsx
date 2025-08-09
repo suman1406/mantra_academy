@@ -4,60 +4,35 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const Petal = ({ index, totalShapes, radius }: { index: number, totalShapes: number, radius: number }) => {
+const Petal = ({ index, totalShapes, radius, petalConfig }: { index: number, totalShapes: number, radius: number, petalConfig: any }) => {
   const angle = (index / totalShapes) * 360;
   
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 w-12 h-24 origin-bottom"
+      className="absolute top-1/2 left-1/2"
       style={{
         transform: `rotate(${angle}deg) translateY(-${radius}px)`,
-        filter: `hue-rotate(${index * 20}deg)`,
-        clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+        filter: `hue-rotate(${index * 10}deg)`,
+        ...petalConfig.style
       }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ 
-          scale: [0, 1.1, 1], 
-          opacity: [0, 0.7, 0.5]
+          scale: [0, petalConfig.scale, 1], 
+          opacity: [0, 0.8, 0.6]
       }}
       transition={{ 
-        duration: 2.5, 
+        duration: petalConfig.duration,
         ease: "easeInOut",
-        delay: index * 0.1,
+        delay: index * petalConfig.delay + petalConfig.stagger,
         repeat: Infinity,
         repeatType: 'mirror',
-        repeatDelay: 5
+        repeatDelay: 8
       }}
     >
-        <div className="w-full h-full bg-gradient-to-b from-primary/60 to-accent/40" />
+        <div className={`w-full h-full ${petalConfig.gradient}`} />
     </motion.div>
   );
 };
-
-const Star = ({ index, totalShapes, radius, duration }: { index: number, totalShapes: number, radius: number, duration: number }) => {
-  const angle = (index / totalShapes) * 360;
-
-  return (
-     <motion.div
-      className="absolute top-1/2 left-1/2 w-2 h-2 bg-primary-foreground rounded-full"
-      style={{
-        transform: `rotate(${angle}deg) translateY(-${radius}px)`,
-      }}
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ 
-        scale: [0, 1, 1.5, 1, 0], 
-        opacity: [0, 1, 0.5, 1, 0] 
-      }}
-      transition={{ 
-        duration: duration, 
-        ease: "linear",
-        delay: (duration / totalShapes) * index,
-        repeat: Infinity,
-        repeatType: 'loop',
-      }}
-    />
-  )
-}
 
 
 export const AnimatedMandala = () => {
@@ -69,9 +44,42 @@ export const AnimatedMandala = () => {
     }
 
     const layers = [
-        { component: Petal, shapes: 12, radius: 100, duration: 60 },
-        { component: Petal, shapes: 8, radius: 160, duration: 90 },
-        { component: Star, shapes: 20, radius: 200, duration: 20 },
+        { 
+            shapes: 8, 
+            radius: 80, 
+            petalConfig: { 
+                style: { width: 80, height: 100, clipPath: 'ellipse(40% 50% at 50% 50%)', originY: '-30px' },
+                gradient: 'bg-gradient-to-t from-primary/70 to-accent/50',
+                duration: 20,
+                delay: 0.2,
+                stagger: 0,
+                scale: 1.1
+            } 
+        },
+        { 
+            shapes: 16, 
+            radius: 140, 
+            petalConfig: { 
+                style: { width: 40, height: 120, clipPath: 'ellipse(35% 50% at 50% 50%)', originY: '-60px' },
+                gradient: 'bg-gradient-to-t from-primary/50 to-accent/30',
+                duration: 25,
+                delay: 0.1,
+                stagger: 2,
+                scale: 1.05
+            } 
+        },
+        { 
+            shapes: 16, 
+            radius: 190, 
+            petalConfig: { 
+                style: { width: 60, height: 80, clipPath: 'ellipse(50% 50% at 50% 50%)', originY: '-100px' },
+                gradient: 'bg-gradient-to-t from-primary/30 to-accent/20',
+                duration: 30,
+                delay: 0.15,
+                stagger: 4,
+                scale: 1.1
+            }
+        },
     ];
 
     return (
@@ -86,20 +94,20 @@ export const AnimatedMandala = () => {
                     className="absolute w-full h-full"
                     animate={{ rotate: 360 }}
                     transition={{
-                        duration: layer.duration,
+                        duration: 60 + layerIndex * 30,
                         repeat: Infinity,
                         ease: 'linear',
-                        delay: layerIndex * -5, // Stagger layer rotation start
+                        delay: layerIndex * -10, 
                         repeatType: 'loop',
                     }}
                 >
                     {Array.from({ length: layer.shapes }).map((_, i) => (
-                        <layer.component 
+                        <Petal 
                             key={i} 
                             index={i} 
                             totalShapes={layer.shapes} 
                             radius={layer.radius}
-                            duration={layer.duration}
+                            petalConfig={layer.petalConfig}
                         />
                     ))}
                 </motion.div>
