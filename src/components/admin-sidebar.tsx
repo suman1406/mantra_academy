@@ -2,10 +2,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Home, Settings, Users, BookOpen, LogOut, BarChart3, ShieldCheck } from "lucide-react";
 import { Logo } from "./logo";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 const navLinks = [
   { href: "/admin/dashboard", label: "Dashboard", icon: Home },
@@ -34,6 +35,17 @@ const NavLink = ({ href, label, icon: Icon }: { href: string; label: string; ico
 };
 
 export function AdminSidebar() {
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    try {
+        sessionStorage.removeItem("isAdminAuthenticated");
+        router.push('/');
+    } catch (error) {
+        console.error("Could not clear session storage:", error);
+    }
+  };
+
   return (
     <div className="hidden border-r bg-card md:block w-64">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -51,13 +63,14 @@ export function AdminSidebar() {
           </nav>
         </div>
          <div className="mt-auto p-4 border-t">
-            <Link
-              href="/"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            <Button
+              variant="ghost"
+              onClick={handleSignOut}
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary w-full justify-start"
             >
               <LogOut className="h-4 w-4" />
               Sign Out
-            </Link>
+            </Button>
         </div>
       </div>
     </div>
