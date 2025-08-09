@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer";
 import { AIChatbot } from "@/components/ai-chatbot";
 import { Toaster } from "@/components/ui/toaster";
 import { usePathname } from "next/navigation";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // export const metadata: Metadata = {
 //   title: "Mantra Academy",
@@ -24,7 +25,7 @@ export default function RootLayout({
   const isAdminPage = pathname.startsWith('/admin');
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>Mantra Academy</title>
         <meta name="description" content="Learn the power of mantras and transform your life." />
@@ -34,16 +35,23 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
       </head>
       <body className={cn("font-body antialiased bg-background text-foreground min-h-screen flex flex-col")}>
-        {!isAdminPage && <Header />}
-        <main className={cn(
-          "flex-grow",
-          !isAdminPage && "container mx-auto px-4"
-        )}>
-          {children}
-        </main>
-        {!isAdminPage && <Footer />}
-        {!isAdminPage && <AIChatbot />}
-        <Toaster />
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+        >
+            {!isAdminPage && <Header />}
+            <main className={cn(
+              "flex-grow",
+              !isAdminPage && "container mx-auto px-4"
+            )}>
+              {children}
+            </main>
+            {!isAdminPage && <Footer />}
+            {!isAdminPage && <AIChatbot />}
+            <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
