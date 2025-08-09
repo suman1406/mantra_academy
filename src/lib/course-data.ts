@@ -33,6 +33,14 @@ export type Course = {
     question: string;
     answer: string;
   }[];
+  highlights?: {
+    title: string;
+    description: string;
+  }[];
+  whoCanAttend?: {
+    title: string;
+    description: string;
+  }[];
 };
 
 const instructors = {
@@ -61,29 +69,82 @@ const instructors = {
 
 export const courses: Course[] = [
   {
-    slug: "foundations-of-mantra-science",
-    title: "Foundations of Mantra Science",
+    slug: "vedashiksha-introduction-to-vedas",
+    title: "Vedashiksha: Introduction to Vedas and the Art of Vedic Chanting",
     category: "Beginner",
     image: "https://placehold.co/600x400.png",
     aiHint: "ancient scroll",
-    description: "Learn the fundamentals of what mantras are, how they work, and correct pronunciation.",
-    fullDescription: "This course is the perfect starting point for anyone new to the world of mantras. We will demystify the ancient science of sound, exploring the principles of vibration, resonance, and intention. You will learn the correct pronunciation of foundational mantras and develop a personal practice that you can carry with you for life. By the end of this course, you will have a solid understanding of how mantras can bring peace, clarity, and positive transformation into your life.",
+    description: "Duration: 6 months | Classes: 8 per month",
+    fullDescription: `Vedashiksha offers a strong foundation in Vedic wisdom, combining authentic study with inner practice. Across 6 months, you’ll explore:
+	•	The origin, purpose, and structure of the Vedas
+	•	Introduction to the Vedangas—the pillars of Vedic learning
+	•	The correct method of Vedic chanting
+	•	Deep engagement with select suktas to integrate knowledge and devotion`,
     price: 49,
     rating: 4.8,
     reviews: 1254,
-    duration: "4 hours",
-    lectures: 25,
-    level: "Beginner",
+    duration: "6 months",
+    lectures: 48,
+    level: "All Levels",
     language: "English",
-    resources: 10,
+    resources: 1,
     instructor: instructors.rishi,
+    highlights: [
+        {
+            title: "Master the Art of Chanting",
+            description: "Learn to chant with clarity and precision, guided by vedangas (axillary sciences) including shadba vijnana, the traditional science of sound. Let each syllable carry purity, power, and presence."
+        },
+        {
+            title: "Go Beyond the Words",
+            description: "Study suktas like Dasha Shāntayaḥ, Shraddhā, Medhā, and Prajñā with full Pada-vibhaga (word breakdown), Pada-artha (meanings), and contextual insights—to truly absorb their essence."
+        },
+        {
+            title: "Symbolism & Stories of the Devatās",
+            description: "Unveil the deeper meaning behind devatās like Indra, Brahma, Shiva, and the Lingam through puranic tales, iconography, and inner reflections."
+        },
+        {
+            title: "Free E-Guide for Daily Practice",
+            description: "Receive a detailed, downloadable guidebook to support your regular chanting—turning every session into a meditative and transformative experience."
+        },
+        {
+            title: "Interactive Q&A + Personal Mentoring",
+            description: "Get your questions answered live each week and connect with the Acharya directly for one-on-one guidance via WhatsApp."
+        }
+    ],
+    whoCanAttend: [
+        {
+            title: "Dharma Enthusiasts",
+            description: "Discover the core principles of Sanātana Dharma and how they illuminate a life of clarity, harmony, and purpose."
+        },
+        {
+            title: "Parents & Families",
+            description: "Learn and chant together as a family. Build a spiritual routine that strengthens emotional well-being and nurtures sacred values at home."
+        },
+        {
+            title: "Children & Students",
+            description: "Daily chanting enhances focus, memory, and emotional grounding. The healing vibrations of the Vedas support inner strength from an early age."
+        },
+        {
+            title: "Teachers & Educators",
+            description: "Bring this age-old wisdom into your classrooms. Learn to guide students in chanting while sharing values rooted in culture and tradition."
+        },
+        {
+            title: "Spiritual Seekers",
+            description: "Strengthen your sādhanā by understanding the deeper meaning behind mantras and aligning with the sound vibrations of the Vedas."
+        },
+        {
+            title: "Samskrita & Chanting Learners",
+            description: "Perfect for beginners and advanced learners alike—refine your pronunciation, rhythm, and meaning through the lens of Shabda Vijnana (science of sound)."
+        }
+    ],
     curriculum: [
-        { title: "Introduction to Sound", lessons: [{title: "The Power of Vibration", duration: "10:00"}, {title: "What is a Mantra?", duration: "12:30"}] },
-        { title: "Core Principles", lessons: [{title: "Intention (Sankalpa)", duration: "15:00"}, {title: "The Four Levels of Sound", duration: "18:00"}] },
+        { title: "Introduction to Vedas", lessons: [{title: "Origin and Purpose", duration: "30:00"}, {title: "Structure of the Vedas", duration: "30:00"}] },
+        { title: "The Art of Chanting", lessons: [{title: "Intro to Vedangas", duration: "45:00"}, {title: "Shabda Vijnana", duration: "45:00"}] },
+        { title: "Sukta Studies", lessons: [{title: "Dasha Shāntayaḥ", duration: "60:00"}, {title: "Shraddhā & Medhā", duration: "60:00"}] },
     ],
     faqs: [
-        { question: "Is this course suitable for absolute beginners?", answer: "Yes, this course is designed specifically for those with no prior experience in mantra chanting." },
-        { question: "Do I need any special equipment?", answer: "No, all you need is a quiet space and an open mind. A journal for taking notes is recommended." },
+        { question: "Is this course suitable for absolute beginners?", answer: "Yes, Vedashiksha is open to all sincere seekers regardless of age, background, or experience. Whether you’re just beginning or deepening your journey, you’re warmly welcomed." },
+        { question: "What is the time commitment?", answer: "The course runs for 6 months, with 8 classes per month. You will also receive a free e-guide for daily practice to support your learning." },
     ]
   },
   {

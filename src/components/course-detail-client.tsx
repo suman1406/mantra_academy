@@ -7,15 +7,21 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Clock,
-  BarChart,
-  Globe,
-  Download,
-  Award,
   BookOpen,
   CalendarDays,
   Video,
   Smile,
   BadgeCheck,
+  BookUser,
+  Users,
+  Feather,
+  MicVocal,
+  Gift,
+  MessageSquare,
+  School,
+  User,
+  GraduationCap,
+  HeartHandshake
 } from "lucide-react";
 import {
   Accordion,
@@ -23,9 +29,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CourseCountdown } from "./course-countdown";
-import { Badge } from "./ui/badge";
 
 // Info card styled for spiritual beige-maroon theme
 const InfoCard = ({
@@ -48,6 +53,23 @@ const InfoCard = ({
   </Card>
 );
 
+const whoCanAttendIcons = {
+    "Dharma Enthusiasts": Feather,
+    "Parents & Families": Users,
+    "Children & Students": School,
+    "Teachers & Educators": GraduationCap,
+    "Spiritual Seekers": User,
+    "Samskrita & Chanting Learners": MicVocal,
+};
+
+const highlightIcons = {
+    "Master the Art of Chanting": MicVocal,
+    "Go Beyond the Words": BookOpen,
+    "Symbolism & Stories of the Devatās": BookUser,
+    "Free E-Guide for Daily Practice": Gift,
+    "Interactive Q&A + Personal Mentoring": MessageSquare,
+}
+
 export function CourseDetailClient({ course }: { course: Course }) {
   const {
     title,
@@ -58,6 +80,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
     aiHint,
     curriculum,
     faqs,
+    highlights,
+    whoCanAttend,
   } = course;
 
   return (
@@ -116,17 +140,67 @@ export function CourseDetailClient({ course }: { course: Course }) {
               />
             </div>
 
+            {/* Course Highlights */}
+            {highlights && (
+                 <section className="mb-12">
+                    <Card className="p-6 md:p-8 bg-[#EFE1D1] shadow-md rounded-xl border border-[#C9A368]/40">
+                        <h2 className="text-3xl font-headline text-[#8B2E26] mb-4 border-b border-[#C9A368]/30 pb-2">
+                            Course Highlights
+                        </h2>
+                        <ul className="space-y-4">
+                            {highlights.map((highlight, index) => {
+                                const Icon = highlightIcons[highlight.title as keyof typeof highlightIcons] || BadgeCheck;
+                                return (
+                                    <li key={index} className="flex items-start gap-4">
+                                        <div className="p-2 bg-[#C9A368]/20 rounded-full mt-1">
+                                           <Icon className="h-5 w-5 text-[#8B2E26]" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-lg text-[#5C3B28]">{highlight.title}</h3>
+                                            <p className="text-[#3B2F2F]/80">{highlight.description}</p>
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </Card>
+                </section>
+            )}
+
             {/* About */}
             <section className="mb-12">
               <Card className="p-6 md:p-8 bg-[#EFE1D1] shadow-md rounded-xl border border-[#C9A368]/40">
                 <h2 className="text-3xl font-headline text-[#8B2E26] mb-4 border-b border-[#C9A368]/30 pb-2">
-                  About this Course
+                  Course Overview
                 </h2>
-                <div className="prose prose-lg max-w-none text-[#3B2F2F]/90">
+                <div className="prose prose-lg max-w-none text-[#3B2F2F]/90 whitespace-pre-wrap">
                   <p>{fullDescription}</p>
                 </div>
               </Card>
             </section>
+            
+            {/* Who Can Attend */}
+            {whoCanAttend && (
+                <section className="mb-12">
+                    <h2 className="text-3xl font-headline text-center text-[#8B2E26] mb-8">
+                        Who Can Attend?
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {whoCanAttend.map((attendee, index) => {
+                             const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || Users;
+                            return (
+                                <Card key={index} className="bg-[#EFE1D1] shadow-md rounded-xl border border-[#C9A368]/40 text-center p-6 flex flex-col items-center">
+                                    <div className="p-3 bg-[#C9A368]/20 rounded-full mb-4">
+                                        <Icon className="h-8 w-8 text-[#8B2E26]" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-[#5C3B28] mb-2">{attendee.title}</h3>
+                                    <p className="text-[#3B2F2F]/80 text-sm">{attendee.description}</p>
+                                </Card>
+                            )
+                        })}
+                    </div>
+                </section>
+            )}
 
             {/* Curriculum */}
             <section className="mb-12">
