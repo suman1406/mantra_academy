@@ -37,7 +37,7 @@ const QuoteIcon = () => (
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-8 w-8 text-primary/80"
+      className="h-8 w-8 text-card-foreground/80"
     >
       <path
         d="M6 17C6 15.3431 7.34315 14 9 14C10.6569 14 12 15.3431 12 17C12 18.6569 10.6569 20 9 20C7.34315 20 6 18.6569 6 17ZM6 17V7H12"
@@ -88,7 +88,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
                   <QuoteIcon />
               </CardHeader>
               <CardContent className="p-0 flex-grow">
-                <p className="text-foreground/80 italic">"{testimonial.quote}"</p>
+                <p className="text-card-foreground/80 italic">"{testimonial.quote}"</p>
               </CardContent>
               <div className="flex items-center mt-6 p-0">
                 <Avatar className="h-12 w-12 mr-4 overflow-hidden">
@@ -96,8 +96,8 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
                   <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-bold text-primary">{testimonial.name}</p>
-                  <p className="text-sm text-foreground/60">{testimonial.title}</p>
+                  <p className="font-bold text-card-foreground">{testimonial.name}</p>
+                  <p className="text-sm text-card-foreground/60">{testimonial.title}</p>
                 </div>
               </div>
             </Card>

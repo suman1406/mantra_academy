@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -31,20 +32,20 @@ const AnnouncementCard = ({ announcement, index }: { announcement: typeof announ
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1, ease: "easeInOut", delay: index * 0.2 }}
       >
-        <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden group p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-500 flex flex-col items-start h-full">
+        <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden group p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-500 flex flex-col items-start h-full text-card-foreground">
           <div className="flex items-center gap-4 mb-4">
-             <div className="p-3 bg-primary/20 rounded-full">
-              <Megaphone className="h-6 w-6 text-primary" />
+             <div className="p-3 bg-card-foreground/20 rounded-full">
+              <Megaphone className="h-6 w-6 text-card-foreground" />
             </div>
-             <h3 className="text-xl font-headline font-bold text-primary">
+             <h3 className="text-xl font-headline font-bold text-card-foreground">
                 {announcement.title}
             </h3>
           </div>
-          <p className="text-foreground/80 mt-2 flex-grow">
+          <p className="text-card-foreground/80 mt-2 flex-grow">
             {announcement.description}
           </p>
           <div className="w-full mt-6">
-            <Button variant="outline" className="w-full md:w-auto group transition-all duration-500 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
+            <Button variant="outline" className="w-full md:w-auto group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground" asChild>
                 <Link href={announcement.link}>
                     Learn More
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />

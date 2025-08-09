@@ -148,7 +148,7 @@
 }
 
 .manuscript-subtext {
-  color: hsl(var(--muted-foreground));
+  color: hsl(var(--card-foreground) / 0.7);
   font-style: italic;
 }
 
@@ -157,7 +157,7 @@
   font-size: 3.5rem;
   line-height: 1;
   margin-right: 0.25rem;
-  color: hsl(var(--primary));
+  color: hsl(var(--card-foreground));
   font-weight: bold;
-  text-shadow: 1px 1px 2px hsla(var(--foreground) / 0.2);
+  text-shadow: 1px 1px 2px hsla(var(--background) / 0.2);
 }

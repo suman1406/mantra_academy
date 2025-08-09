@@ -54,7 +54,7 @@ const BlogPostCard = ({
       className={`h-full flex flex-col group manuscript-card rounded-none ${devanagari.className}`}
     >
       <CardContent className="flex-grow flex flex-col p-8">
-        <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-primary transition-colors">
+        <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-card-foreground/80 transition-colors">
           {post.title}
         </CardTitle>
         <div className="text-sm manuscript-subtext mt-2 mb-4">
@@ -67,7 +67,7 @@ const BlogPostCard = ({
       <CardFooter className="p-8 pt-0">
           <Button
             variant="link"
-            className="p-0 manuscript-text font-bold group-hover:text-primary"
+            className="p-0 manuscript-text font-bold text-card-foreground/80 group-hover:text-card-foreground"
           >
             Read More
             <ArrowRight className="ml-2 h-4 w-4" />

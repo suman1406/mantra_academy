@@ -55,7 +55,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
       transition={{ duration: 0.8, delay: index * 0.15 }}
       className="w-full"
     >
-        <Card className="text-center border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-500">
+        <Card className="text-center border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-500 text-card-foreground">
             <div className="relative w-40 h-40 mb-4">
                 <Image
                     src={member.image}
@@ -67,11 +67,11 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
                 />
             </div>
             <CardHeader className="p-2">
-                <CardTitle className="font-headline text-2xl text-primary">{member.name}</CardTitle>
-                <p className="text-accent font-semibold">{member.role}</p>
+                <CardTitle className="font-headline text-2xl text-card-foreground">{member.name}</CardTitle>
+                <p className="text-card-foreground/80 font-semibold">{member.role}</p>
             </CardHeader>
             <CardContent>
-                <p className="text-foreground/70">{member.bio}</p>
+                <p className="text-card-foreground/70">{member.bio}</p>
             </CardContent>
         </Card>
     </motion.div>
@@ -127,28 +127,28 @@ export default function AboutPage() {
         className="w-full max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center"
       >
           <motion.div variants={itemVariants}>
-              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full">
-                  <BookOpen className="h-12 w-12 mx-auto text-accent mb-4"/>
-                  <h3 className="text-2xl font-headline text-primary mb-2">Authentic Teachings</h3>
-                  <p className="text-foreground/70">
+              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full text-card-foreground">
+                  <BookOpen className="h-12 w-12 mx-auto text-card-foreground mb-4"/>
+                  <h3 className="text-2xl font-headline text-card-foreground mb-2">Authentic Teachings</h3>
+                  <p className="text-card-foreground/70">
                     Our curriculum is rooted in the timeless wisdom of the Vedas and Tantras, adapted for the modern world.
                   </p>
               </Card>
           </motion.div>
            <motion.div variants={itemVariants}>
-              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full">
-                  <Target className="h-12 w-12 mx-auto text-accent mb-4"/>
-                  <h3 className="text-2xl font-headline text-primary mb-2">Our Vision</h3>
-                  <p className="text-foreground/70">
+              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full text-card-foreground">
+                  <Target className="h-12 w-12 mx-auto text-card-foreground mb-4"/>
+                  <h3 className="text-2xl font-headline text-card-foreground mb-2">Our Vision</h3>
+                  <p className="text-card-foreground/70">
                     We envision a world where every individual can harness sound for personal growth, inner peace, and universal well-being.
                   </p>
               </Card>
           </motion.div>
            <motion.div variants={itemVariants}>
-              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full">
-                  <Users className="h-12 w-12 mx-auto text-accent mb-4"/>
-                  <h3 className="text-2xl font-headline text-primary mb-2">For Everyone</h3>
-                  <p className="text-foreground/70">
+              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full text-card-foreground">
+                  <Users className="h-12 w-12 mx-auto text-card-foreground mb-4"/>
+                  <h3 className="text-2xl font-headline text-card-foreground mb-2">For Everyone</h3>
+                  <p className="text-card-foreground/70">
                     We provide practical education on the art and science of mantra chanting for seekers at all levels of their journey.
                   </p>
               </Card>

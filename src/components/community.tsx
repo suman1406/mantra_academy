@@ -53,10 +53,10 @@ const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: index * 0.15 }}
         >
-            <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center text-center h-full">
-                <feature.icon className="h-12 w-12 text-accent mb-4"/>
-                <h3 className="text-2xl font-headline text-primary mb-2">{feature.title}</h3>
-                <p className="text-foreground/70 flex-grow">{feature.description}</p>
+            <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center text-center h-full text-card-foreground">
+                <feature.icon className="h-12 w-12 text-card-foreground mb-4"/>
+                <h3 className="text-2xl font-headline text-card-foreground mb-2">{feature.title}</h3>
+                <p className="text-card-foreground/70 flex-grow">{feature.description}</p>
             </Card>
         </motion.div>
     )
