@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
               {error && <p className="text-sm text-center font-medium text-destructive-foreground">{error}</p>}
             </CardContent>
             <CardFooter className="px-8 pb-8 pt-4">
-               <Button type="submit" size="lg" className="w-full group text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 transform hover:scale-105">
+               <Button type="submit" variant="outline" size="lg" className="w-full group text-lg font-bold transition-all duration-300 transform hover:scale-105">
                     Sign In
                     <LogIn className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
                 </Button>
