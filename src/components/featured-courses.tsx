@@ -68,7 +68,7 @@ export function FeaturedCourses() {
                     </div>
                   </CardHeader>
                   <CardContent className="p-6 flex-grow">
-                    <Badge variant="default" className="mb-2 bg-primary text-primary-foreground">{course.category}</Badge>
+                    <Badge variant="default" className="mb-2 bg-primary text-primary-foreground border border-primary-foreground">{course.category}</Badge>
                     <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
                     <p className="text-card-foreground/70 mt-2">{course.description}</p>
                   </CardContent>
