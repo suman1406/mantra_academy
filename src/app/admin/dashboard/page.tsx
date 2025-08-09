@@ -1,12 +1,13 @@
 
 "use client"
 
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { BarChart, Users, BookOpen, DollarSign, Activity } from "lucide-react";
+import { Users, BookOpen, DollarSign, Activity } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-import { Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts"
+import { Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, BarChart } from "recharts"
 import { motion } from "framer-motion";
 
 const chartData = [
@@ -33,6 +34,12 @@ const recentUsers = [
 ];
 
 export default function AdminDashboard() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -92,18 +99,20 @@ export default function AdminDashboard() {
             <CardDescription>A look at new student sign-ups over the past six months.</CardDescription>
           </CardHeader>
           <CardContent className="pl-2">
-              <ChartContainer config={chartConfig} className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                   <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 10, left: -10 }}>
-                    <CartesianGrid vertical={false} />
-                    <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
-                    <YAxis tickLine={false} tickMargin={10} axisLine={false} />
-                    <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-                    <ChartLegend content={<ChartLegendContent />} />
-                    <Bar dataKey="total" fill="var(--color-total)" radius={8} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </ChartContainer>
+              {isClient && (
+                <ChartContainer config={chartConfig} className="h-[300px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData} margin={{ top: 20, right: 20, bottom: 10, left: -10 }}>
+                      <CartesianGrid vertical={false} />
+                      <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
+                      <YAxis tickLine={false} tickMargin={10} axisLine={false} />
+                      <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+                      <ChartLegend content={<ChartLegendContent />} />
+                      <Bar dataKey="total" fill="var(--color-total)" radius={8} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </ChartContainer>
+              )}
           </CardContent>
         </Card>
         <Card className="lg:col-span-3">
