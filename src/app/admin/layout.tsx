@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/admin-sidebar";
 import { useToast } from "@/hooks/use-toast";
 
@@ -12,9 +12,13 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { toast } = useToast();
+  const isLoginPage = pathname === "/admin/login";
 
   useEffect(() => {
+    if (isLoginPage) return;
+
     let isAuthenticated = false;
     try {
       isAuthenticated = sessionStorage.getItem("isAdminAuthenticated") === "true";
@@ -30,8 +34,11 @@ export default function AdminLayout({
       });
       router.replace("/admin/login");
     }
-  }, [router, toast]);
+  }, [router, toast, isLoginPage]);
 
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="flex min-h-screen">
