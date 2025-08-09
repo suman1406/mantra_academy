@@ -77,8 +77,8 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
             </CardContent>
         </Card>
     </motion.div>
-  )
-}
+  );
+};
 
 export default function AboutPage() {
     const sectionVariants = {
