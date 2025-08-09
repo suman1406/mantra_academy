@@ -47,15 +47,36 @@ export default function AdminLoginPage() {
       >
         <Card className="w-full max-w-md shadow-2xl bg-card/90 backdrop-blur-sm border-primary/20 text-card-foreground">
           <CardHeader className="text-center space-y-4">
-            <div className="mx-auto bg-primary/10 p-4 rounded-full w-fit mb-2 border-2 border-primary/20">
-              <ShieldCheck className="h-10 w-10 text-primary" />
-            </div>
-            <CardTitle className="text-4xl font-headline font-bold text-card-foreground">Admin Access</CardTitle>
-            <CardDescription className="text-lg font-body text-card-foreground/80">
-              Enter your credentials to manage the academy.
-            </CardDescription>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, rotate: 360 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+                delay: 0.3,
+              }}
+              className="mx-auto bg-primary p-4 rounded-full w-fit mb-2 border-2 border-primary-foreground/50 shadow-lg"
+            >
+              <ShieldCheck className="h-10 w-10 text-primary-foreground" />
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2}}
+            >
+                <CardTitle className="text-4xl font-headline font-bold text-card-foreground">Admin Access</CardTitle>
+                <CardDescription className="text-lg font-body text-card-foreground/80">
+                  Enter your credentials to manage the academy.
+                </CardDescription>
+            </motion.div>
           </CardHeader>
-          <form onSubmit={handleSubmit}>
+          <motion.form 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            onSubmit={handleSubmit}
+          >
             <CardContent className="px-8 space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="email" className="font-semibold text-card-foreground/90">Email</Label>
@@ -84,12 +105,12 @@ export default function AdminLoginPage() {
               {error && <p className="text-sm text-center font-medium text-destructive-foreground">{error}</p>}
             </CardContent>
             <CardFooter className="px-8 pb-8 pt-4">
-              <Button type="submit" size="lg" className="w-full group text-lg font-bold bg-primary-foreground text-primary hover:bg-primary-foreground/90">
-                Sign In
-                <LogIn className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
-              </Button>
+               <Button type="submit" size="lg" className="w-full group text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 transform hover:scale-105">
+                    Sign In
+                    <LogIn className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+                </Button>
             </CardFooter>
-          </form>
+          </motion.form>
         </Card>
       </motion.div>
     </div>
