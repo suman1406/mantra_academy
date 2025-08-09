@@ -32,11 +32,12 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
     };
 
     const Icon = () => {
+        const iconProps = { className: "w-20 h-20 text-card-foreground/80 group-hover:text-card-foreground transition-colors duration-300" };
         switch(item.platform) {
-            case "Instagram": return <Instagram />;
-            case "YouTube": return <Youtube />;
-            case "X": return <Twitter />;
-            case "Facebook": return <Facebook />;
+            case "Instagram": return <Instagram {...iconProps} />;
+            case "YouTube": return <Youtube {...iconProps} />;
+            case "X": return <Twitter {...iconProps} />;
+            case "Facebook": return <Facebook {...iconProps} />;
             default: return null;
         }
     };
@@ -53,18 +54,10 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
             transition={{ duration: 0.8, delay: index * 0.15 }}
          >
             <Link href={item.link} target="_blank" rel="noopener noreferrer">
-                <Card className="overflow-hidden group relative border-border/40 bg-card/80 backdrop-blur-sm">
-                    <CardContent className="p-0">
-                    <div className="overflow-hidden">
-                        <Image src={item.image} alt="Social media post" width={400} height={400} className="object-cover transition-transform duration-500 group-hover:scale-105" data-ai-hint={item.aiHint} />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 text-white">
-                        <div className="flex items-center space-x-2">
+                <Card className="overflow-hidden group relative border-border/40 bg-card backdrop-blur-sm aspect-square">
+                    <CardContent className="p-4 flex flex-col items-center justify-center h-full gap-4 text-center">
                         <Icon />
-                        <span className="font-semibold">{item.handle}</span>
-                        </div>
-                    </div>
+                        <span className="font-semibold text-lg text-card-foreground">{item.handle}</span>
                     </CardContent>
                 </Card>
             </Link>
