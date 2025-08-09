@@ -165,6 +165,22 @@ export function CourseDetailClient({ course }: { course: Course }) {
                 text="100% money back*"
               />
             </div>
+            
+            {/* Mobile-only Timer */}
+            <div className="block lg:hidden mb-8">
+              <Card className="shadow-lg rounded-xl overflow-hidden border border-[#C9A368]/40">
+                <CardContent className="p-6 bg-[#E4D3C1]">
+                  <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
+                  <Button
+                    size="lg"
+                    className="w-full text-lg mt-4 bg-[#8B2E26] hover:bg-[#A0522D] text-white rounded-lg shadow-md"
+                  >
+                    Enroll Now
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
 
             {/* Course Highlights */}
             {highlights && (
@@ -331,7 +347,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
           </main>
 
           {/* Sidebar */}
-          <aside className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
+          <aside className="hidden lg:block lg:col-span-1 lg:sticky lg:top-24 h-fit">
             <Card className="shadow-lg rounded-xl overflow-hidden border border-[#C9A368]/40">
               <div className="relative aspect-video">
                 <Image
