@@ -5,25 +5,25 @@
 
 @layer base {
   :root {
-    --background: 48 35% 94%;         /* Cream background */
+    --background: 48 80% 95%;         /* Light Cream background */
     --foreground: 210 15% 15%;        /* Darker slate text */
-    --card: 5 40% 92%;                /* Soft warm reddish-cream for cards */
+    --card: 48 80% 95%;                /* Light Cream for cards */
     --card-foreground: 210 15% 20%;
-    --popover: 45 40% 98%;
+    --popover: 48 80% 95%;
     --popover-foreground: 210 15% 20%;
-    --primary: 45 60% 80%;            /* Cream */
-    --primary-foreground: 210 15% 20%;
+    --primary: 45 85% 75%;            /* Vibrant Cream */
+    --primary-foreground: 210 15% 10%;
     --secondary: 170 35% 85%;         /* Soft muted teal */
     --secondary-foreground: 210 15% 20%;
-    --muted: 45 30% 90%;              /* Pale beige */
+    --muted: 45 50% 92%;              /* Muted Cream */
     --muted-foreground: 210 10% 40%;
-    --accent: 45 60% 80%;             /* Cream accent */
-    --accent-foreground: 210 15% 20%;
+    --accent: 45 85% 75%;             /* Vibrant Cream accent */
+    --accent-foreground: 210 15% 10%;
     --destructive: 0 84% 60%;         /* Bright Red */
     --destructive-foreground: 0 0% 100%;
-    --border: 45 30% 85%;
-    --input: 45 30% 90%;
-    --ring: 45 60% 80%;
+    --border: 45 50% 88%;
+    --input: 45 50% 90%;
+    --ring: 45 85% 75%;
   }
 
   .dark {
