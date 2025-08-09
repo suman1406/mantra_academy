@@ -39,10 +39,10 @@ export function Philosophy() {
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Our Philosophy</h2>
             <div className="text-foreground/80 mt-4 space-y-4 text-lg">
               <p>
-                We believe that within every individual lies a sanctuary of inner light—a source of boundless peace, wisdom, and strength. Our purpose is to provide the tools, guidance, and community to help you connect with that sacred space.
+                We believe that sound is the primordial creative force of the universe. Within every mantra lies a seed of potential—a source of boundless peace, power, and connection. Our purpose is to provide the keys to unlock that potential.
               </p>
               <p>
-                Our teachings are rooted in ancient traditions, yet adapted for the modern world. We honor a holistic approach, nurturing the mind through meditation, the body through mindful movement, and the spirit through community and self-reflection.
+                Our teachings are rooted in the timeless wisdom of the Vedas and Tantras, adapted for the modern world. We honor the science of vibration, teaching correct pronunciation, rhythm, and intention to awaken the power within each sacred syllable.
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export function Philosophy() {
               alt="A serene sanctuary with soft light"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
-              data-ai-hint="serene sanctuary soft light"
+              data-ai-hint="sound waves abstract"
             />
           </div>
         </Card>
@@ -60,4 +60,3 @@ export function Philosophy() {
     </section>
   );
 }
-

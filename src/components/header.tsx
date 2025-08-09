@@ -35,7 +35,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/">
           <Logo />
-          <span className="sr-only">Inner Light Sanctuary Home</span>
+          <span className="sr-only">Mantra Academy Home</span>
         </Link>
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (

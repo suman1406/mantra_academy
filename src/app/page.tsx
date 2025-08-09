@@ -37,10 +37,10 @@ export default function Home() {
 
         <div className="z-10 flex flex-col items-center space-y-6">
             <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]">
-              Welcome to Your Inner Light Sanctuary
+              Welcome to Mantra Academy
             </h1>
             <p className="max-w-2xl text-lg text-foreground/80">
-              Discover tranquility and wisdom. Embark on a journey of self-discovery through our curated courses and a supportive community.
+              Unlock the power of sound and vibration. Discover ancient mantras and transform your life through our expert-led courses and vibrant community.
             </p>
         </div>
       </section>
@@ -67,6 +67,3 @@ export default function Home() {
     </div>
   );
 }
-
-
-

@@ -67,7 +67,7 @@ export function AIChatbot() {
         <SheetHeader>
           <SheetTitle className="font-headline text-2xl text-primary flex items-center gap-2">
             <Bot />
-            Spiritual Assistant
+            Mantra Guide
           </SheetTitle>
         </SheetHeader>
         <ScrollArea className="flex-grow my-4 pr-4" ref={scrollAreaRef}>
@@ -77,7 +77,7 @@ export function AIChatbot() {
                 <AvatarFallback><Bot size={20}/></AvatarFallback>
               </Avatar>
               <div className="p-3 rounded-lg bg-muted max-w-xs">
-                <p>Greetings! How may I assist you on your spiritual path today? Ask me about our courses or mission.</p>
+                <p>Greetings! How may I assist you today? Ask me about our mantra courses or our mission.</p>
               </div>
             </div>
             {messages.map((message, index) => (

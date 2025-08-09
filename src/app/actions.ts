@@ -11,20 +11,20 @@ export async function handleFaqQuery(query: string): Promise<{ answer: string }>
     const lowerQuery = query.toLowerCase();
 
     if (lowerQuery.includes('course') || lowerQuery.includes('learn')) {
-      return { answer: "We offer a variety of courses on meditation, mindfulness, and spiritual development. You can find all our featured courses on the homepage." };
+      return { answer: "We offer a variety of courses on mantra science, Vedic chanting, and meditation. You can find all our featured courses on the homepage." };
     }
     if (lowerQuery.includes('mission') || lowerQuery.includes('vision') || lowerQuery.includes('about')) {
-      return { answer: "Our mission is to provide a sanctuary for spiritual seekers to find peace, wisdom, and community. Learn more on our 'About Us' page." };
+      return { answer: "Our mission is to revive the ancient science of mantras and make it accessible for modern seekers. Learn more on our 'About Us' page." };
     }
     if (lowerQuery.includes('who are you') || lowerQuery.includes('team')) {
-      return { answer: "We are the Inner Light Sanctuary, a place for spiritual growth and learning. You can learn about our team and guides on the 'About Us' page." };
+      return { answer: "We are Mantra Academy, a place for learning the art and science of mantras. You can learn about our instructors on the 'About Us' page." };
     }
     if (lowerQuery.includes('hello') || lowerQuery.includes('hi')) {
         return { answer: "Hello! It's a joy to connect with you. How can I help you today?" };
     }
 
     // Fallback if no specific keywords are matched.
-    return { answer: "I'm here to help with questions about Inner Light Sanctuary. I can answer questions about our courses, our mission, or our team. Could you try rephrasing your question?" };
+    return { answer: "I'm here to help with questions about Mantra Academy. I can answer questions about our courses, our mission, or our instructors. Could you try rephrasing your question?" };
 
   } catch (error) {
     console.error('Error in AI query:', error);

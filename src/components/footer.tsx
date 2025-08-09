@@ -11,7 +11,7 @@ export function Footer() {
             <Logo />
           </div>
           <div className="text-center text-foreground/60">
-            <p>&copy; {new Date().getFullYear()} Inner Light Sanctuary. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Mantra Academy. All rights reserved.</p>
             <AmbientAudio />
           </div>
           <div className="flex justify-center md:justify-end space-x-4">

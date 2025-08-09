@@ -7,8 +7,8 @@ import { AIChatbot } from "@/components/ai-chatbot";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Inner Light Sanctuary",
-  description: "Find your inner peace and spiritual growth.",
+  title: "Mantra Academy",
+  description: "Learn the power of mantras and transform your life.",
 };
 
 export default function RootLayout({

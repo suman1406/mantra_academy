@@ -11,60 +11,60 @@ import { ArrowRight } from "lucide-react";
 
 const courses = [
   {
-    title: "The Art of Meditation",
-    category: "Mindfulness",
+    title: "Foundations of Mantra Science",
+    category: "Beginner",
     image: "https://placehold.co/600x400.png",
-    aiHint: "meditation yoga",
-    description: "Master the practice of meditation and bring peace to your daily life.",
+    aiHint: "ancient scroll",
+    description: "Learn the fundamentals of what mantras are, how they work, and correct pronunciation.",
   },
   {
-    title: "Chakra Healing & Balancing",
-    category: "Energy Work",
+    title: "Ganesha Mantras for Success",
+    category: "Prosperity",
     image: "https://placehold.co/600x400.png",
-    aiHint: "chakra energy",
-    description: "Learn to align your energy centers for physical and spiritual well-being.",
+    aiHint: "ganesha statue",
+    description: "Invoke the energy of Ganesha to remove obstacles and attract success in your life.",
   },
   {
-    title: "Introduction to Spiritualism",
-    category: "Philosophy",
+    title: "Mantras for Healing",
+    category: "Wellness",
     image: "https://placehold.co/600x400.png",
-    aiHint: "spirituality books",
-    description: "Explore the fundamental concepts of spiritual thought and practice.",
+    aiHint: "healing energy",
+    description: "Explore powerful healing mantras to restore balance to your mind, body, and spirit.",
   },
   {
-    title: "Advanced Yoga Poses",
-    category: "Yoga",
+    title: "Advanced Vedic Chanting",
+    category: "Advanced",
     image: "https://placehold.co/600x400.png",
-    aiHint: "yoga advanced",
-    description: "Deepen your yoga practice with challenging and rewarding new asanas.",
+    aiHint: "vedic text",
+    description: "Deepen your practice with complex Vedic hymns and advanced chanting techniques.",
   },
    {
-    title: "Crystal Healing Basics",
-    category: "Energy Work",
+    title: "Lakshmi Mantras for Abundance",
+    category: "Prosperity",
     image: "https://placehold.co/600x400.png",
-    aiHint: "healing crystals",
-    description: "Understand the power of crystals and how to use them for healing and intention setting.",
+    aiHint: "gold coins",
+    description: "Attract wealth and abundance with the sacred sounds dedicated to Goddess Lakshmi.",
   },
   {
-    title: "Mindful Living Workshop",
-    category: "Mindfulness",
+    title: "The Bija Mantras",
+    category: "Chakras",
     image: "https://placehold.co/600x400.png",
-    aiHint: "mindfulness journal",
-    description: "Integrate mindfulness into every aspect of your life for greater presence and joy.",
+    aiHint: "chakra energy",
+    description: "Learn the seed sounds of the chakras to awaken and balance your energy centers.",
   },
   {
-    title: "Astrology for Beginners",
-    category: "Divination",
+    title: "Gayatri Mantra Masterclass",
+    category: "Advanced",
     image: "https://placehold.co/600x400.png",
-    aiHint: "astrology chart",
-    description: "Learn to read birth charts and understand the language of the stars.",
+    aiHint: "sunrise meditation",
+    description: "Master the pronunciation, meaning, and deep spiritual significance of the Gayatri Mantra.",
   },
   {
-    title: "Tarot Reading Fundamentals",
-    category: "Divination",
+    title: "Mantras for Inner Peace",
+    category: "Wellness",
     image: "https://placehold.co/600x400.png",
-    aiHint: "tarot cards",
-    description: "Unlock the secrets of the tarot and develop your intuition.",
+    aiHint: "serene landscape",
+    description: "Find your center and cultivate profound tranquility with these peace-giving mantras.",
   },
 ];
 
@@ -137,10 +137,10 @@ export default function CoursesPage() {
         className="text-center"
       >
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
-          Expand Your Consciousness
+          Tune Your Vibration
         </h1>
         <p className="mt-6 max-w-3xl mx-auto space-y-4 text-lg text-foreground/80">
-          Our courses are crafted to guide you through every stage of your spiritual awakening.
+          Our courses are designed to guide you through the ancient science of mantras.
         </p>
       </motion.section>
 

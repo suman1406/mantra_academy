@@ -8,32 +8,32 @@ import { ArrowRight } from "lucide-react";
 
 const courses = [
   {
-    title: "The Art of Meditation",
-    category: "Mindfulness",
+    title: "Foundations of Mantra Science",
+    category: "Beginner",
     image: "https://placehold.co/600x400.png",
-    aiHint: "meditation yoga",
-    description: "Master the practice of meditation and bring peace to your daily life.",
+    aiHint: "ancient scroll",
+    description: "Learn the fundamentals of what mantras are, how they work, and correct pronunciation.",
   },
   {
-    title: "Chakra Healing & Balancing",
-    category: "Energy Work",
+    title: "Ganesha Mantras for Success",
+    category: "Prosperity",
     image: "https://placehold.co/600x400.png",
-    aiHint: "chakra energy",
-    description: "Learn to align your energy centers for physical and spiritual well-being.",
+    aiHint: "ganesha statue",
+    description: "Invoke the energy of Ganesha to remove obstacles and attract success in your life.",
   },
   {
-    title: "Introduction to Spiritualism",
-    category: "Philosophy",
+    title: "Mantras for Healing",
+    category: "Wellness",
     image: "https://placehold.co/600x400.png",
-    aiHint: "spirituality books",
-    description: "Explore the fundamental concepts of spiritual thought and practice.",
+    aiHint: "healing energy",
+    description: "Explore powerful healing mantras to restore balance to your mind, body, and spirit.",
   },
   {
-    title: "Advanced Yoga Poses",
-    category: "Yoga",
+    title: "Advanced Vedic Chanting",
+    category: "Advanced",
     image: "https://placehold.co/600x400.png",
-    aiHint: "yoga advanced",
-    description: "Deepen your yoga practice with challenging and rewarding new asanas.",
+    aiHint: "vedic text",
+    description: "Deepen your practice with complex Vedic hymns and advanced chanting techniques.",
   },
 ];
 

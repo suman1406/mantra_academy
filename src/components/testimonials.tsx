@@ -7,23 +7,23 @@ import { useRef } from "react";
 
 const testimonials = [
   {
-    name: "Elena Morningstar",
-    title: "Meditation Student",
-    quote: "The meditation course opened my eyes to a new way of living. I feel more centered and peaceful than ever before. The guidance was authentic and deeply transformative.",
+    name: "Priya Sharma",
+    title: "Mantra Student",
+    quote: "The foundational course changed my life. I never understood the science behind mantras until now. The instructors are authentic and the teachings are profound.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "woman portrait happy",
   },
   {
-    name: "David Chen",
-    title: "Yoga Enthusiast",
-    quote: "I've practiced yoga for years, but the instructors here brought a new level of spiritual depth to my practice. It's more than just poses; it's a connection to the self.",
+    name: "Rajesh Kumar",
+    title: "Yoga Teacher",
+    quote: "As a yoga teacher, I thought I knew about mantras. Mantra Academy took my understanding to a whole new level. My own teaching has become so much more powerful.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "man portrait smiling",
   },
   {
-    name: "Sophia Rodriguez",
+    name: "Sunita Patel",
     title: "Spiritual Seeker",
-    quote: "Inner Light Sanctuary is truly a haven. The community is so welcoming, and the variety of courses means there's always something new to learn and explore on your journey.",
+    quote: "Mantra Academy is an incredible resource. The community is supportive, and the depth of knowledge shared is unparalleled. It's a must for any serious spiritual seeker.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "woman portrait content",
   },
@@ -108,8 +108,8 @@ export function Testimonials() {
   return (
     <section className="w-full max-w-6xl">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Words of Light</h2>
-        <p className="text-foreground/80 mt-2">What our community says about us</p>
+        <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Words of Power</h2>
+        <p className="text-foreground/80 mt-2">What our students say about us</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (

@@ -8,25 +8,25 @@ import { motion } from "framer-motion";
 
 const teamMembers = [
   {
-    name: "Aria Lightwood",
-    role: "Founder & Lead Mystic",
+    name: "Rishi Varma",
+    role: "Founder & Lead Instructor",
     image: "https://placehold.co/400x400.png",
-    aiHint: "spiritual woman portrait",
-    bio: "Aria founded the Sanctuary to create a haven for souls seeking light and wisdom.",
+    aiHint: "spiritual man portrait",
+    bio: "Rishi founded Mantra Academy to share the transformative power of ancient sound.",
   },
   {
-    name: "Kaelen Stone",
-    role: "Meditation Guide",
+    name: "Anjali Devi",
+    role: "Vedic Chanting Expert",
     image: "https://placehold.co/400x400.png",
-    aiHint: "meditating man portrait",
-    bio: "With 20 years of practice, Kaelen guides students to find their inner stillness.",
+    aiHint: "chanting woman portrait",
+    bio: "With a lineage of scholars, Anjali teaches the precise science of Vedic chanting.",
   },
   {
-    name: "Seraphina Moon",
-    role: "Yoga Instructor",
+    name: "Sanjay Rao",
+    role: "Nada Yoga Teacher",
     image: "https://placehold.co/400x400.png",
     aiHint: "yoga instructor portrait",
-    bio: "Seraphina combines ancient yoga traditions with modern anatomical understanding.",
+    bio: "Sanjay helps students connect with their inner sound through Nada Yoga.",
   },
 ];
 
@@ -104,10 +104,10 @@ export default function AboutPage() {
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">Our Sacred Mission</h1>
         <div className="mt-6 max-w-3xl mx-auto space-y-4 text-lg text-foreground/80">
           <p>
-            At Inner Light Sanctuary, our mission is to illuminate the path of spiritual discovery for every soul that finds its way to us. We believe in the power of ancient wisdom, the peace of mindful practice, and the strength of a supportive community.
+            At Mantra Academy, our mission is to revive the ancient science of mantras and make it accessible for modern seekers. We believe in the profound power of sound to heal, uplift, and transform consciousness.
           </p>
           <p>
-            We are dedicated to providing authentic, accessible, and transformative experiences that nurture the mind, body, and spirit. Our vision is a world where every individual is connected to their inner light, living a life of purpose, peace, and profound joy.
+            We are dedicated to providing authentic, in-depth, and practical education on the art and science of mantra chanting. Our vision is a world where every individual can harness the power of sound for personal growth, inner peace, and universal well-being.
           </p>
         </div>
       </motion.section>
@@ -120,15 +120,15 @@ export default function AboutPage() {
         className="w-full max-w-6xl"
       >
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Guides</h2>
-          <p className="text-foreground/80 mt-2">The hearts and souls behind the Sanctuary</p>
+          <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Instructors</h2>
+          <p className="text-foreground/80 mt-2">The guides of Mantra Academy</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
             <TeamMemberCard key={member.name} member={member} index={index} />
           ))}
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }

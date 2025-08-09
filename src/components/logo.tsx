@@ -26,9 +26,9 @@ export function Logo({ className }: { className?: string }) {
         x="50"
         y="33"
         className="font-headline fill-current"
-        fontSize="28"
+        fontSize="24"
       >
-        Inner Light
+        Mantra Academy
       </text>
     </svg>
   );
