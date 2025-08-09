@@ -46,7 +46,7 @@ export function AdminSidebar() {
         <div className="flex-1 overflow-auto py-2">
           <nav className="grid items-start px-4 text-sm font-medium">
             {navLinks.map((link) => (
-              <NavLink key={link.href} {...link} />
+              <NavLink key={link.label} {...link} />
             ))}
           </nav>
         </div>
