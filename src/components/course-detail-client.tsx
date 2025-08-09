@@ -13,16 +13,14 @@ import {
   Smile,
   BadgeCheck,
   Users,
-  Feather,
   Gift,
   MessageSquare,
   School,
   User,
   GraduationCap,
-  HeartHandshake,
   AudioWaveform,
-  Flower2,
-  BookHeart
+  BookHeart,
+  Flower2
 } from "lucide-react";
 import {
   Accordion,
@@ -32,6 +30,27 @@ import {
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CourseCountdown } from "./course-countdown";
+
+// Custom Dharma Wheel Icon
+const DharmaIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="2" />
+        <path d="m12 14 1.8-5.4" />
+        <path d="m12 14-1.8-5.4" />
+        <path d="m14.24 16.24 3.52-1.2" />
+        <path d="m9.76 7.76-3.52 1.2" />
+        <path d="m16.24 9.76 1.2-3.52" />
+        <path d="m7.76 14.24-1.2 3.52" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="m4.93 4.93 1.41 1.41" />
+        <path d="m17.66 17.66 1.41 1.41" />
+        <path d="m4.93 19.07 1.41-1.41" />
+        <path d="m17.66 6.34 1.41-1.41" />
+    </svg>
+);
+
 
 // Info card styled for spiritual beige-maroon theme
 const InfoCard = ({
@@ -54,8 +73,8 @@ const InfoCard = ({
   </Card>
 );
 
-const whoCanAttendIcons = {
-    "Dharma Enthusiasts": Feather,
+const whoCanAttendIcons: Record<string, React.ElementType> = {
+    "Dharma Enthusiasts": DharmaIcon,
     "Parents & Families": Users,
     "Children & Students": School,
     "Teachers & Educators": GraduationCap,
@@ -63,7 +82,7 @@ const whoCanAttendIcons = {
     "Samskrita & Chanting Learners": AudioWaveform,
 };
 
-const highlightIcons = {
+const highlightIcons: Record<string, React.ElementType> = {
     "Master the Art of Chanting": AudioWaveform,
     "Go Beyond the Words": BookHeart,
     "Symbolism & Stories of the Devatās": Flower2,
