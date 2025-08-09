@@ -4,7 +4,6 @@
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { ArrowRight, BookText } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -13,24 +12,18 @@ const blogPosts = [
     title: "The Primordial Sound: Unpacking the Meaning of 'Om'",
     author: "Rishi Varma",
     date: "July 26, 2024",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "sacred geometry symbol",
     excerpt: "The syllable 'Om' is said to be the primordial sound from which the entire universe emanated. We explore its profound significance and the science of its vibration.",
   },
   {
     title: "Five Mantras to Cultivate Inner Peace",
     author: "Anjali Devi",
     date: "July 20, 2024",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "serene meditation landscape",
     excerpt: "In a world of constant noise, finding tranquility can be a challenge. Here are five powerful, yet simple, mantras to help you cultivate a state of inner peace and calm.",
   },
   {
     title: "The Role of Intention in Mantra Practice",
     author: "Sanjay Rao",
     date: "July 15, 2024",
-    image: "https://placehold.co/600x400.png",
-    aiHint: "focused mind illustration",
     excerpt: "A mantra is more than just sound; it is an intention given form. Learn how 'sankalpa' (intention) can amplify the effects of your chanting practice exponentially.",
   },
 ];
@@ -43,18 +36,6 @@ const BlogPostCard = ({ post, index }: { post: typeof blogPosts[0], index: numbe
     transition={{ duration: 0.8, delay: index * 0.15 }}
   >
     <Card className="h-full flex flex-col group manuscript-card">
-      <CardHeader>
-        <div className="relative h-56 w-full overflow-hidden rounded-t-lg border-b-4 border-amber-800/50">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            data-ai-hint={post.aiHint}
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-           <div className="absolute inset-0 bg-stone-900/20" />
-        </div>
-      </CardHeader>
       <CardContent className="flex-grow flex flex-col p-8">
         <CardTitle className="text-2xl md:text-3xl font-headline text-amber-900/90 dark:text-amber-200/90 group-hover:text-primary transition-colors">
           {post.title}
