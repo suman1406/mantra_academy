@@ -12,16 +12,17 @@ import {
   Video,
   Smile,
   BadgeCheck,
-  BookUser,
   Users,
   Feather,
-  MicVocal,
   Gift,
   MessageSquare,
   School,
   User,
   GraduationCap,
-  HeartHandshake
+  HeartHandshake,
+  AudioWaveform,
+  Lotus,
+  BookHeart
 } from "lucide-react";
 import {
   Accordion,
@@ -59,13 +60,13 @@ const whoCanAttendIcons = {
     "Children & Students": School,
     "Teachers & Educators": GraduationCap,
     "Spiritual Seekers": User,
-    "Samskrita & Chanting Learners": MicVocal,
+    "Samskrita & Chanting Learners": AudioWaveform,
 };
 
 const highlightIcons = {
-    "Master the Art of Chanting": MicVocal,
-    "Go Beyond the Words": BookOpen,
-    "Symbolism & Stories of the Devatās": BookUser,
+    "Master the Art of Chanting": AudioWaveform,
+    "Go Beyond the Words": BookHeart,
+    "Symbolism & Stories of the Devatās": Lotus,
     "Free E-Guide for Daily Practice": Gift,
     "Interactive Q&A + Personal Mentoring": MessageSquare,
 }
