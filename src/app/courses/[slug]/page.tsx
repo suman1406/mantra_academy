@@ -1,8 +1,12 @@
 
+"use client";
+
 import { courses } from "@/lib/course-data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Star,
@@ -14,10 +18,7 @@ import {
   Download,
   Award,
   BookOpen,
-  Plus,
-  Minus,
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Accordion,
   AccordionContent,
@@ -25,7 +26,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 export default function CourseDetailPage({
   params,
@@ -33,14 +33,10 @@ export default function CourseDetailPage({
   params: { slug: string };
 }) {
   const course = courses.find((c) => c.slug === params.slug);
-
-  if (!course) {
-    notFound();
-  }
+  if (!course) notFound();
 
   const {
     title,
-    category,
     instructor,
     rating,
     reviews,
@@ -59,39 +55,42 @@ export default function CourseDetailPage({
   } = course;
 
   return (
-    <div className="py-12 sm:py-16">
+    <div className="bg-[#FAF5E4] min-h-screen">
       {/* Hero Section */}
-      <section className="bg-primary text-primary-foreground">
+      <section className="bg-[#EFE1D1] border-b-4 border-[#C9A368] shadow-md">
         <div className="container mx-auto px-4 py-16 grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-4">
-            <h1 className="text-4xl md:text-5xl font-headline font-bold">
+            <h1 className="text-4xl md:text-5xl font-bold text-[#5C3B28]">
               {title}
             </h1>
-            <p className="text-xl text-primary-foreground/80">{description}</p>
+            <p className="text-lg text-[#3B2F2F]">{description}</p>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage
-                    src={instructor.image}
-                    alt={instructor.name}
-                    data-ai-hint={instructor.aiHint}
-                  />
+                  <AvatarImage src={instructor.image} alt={instructor.name} />
                   <AvatarFallback>{instructor.name.charAt(0)}</AvatarFallback>
                 </Avatar>
-                <span>{instructor.name}</span>
+                <span className="text-[#5C3B28]">{instructor.name}</span>
               </div>
-              <Separator orientation="vertical" className="h-6 bg-primary-foreground/50" />
-              <div className="flex items-center gap-1">
+              <Separator orientation="vertical" className="h-6 bg-[#C9A368]" />
+              <div className="flex items-center gap-1 text-[#5C3B28]">
                 <span className="font-bold">{rating}</span>
-                <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                 <span>({reviews} reviews)</span>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" variant="default" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+              <Button
+                size="lg"
+                className="bg-[#8B2E26] text-white hover:bg-[#A0522D] rounded-lg"
+              >
                 Enroll Now
               </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-[#8B2E26] text-[#8B2E26] hover:bg-[#E4D3C1]"
+              >
                 Add to Wishlist
               </Button>
             </div>
@@ -99,12 +98,12 @@ export default function CourseDetailPage({
         </div>
       </section>
 
-      <div className="container mx-auto px-4 mt-[-4rem] ">
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Main Content */}
+      {/* Main Content */}
+      <div className="container mx-auto px-4 mt-[-4rem] relative z-10">
+        <div className="grid lg:grid-cols-3 gap-8">
           <main className="lg:col-span-2">
             {/* Course Preview */}
-            <Card className="overflow-hidden mb-8 shadow-xl">
+            <Card className="overflow-hidden mb-8 shadow-lg rounded-lg bg-[#E4D3C1]">
               <div className="relative aspect-video">
                 <Image
                   src={image}
@@ -116,44 +115,46 @@ export default function CourseDetailPage({
               </div>
             </Card>
 
-            {/* Course Description */}
+            {/* About */}
             <section className="mb-12">
-              <Card className="p-6 md:p-8 bg-card/50">
-                <h2 className="text-3xl font-headline font-bold text-primary mb-4">
+              <Card className="p-6 md:p-8 bg-[#EFE1D1] shadow-sm rounded-lg">
+                <h2 className="text-3xl font-bold text-[#8B2E26] mb-4">
                   About this Course
                 </h2>
-                <div className="prose prose-lg text-foreground/80 max-w-none">
-                  {fullDescription}
-                </div>
+                <p className="text-[#3B2F2F]">{fullDescription}</p>
               </Card>
             </section>
-            
-            {/* Curriculum Section */}
+
+            {/* Curriculum */}
             <section className="mb-12">
-              <h2 className="text-3xl font-headline font-bold text-primary mb-4">
+              <h2 className="text-3xl font-bold text-[#8B2E26] mb-4">
                 Course Curriculum
               </h2>
               <Accordion type="single" collapsible className="w-full">
                 {curriculum.map((section, index) => (
-                  <AccordionItem value={`item-${index}`} key={index} className="bg-card/20 border-border/40 rounded-lg mb-2 px-4">
-                    <AccordionTrigger className="text-lg font-bold hover:no-underline">
+                  <AccordionItem
+                    value={`item-${index}`}
+                    key={index}
+                    className="bg-[#E4D3C1] border border-[#C9A368] rounded-lg mb-2 px-4"
+                  >
+                    <AccordionTrigger className="text-lg font-semibold text-[#5C3B28]">
                       <div className="flex items-center gap-4">
-                         <BookOpen className="h-5 w-5 text-primary"/>
-                         <span>{section.title}</span>
+                        <BookOpen className="h-5 w-5 text-[#8B2E26]" />
+                        {section.title}
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
                       <ul className="space-y-2 pt-2">
-                        {section.lessons.map((lesson, lessonIndex) => (
+                        {section.lessons.map((lesson, i) => (
                           <li
-                            key={lessonIndex}
-                            className="flex justify-between items-center p-2 rounded-md hover:bg-muted"
+                            key={i}
+                            className="flex justify-between items-center p-2 rounded-md hover:bg-[#EFE1D1]"
                           >
-                            <span className="flex items-center gap-2">
-                              <PlayCircle className="h-4 w-4 text-muted-foreground" />
+                            <span className="flex items-center gap-2 text-[#3B2F2F]">
+                              <PlayCircle className="h-4 w-4 text-[#A0522D]" />
                               {lesson.title}
                             </span>
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-sm text-[#7A6654]">
                               {lesson.duration}
                             </span>
                           </li>
@@ -165,42 +166,48 @@ export default function CourseDetailPage({
               </Accordion>
             </section>
 
-             {/* Instructor Section */}
+            {/* Instructor */}
             <section className="mb-12">
-              <h2 className="text-3xl font-headline font-bold text-primary mb-4">
+              <h2 className="text-3xl font-bold text-[#8B2E26] mb-4">
                 Meet Your Instructor
               </h2>
-              <Card className="p-6 md:p-8 bg-card/50">
+              <Card className="p-6 md:p-8 bg-[#EFE1D1] shadow-sm rounded-lg">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
                   <Avatar className="h-24 w-24">
                     <AvatarImage
                       src={instructor.image}
                       alt={instructor.name}
-                      data-ai-hint={instructor.aiHint}
                     />
                     <AvatarFallback>{instructor.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-2xl font-headline font-bold">{instructor.name}</h3>
-                    <p className="text-muted-foreground">{instructor.title}</p>
-                    <p className="mt-2 text-foreground/80">{instructor.bio}</p>
+                    <h3 className="text-2xl font-bold text-[#5C3B28]">
+                      {instructor.name}
+                    </h3>
+                    <p className="text-[#7A6654]">{instructor.title}</p>
+                    <p className="mt-2 text-[#3B2F2F]">{instructor.bio}</p>
                   </div>
                 </div>
               </Card>
             </section>
 
-
-            {/* FAQ Section */}
+            {/* FAQs */}
             <section>
-              <h2 className="text-3xl font-headline font-bold text-primary mb-4">
+              <h2 className="text-3xl font-bold text-[#8B2E26] mb-4">
                 Frequently Asked Questions
               </h2>
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
-                  <AccordionItem value={`item-${index}`} key={index} className="bg-card/20 border-border/40 rounded-lg mb-2 px-4">
-                    <AccordionTrigger className="text-lg text-left font-semibold hover:no-underline">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="text-base text-foreground/70">
-                        {faq.answer}
+                  <AccordionItem
+                    value={`faq-${index}`}
+                    key={index}
+                    className="bg-[#E4D3C1] border border-[#C9A368] rounded-lg mb-2 px-4"
+                  >
+                    <AccordionTrigger className="text-lg font-semibold text-[#5C3B28]">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-[#3B2F2F]">
+                      {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -210,22 +217,42 @@ export default function CourseDetailPage({
 
           {/* Sidebar */}
           <aside className="lg:col-span-1 lg:sticky lg:top-24 h-fit">
-            <Card className="shadow-xl">
+            <Card className="shadow-lg rounded-lg bg-[#EFE1D1]">
               <CardContent className="p-6">
                 <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-4xl font-bold text-primary">${price}</span>
-                    {/* <span className="text-lg line-through text-muted-foreground">$199</span> */}
+                  <span className="text-4xl font-bold text-[#8B2E26]">
+                    ${price}
+                  </span>
                 </div>
-                <Button size="lg" className="w-full">Enroll Now</Button>
-                <Separator className="my-6" />
-                <h3 className="text-lg font-bold mb-4">This course includes:</h3>
-                <ul className="space-y-3 text-sm text-foreground/80">
-                  <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {duration} on-demand video</li>
-                  <li className="flex items-center gap-2"><BookOpen className="h-4 w-4 text-primary" /> {lectures} lectures</li>
-                  <li className="flex items-center gap-2"><BarChart className="h-4 w-4 text-primary" /> {level}</li>
-                  <li className="flex items-center gap-2"><Globe className="h-4 w-4 text-primary" /> {language}</li>
-                  <li className="flex items-center gap-2"><Download className="h-4 w-4 text-primary" /> {resources} downloadable resources</li>
-                  <li className="flex items-center gap-2"><Award className="h-4 w-4 text-primary" /> Certificate of completion</li>
+                <Button
+                  size="lg"
+                  className="w-full bg-[#8B2E26] text-white hover:bg-[#A0522D] rounded-lg"
+                >
+                  Enroll Now
+                </Button>
+                <Separator className="my-6 bg-[#C9A368]" />
+                <h3 className="text-lg font-bold text-[#5C3B28] mb-4">
+                  This course includes:
+                </h3>
+                <ul className="space-y-3 text-sm text-[#3B2F2F]">
+                  <li className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-[#8B2E26]" /> {duration} on-demand video
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <BookOpen className="h-4 w-4 text-[#8B2E26]" /> {lectures} lectures
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <BarChart className="h-4 w-4 text-[#8B2E26]" /> {level}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Globe className="h-4 w-4 text-[#8B2E26]" /> {language}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Download className="h-4 w-4 text-[#8B2E26]" /> {resources} downloadable resources
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Award className="h-4 w-4 text-[#8B2E26]" /> Certificate of completion
+                  </li>
                 </ul>
               </CardContent>
             </Card>
