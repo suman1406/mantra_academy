@@ -20,12 +20,13 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
 
-  const NavLink = ({ href, label }: { href: string; label: string }) => (
+  const NavLink = ({ href, label, className }: { href: string; label: string, className?: string }) => (
     <Link
       href={href}
       className={cn(
-        "text-lg font-medium transition-colors hover:text-primary",
-        pathname === href ? "text-primary" : "text-foreground/60"
+        "text-lg font-medium transition-colors hover:text-primary-foreground/80",
+        pathname === href ? "text-primary-foreground" : "text-primary-foreground/60",
+        className
       )}
     >
       {label}
@@ -33,10 +34,10 @@ export function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-primary shadow-lg">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/">
-          <Logo />
+          <Logo className="[&>span]:text-primary-foreground [&>span]:hover:text-primary-foreground/80" />
           <span className="sr-only">Mantra Academy Home</span>
         </Link>
         <div className="hidden md:flex items-center gap-6">
@@ -49,15 +50,18 @@ export function Header() {
         <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="hover:bg-primary/90 text-primary-foreground hover:text-primary-foreground">
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right">
-                <div className="flex flex-col space-y-6 pt-10">
+              <SheetContent side="right" className="bg-primary text-primary-foreground border-l-primary/20">
+                 <div className="flex justify-center my-8">
+                   <Logo className="[&>span]:text-primary-foreground [&>span]:hover:text-primary-foreground/80" />
+                 </div>
+                <div className="flex flex-col items-center space-y-6 pt-10">
                   {navLinks.map((link) => (
-                    <NavLink key={link.href} {...link} />
+                    <NavLink key={link.href} {...link} className="text-2xl" />
                   ))}
                 </div>
               </SheetContent>

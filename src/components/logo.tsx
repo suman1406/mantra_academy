@@ -39,12 +39,12 @@ export function Logo({ className }: { className?: string }) {
 
   return (
     <div 
-      className={cn("flex items-center gap-2 cursor-pointer", className)}
+      className={cn("flex items-center gap-2 cursor-pointer group", className)}
       onClick={handleClick}
       title="Mantra Academy"
     >
-        <Image src="/images/Logo.png" alt="Mantra Academy Logo" width={40} height={40} />
-        <span className="font-headline text-xl font-bold text-primary">Mantra Academy</span>
+        <Image src="/images/Logo.png" alt="Mantra Academy Logo" width={40} height={40} className="group-hover:opacity-80 transition-opacity" />
+        <span className="font-headline text-xl font-bold text-primary group-hover:text-primary/80 transition-colors">Mantra Academy</span>
     </div>
   );
 }
