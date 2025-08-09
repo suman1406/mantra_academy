@@ -117,7 +117,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
         </CardContent>
         <CardFooter className="p-6 pt-0">
           <Button variant="outline" className="w-full group">
-            Enroll Now
+            Explore Now
             <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
           </Button>
         </CardFooter>
