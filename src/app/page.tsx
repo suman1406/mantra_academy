@@ -10,7 +10,6 @@ import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Community } from "@/components/community";
 import { motion } from "framer-motion";
-import { DivineLotus } from "@/components/animated-mandala";
 import { Announcement } from "@/components/announcement";
 
 export default function Home() {
@@ -30,7 +29,6 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center space-y-20 py-12">
       <section className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center">
         <div className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-0 mb-8 flex items-center justify-center">
-          <DivineLotus />
            <div className="absolute inset-0 flex items-center justify-center">
                 <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&_span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
            </div>
