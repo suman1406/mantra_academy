@@ -108,7 +108,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
               data-ai-hint={course.aiHint}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 group-hover:from-black/60 transition-colors" />
-             <Badge variant="default" className="absolute top-4 right-4 bg-card-foreground/20 text-card-foreground border-card-foreground/40">{course.category}</Badge>
+             <Badge variant="default" className="absolute top-4 right-4 bg-primary text-primary-foreground">{course.category}</Badge>
           </div>
         </CardHeader>
         <CardContent className="p-6 flex-grow flex flex-col">
@@ -116,7 +116,7 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
           <p className="text-card-foreground/70 mt-2 flex-grow">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
-          <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground">
+          <Button variant="outline" className="w-full group">
             Enroll Now
             <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
           </Button>

@@ -45,7 +45,7 @@ const AnnouncementCard = ({ announcement, index }: { announcement: typeof announ
             {announcement.description}
           </p>
           <div className="w-full mt-6">
-            <Button variant="outline" className="w-full md:w-auto group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground" asChild>
+            <Button variant="outline" className="w-full md:w-auto group" asChild>
                 <Link href={announcement.link}>
                     Learn More
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />

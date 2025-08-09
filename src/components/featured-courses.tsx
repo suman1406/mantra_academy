@@ -68,12 +68,12 @@ export function FeaturedCourses() {
                     </div>
                   </CardHeader>
                   <CardContent className="p-6 flex-grow">
-                    <Badge variant="default" className="mb-2 bg-card-foreground/20 text-card-foreground">{course.category}</Badge>
+                    <Badge variant="default" className="mb-2 bg-primary text-primary-foreground">{course.category}</Badge>
                     <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
                     <p className="text-card-foreground/70 mt-2">{course.description}</p>
                   </CardContent>
                   <CardFooter className="p-6 pt-0">
-                     <Button variant="outline" className="w-full group transition-all duration-500 hover:bg-primary-foreground hover:text-primary hover:border-primary-foreground" asChild>
+                     <Button variant="outline" className="w-full group" asChild>
                         <Link href="/courses">
                            Explore Courses
                            <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />

@@ -75,7 +75,7 @@ export function Community() {
             ))}
         </div>
         <div className="text-center mt-12">
-            <Button variant="outline" size="lg" className="group transition-all duration-500 hover:bg-primary hover:text-primary-foreground hover:border-primary" asChild>
+            <Button size="lg" className="group" asChild>
                 <Link href="#">
                     Become a Member
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
