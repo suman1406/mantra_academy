@@ -41,6 +41,7 @@ export type Course = {
     title: string;
     description: string;
   }[];
+  startDate?: string;
 };
 
 const instructors = {
@@ -67,6 +68,12 @@ const instructors = {
   }
 }
 
+// Set a dynamic start date for the first course, 10 days from now at 7 PM
+const dynamicStartDate = new Date();
+dynamicStartDate.setDate(dynamicStartDate.getDate() + 10);
+dynamicStartDate.setHours(19, 0, 0, 0);
+
+
 export const courses: Course[] = [
   {
     slug: "vedashiksha-introduction-to-vedas",
@@ -89,6 +96,7 @@ export const courses: Course[] = [
     language: "English",
     resources: 1,
     instructor: instructors.rishi,
+    startDate: dynamicStartDate.toISOString(),
     highlights: [
         {
             title: "Master the Art of Chanting",

@@ -102,7 +102,13 @@ export function CourseDetailClient({ course }: { course: Course }) {
     faqs,
     highlights,
     whoCanAttend,
+    startDate,
   } = course;
+
+  const getStartDateText = () => {
+    if (!startDate) return "Yet to announce";
+    return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(startDate));
+  };
 
   return (
     <div className="py-12 md:py-16 bg-[#FAF5E4]">
@@ -141,7 +147,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
               <InfoCard
                 icon={CalendarDays}
                 title="Starting from"
-                text="Yet to announce"
+                text={getStartDateText()}
               />
               <InfoCard
                 icon={Clock}
@@ -337,7 +343,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                 />
               </div>
               <CardContent className="p-6 bg-[#E4D3C1]">
-                <CourseCountdown />
+                <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                 <Button
                   size="lg"
                   className="w-full text-lg mt-4 bg-[#8B2E26] hover:bg-[#A0522D] text-white rounded-lg shadow-md"

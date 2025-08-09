@@ -4,14 +4,9 @@
 import { useState, useEffect } from "react";
 import { Card } from "./ui/card";
 
-export function CourseCountdown() {
+export function CourseCountdown({ targetDate }: { targetDate?: Date }) {
   const calculateTimeLeft = () => {
-    // Set a target date 10 days from now for demonstration
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 10);
-    targetDate.setHours(19, 0, 0, 0); // 7:00 PM
-
-    const difference = +targetDate - +new Date();
+    const difference = +(targetDate || new Date()) - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {
@@ -44,21 +39,23 @@ export function CourseCountdown() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [targetDate]);
 
   if (!isClient) {
     return null; // Or a placeholder
   }
   
   const timerComponents = Object.keys(timeLeft).map((interval) => {
-    if (!timeLeft[interval as keyof typeof timeLeft]) {
+    const value = timeLeft[interval as keyof typeof timeLeft];
+    if (value === undefined) {
       return null;
     }
 
     return (
       <div key={interval} className="flex flex-col items-center">
         <span className="text-3xl font-bold text-primary">
-          {String(timeLeft[interval as keyof typeof timeLeft]).padStart(2, "0")}
+          {String(value).padStart(2, "0")}
         </span>
         <span className="text-xs uppercase text-muted-foreground">{interval}</span>
       </div>
@@ -69,7 +66,7 @@ export function CourseCountdown() {
     <div>
         <h3 className="text-center font-semibold text-lg mb-2 text-foreground">Course starts in</h3>
         <div className="grid grid-cols-4 gap-2 text-center">
-            {timerComponents.length ? timerComponents : <span className="col-span-4">Time's up!</span>}
+            {timerComponents.length ? timerComponents : <span className="col-span-4 text-primary font-semibold">Course has started!</span>}
         </div>
     </div>
   );
