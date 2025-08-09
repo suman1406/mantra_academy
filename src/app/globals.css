@@ -5,47 +5,45 @@
 
 @layer base {
   :root {
-    --background: 40 80% 96%; /* Cream */
-    --foreground: 0 0% 10%; /* Dark Gray */
-    --card: 40 80% 96%; /* Cream */
-    --card-foreground: 0 0% 10%;
-    --popover: 40 80% 96%; /* Cream */
-    --popover-foreground: 0 0% 10%;
-    --primary: 0 85% 60%; /* Bright Red */
-    --primary-foreground: 0 0% 100%; /* White */
-    --secondary: 0 85% 50%; /* Darker Bright Red */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 40 50% 92%; /* Lighter Cream */
-    --muted-foreground: 0 0% 40%;
-    --accent: 0 85% 60%; /* Bright Red */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%; /* Bright Red */
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 85%; /* Light Gray */
-    --input: 0 0% 92%;
-    --ring: 0 85% 60%; /* Bright Red */
+    /* Light mode */
+    --background: 39 51% 95%; /* Light cream */
+    --foreground: 0 15% 15%; /* Deep brownish text */
+    --card: 348 83% 47%; /* Crimson red */
+    --card-foreground: 39 51% 95%; /* Cream text on crimson */
+    --popover: 39 51% 95%;
+    --popover-foreground: 0 15% 15%;
+    --primary: 348 83% 47%; /* Crimson red as primary */
+    --primary-foreground: 39 51% 95%;
+    --secondary: 348 60% 35%; /* Darker crimson */
+    --secondary-foreground: 39 51% 95%;
+    --muted: 39 40% 90%;
+    --muted-foreground: 0 20% 30%;
+    --accent: 348 83% 47%;
+    --accent-foreground: 39 51% 95%;
+    --border: 39 30% 80%; /* Soft cream border */
+    --input: 39 30% 90%;
+    --ring: 348 83% 47%;
   }
 
   .dark {
-    --background: 0 0% 10%; /* Very Dark Gray */
-    --foreground: 0 0% 95%; /* Almost White */
-    --card: 0 0% 12%; /* Slightly Lighter Gray */
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 0 85% 65%; /* Bright Red */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 85% 55%; /* Darker Bright Red */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 85% 65%; /* Bright Red */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 0 85% 65%; /* Bright Red */
+    /* Dark mode */
+    --background: 39 25% 20%; /* Darker cream shade */
+    --foreground: 39 40% 90%; /* Light cream text */
+    --card: 348 83% 47%; /* Crimson red cards stay the same */
+    --card-foreground: 39 51% 95%; /* Cream text */
+    --popover: 39 25% 20%;
+    --popover-foreground: 39 40% 90%;
+    --primary: 348 83% 50%; /* Slightly brighter crimson in dark mode */
+    --primary-foreground: 39 51% 95%;
+    --secondary: 348 60% 35%;
+    --secondary-foreground: 39 51% 95%;
+    --muted: 39 20% 30%;
+    --muted-foreground: 39 30% 80%;
+    --accent: 348 83% 50%;
+    --accent-foreground: 39 51% 95%;
+    --border: 39 25% 35%;
+    --input: 39 25% 35%;
+    --ring: 348 83% 50%;
   }
 }
 
