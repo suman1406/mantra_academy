@@ -7,47 +7,25 @@
   :root {
     /* Light mode */
     --background: 46 65% 94%; /* Light cream */
-    --foreground: 18 25% 25%; /* Warm dark brown text */
-    --card: 46 50% 90%; /* Warm beige for cards */
+    --foreground: 18 25% 25%; /* Warm dark brown */
+    --card: 46 50% 90%; /* Warm beige */
     --card-foreground: 18 25% 25%;
     --popover: 46 65% 94%;
     --popover-foreground: 18 25% 25%;
     --primary: 348 83% 47%; /* Crimson */
-    --primary-foreground: 46 65% 94%;
-    --secondary: 355 45% 45%; /* Burnt Sienna */
+    --primary-foreground: 46 65% 94%; /* Light cream text on crimson */
+    --secondary: 355 45% 45%; /* Burnt sienna */
     --secondary-foreground: 46 65% 94%;
-    --muted: 46 40% 88%;
-    --muted-foreground: 18 20% 45%;
-    --accent: 348 83% 47%;
+    --muted: 46 50% 90%;
+    --muted-foreground: 18 25% 45%;
+    --accent: 348 83% 47%; /* Crimson accents */
     --accent-foreground: 46 65% 94%;
     --destructive: 348 83% 47%;
     --destructive-foreground: 46 65% 94%;
-    --border: 46 30% 85%;
-    --input: 46 30% 90%;
+    --border: 46 40% 85%;
+    --input: 46 40% 90%;
     --ring: 348 83% 47%;
-  }
-
-  .dark {
-    /* Dark mode */
-    --background: 18 15% 15%; /* Deep earthy brown */
-    --foreground: 46 50% 90%; /* Off-white cream text */
-    --card: 18 15% 20%;
-    --card-foreground: 46 50% 90%;
-    --popover: 18 15% 15%;
-    --popover-foreground: 46 50% 90%;
-    --primary: 355 70% 65%; /* Brighter crimson for dark mode */
-    --primary-foreground: 18 15% 15%;
-    --secondary: 20 60% 55%; /* Brighter sienna for dark mode */
-    --secondary-foreground: 18 15% 15%;
-    --muted: 18 15% 25%;
-    --muted-foreground: 46 40% 80%;
-    --accent: 355 70% 65%;
-    --accent-foreground: 18 15% 15%;
-    --destructive: 355 70% 65%;
-    --destructive-foreground: 18 15% 15%;
-    --border: 18 15% 25%;
-    --input: 18 15% 25%;
-    --ring: 355 70% 65%;
+    --radius: 0.5rem;
   }
 }
 

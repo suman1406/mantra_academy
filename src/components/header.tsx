@@ -9,7 +9,6 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -63,7 +62,6 @@ export function Header() {
                 </SheetContent>
               </Sheet>
             </div>
-            <ThemeToggle />
         </div>
       </div>
     </header>
