@@ -113,9 +113,6 @@ export default function CourseDetailPage({
                   className="object-cover"
                   data-ai-hint={aiHint}
                 />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <PlayCircle className="h-20 w-20 text-white/80 hover:text-white transition-colors cursor-pointer" />
-                </div>
               </div>
             </Card>
 
