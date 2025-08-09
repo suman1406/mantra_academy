@@ -83,7 +83,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
         >
-            <Card className="border-border/40 bg-card/80 backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-500 hover:shadow-primary/20 hover:shadow-lg group h-full">
+            <Card className="border-border/40 bg-card backdrop-blur-sm p-6 flex flex-col justify-between transition-all duration-500 hover:shadow-primary/20 hover:shadow-lg group h-full">
               <CardHeader className="p-0 mb-4">
                   <QuoteIcon />
               </CardHeader>

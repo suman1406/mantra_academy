@@ -32,7 +32,7 @@ const AnnouncementCard = ({ announcement, index }: { announcement: typeof announ
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1, ease: "easeInOut", delay: index * 0.2 }}
       >
-        <Card className="border-border/40 bg-card/80 backdrop-blur-sm overflow-hidden group p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-500 flex flex-col items-start h-full text-card-foreground">
+        <Card className="border-border/40 bg-card backdrop-blur-sm overflow-hidden group p-6 shadow-lg hover:shadow-primary/20 transition-shadow duration-500 flex flex-col items-start h-full text-card-foreground">
           <div className="flex items-center gap-4 mb-4">
              <div className="p-3 bg-card-foreground/20 rounded-full">
               <Megaphone className="h-6 w-6 text-card-foreground" />
