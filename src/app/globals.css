@@ -60,9 +60,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(-45deg, hsl(var(--background)), hsl(var(--secondary)), hsl(var(--background)), hsl(var(--secondary)));
-    background-size: 400% 400%;
-    animation: background-pan 30s ease-in-out infinite;
   }
 }
 
