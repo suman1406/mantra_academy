@@ -43,11 +43,11 @@ const Mantra = ({ text, column }: { text: string; column: number }) => {
 
   return (
     <motion.p
-      className="absolute font-headline text-primary/30 whitespace-nowrap"
+      className="absolute font-headline text-primary/50 whitespace-nowrap"
       style={{
         left: `${left}vw`,
         fontSize: fontSize,
-        textShadow: "0 0 10px hsla(var(--background), 0.7)",
+        textShadow: "0 0 8px hsla(var(--primary), 0.5)",
       }}
       initial={{ top: "-20%", opacity: 0.7 }}
       animate={{ top: "120%", opacity: 0 }}
