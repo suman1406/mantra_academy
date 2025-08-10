@@ -27,14 +27,14 @@ export default function Home() {
   // Headline: fade in after logo disappears, fade out later
   const headlineOpacity = useTransform(
     scrollYProgress,
-    [0.15, 0.3, 0.5],
+    [0.2, 0.3, 0.5],
     [0, 1, 0]
   );
-  const headlineScale = useTransform(scrollYProgress, [0.15, 0.3], [0.9, 1]);
+  const headlineScale = useTransform(scrollYProgress, [0.2, 0.3], [0.9, 1]);
 
   // Paragraph: fade in after headline is shown
-  const paragraphOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
-  const paragraphY = useTransform(scrollYProgress, [0.5, 0.65], [20, 0]);
+  const paragraphOpacity = useTransform(scrollYProgress, [0.55, 0.7], [0, 1]);
+  const paragraphY = useTransform(scrollYProgress, [0.55, 0.7], [20, 0]);
 
   // Entire section fade out at the very end
   const heroOpacity = useTransform(scrollYProgress, [0.85, 1], [1, 0]);
@@ -56,38 +56,40 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center py-12 space-y-24">
       <section
         ref={heroRef}
-        className="relative w-full h-[250vh] overflow-hidden"
+        className="relative w-full h-[200vh] overflow-hidden"
       >
-        <motion.div
-          style={{ opacity: heroOpacity }}
-          className="sticky top-0 h-screen flex flex-col items-center justify-center text-center"
-        >
-          {/* Logo */}
-          <motion.div
-            style={{ opacity: logoOpacity, scale: logoScale }}
-            className="flex items-center justify-center mb-12"
-          >
-            <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
-          </motion.div>
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
+            <motion.div
+              style={{ opacity: heroOpacity }}
+              className="absolute inset-0 flex flex-col items-center justify-center text-center"
+            >
+              {/* Logo */}
+              <motion.div
+                style={{ opacity: logoOpacity, scale: logoScale }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
+              </motion.div>
 
-          {/* Headline */}
-          <motion.h1
-            style={{ opacity: headlineOpacity, scale: headlineScale }}
-            className="mb-6 text-4xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
-          >
-            Welcome to Mantra Academy
-          </motion.h1>
+              {/* Headline */}
+              <motion.h1
+                style={{ opacity: headlineOpacity, scale: headlineScale }}
+                className="absolute inset-0 flex items-center justify-center text-4xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+              >
+                Welcome to Mantra Academy
+              </motion.h1>
 
-          {/* Paragraph */}
-          <motion.p
-            style={{ opacity: paragraphOpacity, y: paragraphY }}
-            className="max-w-3xl mx-auto text-xl md:text-2xl text-foreground/80"
-          >
-            Unlock the power of sound and vibration. Discover ancient mantras
-            and transform your life through our expert-led courses and vibrant
-            community.
-          </motion.p>
-        </motion.div>
+              {/* Paragraph */}
+              <motion.p
+                style={{ opacity: paragraphOpacity, y: paragraphY }}
+                className="absolute inset-0 flex items-center justify-center max-w-3xl mx-auto text-xl md:text-2xl text-foreground/80"
+              >
+                Unlock the power of sound and vibration. Discover ancient mantras
+                and transform your life through our expert-led courses and vibrant
+                community.
+              </motion.p>
+            </motion.div>
+        </div>
       </section>
 
       <motion.div
