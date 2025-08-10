@@ -44,7 +44,7 @@ const BlogPostCard = ({
       </div>
       <div className="md:w-2/3 flex flex-col">
         <CardContent className="flex-grow flex flex-col p-8">
-          <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-card-foreground/80 transition-colors">
+          <CardTitle className="text-2xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors">
             {post.title}
           </CardTitle>
           <div className="text-sm manuscript-subtext mt-2 mb-4">
