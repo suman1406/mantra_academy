@@ -93,7 +93,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0]; inde
         <p className="text-card-foreground/80 font-semibold">{member.role}</p>
       </CardHeader>
       <CardContent>
-        <p className="text-card-foreground/70 text-left">{member.bio}</p>
+        <p className="text-card-foreground/70 text-left text-sm md:text-base">{member.bio}</p>
       </CardContent>
     </Card>
   </motion.div>
@@ -124,7 +124,7 @@ export default function AboutPage() {
           <motion.div
             variants={fadeUp}
             custom={0.4}
-            className="text-card-foreground/80 mt-6 space-y-4 text-lg max-w-4xl mx-auto"
+            className="text-card-foreground/80 mt-6 space-y-4 text-base md:text-lg max-w-4xl mx-auto"
           >
             <p>
               To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
@@ -162,7 +162,7 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Inspiration</h2>
           <h3 className="text-xl md:text-2xl font-headline font-semibold text-card-foreground/80 mt-2">Acharya Dr. Ramachandra Bhat Kotemane</h3>
           <p className="font-semibold text-card-foreground/70 mb-4">Scholar - Mystic - Visionary Guide</p>
-          <div className="text-card-foreground/80 mt-4 space-y-4 text-md">
+          <div className="text-card-foreground/80 mt-4 space-y-4 text-sm md:text-md">
             <p>At the heart of Mantra Academy’s vision stands our revered Acharya, Dr. Ramachandra Bhat Kotemane, fondly known simply as Acharya. A shining beacon in the world of Vedic, Vedantic, and Yogic wisdom, Acharya is the Pradhana Acharya of Veda Vijnana Gurukulam, Founder of Veda Vijnana Shodha Samsthanam, and former Vice-Chancellor of SVYASA Yoga University, Bengaluru.</p>
             <p>With decades of deep sādhanā, scholarship, and compassion, Acharya has guided countless seekers into the profound inner world of the Vedas and Upanishads. His unwavering emphasis on preserving the purity of Yoga and Vedic knowledge has shaped the very soul of modern traditional education.</p>
             <p>For us at Mantra Academy, an online extension of the Gurukula spirit, Acharya is not just a mentor, he is the root inspiration and spiritual backbone of every initiative we carry forward. His teachings, silent presence, and unshakable commitment to Sanātana Dharma pulse through every course, every chant, and every student we serve. We humbly walk this path, holding his blessing and vision close to our hearts.</p>

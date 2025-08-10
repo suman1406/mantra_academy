@@ -128,7 +128,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="mb-6 text-4xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+            className="mb-6 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
@@ -138,7 +138,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="max-w-3xl mx-auto text-xl md:text-2xl text-foreground/80"
+            className="max-w-3xl mx-auto text-lg md:text-2xl text-foreground/80"
           >
             Unlock the power of sound and vibration. Discover ancient mantras
             and transform your life through our expert-led courses and vibrant
@@ -147,13 +147,13 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="space-y-24 py-24">
+      <div className="space-y-16 md:space-y-24 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-24"
+          className="w-full flex justify-center py-8 md:py-12"
         >
           <Philosophy />
         </motion.div>
@@ -163,7 +163,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-24"
+          className="w-full flex justify-center py-8 md:py-12"
         >
           <Vision />
         </motion.div>
@@ -173,7 +173,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-24"
+          className="w-full flex justify-center py-8 md:py-12"
         >
           <Announcement />
         </motion.div>
@@ -183,7 +183,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-24"
+          className="w-full flex justify-center py-8 md:py-12"
         >
           <FeaturedCourses />
         </motion.div>
@@ -193,7 +193,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-24"
+          className="w-full flex justify-center py-8 md:py-12"
         >
           <Testimonials />
         </motion.div>
@@ -203,7 +203,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-24"
+          className="w-full flex justify-center py-8 md:py-12"
         >
           <Community />
         </motion.div>
