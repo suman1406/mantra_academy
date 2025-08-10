@@ -35,7 +35,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body className={cn("font-body antialiased bg-background text-foreground overflow-x-hidden")}>
+      <body className={cn("font-body antialiased bg-background text-foreground")}>
         <div className="relative flex flex-col min-h-screen">
           {!isAdminPage && !isCourseDetailPage && <FallingMantras />}
           {!isAdminPage && <Header />}
