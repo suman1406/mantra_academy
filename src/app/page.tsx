@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
+import { Vision } from "@/components/vision";
 import { Community } from "@/components/community";
 import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
@@ -155,6 +156,16 @@ export default function Home() {
           className="w-full flex justify-center"
         >
           <Philosophy />
+        </motion.div>
+        
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+          className="w-full flex justify-center"
+        >
+          <Vision />
         </motion.div>
 
         <motion.div
