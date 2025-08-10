@@ -34,8 +34,8 @@ const allMantras = [
 
 const Mantra = ({ text, column }: { text: string; column: number }) => {
   const isMobile = useIsMobile();
-  const duration = 15 + Math.random() * 15;
-  const delay = Math.random() * 15;
+  const duration = 25 + Math.random() * 20; // Slower, more graceful fall
+  const delay = Math.random() * 25;
   const fontSize = isMobile ? "1rem" : "1.5rem";
   const columnWidth = isMobile ? 20 : 10;
   const left = column * columnWidth + (Math.random() * columnWidth - (columnWidth/2));
@@ -49,13 +49,14 @@ const Mantra = ({ text, column }: { text: string; column: number }) => {
         fontSize: fontSize,
         textShadow: "0 0 8px hsla(var(--primary), 0.5)",
       }}
-      initial={{ top: "-20%", opacity: 0.7 }}
-      animate={{ top: "120%", opacity: 0 }}
+      initial={{ top: "-10vh" }}
+      animate={{ top: "110vh" }}
       transition={{
         duration: duration,
         delay: delay,
         ease: "linear",
         repeat: Infinity,
+        repeatType: 'loop'
       }}
     >
       {text}
@@ -68,23 +69,22 @@ export function FallingMantras() {
     const numColumns = isMobile ? 5 : 10;
 
     const mantrasForColumns = useMemo(() => {
-        const columns: string[][] = Array.from({ length: numColumns }, () => []);
-        allMantras.forEach((mantra, index) => {
-            columns[index % numColumns].push(mantra);
-        });
-
-        // To make it less crowded, lets only pick one mantra per column randomly
-        return columns.map((colMantras, colIndex) => {
-             if (colMantras.length === 0) return null;
-             const mantra = colMantras[Math.floor(Math.random() * colMantras.length)];
-             return { mantra, colIndex };
-        }).filter(item => item !== null);
+        const columns: { mantra: string, colIndex: number }[] = [];
+        const shuffledMantras = [...allMantras].sort(() => 0.5 - Math.random());
+        
+        for (let i = 0; i < 20; i++) { // Increase density
+             columns.push({
+                 mantra: shuffledMantras[i % shuffledMantras.length],
+                 colIndex: i % numColumns
+             })
+        }
+        return columns;
 
     }, [numColumns]);
 
 
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
       {mantrasForColumns.map((item, i) =>
         item ? <Mantra key={i} text={item.mantra} column={item.colIndex} /> : null
       )}

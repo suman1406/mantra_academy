@@ -108,11 +108,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="relative flex flex-col items-center justify-center">
+      <FallingMantras />
       <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center text-center">
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
-        <FallingMantras />
         
         {/* Mandala and Glyphs */}
         <div className="absolute inset-0">
