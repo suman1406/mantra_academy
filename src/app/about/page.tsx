@@ -5,6 +5,29 @@ import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
+// ===== Example Spiritual SVG Divider =====
+const LotusDivider = () => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 1 }}
+    className="flex justify-center my-12"
+  >
+    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" className="text-primary">
+      <path
+        d="M12 2c1.5 4 4 6 8 7-4 1-6.5 3-8 7-1.5-4-4-6-8-7 4-1 6.5-3 8-7z"
+        fill="currentColor"
+      />
+      <path
+        d="M12 13c-2 2-3 4.5-3 7 2.5-1 4.5-1 7 0 0-2.5-1-5-3-7z"
+        fill="currentColor"
+      />
+    </svg>
+  </motion.div>
+);
+
+// ====== Team Members =====
 const teamMembers = [
   {
     name: "Karthik Sharma",
@@ -22,150 +45,144 @@ const teamMembers = [
   },
 ];
 
-const pageVariants = {
-  initial: { opacity: 0, y: 20 },
-  in: { opacity: 1, y: 0 },
-  out: { opacity: 0, y: -20 },
+// ====== Motion Variants =====
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, delay }
+  })
 };
 
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 0.8,
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, delay }
+  })
 };
 
-const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], index: number }) => {
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0 }
-      }}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, delay: index * 0.15 }}
-      className="w-full"
-    >
-        <Card className="text-center border-border/40 bg-card backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-500 text-card-foreground">
-            <div className="relative w-40 h-40 mb-4">
-                <Image
-                    src={member.image}
-                    alt={member.name}
-                    width={400}
-                    height={400}
-                    data-ai-hint={member.aiHint}
-                    className="rounded-full object-cover ring-4 ring-offset-4 ring-offset-background ring-accent/50 group-hover:scale-105 transition-transform duration-500"
-                />
-            </div>
-            <CardHeader className="p-2">
-                <CardTitle className="font-headline text-2xl text-card-foreground">{member.name}</CardTitle>
-                <p className="text-card-foreground/80 font-semibold">{member.role}</p>
-            </CardHeader>
-            <CardContent>
-                <p className="text-card-foreground/70 text-left">{member.bio}</p>
-            </CardContent>
-        </Card>
-    </motion.div>
-  );
-};
+const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0]; index: number }) => (
+  <motion.div
+    variants={fadeUp}
+    custom={index * 0.2}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    className="w-full"
+  >
+    <Card className="text-center border-border/40 bg-card backdrop-blur-sm p-6 h-full group hover:shadow-lg transition-all duration-500 text-card-foreground">
+      <motion.div
+        whileHover={{ scale: 1.05, rotate: 1 }}
+        transition={{ type: "spring", stiffness: 200 }}
+        className="relative w-40 h-40 mx-auto mb-4"
+      >
+        <Image
+          src={member.image}
+          alt={member.name}
+          width={400}
+          height={400}
+          data-ai-hint={member.aiHint}
+          className="rounded-full object-cover ring-4 ring-offset-4 ring-offset-background ring-accent/50"
+        />
+      </motion.div>
+      <CardHeader className="p-2">
+        <CardTitle className="font-headline text-2xl text-card-foreground">{member.name}</CardTitle>
+        <p className="text-card-foreground/80 font-semibold">{member.role}</p>
+      </CardHeader>
+      <CardContent>
+        <p className="text-card-foreground/70 text-left">{member.bio}</p>
+      </CardContent>
+    </Card>
+  </motion.div>
+);
 
 export default function AboutPage() {
-    const sectionVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: (i: number = 1) => ({ 
-            opacity: 1, 
-            y: 0,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: i * 0.1,
-                duration: 0.8,
-                ease: "easeInOut"
-            }
-        })
-    };
-
-    const itemVariants = {
-      hidden: { opacity: 0, y: 20 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-    };
-
   return (
     <motion.div
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={pageTransition}
-        className="py-16 sm:py-24 space-y-24"
+      initial="hidden"
+      animate="visible"
+      className="py-16 sm:py-24 space-y-24"
     >
+      {/* Mission Section */}
       <motion.section
-        variants={sectionVariants}
+        variants={scaleIn}
+        custom={0}
         initial="hidden"
         animate="visible"
       >
-        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden group p-8 md:p-12">
-            <h1 className="text-4xl md:text-6xl font-headline font-bold text-card-foreground text-center">Our Sacred Mission</h1>
-            <div className="text-card-foreground/80 mt-6 space-y-4 text-lg max-w-4xl mx-auto">
-              <p>
-                To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
-              </p>
-            </div>
-          </Card>
-      </motion.section>
-
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="w-full max-w-6xl mx-auto"
-      >
-        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-3 items-center group">
-          <div className="relative h-64 md:h-full w-full min-h-[400px] md:col-span-1 overflow-hidden">
-             <Image
-              src="https://placehold.co/600x800.png"
-              alt="Acharya Dr. Ramachandra Bhat Kotemane"
-              fill
-              className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-              data-ai-hint="indian scholar portrait"
-            />
-          </div>
-          <div className="p-8 md:p-12 md:col-span-2">
-            <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Inspiration</h2>
-            <h3 className="text-xl md:text-2xl font-headline font-semibold text-card-foreground/80 mt-2">Acharya Dr. Ramachandra Bhat Kotemane</h3>
-            <p className="font-semibold text-card-foreground/70">Scholar - Mystic - Visionary Guide</p>
-            <div className="text-card-foreground/80 mt-4 space-y-4 text-md">
-                <p>At the heart of Mantra Academy’s vision stands our revered Acharya, Dr. Ramachandra Bhat Kotemane, fondly known simply as Acharya. A shining beacon in the world of Vedic, Vedantic, and Yogic wisdom, Acharya is the Pradhana Acharya of Veda Vijnana Gurukulam, Founder of Veda Vijnana Shodha Samsthanam, and former Vice-Chancellor of SVYASA Yoga University, Bengaluru.</p>
-                <p>With decades of deep sādhanā, scholarship, and compassion, Acharya has guided countless seekers into the profound inner world of the Vedas and Upanishads. His unwavering emphasis on preserving the purity of Yoga and Vedic knowledge has shaped the very soul of modern traditional education.</p>
-                <p>For us at Mantra Academy, an online extension of the Gurukula spirit, Acharya is not just a mentor, he is the root inspiration and spiritual backbone of every initiative we carry forward. His teachings, silent presence, and unshakable commitment to Sanātana Dharma pulse through every course, every chant, and every student we serve. We humbly walk this path, holding his blessing and vision close to our hearts.</p>
-            </div>
-          </div>
+        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm p-8 md:p-12 text-center">
+          <motion.h1
+            variants={fadeUp}
+            custom={0.2}
+            className="text-4xl md:text-6xl font-headline font-bold text-card-foreground"
+          >
+            Our Sacred Mission
+          </motion.h1>
+          <motion.div
+            variants={fadeUp}
+            custom={0.4}
+            className="text-card-foreground/80 mt-6 space-y-4 text-lg max-w-4xl mx-auto"
+          >
+            <p>
+              To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
+            </p>
+          </motion.div>
         </Card>
       </motion.section>
 
+      <LotusDivider />
+
+      {/* Inspiration Section */}
       <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        className="w-full max-w-6xl mx-auto"
+        className="w-full max-w-6xl mx-auto grid md:grid-cols-3 border-border/40 bg-card backdrop-blur-sm overflow-hidden rounded-xl text-card-foreground"
       >
-        <motion.div variants={itemVariants} className="text-center mb-12">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="relative h-64 md:h-full min-h-[400px] overflow-hidden"
+        >
+          <Image
+            src="https://placehold.co/600x800.png"
+            alt="Acharya Dr. Ramachandra Bhat Kotemane"
+            fill
+            className="object-cover object-top"
+            data-ai-hint="indian scholar portrait"
+          />
+        </motion.div>
+        <motion.div
+          variants={fadeUp}
+          custom={0.2}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="p-8 md:p-12 md:col-span-2"
+        >
+          <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Inspiration</h2>
+          <h3 className="text-xl md:text-2xl font-headline font-semibold text-card-foreground/80 mt-2">Acharya Dr. Ramachandra Bhat Kotemane</h3>
+          <p className="font-semibold text-card-foreground/70 mb-4">Scholar - Mystic - Visionary Guide</p>
+          <div className="text-card-foreground/80 mt-4 space-y-4 text-md">
+            <p>At the heart of Mantra Academy’s vision stands our revered Acharya, Dr. Ramachandra Bhat Kotemane, fondly known simply as Acharya. A shining beacon in the world of Vedic, Vedantic, and Yogic wisdom, Acharya is the Pradhana Acharya of Veda Vijnana Gurukulam, Founder of Veda Vijnana Shodha Samsthanam, and former Vice-Chancellor of SVYASA Yoga University, Bengaluru.</p>
+            <p>With decades of deep sādhanā, scholarship, and compassion, Acharya has guided countless seekers into the profound inner world of the Vedas and Upanishads. His unwavering emphasis on preserving the purity of Yoga and Vedic knowledge has shaped the very soul of modern traditional education.</p>
+            <p>For us at Mantra Academy, an online extension of the Gurukula spirit, Acharya is not just a mentor, he is the root inspiration and spiritual backbone of every initiative we carry forward. His teachings, silent presence, and unshakable commitment to Sanātana Dharma pulse through every course, every chant, and every student we serve. We humbly walk this path, holding his blessing and vision close to our hearts.</p>
+          </div>
+        </motion.div>
+      </motion.section>
+
+      <LotusDivider />
+
+      {/* Team Section */}
+      <motion.section className="w-full max-w-6xl mx-auto">
+        <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Team</h2>
           <p className="text-foreground/80 mt-2">The dedicated guides of Mantra Academy</p>
         </motion.div>
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {teamMembers.map((member, index) => (
             <TeamMemberCard key={member.name} member={member} index={index} />
           ))}
-        </motion.div>
+        </div>
       </motion.section>
     </motion.div>
   );
