@@ -4,7 +4,6 @@
 import { Button } from "@/components/ui/button";
 import { FeaturedCourses } from "@/components/featured-courses";
 import Link from "next/link";
-import { Logo } from "@/components/logo";
 import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Vision } from "@/components/vision";
@@ -13,6 +12,7 @@ import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Image from "next/image";
 
 const glyphs = ["ॐ", "प्र", "ज्ञा", "नं", "ब्र", "ह्म", "अ", "हं", "सः"];
 
@@ -40,10 +40,9 @@ const FuturisticGlyph = ({ index }: { index: number }) => {
   );
 };
 
-
-const Mandala = () => {
+const AnimatedLogo = () => {
   const isMobile = useIsMobile();
-  const baseSize = isMobile ? 80 : 200;
+  const logoSize = isMobile ? 180 : 300;
 
   return (
     <motion.div
@@ -55,34 +54,13 @@ const Mandala = () => {
         transition: { duration: 4, ease: "circOut" },
       }}
     >
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-full h-full"
-          style={{
-            rotate: i * 30,
-          }}
-        >
-          <motion.div
-            className="absolute w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent left-1/2 -translate-x-1/2"
-            initial={{ height: "0%" }}
-            animate={{ height: "100%", transition: { duration: 2, delay: 1 } }}
-          />
-        </motion.div>
-      ))}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute border border-primary/30 rounded-full"
-          initial={{ width: 0, height: 0, opacity: 0 }}
-          animate={{
-            width: `${(i + 1) * baseSize}px`,
-            height: `${(i + 1) * baseSize}px`,
-            opacity: 1,
-            transition: { duration: 1.5, delay: 1.5 + i * 0.2, ease: "easeOut" },
-          }}
+        <Image 
+            src="/images/Logo.png" 
+            alt="Mantra Academy animated logo"
+            width={logoSize}
+            height={logoSize}
+            className="drop-shadow-2xl"
         />
-      ))}
     </motion.div>
   )
 };
@@ -124,21 +102,18 @@ export default function Home() {
         
         {/* Mandala and Glyphs */}
         <div className="absolute inset-0">
-          <Mandala />
+          <AnimatedLogo />
           {[...Array(20)].map((_, i) => <FuturisticGlyph key={i} index={i}/>)}
         </div>
         
         {/* Content */}
         <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
-          <motion.div custom={0} initial="hidden" animate="visible" variants={textRevealVariants}>
-            <Logo className="h-20 w-auto text-primary drop-shadow-lg [&>span]:text-2xl md:[&>span]:text-3xl [&_img]:h-20 [&_img]:w-20" />
-          </motion.div>
           <motion.h1
             custom={1}
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="mb-4 md:mb-6 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+            className="mt-20 mb-4 md:mb-6 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
@@ -163,7 +138,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center py-8"
+          className="flex justify-center"
         >
           <Philosophy />
         </motion.div>
@@ -173,7 +148,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center py-8"
+          className="flex justify-center"
         >
           <Vision />
         </motion.div>
@@ -183,7 +158,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center py-8"
+          className="flex justify-center"
         >
           <Announcement />
         </motion.div>
@@ -193,7 +168,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center py-8"
+          className="flex justify-center"
         >
           <FeaturedCourses />
         </motion.div>
@@ -203,7 +178,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center py-8"
+          className="flex justify-center"
         >
           <Testimonials />
         </motion.div>
@@ -213,7 +188,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center py-8"
+          className="flex justify-center"
         >
           <Community />
         </motion.div>
@@ -221,4 +196,3 @@ export default function Home() {
     </div>
   );
 }
-
