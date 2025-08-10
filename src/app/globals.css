@@ -6,25 +6,25 @@
 @layer base {
   :root {
     /* Light mode */
-    --background: 46 65% 94%; /* Light cream */
-    --foreground: 18 25% 15%; /* Deeper warm dark brown */
-    --card: 12 60% 35%; /* Coffee Red */
-    --card-foreground: 46 65% 94%; /* Light cream text on crimson */
-    --popover: 46 65% 94%;
-    --popover-foreground: 18 25% 15%;
-    --primary: 12 60% 35%; /* Coffee Red */
-    --primary-foreground: 46 65% 94%; /* Light cream text on crimson */
-    --secondary: 12 60% 35%; /* Coffee Red */
-    --secondary-foreground: 46 65% 94%; /* Light cream text on crimson */
-    --muted: 46 50% 90%;
-    --muted-foreground: 18 25% 40%;
-    --accent: 12 60% 35%; /* Coffee Red accents */
-    --accent-foreground: 46 65% 94%;
-    --destructive: 0 70% 40%;
-    --destructive-foreground: 46 65% 94%;
-    --border: 46 40% 85%;
-    --input: 46 40% 90%;
-    --ring: 12 60% 35%;
+    --background: 0 0% 98%; /* Off-white */
+    --foreground: 240 10% 3.9%; /* Dark Slate Gray */
+    --card: 338 59% 38%; /* Magenta */
+    --card-foreground: 0 0% 98%; /* Off-white text on magenta */
+    --popover: 0 0% 98%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 338 59% 38%; /* Magenta */
+    --primary-foreground: 0 0% 98%; /* Off-white text on magenta */
+    --secondary: 338 59% 38%; /* Magenta */
+    --secondary-foreground: 0 0% 98%; /* Off-white text on magenta */
+    --muted: 0 0% 94%;
+    --muted-foreground: 240 4% 46%;
+    --accent: 338 59% 38%; /* Magenta accents */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 88%;
+    --ring: 338 59% 38%;
   }
 }
 
