@@ -23,6 +23,7 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith('/admin');
+  const isCourseDetailPage = pathname.startsWith('/courses/');
 
   return (
     <html lang="en">
@@ -36,7 +37,7 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased bg-background text-foreground overflow-x-hidden")}>
         <div className="relative flex flex-col min-h-screen">
-          {!isAdminPage && <FallingMantras />}
+          {!isAdminPage && !isCourseDetailPage && <FallingMantras />}
           {!isAdminPage && <Header />}
           <main className={cn(
             "flex-grow pt-16",
