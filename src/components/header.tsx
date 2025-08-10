@@ -38,7 +38,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-auto">
           <Link href="/">
-            <Logo className="[&>span]:text-2xl [&>span]:text-primary-foreground [&>span]:hover:text-primary-foreground/80" />
+            <Logo className="[&>span]:text-2xl [&>span]:text-primary-foreground [&>span]:hover:text-primary-foreground" />
             <span className="sr-only">Mantra Academy Home</span>
           </Link>
         </div>
