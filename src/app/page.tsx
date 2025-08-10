@@ -17,13 +17,20 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
-  const logoY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const headingY = useTransform(scrollYProgress, [0, 1], ["0%", "70%"]);
+  // Logo animation: fade out and scale down
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const logoScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
 
+  // Headline animation: fade in, then out
+  const headlineOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6], [0, 1, 0]);
+  const headlineScale = useTransform(scrollYProgress, [0.2, 0.4], [0.9, 1]);
+  
+  // Paragraph animation: fade in
+  const paragraphOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
+  const paragraphY = useTransform(scrollYProgress, [0.6, 0.8], ["20px", "0px"]);
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -38,58 +45,36 @@ export default function Home() {
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1 } },
-  };
-
   return (
     <div className="flex flex-col items-center justify-center space-y-48 py-12">
-      <motion.section
-        ref={heroRef}
-        className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center overflow-hidden"
-        initial="hidden"
-        animate="visible"
-        variants={sectionVariants}
-      >
-        <motion.div
-          style={{ y: logoY }}
-          className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-10 mb-8 flex items-center justify-center"
-          variants={itemVariants}
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&_span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
-          </div>
-        </motion.div>
+      <section ref={heroRef} className="relative w-full h-[200vh]">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+          
+          <motion.div 
+            style={{ opacity: logoOpacity, scale: logoScale }}
+            className="absolute inset-0 flex items-center justify-center"
+          >
+            <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
+          </motion.div>
 
-        <motion.div
-          className="z-10 flex flex-col items-center space-y-6"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.3, delayChildren: 0.2 },
-            },
-          }}
-        >
           <motion.h1
-            style={{ y: headingY }}
-            variants={itemVariants}
-            className="text-4xl md:text-6xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+            style={{ opacity: headlineOpacity, scale: headlineScale }}
+            className="absolute inset-0 flex items-center justify-center text-4xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
+
           <motion.p
-            style={{ y: textY }}
-            variants={itemVariants}
-            className="max-w-2xl text-lg text-foreground/80"
+             style={{ opacity: paragraphOpacity, y: paragraphY }}
+            className="absolute inset-0 flex items-center justify-center max-w-3xl mx-auto text-xl md:text-2xl text-foreground/80"
           >
             Unlock the power of sound and vibration. Discover ancient mantras
             and transform your life through our expert-led courses and vibrant
             community.
           </motion.p>
-        </motion.div>
-      </motion.section>
+
+        </div>
+      </section>
 
       <motion.div
         initial="hidden"
