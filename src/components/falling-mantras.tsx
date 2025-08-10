@@ -34,7 +34,7 @@ const allMantras = [
 
 const Mantra = ({ text, column }: { text: string; column: number }) => {
   const isMobile = useIsMobile();
-  const duration = 20 + Math.random() * 20;
+  const duration = 15 + Math.random() * 15;
   const delay = Math.random() * 15;
   const fontSize = isMobile ? "1rem" : "1.5rem";
   const columnWidth = isMobile ? 20 : 10;
@@ -43,7 +43,7 @@ const Mantra = ({ text, column }: { text: string; column: number }) => {
 
   return (
     <motion.p
-      className="absolute font-headline text-primary/20 whitespace-nowrap"
+      className="absolute font-headline text-primary/30 whitespace-nowrap"
       style={{
         left: `${left}vw`,
         fontSize: fontSize,
