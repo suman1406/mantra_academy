@@ -20,7 +20,6 @@ export type Course = {
     title: string;
     image: string;
     aiHint: string;
-    bio: string;
   };
   curriculum: {
     title: string;
@@ -50,21 +49,18 @@ const instructors = {
     title: "Founder & Lead Instructor",
     image: "https://placehold.co/100x100.png",
     aiHint: "spiritual man portrait",
-    bio: "Rishi founded Mantra Academy to share the transformative power of ancient sound. He has spent over 20 years studying with masters in the Himalayas.",
   },
   anjali: {
     name: "Anjali Devi",
     title: "Vedic Chanting Expert",
     image: "https://placehold.co/100x100.png",
     aiHint: "chanting woman portrait",
-    bio: "With a lineage of scholars, Anjali teaches the precise science of Vedic chanting with unparalleled clarity and devotion.",
   },
   sanjay: {
     name: "Sanjay Rao",
     title: "Nada Yoga Teacher",
     image: "https://placehold.co/100x100.png",
     aiHint: "yoga instructor portrait",
-    bio: "Sanjay helps students connect with their inner sound through Nada Yoga, the yoga of sound. His approach is both meditative and deeply practical.",
   }
 }
 
