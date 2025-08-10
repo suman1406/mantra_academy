@@ -1,16 +1,37 @@
 
+"use client";
+
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { courses as allCourses } from "@/lib/course-data";
+import React from "react";
+import { cn } from "@/lib/utils";
 
 const courses = allCourses.slice(0, 4);
 
 export function FeaturedCourses() {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap())
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
+
   return (
     <section className="w-full max-w-6xl">
       <div className="text-center mb-12">
@@ -18,6 +39,7 @@ export function FeaturedCourses() {
         <p className="text-foreground/80 mt-2">Handpicked for your spiritual journey</p>
       </div>
       <Carousel
+        setApi={setApi}
         opts={{
           align: "start",
           loop: true,
@@ -61,6 +83,20 @@ export function FeaturedCourses() {
         <CarouselPrevious className="hidden sm:flex" />
         <CarouselNext className="hidden sm:flex" />
       </Carousel>
+       <div className="flex justify-center gap-2 mt-4">
+        {Array.from({ length: count }).map((_, index) => (
+          <Button
+            key={index}
+            variant="ghost"
+            size="icon"
+            className={cn(
+              "h-2 w-2 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
+              index === current && "bg-primary"
+            )}
+            onClick={() => api?.scrollTo(index)}
+          />
+        ))}
+      </div>
     </section>
   );
 }

@@ -4,8 +4,10 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import React, { useRef } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
@@ -115,6 +117,23 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
 }
 
 export function Testimonials() {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap())
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
+
   return (
     <section className="w-full max-w-6xl">
       <div className="text-center mb-12">
@@ -122,6 +141,7 @@ export function Testimonials() {
         <p className="text-foreground/80 mt-2">What our students say about us</p>
       </div>
       <Carousel
+        setApi={setApi}
         opts={{
           align: "start",
           loop: true,
@@ -140,6 +160,20 @@ export function Testimonials() {
         <CarouselPrevious className="hidden sm:flex" />
         <CarouselNext className="hidden sm:flex" />
       </Carousel>
+      <div className="flex justify-center gap-2 mt-4">
+        {Array.from({ length: count }).map((_, index) => (
+          <Button
+            key={index}
+            variant="ghost"
+            size="icon"
+            className={cn(
+              "h-2 w-2 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
+              index === current && "bg-primary"
+            )}
+            onClick={() => api?.scrollTo(index)}
+          />
+        ))}
+      </div>
     </section>
   );
 }
