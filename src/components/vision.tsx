@@ -35,7 +35,7 @@ export function Vision() {
         transition={{ duration: 0.8 }}
       >
         <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
-           <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden order-last">
+           <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden">
              <Image
               src="https://placehold.co/600x800.png"
               alt="A vibrant cosmic nebula"
