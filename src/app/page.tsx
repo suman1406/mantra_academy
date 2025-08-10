@@ -20,23 +20,18 @@ export default function Home() {
     offset: ["start start", "end start"],
   });
 
-  // Logo: fade out early
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const logoScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
+  // Animate the logo to zoom in and then fade out
+  const logoScale = useTransform(scrollYProgress, [0, 0.1], [1, 1.5]);
+  const logoOpacity = useTransform(scrollYProgress, [0.1, 0.2], [1, 0]);
 
-  // Headline: fade in after logo disappears, fade out later
-  const headlineOpacity = useTransform(
-    scrollYProgress,
-    [0.15, 0.3, 0.5],
-    [0, 1, 0]
-  );
-  const headlineScale = useTransform(scrollYProgress, [0.15, 0.3], [0.9, 1]);
+  // Animate the headline to slide up and fade in after the logo fades
+  const headlineY = useTransform(scrollYProgress, [0.2, 0.4], [50, 0]);
+  const headlineOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
 
-  // Paragraph: fade in after headline is shown
-  const paragraphOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
-  const paragraphY = useTransform(scrollYProgress, [0.5, 0.65], [20, 0]);
-
-  // Entire section fade out at the very end
+  // Animate the paragraph to fade in after the headline
+  const paragraphOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
+  
+  // Fade out the entire hero section at the end of the scroll
   const heroOpacity = useTransform(scrollYProgress, [0.85, 1], [1, 0]);
 
   const sectionVariants = {
@@ -63,31 +58,36 @@ export default function Home() {
               style={{ opacity: heroOpacity }}
               className="flex flex-col items-center justify-center text-center"
             >
-              {/* Logo */}
-              <motion.div
-                style={{ opacity: logoOpacity, scale: logoScale }}
-                className="mb-12"
-              >
-                <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
-              </motion.div>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                {/* Logo */}
+                <motion.div
+                  style={{ opacity: logoOpacity, scale: logoScale }}
+                  className="mb-12"
+                >
+                  <Logo className="h-24 w-auto text-primary/80 opacity-80 animate-glow-pulse [animation-delay:-4s] animate-float-drift [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
+                </motion.div>
 
-              {/* Headline */}
-              <motion.h1
-                style={{ opacity: headlineOpacity, scale: headlineScale }}
-                className="mb-6 text-4xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
-              >
-                Welcome to Mantra Academy
-              </motion.h1>
+                {/* Headline & Paragraph Container */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    {/* Headline */}
+                    <motion.h1
+                        style={{ opacity: headlineOpacity, y: headlineY }}
+                        className="mb-6 text-4xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+                    >
+                        Welcome to Mantra Academy
+                    </motion.h1>
 
-              {/* Paragraph */}
-              <motion.p
-                style={{ opacity: paragraphOpacity, y: paragraphY }}
-                className="max-w-3xl mx-auto text-xl md:text-2xl text-foreground/80"
-              >
-                Unlock the power of sound and vibration. Discover ancient mantras
-                and transform your life through our expert-led courses and vibrant
-                community.
-              </motion.p>
+                    {/* Paragraph */}
+                    <motion.p
+                        style={{ opacity: paragraphOpacity }}
+                        className="max-w-3xl mx-auto text-xl md:text-2xl text-foreground/80"
+                    >
+                        Unlock the power of sound and vibration. Discover ancient mantras
+                        and transform your life through our expert-led courses and vibrant
+                        community.
+                    </motion.p>
+                </div>
+              </div>
             </motion.div>
         </div>
       </section>
