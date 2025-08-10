@@ -29,7 +29,7 @@ const AnimatedLogo = () => {
       }}
     >
         <Image 
-            src="/images/Logo.png" 
+            src="/Logo.png" 
             alt="Mantra Academy animated logo"
             width={logoSize}
             height={logoSize}
