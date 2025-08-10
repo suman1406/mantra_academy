@@ -147,7 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="space-y-24">
+      <div className="space-y-24 py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"
