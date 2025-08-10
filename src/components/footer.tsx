@@ -6,6 +6,14 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import Link from "next/link";
 
+const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M21.44 12.22a8.9 8.9 0 0 0-4.66-4.66A9 9 0 1 0 3.56 12.22" />
+        <path d="M12 18a6 6 0 0 0 6-6h-6V6a6 6 0 1 0-6 6Z" />
+    </svg>
+);
+
+
 export function Footer() {
   return (
     <footer className="z-10 border-t border-border/40 bg-background/95 text-foreground/80">
@@ -15,9 +23,6 @@ export function Footer() {
           {/* About Section */}
           <div className="md:col-span-1 space-y-4">
             <Logo />
-            <p className="text-sm">
-              Reviving the ancient science of mantras for modern seekers. Discover the power of sound to heal, uplift, and transform.
-            </p>
             <AmbientAudio />
           </div>
 
@@ -43,16 +48,16 @@ export function Footer() {
             </div>
           </div>
           
-          {/* Newsletter */}
+          {/* Community */}
           <div>
-            <h3 className="font-headline text-lg font-semibold text-foreground mb-4">Join Our Sangha</h3>
-            <p className="text-sm mb-3">Receive wisdom, updates, and event invitations directly to your inbox.</p>
-            <form className="flex space-x-2">
-                <Input type="email" placeholder="Your Email" className="bg-background border-border" />
-                <Button type="submit" size="icon" aria-label="Subscribe to newsletter">
-                    <Send className="h-4 w-4" />
-                </Button>
-            </form>
+            <h3 className="font-headline text-lg font-semibold text-foreground mb-4">Join Our Community</h3>
+            <p className="text-sm mb-3">Connect with fellow seekers and get instant updates.</p>
+             <Button asChild>
+                <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n" target="_blank" rel="noopener noreferrer">
+                    <WhatsAppIcon className="mr-2 h-5 w-5" />
+                    Join on WhatsApp
+                </Link>
+            </Button>
           </div>
 
         </div>
