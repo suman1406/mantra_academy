@@ -118,7 +118,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <section className="relative w-full h-[90vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center">
+      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center">
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
         
@@ -148,7 +148,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto text-base md:text-2xl text-foreground/80"
+            className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto text-base sm:text-lg md:text-2xl text-foreground/80"
           >
             Unlock the power of sound and vibration. Discover ancient mantras
             and transform your life through our expert-led courses and vibrant
@@ -163,7 +163,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8"
+          className="flex justify-center py-8"
         >
           <Philosophy />
         </motion.div>
@@ -173,7 +173,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8"
+          className="flex justify-center py-8"
         >
           <Vision />
         </motion.div>
@@ -183,7 +183,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8"
+          className="flex justify-center py-8"
         >
           <Announcement />
         </motion.div>
@@ -193,7 +193,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8"
+          className="flex justify-center py-8"
         >
           <FeaturedCourses />
         </motion.div>
@@ -203,7 +203,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8"
+          className="flex justify-center py-8"
         >
           <Testimonials />
         </motion.div>
@@ -213,7 +213,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8"
+          className="flex justify-center py-8"
         >
           <Community />
         </motion.div>
