@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -31,15 +32,13 @@ export function AmbientAudio() {
   };
 
   return (
-    <div className="mt-2">
-      <Button variant="ghost" size="sm" onClick={togglePlay} className="text-foreground/60 hover:text-primary">
+    <Button variant="ghost" size="icon" onClick={togglePlay} className="text-primary-foreground/60 hover:text-primary-foreground">
         {isPlaying ? (
-          <Volume2 className="h-4 w-4 mr-2" />
+          <Volume2 className="h-5 w-5" />
         ) : (
-          <VolumeX className="h-4 w-4 mr-2" />
+          <VolumeX className="h-5 w-5" />
         )}
-        Ambient Sound
+        <span className="sr-only">Toggle Ambient Sound</span>
       </Button>
-    </div>
   );
 }

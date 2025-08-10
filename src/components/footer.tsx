@@ -16,14 +16,13 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function Footer() {
   return (
-    <footer className="z-10 border-t border-primary/20 bg-primary text-primary-foreground/80">
+    <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
           {/* About Section */}
           <div className="md:col-span-1 space-y-4">
             <Logo className="[&>span]:text-primary-foreground" />
-            <AmbientAudio />
           </div>
 
           {/* Quick Links */}
