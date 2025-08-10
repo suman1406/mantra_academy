@@ -62,7 +62,7 @@ const InfoCard = ({
   title: string;
   text: string;
 }) => (
-  <Card className="bg-card/10 p-4 shadow-md rounded-xl border border-primary/20">
+  <Card className="bg-card p-4 shadow-md rounded-xl border border-primary/20">
     <div className="flex items-center gap-3">
       <Icon className="h-8 w-8 text-primary" />
       <div>
@@ -120,20 +120,6 @@ export function CourseDetailClient({ course }: { course: Course }) {
               {title}
             </h1>
             <p className="text-xl text-foreground/90">{description}</p>
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-12 w-12 ring-2 ring-primary/50">
-                  <AvatarImage src={instructor.image} alt={instructor.name} />
-                  <AvatarFallback>{instructor.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm text-muted-foreground">Instructor</p>
-                  <p className="font-bold text-lg text-foreground">
-                    {instructor.name}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -178,7 +164,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                       data-ai-hint={aiHint}
                     />
                   </div>
-                <CardContent className="p-6 bg-card/5">
+                <CardContent className="p-6 bg-card">
                   <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                   <Button
                     size="lg"
@@ -194,7 +180,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {/* Course Highlights */}
             {highlights && (
                  <section className="mb-12">
-                    <Card className="p-6 md:p-8 bg-card/5 shadow-md rounded-xl border border-primary/20">
+                    <Card className="p-6 md:p-8 bg-card shadow-md rounded-xl border border-primary/20">
                         <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2">
                             Course Highlights
                         </h2>
@@ -220,7 +206,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* About */}
             <section className="mb-12">
-              <Card className="p-6 md:p-8 bg-card/5 shadow-md rounded-xl border border-primary/20">
+              <Card className="p-6 md:p-8 bg-card shadow-md rounded-xl border border-primary/20">
                 <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2">
                   Course Overview
                 </h2>
@@ -240,7 +226,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         {whoCanAttend.map((attendee, index) => {
                              const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || Users;
                             return (
-                                <Card key={index} className="bg-card/5 shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
+                                <Card key={index} className="bg-card shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
                                     <div className="p-3 bg-primary/10 rounded-full mb-4">
                                         <Icon className="h-8 w-8 text-primary" />
                                     </div>
@@ -267,7 +253,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`item-${index}`}
                     key={index}
-                    className="bg-card/5 border border-border rounded-xl px-4"
+                    className="bg-card border border-border rounded-xl px-4"
                   >
                     <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">
                       <div className="flex items-center gap-4">
@@ -312,7 +298,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`faq-${index}`}
                     key={index}
-                    className="bg-card/5 border border-border rounded-xl px-4"
+                    className="bg-card border border-border rounded-xl px-4"
                   >
                     <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                       {faq.question}
@@ -338,7 +324,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   data-ai-hint={aiHint}
                 />
               </div>
-              <CardContent className="p-6 bg-card/5">
+              <CardContent className="p-6 bg-card">
                 <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                 <Button
                   size="lg"
@@ -354,3 +340,5 @@ export function CourseDetailClient({ course }: { course: Course }) {
     </div>
   );
 }
+
+    
