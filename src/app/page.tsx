@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-12 space-y-24">
+    <div className="flex flex-col items-center justify-center space-y-24">
       <section
         ref={heroRef}
         className="relative w-full h-[120vh] overflow-hidden"
