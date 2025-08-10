@@ -12,21 +12,26 @@ import { Community } from "@/components/community";
 import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const glyphs = ["ॐ", "प्र", "ज्ञा", "नं", "ब्र", "ह्म", "अ", "हं", "सः"];
 
 const FuturisticGlyph = ({ index }: { index: number }) => {
   const [style, setStyle] = useState({});
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const angle = Math.random() * 2 * Math.PI;
-    const radius = 200 + Math.random() * 150;
+    const baseRadius = isMobile ? 100 : 200;
+    const randomRadius = isMobile ? 75 : 150;
+    const radius = baseRadius + Math.random() * randomRadius;
+    
     setStyle({
       '--tx': `${Math.cos(angle) * radius}px`,
       '--ty': `${Math.sin(angle) * radius}px`,
       '--delay': `${Math.random() * 10}s`,
     });
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="glyph-particle" style={style}>
@@ -36,46 +41,51 @@ const FuturisticGlyph = ({ index }: { index: number }) => {
 };
 
 
-const Mandala = () => (
-  <motion.div
-    className="absolute inset-0 flex items-center justify-center"
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 4, ease: "circOut" },
-    }}
-  >
-    {[...Array(6)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-full h-full"
-        style={{
-          rotate: i * 30,
-        }}
-      >
+const Mandala = () => {
+  const isMobile = useIsMobile();
+  const baseSize = isMobile ? 100 : 200;
+
+  return (
+    <motion.div
+      className="absolute inset-0 flex items-center justify-center"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{
+        scale: 1,
+        opacity: 1,
+        transition: { duration: 4, ease: "circOut" },
+      }}
+    >
+      {[...Array(6)].map((_, i) => (
         <motion.div
-          className="absolute w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent left-1/2 -translate-x-1/2"
-          initial={{ height: "0%" }}
-          animate={{ height: "100%", transition: { duration: 2, delay: 1 } }}
+          key={i}
+          className="absolute w-full h-full"
+          style={{
+            rotate: i * 30,
+          }}
+        >
+          <motion.div
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent left-1/2 -translate-x-1/2"
+            initial={{ height: "0%" }}
+            animate={{ height: "100%", transition: { duration: 2, delay: 1 } }}
+          />
+        </motion.div>
+      ))}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute border border-primary/30 rounded-full"
+          initial={{ width: 0, height: 0, opacity: 0 }}
+          animate={{
+            width: `${(i + 1) * baseSize}px`,
+            height: `${(i + 1) * baseSize}px`,
+            opacity: 1,
+            transition: { duration: 1.5, delay: 1.5 + i * 0.2, ease: "easeOut" },
+          }}
         />
-      </motion.div>
-    ))}
-    {[...Array(3)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute border border-primary/30 rounded-full"
-        initial={{ width: 0, height: 0, opacity: 0 }}
-        animate={{
-          width: `${(i + 1) * 200}px`,
-          height: `${(i + 1) * 200}px`,
-          opacity: 1,
-          transition: { duration: 1.5, delay: 1.5 + i * 0.2, ease: "easeOut" },
-        }}
-      />
-    ))}
-  </motion.div>
-);
+      ))}
+    </motion.div>
+  )
+};
 
 
 export default function Home() {
@@ -108,7 +118,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center text-center">
+      <section className="relative w-full h-[85vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center">
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
         
@@ -128,7 +138,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="mb-6 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+            className="mb-6 text-5xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
