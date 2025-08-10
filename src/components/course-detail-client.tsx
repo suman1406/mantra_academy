@@ -62,7 +62,7 @@ const InfoCard = ({
   title: string;
   text: string;
 }) => (
-  <Card className="bg-primary/5 p-4 shadow-md rounded-xl border border-primary/20">
+  <Card className="bg-background p-4 shadow-md rounded-xl border border-primary/20">
     <div className="flex items-center gap-3">
       <Icon className="h-8 w-8 text-primary" />
       <div>
@@ -153,7 +153,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             
             {/* Mobile-only Timer */}
             <div className="block lg:hidden mb-8">
-              <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20">
+              <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20 bg-background">
                  <div className="relative aspect-video">
                     <Image
                       src={image}
@@ -179,8 +179,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {/* Course Highlights */}
             {highlights && (
                  <section className="mb-12">
-                    <Card className="p-6 md:p-8 bg-primary/5 shadow-md rounded-xl border border-primary/20">
-                        <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2">
+                    <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
+                        <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
                             Course Highlights
                         </h2>
                         <ul className="space-y-4">
@@ -205,8 +205,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* About */}
             <section className="mb-12">
-              <Card className="p-6 md:p-8 bg-primary/5 shadow-md rounded-xl border border-primary/20">
-                <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2">
+              <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
+                <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
                   Course Overview
                 </h2>
                 <div className="prose prose-lg max-w-none text-foreground/90 whitespace-pre-wrap">
@@ -218,14 +218,14 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {/* Who Can Attend */}
             {whoCanAttend && (
                 <section className="mb-12">
-                    <h2 className="text-3xl font-headline text-center text-primary mb-8">
+                    <h2 className="text-3xl font-headline text-center text-primary mb-8 font-semibold">
                         Who Can Attend?
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {whoCanAttend.map((attendee, index) => {
                              const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || Users;
                             return (
-                                <Card key={index} className="bg-primary/5 shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
+                                <Card key={index} className="bg-background shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
                                     <div className="p-3 bg-primary/10 rounded-full mb-4">
                                         <Icon className="h-8 w-8 text-primary" />
                                     </div>
@@ -240,7 +240,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* Curriculum */}
             <section className="mb-12">
-              <h2 className="text-3xl font-headline text-primary mb-4">
+              <h2 className="text-3xl font-headline text-primary mb-4 font-semibold">
                 Course Curriculum
               </h2>
               <Accordion
@@ -252,7 +252,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`item-${index}`}
                     key={index}
-                    className="bg-primary/5 border border-border rounded-xl px-4"
+                    className="bg-background border border-border rounded-xl px-4"
                   >
                     <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">
                       <div className="flex items-center gap-4">
@@ -285,7 +285,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* FAQs */}
             <section>
-              <h2 className="text-3xl font-headline text-primary mb-4">
+              <h2 className="text-3xl font-headline text-primary mb-4 font-semibold">
                 Frequently Asked Questions
               </h2>
               <Accordion
@@ -297,7 +297,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`faq-${index}`}
                     key={index}
-                    className="bg-primary/5 border border-border rounded-xl px-4"
+                    className="bg-background border border-border rounded-xl px-4"
                   >
                     <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                       {faq.question}
@@ -313,7 +313,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
           {/* Sidebar */}
           <aside className="hidden lg:block lg:sticky lg:top-24 h-fit">
-            <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20">
+            <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20 bg-background">
               <div className="relative aspect-video">
                 <Image
                   src={image}
