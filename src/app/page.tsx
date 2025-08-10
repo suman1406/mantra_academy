@@ -17,20 +17,24 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end start"],
   });
 
   // Logo animation: fade out and scale down
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const logoScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const logoScale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
 
   // Headline animation: fade in, then out
-  const headlineOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6], [0, 1, 0]);
-  const headlineScale = useTransform(scrollYProgress, [0.2, 0.4], [0.9, 1]);
+  const headlineOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.4], [0, 1, 0]);
+  const headlineScale = useTransform(scrollYProgress, [0.15, 0.25], [0.9, 1]);
   
   // Paragraph animation: fade in
-  const paragraphOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const paragraphY = useTransform(scrollYProgress, [0.6, 0.8], ["20px", "0px"]);
+  const paragraphOpacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
+  const paragraphY = useTransform(scrollYProgress, [0.4, 0.5], [20, 0]);
+  
+  // Entire hero section fades out
+  const heroOpacity = useTransform(scrollYProgress, [0.8, 0.9], [1, 0]);
+
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -46,9 +50,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-48 py-12">
+    <div className="flex flex-col items-center justify-center py-12 space-y-24">
       <section ref={heroRef} className="relative w-full h-[200vh]">
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+        <motion.div style={{opacity: heroOpacity}} className="sticky top-0 h-screen flex flex-col items-center justify-center text-center overflow-hidden">
           
           <motion.div 
             style={{ opacity: logoOpacity, scale: logoScale }}
@@ -73,7 +77,7 @@ export default function Home() {
             community.
           </motion.p>
 
-        </div>
+        </motion.div>
       </section>
 
       <motion.div
