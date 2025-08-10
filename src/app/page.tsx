@@ -22,8 +22,8 @@ const FuturisticGlyph = ({ index }: { index: number }) => {
 
   useEffect(() => {
     const angle = Math.random() * 2 * Math.PI;
-    const baseRadius = isMobile ? 100 : 200;
-    const randomRadius = isMobile ? 75 : 150;
+    const baseRadius = isMobile ? 80 : 200;
+    const randomRadius = isMobile ? 60 : 150;
     const radius = baseRadius + Math.random() * randomRadius;
     
     setStyle({
@@ -43,7 +43,7 @@ const FuturisticGlyph = ({ index }: { index: number }) => {
 
 const Mandala = () => {
   const isMobile = useIsMobile();
-  const baseSize = isMobile ? 100 : 200;
+  const baseSize = isMobile ? 80 : 200;
 
   return (
     <motion.div
@@ -118,7 +118,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <section className="relative w-full h-[85vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center">
+      <section className="relative w-full h-[90vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center">
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
         
@@ -129,16 +129,16 @@ export default function Home() {
         </div>
         
         {/* Content */}
-        <div className="z-10 flex flex-col items-center justify-center text-center space-y-6">
+        <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
           <motion.div custom={0} initial="hidden" animate="visible" variants={textRevealVariants}>
-            <Logo className="h-24 w-auto text-primary drop-shadow-lg [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
+            <Logo className="h-20 w-auto text-primary drop-shadow-lg [&>span]:text-2xl md:[&>span]:text-3xl [&_img]:h-20 [&_img]:w-20" />
           </motion.div>
           <motion.h1
             custom={1}
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="mb-6 text-5xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+            className="mb-4 md:mb-6 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
@@ -148,7 +148,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="max-w-3xl mx-auto text-lg md:text-2xl text-foreground/80"
+            className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto text-base md:text-2xl text-foreground/80"
           >
             Unlock the power of sound and vibration. Discover ancient mantras
             and transform your life through our expert-led courses and vibrant
@@ -163,7 +163,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8 md:py-12"
+          className="w-full flex justify-center py-8"
         >
           <Philosophy />
         </motion.div>
@@ -173,7 +173,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8 md:py-12"
+          className="w-full flex justify-center py-8"
         >
           <Vision />
         </motion.div>
@@ -183,7 +183,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8 md:py-12"
+          className="w-full flex justify-center py-8"
         >
           <Announcement />
         </motion.div>
@@ -193,7 +193,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8 md:py-12"
+          className="w-full flex justify-center py-8"
         >
           <FeaturedCourses />
         </motion.div>
@@ -203,7 +203,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8 md:py-12"
+          className="w-full flex justify-center py-8"
         >
           <Testimonials />
         </motion.div>
@@ -213,7 +213,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center py-8 md:py-12"
+          className="w-full flex justify-center py-8"
         >
           <Community />
         </motion.div>
@@ -221,3 +221,4 @@ export default function Home() {
     </div>
   );
 }
+
