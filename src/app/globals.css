@@ -146,6 +146,7 @@
   background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
   background-size: 200% 200%;
   animation: background-pan 25s ease-in-out infinite;
+  z-index: -2;
 }
 
 @keyframes glyph-drift {

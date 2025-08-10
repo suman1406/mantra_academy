@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer";
 import { AIChatbot } from "@/components/ai-chatbot";
 import { Toaster } from "@/components/ui/toaster";
 import { usePathname } from "next/navigation";
+import { FallingMantras } from "@/components/falling-mantras";
 
 // export const metadata: Metadata = {
 //   title: "Mantra Academy",
@@ -36,9 +37,10 @@ export default function RootLayout({
       <body className={cn("font-body antialiased bg-background text-foreground min-h-screen flex flex-col")}>
         {!isAdminPage && <Header />}
         <main className={cn(
-          "flex-grow pt-16",
+          "flex-grow pt-16 relative",
           !isAdminPage && "container mx-auto px-4"
         )}>
+           {!isAdminPage && <FallingMantras />}
           {children}
         </main>
         {!isAdminPage && <Footer />}

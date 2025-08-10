@@ -3,7 +3,6 @@
 
 import { Button } from "@/components/ui/button";
 import { FeaturedCourses } from "@/components/featured-courses";
-import { SocialFeed } from "@/components/social-feed";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { Testimonials } from "@/components/testimonials";
@@ -12,7 +11,6 @@ import { Community } from "@/components/community";
 import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { useEffect, useState } from "react";
-import { FallingMantras } from "@/components/falling-mantras";
 
 const glyphs = ["ॐ", "प्र", "ज्ञा", "नं", "ब्र", "ह्म", "अ", "हं", "सः"];
 
@@ -108,8 +106,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
-      <FallingMantras />
+    <div className="flex flex-col items-center justify-center">
       <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center text-center">
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
@@ -198,16 +195,6 @@ export default function Home() {
           className="w-full flex justify-center"
         >
           <Community />
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-          className="w-full flex justify-center"
-        >
-          <SocialFeed />
         </motion.div>
       </div>
     </div>
