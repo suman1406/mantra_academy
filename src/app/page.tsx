@@ -14,32 +14,6 @@ import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Image from "next/image";
 
-const glyphs = ["ॐ", "प्र", "ज्ञा", "नं", "ब्र", "ह्म", "अ", "हं", "सः"];
-
-const FuturisticGlyph = ({ index }: { index: number }) => {
-  const [style, setStyle] = useState({});
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const angle = Math.random() * 2 * Math.PI;
-    const baseRadius = isMobile ? 80 : 200;
-    const randomRadius = isMobile ? 60 : 150;
-    const radius = baseRadius + Math.random() * randomRadius;
-    
-    setStyle({
-      '--tx': `${Math.cos(angle) * radius}px`,
-      '--ty': `${Math.sin(angle) * radius}px`,
-      '--delay': `${Math.random() * 10}s`,
-    });
-  }, [isMobile]);
-
-  return (
-    <div className="glyph-particle" style={style}>
-      {glyphs[index % glyphs.length]}
-    </div>
-  );
-};
-
 const AnimatedLogo = () => {
   const isMobile = useIsMobile();
   const logoSize = isMobile ? 180 : 300;
@@ -100,10 +74,9 @@ export default function Home() {
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
         
-        {/* Mandala and Glyphs */}
+        {/* Logo */}
         <div className="absolute inset-0">
           <AnimatedLogo />
-          {[...Array(20)].map((_, i) => <FuturisticGlyph key={i} index={i}/>)}
         </div>
         
         {/* Content */}
