@@ -62,7 +62,7 @@ const InfoCard = ({
   title: string;
   text: string;
 }) => (
-  <Card className="bg-card p-4 shadow-md rounded-xl border border-primary/20">
+  <Card className="bg-primary/5 p-4 shadow-md rounded-xl border border-primary/20">
     <div className="flex items-center gap-3">
       <Icon className="h-8 w-8 text-primary" />
       <div>
@@ -93,7 +93,6 @@ const highlightIcons: Record<string, React.ElementType> = {
 export function CourseDetailClient({ course }: { course: Course }) {
   const {
     title,
-    instructor,
     description,
     fullDescription,
     image,
@@ -164,7 +163,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                       data-ai-hint={aiHint}
                     />
                   </div>
-                <CardContent className="p-6 bg-card">
+                <CardContent className="p-6 bg-background">
                   <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                   <Button
                     size="lg"
@@ -180,7 +179,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {/* Course Highlights */}
             {highlights && (
                  <section className="mb-12">
-                    <Card className="p-6 md:p-8 bg-card shadow-md rounded-xl border border-primary/20">
+                    <Card className="p-6 md:p-8 bg-primary/5 shadow-md rounded-xl border border-primary/20">
                         <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2">
                             Course Highlights
                         </h2>
@@ -206,7 +205,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* About */}
             <section className="mb-12">
-              <Card className="p-6 md:p-8 bg-card shadow-md rounded-xl border border-primary/20">
+              <Card className="p-6 md:p-8 bg-primary/5 shadow-md rounded-xl border border-primary/20">
                 <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2">
                   Course Overview
                 </h2>
@@ -226,7 +225,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         {whoCanAttend.map((attendee, index) => {
                              const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || Users;
                             return (
-                                <Card key={index} className="bg-card shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
+                                <Card key={index} className="bg-primary/5 shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
                                     <div className="p-3 bg-primary/10 rounded-full mb-4">
                                         <Icon className="h-8 w-8 text-primary" />
                                     </div>
@@ -253,7 +252,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`item-${index}`}
                     key={index}
-                    className="bg-card border border-border rounded-xl px-4"
+                    className="bg-primary/5 border border-border rounded-xl px-4"
                   >
                     <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">
                       <div className="flex items-center gap-4">
@@ -266,7 +265,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         {section.lessons.map((lesson, i) => (
                           <li
                             key={i}
-                            className="flex justify-between items-center p-2 rounded-md hover:bg-card/10"
+                            className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
                           >
                             <span className="flex items-center gap-2 text-foreground/80">
                               <BadgeCheck className="h-4 w-4 text-primary" />
@@ -298,7 +297,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   <AccordionItem
                     value={`faq-${index}`}
                     key={index}
-                    className="bg-card border border-border rounded-xl px-4"
+                    className="bg-primary/5 border border-border rounded-xl px-4"
                   >
                     <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                       {faq.question}
@@ -324,7 +323,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   data-ai-hint={aiHint}
                 />
               </div>
-              <CardContent className="p-6 bg-card">
+              <CardContent className="p-6 bg-background">
                 <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                 <Button
                   size="lg"
@@ -340,5 +339,3 @@ export function CourseDetailClient({ course }: { course: Course }) {
     </div>
   );
 }
-
-    
