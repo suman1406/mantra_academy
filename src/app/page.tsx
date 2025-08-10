@@ -46,7 +46,7 @@ const AnimatedLogo = () => {
 
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center"
+      className="absolute inset-0 flex items-center justify-center z-0"
       initial={{ scale: 0, opacity: 0 }}
       animate={{
         scale: 1,
@@ -59,7 +59,7 @@ const AnimatedLogo = () => {
             alt="Mantra Academy animated logo"
             width={logoSize}
             height={logoSize}
-            className="drop-shadow-2xl"
+            className="drop-shadow-2xl animate-float-drift"
         />
     </motion.div>
   )
@@ -138,7 +138,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center"
         >
           <Philosophy />
         </motion.div>
@@ -148,7 +147,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center"
         >
           <Vision />
         </motion.div>
@@ -158,7 +156,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center"
         >
           <Announcement />
         </motion.div>
@@ -168,7 +165,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center"
         >
           <FeaturedCourses />
         </motion.div>
@@ -178,7 +174,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center"
         >
           <Testimonials />
         </motion.div>
@@ -188,7 +183,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="flex justify-center"
         >
           <Community />
         </motion.div>
