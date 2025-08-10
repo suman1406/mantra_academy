@@ -163,7 +163,7 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
-          className="w-full flex justify-center"
+          className="w-full flex justify-center py-24"
         >
           <Vision />
         </motion.div>
