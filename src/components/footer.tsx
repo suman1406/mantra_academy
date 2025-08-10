@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background/95 text-foreground/80">
+    <footer className="z-10 border-t border-border/40 bg-background/95 text-foreground/80">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           

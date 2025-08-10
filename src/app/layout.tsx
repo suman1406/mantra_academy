@@ -34,16 +34,18 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body className={cn("font-body antialiased bg-background text-foreground min-h-screen flex flex-col")}>
-        {!isAdminPage && <Header />}
-        <main className={cn(
-          "flex-grow pt-16 relative",
-          !isAdminPage && "container mx-auto px-4"
-        )}>
-           {!isAdminPage && <FallingMantras />}
-          {children}
-        </main>
-        {!isAdminPage && <Footer />}
+      <body className={cn("font-body antialiased bg-background text-foreground")}>
+        <div className="relative flex flex-col min-h-screen">
+          {!isAdminPage && <FallingMantras />}
+          {!isAdminPage && <Header />}
+          <main className={cn(
+            "flex-grow pt-16",
+            !isAdminPage && "container mx-auto px-4"
+          )}>
+            {children}
+          </main>
+          {!isAdminPage && <Footer />}
+        </div>
         {!isAdminPage && <AIChatbot />}
         <Toaster />
       </body>
