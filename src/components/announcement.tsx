@@ -106,8 +106,8 @@ export function Announcement() {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex" />
-            <CarouselNext className="hidden sm:flex" />
+            <CarouselPrevious />
+            <CarouselNext />
       </Carousel>
       <div className="flex justify-center gap-2 mt-4">
         {Array.from({ length: count }).map((_, index) => (
@@ -116,7 +116,7 @@ export function Announcement() {
             variant="ghost"
             size="icon"
             className={cn(
-              "h-2 w-2 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
+              "h-3 w-3 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
               index === current && "bg-primary"
             )}
             onClick={() => api?.scrollTo(index)}
