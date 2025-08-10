@@ -30,9 +30,9 @@ const BlogPostCard = ({
     transition={{ duration: 0.8, delay: index * 0.15 }}
   >
     <Card
-      className={`h-full flex flex-col group manuscript-card rounded-none overflow-hidden ${devanagari.className}`}
+      className={`h-full flex flex-col md:flex-row group manuscript-card rounded-none overflow-hidden ${devanagari.className}`}
     >
-      <div className="relative h-56 w-full">
+      <div className="relative md:w-1/3 w-full h-56 md:h-auto">
          <Image
           src={post.image}
           alt={post.title}
@@ -40,31 +40,33 @@ const BlogPostCard = ({
           data-ai-hint={post.aiHint}
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent md:bg-gradient-to-r" />
       </div>
-      <CardContent className="flex-grow flex flex-col p-8">
-        <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-card-foreground/80 transition-colors">
-          {post.title}
-        </CardTitle>
-        <div className="text-sm manuscript-subtext mt-2 mb-4">
-          By {post.author} on {post.date}
-        </div>
-        <p className="manuscript-text manuscript-dropcap flex-grow leading-relaxed">
-          {post.excerpt}
-        </p>
-      </CardContent>
-      <CardFooter className="p-8 pt-0">
-          <Button
-            variant="link"
-            asChild
-            className="p-0 manuscript-text font-bold text-card-foreground/80 group-hover:text-card-foreground"
-          >
-            <Link href={`/blog/${post.slug}`}>
-                Read More
-                <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-      </CardFooter>
+      <div className="md:w-2/3 flex flex-col">
+        <CardContent className="flex-grow flex flex-col p-8">
+          <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-card-foreground/80 transition-colors">
+            {post.title}
+          </CardTitle>
+          <div className="text-sm manuscript-subtext mt-2 mb-4">
+            By {post.author} on {post.date}
+          </div>
+          <p className="manuscript-text manuscript-dropcap flex-grow leading-relaxed">
+            {post.excerpt}
+          </p>
+        </CardContent>
+        <CardFooter className="p-8 pt-0">
+            <Button
+              variant="link"
+              asChild
+              className="p-0 manuscript-text font-bold text-card-foreground/80 group-hover:text-card-foreground"
+            >
+              <Link href={`/blog/${post.slug}`}>
+                  Read More
+                  <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+        </CardFooter>
+      </div>
     </Card>
   </motion.div>
 );
