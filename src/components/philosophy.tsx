@@ -39,10 +39,13 @@ export function Philosophy() {
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Philosophy</h2>
             <div className="text-card-foreground/80 mt-4 space-y-4 text-lg">
               <p>
-                We believe that sound is the primordial creative force of the universe. Within every mantra lies a seed of potential—a source of boundless peace, power, and connection. Our purpose is to provide the keys to unlock that potential.
+                At Mantra Academy, we bring the ancient wisdom of Bharat’s spiritual heritage into today’s world. Rooted in the timeless teachings of the Vedas, Upanishads, Itihasas, and Puranas, our goal is to make these profound truths clear, relatable, and practical for modern life.
               </p>
               <p>
-                Our teachings are rooted in the timeless wisdom of the Vedas and Tantras, adapted for the modern world. We honor the science of vibration, teaching correct pronunciation, rhythm, and intention to awaken the power within each sacred syllable.
+                We see this wisdom not as something from the distant past, but as a living guide that can bring balance, clarity, and purpose to everyday challenges. By blending tradition with practical insights, we help seekers reconnect with their roots and embody spiritual values in ways that matter today.
+              </p>
+              <p>
+                Our mission is simple: to share and live this timeless knowledge so it inspires a meaningful, grounded journey of self-discovery for everyone.
               </p>
             </div>
           </div>
