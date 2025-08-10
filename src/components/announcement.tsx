@@ -86,8 +86,8 @@ export function Announcement() {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/80" />
-            <CarouselNext className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/80" />
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
       </Carousel>
     </section>
   );
