@@ -115,7 +115,7 @@ export default function AboutPage() {
       >
         <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-headline font-bold text-primary">Our Sacred Mission</motion.h1>
         <motion.p variants={itemVariants} className="mt-6 text-lg text-foreground/80">
-            At Mantra Academy, we are dedicated to reviving the ancient science of mantras and making it accessible for modern seekers. We believe in the profound power of sound to heal, uplift, and transform consciousness.
+            To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
         </motion.p>
       </motion.section>
 
