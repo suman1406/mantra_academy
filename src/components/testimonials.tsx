@@ -102,7 +102,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
                 <p className="text-card-foreground/80 italic">"{testimonial.quote}"</p>
               </CardContent>
               <div className="flex items-center mt-6 p-0">
-                <Avatar className="h-12 w-12 mr-4 overflow-hidden">
+                <Avatar className="h-16 w-16 mr-4 overflow-hidden">
                   <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-500" />
                   <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                 </Avatar>
@@ -167,7 +167,7 @@ export function Testimonials() {
             variant="ghost"
             size="icon"
             className={cn(
-              "h-3 w-3 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
+              "h-4 w-4 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
               index === current && "bg-primary"
             )}
             onClick={() => api?.scrollTo(index)}
