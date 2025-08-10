@@ -115,7 +115,7 @@ export function Community() {
         </div>
         <div className="text-center mt-12">
             <Button size="lg" className="group" asChild>
-                <Link href="#">
+                <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n">
                     Become a Member
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </Link>
