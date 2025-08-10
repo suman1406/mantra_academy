@@ -4,29 +4,21 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Users, BookOpen, Target } from "lucide-react";
 
 const teamMembers = [
   {
-    name: "Rishi Varma",
-    role: "Founder & Lead Instructor",
+    name: "Karthik Sharma",
+    role: "Co-Founder & Lead Instructor",
     image: "https://placehold.co/400x400.png",
-    aiHint: "spiritual man portrait",
-    bio: "Rishi founded Mantra Academy to share the transformative power of ancient sound.",
+    aiHint: "indian scholar man",
+    bio: "Karthik Sharma is a dedicated scholar, shaped by over 13 years of immersive learning in the traditional Gurukula system, with a firm grounding in the Indian Knowledge Systems (IKS). Introduced to the Vedic tradition at the age of 10, he studied Krishna Yajurveda, along with the Upanishads, Bhagavad Gītā, Brahmasūtras, Yogasūtras, and key shastras like Vyākaraṇa, Kāvya, and Mīmāṁsā. Under the guidance of Dr. Ramachandra Bhat Kotemane, a leading Vedic scholar, he developed a deeply experiential and contemplative approach to Vedānta. Karthik holds Vidwat (M.A.) in Advaita Vedanta and an M.Phil, and is currently pursuing doctoral research. With a heartfelt commitment to preserving India’s sacred wisdom, he continues to share the Gurukula way of learning bridging ancient heritage and modern seekers through teaching, reflection, and practice.",
   },
   {
-    name: "Anjali Devi",
-    role: "Vedic Chanting Expert",
+    name: "Jyothi Sharma",
+    role: "Co-Founder & Instructor",
     image: "https://placehold.co/400x400.png",
-    aiHint: "chanting woman portrait",
-    bio: "With a lineage of scholars, Anjali teaches the precise science of Vedic chanting.",
-  },
-  {
-    name: "Sanjay Rao",
-    role: "Nada Yoga Teacher",
-    image: "https://placehold.co/400x400.png",
-    aiHint: "yoga instructor portrait",
-    bio: "Sanjay helps students connect with their inner sound through Nada Yoga.",
+    aiHint: "indian scholar woman",
+    bio: "Jyothi M. Bhat is a dedicated scholar and teacher deeply grounded in the timeless wisdom of the Indian Knowledge System (IKS). Trained in the traditional Gurukula way, she embodies the living heritage of oral transmission, disciplined study, and spiritual practice that form the heart of Bharat’s sacred teachings. Her profound understanding of Advaita Vedānta and Sanskrit scriptures is enriched by immersive Gurukula education, where learning merges scholarship with heartfelt experience. Committed to preserving and sharing this wisdom, Jyothi integrates authentic classical knowledge with contemporary inquiry, making the ancient teachings accessible and relevant for today’s seekers. At Mantra Academy, she brings this unique blend of tradition and modern insight to guide learners gently but deeply on their spiritual path, nurturing not just knowledge but transformation through sound, meaning, and devotion.",
   },
 ];
 
@@ -55,7 +47,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
       transition={{ duration: 0.8, delay: index * 0.15 }}
       className="w-full"
     >
-        <Card className="text-center border-border/40 bg-card/80 backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-500 text-card-foreground">
+        <Card className="text-center border-border/40 bg-card backdrop-blur-sm flex flex-col items-center p-6 h-full group hover:shadow-primary/20 hover:shadow-2xl transition-shadow duration-500 text-card-foreground">
             <div className="relative w-40 h-40 mb-4">
                 <Image
                     src={member.image}
@@ -71,7 +63,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
                 <p className="text-card-foreground/80 font-semibold">{member.role}</p>
             </CardHeader>
             <CardContent>
-                <p className="text-card-foreground/70">{member.bio}</p>
+                <p className="text-card-foreground/70 text-left">{member.bio}</p>
             </CardContent>
         </Card>
     </motion.div>
@@ -111,12 +103,15 @@ export default function AboutPage() {
         variants={sectionVariants}
         initial="hidden"
         animate="visible"
-        className="text-center max-w-4xl mx-auto"
       >
-        <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-headline font-bold text-primary">Our Sacred Mission</motion.h1>
-        <motion.p variants={itemVariants} className="mt-6 text-lg text-foreground/80">
-            To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
-        </motion.p>
+        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden group p-8 md:p-12">
+            <h1 className="text-4xl md:text-6xl font-headline font-bold text-card-foreground text-center">Our Sacred Mission</h1>
+            <div className="text-card-foreground/80 mt-6 space-y-4 text-lg max-w-4xl mx-auto">
+              <p>
+                To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
+              </p>
+            </div>
+          </Card>
       </motion.section>
 
       <motion.section
@@ -124,35 +119,29 @@ export default function AboutPage() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="w-full max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center"
+        className="w-full max-w-6xl mx-auto"
       >
-          <motion.div variants={itemVariants}>
-              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full text-card-foreground">
-                  <BookOpen className="h-12 w-12 mx-auto text-card-foreground mb-4"/>
-                  <h3 className="text-2xl font-headline text-card-foreground mb-2">Authentic Teachings</h3>
-                  <p className="text-card-foreground/70">
-                    Our curriculum is rooted in the timeless wisdom of the Vedas and Tantras, adapted for the modern world.
-                  </p>
-              </Card>
-          </motion.div>
-           <motion.div variants={itemVariants}>
-              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full text-card-foreground">
-                  <Target className="h-12 w-12 mx-auto text-card-foreground mb-4"/>
-                  <h3 className="text-2xl font-headline text-card-foreground mb-2">Our Vision</h3>
-                  <p className="text-card-foreground/70">
-                    We envision a world where every individual can harness sound for personal growth, inner peace, and universal well-being.
-                  </p>
-              </Card>
-          </motion.div>
-           <motion.div variants={itemVariants}>
-              <Card className="p-8 border-border/40 bg-card/80 backdrop-blur-sm h-full text-card-foreground">
-                  <Users className="h-12 w-12 mx-auto text-card-foreground mb-4"/>
-                  <h3 className="text-2xl font-headline text-card-foreground mb-2">For Everyone</h3>
-                  <p className="text-card-foreground/70">
-                    We provide practical education on the art and science of mantra chanting for seekers at all levels of their journey.
-                  </p>
-              </Card>
-          </motion.div>
+        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-3 items-center group">
+          <div className="relative h-64 md:h-full w-full min-h-[400px] md:col-span-1 overflow-hidden">
+             <Image
+              src="https://placehold.co/600x800.png"
+              alt="Acharya Dr. Ramachandra Bhat Kotemane"
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+              data-ai-hint="indian scholar portrait"
+            />
+          </div>
+          <div className="p-8 md:p-12 md:col-span-2">
+            <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Inspiration</h2>
+            <h3 className="text-xl md:text-2xl font-headline font-semibold text-card-foreground/80 mt-2">Acharya Dr. Ramachandra Bhat Kotemane</h3>
+            <p className="font-semibold text-card-foreground/70">Scholar - Mystic - Visionary Guide</p>
+            <div className="text-card-foreground/80 mt-4 space-y-4 text-md">
+                <p>At the heart of Mantra Academy’s vision stands our revered Acharya, Dr. Ramachandra Bhat Kotemane, fondly known simply as Acharya. A shining beacon in the world of Vedic, Vedantic, and Yogic wisdom, Acharya is the Pradhana Acharya of Veda Vijnana Gurukulam, Founder of Veda Vijnana Shodha Samsthanam, and former Vice-Chancellor of SVYASA Yoga University, Bengaluru.</p>
+                <p>With decades of deep sādhanā, scholarship, and compassion, Acharya has guided countless seekers into the profound inner world of the Vedas and Upanishads. His unwavering emphasis on preserving the purity of Yoga and Vedic knowledge has shaped the very soul of modern traditional education.</p>
+                <p>For us at Mantra Academy, an online extension of the Gurukula spirit, Acharya is not just a mentor, he is the root inspiration and spiritual backbone of every initiative we carry forward. His teachings, silent presence, and unshakable commitment to Sanātana Dharma pulse through every course, every chant, and every student we serve. We humbly walk this path, holding his blessing and vision close to our hearts.</p>
+            </div>
+          </div>
+        </Card>
       </motion.section>
 
       <motion.section
@@ -163,7 +152,7 @@ export default function AboutPage() {
         className="w-full max-w-6xl mx-auto"
       >
         <motion.div variants={itemVariants} className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Instructors</h2>
+          <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Team</h2>
           <p className="text-foreground/80 mt-2">The dedicated guides of Mantra Academy</p>
         </motion.div>
         <motion.div
@@ -171,7 +160,7 @@ export default function AboutPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {teamMembers.map((member, index) => (
             <TeamMemberCard key={member.name} member={member} index={index} />
@@ -181,3 +170,4 @@ export default function AboutPage() {
     </motion.div>
   );
 }
+
