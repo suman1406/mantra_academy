@@ -34,7 +34,7 @@ export function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-primary shadow-lg">
+    <header className="fixed top-0 left-0 w-full z-50 border-b border-primary/20 bg-primary shadow-lg">
       <div className="container flex h-16 items-center">
         <div className="mr-auto">
           <Link href="/">

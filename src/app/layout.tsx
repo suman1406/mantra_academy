@@ -38,7 +38,7 @@ export default function RootLayout({
         {!isAdminPage && <FallingMantras />}
         {!isAdminPage && <Header />}
         <main className={cn(
-          "flex-grow",
+          "flex-grow pt-16",
           !isAdminPage && "container mx-auto px-4"
         )}>
           {children}
