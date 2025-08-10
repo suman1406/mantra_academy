@@ -127,29 +127,6 @@ export function CourseDetailClient({ course }: { course: Course }) {
       <div className="container mx-auto mt-8">
         <div className="grid lg:grid-cols-3 gap-12">
           <main className="lg:col-span-2">
-            {/* Info Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <InfoCard
-                icon={CalendarDays}
-                title="Starting from"
-                text={getStartDateText()}
-              />
-              <InfoCard
-                icon={Clock}
-                title="Live Practice Timings"
-                text="7:00 PM - 8:15 PM IST"
-              />
-              <InfoCard
-                icon={Video}
-                title="Live Recordings"
-                text="Available for 30 days (1080P)"
-              />
-              <InfoCard
-                icon={Smile}
-                title="If not Happy"
-                text="100% money back*"
-              />
-            </div>
             
             {/* Mobile-only Timer */}
             <div className="block lg:hidden mb-8">
@@ -173,6 +150,30 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   </Button>
                 </CardContent>
               </Card>
+            </div>
+            
+            {/* Info Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <InfoCard
+                icon={CalendarDays}
+                title="Starting from"
+                text={getStartDateText()}
+              />
+              <InfoCard
+                icon={Clock}
+                title="Live Practice Timings"
+                text="7:00 PM - 8:15 PM IST"
+              />
+              <InfoCard
+                icon={Video}
+                title="Live Recordings"
+                text="Available for 30 days (1080P)"
+              />
+              <InfoCard
+                icon={Smile}
+                title="If not Happy"
+                text="100% money back*"
+              />
             </div>
 
 
