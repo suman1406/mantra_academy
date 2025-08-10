@@ -3,8 +3,9 @@
 
 import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useMemo } from "react";
 
-const mantras = [
+const allMantras = [
     "शिवोऽहम्",
     "चिदानन्द रूपःअहम्",
     "अहं ब्रह्मास्मि",
@@ -31,21 +32,24 @@ const mantras = [
     "आत्मदीपो भव",
 ];
 
-const Mantra = ({ text }: { text: string }) => {
+const Mantra = ({ text, column }: { text: string; column: number }) => {
   const isMobile = useIsMobile();
-  const left = Math.random() * 100;
-  const duration = 15 + Math.random() * 15;
-  const delay = Math.random() * 10;
-  const fontSize = isMobile ? "1.2rem" : "1.75rem";
+  const duration = 20 + Math.random() * 20;
+  const delay = Math.random() * 15;
+  const fontSize = isMobile ? "1rem" : "1.5rem";
+  const columnWidth = isMobile ? 20 : 10;
+  const left = column * columnWidth + (Math.random() * columnWidth - (columnWidth/2));
+
 
   return (
     <motion.p
-      className="absolute font-headline text-primary/30 whitespace-nowrap"
+      className="absolute font-headline text-primary/20 whitespace-nowrap"
       style={{
         left: `${left}vw`,
         fontSize: fontSize,
+        textShadow: "0 0 10px hsla(var(--background), 0.7)",
       }}
-      initial={{ top: "-20%", opacity: 0.8 }}
+      initial={{ top: "-20%", opacity: 0.7 }}
       animate={{ top: "120%", opacity: 0 }}
       transition={{
         duration: duration,
@@ -60,11 +64,30 @@ const Mantra = ({ text }: { text: string }) => {
 };
 
 export function FallingMantras() {
+    const isMobile = useIsMobile();
+    const numColumns = isMobile ? 5 : 10;
+
+    const mantrasForColumns = useMemo(() => {
+        const columns: string[][] = Array.from({ length: numColumns }, () => []);
+        allMantras.forEach((mantra, index) => {
+            columns[index % numColumns].push(mantra);
+        });
+
+        // To make it less crowded, lets only pick one mantra per column randomly
+        return columns.map((colMantras, colIndex) => {
+             if (colMantras.length === 0) return null;
+             const mantra = colMantras[Math.floor(Math.random() * colMantras.length)];
+             return { mantra, colIndex };
+        }).filter(item => item !== null);
+
+    }, [numColumns]);
+
+
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
-      {mantras.map((text, i) => (
-        <Mantra key={i} text={text} />
-      ))}
+    <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+      {mantrasForColumns.map((item, i) =>
+        item ? <Mantra key={i} text={item.mantra} column={item.colIndex} /> : null
+      )}
     </div>
   );
 }

@@ -12,7 +12,6 @@ import { Community } from "@/components/community";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { useRef } from "react";
-import { FallingMantras } from "@/components/falling-mantras";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -53,7 +52,6 @@ export default function Home() {
         animate="visible"
         variants={sectionVariants}
       >
-        <FallingMantras />
         <motion.div
           style={{ y: logoY }}
           className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-10 mb-8 flex items-center justify-center"
