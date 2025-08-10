@@ -56,7 +56,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center space-y-24">
       <section
         ref={heroRef}
-        className="relative w-full h-[120vh] overflow-hidden"
+        className="relative w-full h-[200vh] overflow-hidden"
       >
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
             <motion.div
