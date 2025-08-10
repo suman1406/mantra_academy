@@ -12,6 +12,7 @@ import { Community } from "@/components/community";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { useRef } from "react";
+import { FallingMantras } from "@/components/falling-mantras";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -47,14 +48,15 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center space-y-48 py-12">
       <motion.section
         ref={heroRef}
-        className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center"
+        className="text-center flex flex-col items-center space-y-8 relative w-full min-h-[70vh] justify-center overflow-hidden"
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
       >
+        <FallingMantras />
         <motion.div
           style={{ y: logoY }}
-          className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-0 mb-8 flex items-center justify-center"
+          className="relative w-80 h-80 md:w-[450px] md:h-[450px] z-10 mb-8 flex items-center justify-center"
           variants={itemVariants}
         >
           <div className="absolute inset-0 flex items-center justify-center">
