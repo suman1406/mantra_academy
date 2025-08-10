@@ -7,35 +7,14 @@ import { ArrowRight, BookText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Noto_Serif_Devanagari } from "next/font/google";
+import { blogPosts } from "@/lib/blog-data";
+import Image from "next/image";
 
 const devanagari = Noto_Serif_Devanagari({
   weight: ["400", "700"],
   subsets: ["devanagari", "latin"],
 });
 
-const blogPosts = [
-  {
-    title: "The Primordial Sound: Unpacking the Meaning of 'Om'",
-    author: "Rishi Varma",
-    date: "July 26, 2024",
-    excerpt:
-      "The syllable 'Om' is said to be the primordial sound from which the entire universe emanated. We explore its profound significance and the science of its vibration.",
-  },
-  {
-    title: "Five Mantras to Cultivate Inner Peace",
-    author: "Anjali Devi",
-    date: "July 20, 2024",
-    excerpt:
-      "In a world of constant noise, finding tranquility can be a challenge. Here are five powerful, yet simple, mantras to help you cultivate a state of inner peace and calm.",
-  },
-  {
-    title: "The Role of Intention in Mantra Practice",
-    author: "Sanjay Rao",
-    date: "July 15, 2024",
-    excerpt:
-      "A mantra is more than just sound; it is an intention given form. Learn how 'sankalpa' (intention) can amplify the effects of your chanting practice exponentially.",
-  },
-];
 
 const BlogPostCard = ({
   post,
@@ -51,8 +30,18 @@ const BlogPostCard = ({
     transition={{ duration: 0.8, delay: index * 0.15 }}
   >
     <Card
-      className={`h-full flex flex-col group manuscript-card rounded-none ${devanagari.className}`}
+      className={`h-full flex flex-col group manuscript-card rounded-none overflow-hidden ${devanagari.className}`}
     >
+      <div className="relative h-56 w-full">
+         <Image
+          src={post.image}
+          alt={post.title}
+          fill
+          data-ai-hint={post.aiHint}
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      </div>
       <CardContent className="flex-grow flex flex-col p-8">
         <CardTitle className="text-2xl md:text-3xl font-bold manuscript-text group-hover:text-card-foreground/80 transition-colors">
           {post.title}
@@ -67,10 +56,13 @@ const BlogPostCard = ({
       <CardFooter className="p-8 pt-0">
           <Button
             variant="link"
+            asChild
             className="p-0 manuscript-text font-bold text-card-foreground/80 group-hover:text-card-foreground"
           >
-            Read More
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <Link href={`/blog/${post.slug}`}>
+                Read More
+                <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
       </CardFooter>
     </Card>
@@ -105,7 +97,7 @@ export default function BlogPage() {
       <section className="w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 gap-16">
           {blogPosts.map((post, index) => (
-            <BlogPostCard key={post.title} post={post} index={index} />
+            <BlogPostCard key={post.slug} post={post} index={index} />
           ))}
         </div>
       </section>
