@@ -12,6 +12,7 @@ import { Community } from "@/components/community";
 import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { useEffect, useState } from "react";
+import { FallingMantras } from "@/components/falling-mantras";
 
 const glyphs = ["ॐ", "प्र", "ज्ञा", "नं", "ब्र", "ह्म", "अ", "हं", "सः"];
 
@@ -111,6 +112,7 @@ export default function Home() {
       <section className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center text-center">
         {/* Animated Background */}
         <div className="absolute inset-0 celestial-background" />
+        <FallingMantras />
         
         {/* Mandala and Glyphs */}
         <div className="absolute inset-0">
