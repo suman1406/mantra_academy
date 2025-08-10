@@ -123,7 +123,7 @@ export default function Home() {
         {/* Content */}
         <div className="z-10 flex flex-col items-center justify-center text-center space-y-6">
           <motion.div custom={0} initial="hidden" animate="visible" variants={textRevealVariants}>
-            <Logo className="h-24 w-auto text-primary/80 opacity-80 [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
+            <Logo className="h-24 w-auto text-primary drop-shadow-lg [&>span]:text-3xl [&_img]:h-24 [&_img]:w-24" />
           </motion.div>
           <motion.h1
             custom={1}
