@@ -5,7 +5,6 @@
 
 @layer base {
   :root {
-    /* Light mode */
     --background: 40 100% 96%; /* Off-white */
     --foreground: 240 10% 3.9%; /* Dark Slate Gray */
     --card: 338 78% 44%; /* Magenta */
