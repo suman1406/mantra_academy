@@ -34,6 +34,7 @@ const AnimatedLogo = () => {
             width={logoSize}
             height={logoSize}
             className="drop-shadow-2xl animate-float-drift"
+            priority
         />
     </motion.div>
   )
