@@ -55,7 +55,6 @@ export default function Home() {
               height={180}
               className="h-32 w-32 md:h-44 md:w-44 object-contain drop-shadow-lg"
               priority
-              unoptimized
             />
           </motion.div>
 
