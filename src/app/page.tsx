@@ -40,13 +40,16 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <section className="relative w-full h-[80vh] md:h-screen bg-background overflow-hidden flex flex-col items-center justify-center text-center p-4">
+      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center p-4">
+        <div className="absolute inset-0 celestial-background" />
+
         {/* Content */}
         <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
+            className="animate-float-drift"
           >
             <Image
               src="/images/Logo.png"

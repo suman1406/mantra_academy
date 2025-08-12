@@ -6,25 +6,25 @@
 @layer base {
   :root {
     /* Light mode */
-    --background: 0 0% 98%; /* Off-white */
+    --background: 40 100% 96%; /* Off-white */
     --foreground: 240 10% 3.9%; /* Dark Slate Gray */
-    --card: 338 59% 38%; /* Magenta */
-    --card-foreground: 0 0% 98%; /* Off-white text on magenta */
-    --popover: 0 0% 98%;
+    --card: 338 78% 44%; /* Magenta */
+    --card-foreground: 36 100% 98%; /* Off-white text on magenta */
+    --popover: 40 100% 96%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 338 59% 38%; /* Magenta */
-    --primary-foreground: 0 0% 98%; /* Off-white text on magenta */
-    --secondary: 338 59% 38%; /* Magenta */
-    --secondary-foreground: 0 0% 98%; /* Off-white text on magenta */
-    --muted: 0 0% 94%;
+    --primary: 338 78% 44%; /* Magenta */
+    --primary-foreground: 36 100% 98%; /* Off-white text on magenta */
+    --secondary: 338 78% 44%; /* Magenta */
+    --secondary-foreground: 36 100% 98%; /* Off-white text on magenta */
+    --muted: 40 10% 94%;
     --muted-foreground: 240 4% 46%;
-    --accent: 338 59% 38%; /* Magenta accents */
-    --accent-foreground: 0 0% 98%;
+    --accent: 338 78% 44%; /* Magenta accents */
+    --accent-foreground: 36 100% 98%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 88%;
-    --ring: 338 59% 38%;
+    --destructive-foreground: 36 100% 98%;
+    --border: 40 10% 90%;
+    --input: 40 10% 88%;
+    --ring: 338 78% 44%;
   }
 }
 
@@ -140,31 +140,9 @@
 .celestial-background {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.8) 100%);
+  background: radial-gradient(ellipse at bottom, hsl(var(--primary)/0.1), transparent 60%),
+              linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--primary)/0.05) 100%);
   background-size: 200% 200%;
   animation: background-pan 25s ease-in-out infinite;
   z-index: -2;
-}
-
-@keyframes glyph-drift {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    transform: translate(var(--tx, 0), var(--ty, 0)) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-.glyph-particle {
-  position: absolute;
-  font-size: 1.2rem;
-  color: hsl(var(--primary-foreground) / 0.6);
-  text-shadow: 0 0 10px hsl(var(--primary-foreground) / 0.8);
-  animation: glyph-drift 10s ease-in-out infinite;
-  animation-delay: var(--delay);
 }
