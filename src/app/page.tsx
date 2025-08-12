@@ -10,33 +10,6 @@ import { Announcement } from "@/components/announcement";
 import { Testimonials } from "@/components/testimonials";
 import Image from "next/image";
 
-const AnimatedLogo = () => {
-  return (
-    <motion.div
-      className="absolute inset-0 flex items-center justify-center z-0"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{
-        scale: 1,
-        opacity: 1,
-        transition: { duration: 4, ease: "circOut" },
-      }}
-    >
-        <div className="relative w-[180px] h-[180px] md:w-[300px] md:h-[300px]">
-             <Image 
-                src="/images/Logo.png" 
-                alt="Mantra Academy animated logo"
-                fill
-                style={{objectFit: "contain"}}
-                className="drop-shadow-2xl animate-float-drift"
-                priority
-                unoptimized
-            />
-        </div>
-    </motion.div>
-  )
-};
-
-
 export default function Home() {
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -58,7 +31,7 @@ export default function Home() {
       y: 0,
       filter: "blur(0px)",
       transition: {
-        delay: 2.5 + i * 0.2,
+        delay: i * 0.2,
         duration: 1,
         ease: "easeOut",
       },
@@ -67,23 +40,31 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center">
-        {/* Animated Background */}
-        <div className="absolute inset-0 celestial-background" />
-        
-        {/* Logo */}
-        <div className="absolute inset-0">
-          <AnimatedLogo />
-        </div>
-        
+      <section className="relative w-full h-[80vh] md:h-screen bg-background overflow-hidden flex flex-col items-center justify-center text-center p-4">
         {/* Content */}
         <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          >
+            <Image
+              src="/images/Logo.png"
+              alt="Mantra Academy Logo"
+              width={180}
+              height={180}
+              className="h-32 w-32 md:h-44 md:w-44 object-contain drop-shadow-lg"
+              priority
+              unoptimized
+            />
+          </motion.div>
+
           <motion.h1
             custom={1}
             initial="hidden"
             animate="visible"
             variants={textRevealVariants}
-            className="mt-20 mb-4 md:mb-6 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
+            className="mt-4 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
           >
             Welcome to Mantra Academy
           </motion.h1>
