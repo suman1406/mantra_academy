@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
 import { Testimonials } from "@/components/testimonials";
 import Image from "next/image";
+import { SocialFeed } from "@/components/social-feed";
 
 export default function Home() {
   const sectionVariants = {
@@ -128,6 +129,15 @@ export default function Home() {
           variants={sectionVariants}
         >
           <Testimonials />
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+            <SocialFeed />
         </motion.div>
 
         <motion.div
