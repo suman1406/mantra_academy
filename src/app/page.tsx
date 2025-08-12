@@ -1,23 +1,16 @@
 
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { FeaturedCourses } from "@/components/featured-courses";
-import Link from "next/link";
-import { Testimonials } from "@/components/testimonials";
 import { Philosophy } from "@/components/philosophy";
 import { Vision } from "@/components/vision";
 import { Community } from "@/components/community";
 import { motion } from "framer-motion";
 import { Announcement } from "@/components/announcement";
-import { useEffect, useState } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { Testimonials } from "@/components/testimonials";
 import Image from "next/image";
 
 const AnimatedLogo = () => {
-  const isMobile = useIsMobile();
-  const logoSize = isMobile ? 180 : 300;
-
   return (
     <motion.div
       className="absolute inset-0 flex items-center justify-center z-0"
@@ -28,14 +21,17 @@ const AnimatedLogo = () => {
         transition: { duration: 4, ease: "circOut" },
       }}
     >
-        <Image 
-            src="/images/Logo.png" 
-            alt="Mantra Academy animated logo"
-            width={logoSize}
-            height={logoSize}
-            className="drop-shadow-2xl animate-float-drift"
-            priority
-        />
+        <div className="relative w-[180px] h-[180px] md:w-[300px] md:h-[300px]">
+             <Image 
+                src="/images/Logo.png" 
+                alt="Mantra Academy animated logo"
+                fill
+                style={{objectFit: "contain"}}
+                className="drop-shadow-2xl animate-float-drift"
+                priority
+                unoptimized
+            />
+        </div>
     </motion.div>
   )
 };
