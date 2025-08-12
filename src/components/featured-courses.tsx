@@ -11,8 +11,68 @@ import { ArrowRight } from "lucide-react";
 import { courses as allCourses } from "@/lib/course-data";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useRef } from "react";
+
 
 const courses = allCourses.slice(0, 4);
+
+const CourseCard = ({ course }: { course: typeof courses[0] }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || isMobile) return;
+    const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - left - width / 2) / (width/2);
+    const y = (e.clientY - top - height / 2) / (height/2);
+    cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
+  };
+
+  const onMouseLeave = () => {
+    if (!cardRef.current || isMobile) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ transition: 'transform 0.2s ease-out' }}
+      className="h-full"
+    >
+      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-lg text-card-foreground">
+        <CardHeader className="p-0">
+          <div className="relative h-56 w-full overflow-hidden">
+            <Image
+              src={course.image}
+              alt={course.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              data-ai-hint={course.aiHint}
+            />
+          </div>
+        </CardHeader>
+        <CardContent className="p-6 flex-grow">
+          <Badge variant="default" className="mb-2 bg-primary text-primary-foreground border border-primary-foreground">{course.category}</Badge>
+          <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
+          <p className="text-card-foreground/70 mt-2">{course.description}</p>
+        </CardContent>
+        <CardFooter className="p-6 pt-0">
+           <Button variant="outline" className="w-full group" asChild>
+              <Link href={`/courses/${course.slug}`}>
+                 Explore Now
+                 <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+              </Link>
+          </Button>
+        </CardFooter>
+      </Card>
+    </motion.div>
+  );
+};
+
 
 export function FeaturedCourses() {
   const [api, setApi] = React.useState<CarouselApi>()
@@ -50,32 +110,7 @@ export function FeaturedCourses() {
           {courses.map((course, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <div className="p-1 h-full">
-                <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-lg text-card-foreground">
-                  <CardHeader className="p-0">
-                    <div className="relative h-56 w-full overflow-hidden">
-                      <Image
-                        src={course.image}
-                        alt={course.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                        data-ai-hint={course.aiHint}
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6 flex-grow">
-                    <Badge variant="default" className="mb-2 bg-primary text-primary-foreground border border-primary-foreground">{course.category}</Badge>
-                    <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
-                    <p className="text-card-foreground/70 mt-2">{course.description}</p>
-                  </CardContent>
-                  <CardFooter className="p-6 pt-0">
-                     <Button variant="outline" className="w-full group" asChild>
-                        <Link href={`/courses/${course.slug}`}>
-                           Explore Now
-                           <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                    </Button>
-                  </CardFooter>
-                </Card>
+                <CourseCard course={course} />
               </div>
             </CarouselItem>
           ))}

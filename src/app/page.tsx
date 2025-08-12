@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center">
       <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center p-4">
-        <div className="absolute inset-0 bg-background" />
+        <div className="absolute inset-0 celestial-background" />
 
         {/* Content */}
         <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">

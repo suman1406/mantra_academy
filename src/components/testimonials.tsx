@@ -8,6 +8,7 @@ import React, { useRef } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const testimonials = [
   {
@@ -68,9 +69,10 @@ const QuoteIcon = () => (
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
     const cardRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
         const { left, top, width, height } = cardRef.current.getBoundingClientRect();
         const x = (e.clientX - left - width / 2) / (width / 2);
         const y = (e.clientY - top - height / 2) / (height / 2);
@@ -78,7 +80,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
     };
 
     const onMouseLeave = () => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
         cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
     };
 

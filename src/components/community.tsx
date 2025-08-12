@@ -7,6 +7,7 @@ import { ArrowRight, Globe, Sparkles, Podcast } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const communityFeatures = [
     {
@@ -28,9 +29,10 @@ const communityFeatures = [
 
 const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0], index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
         const { left, top, width, height } = cardRef.current.getBoundingClientRect();
         const x = (e.clientX - left - width / 2) / (width / 2);
         const y = (e.clientY - top - height / 2) / (height / 2);
@@ -38,7 +40,7 @@ const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0
     };
 
     const onMouseLeave = () => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
         cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
     };
 
