@@ -5,11 +5,11 @@
 
 @layer base {
   :root {
-    --background: 40 100% 96%; /* Off-white */
+    --background: 40 100% 98%; /* Half White */
     --foreground: 240 10% 3.9%; /* Dark Slate Gray */
-    --card: 338 78% 44%; /* Magenta */
-    --card-foreground: 36 100% 98%; /* Off-white text on magenta */
-    --popover: 40 100% 96%;
+    --card: 40 100% 96%; /* Lighter Off-white */
+    --card-foreground: 240 10% 3.9%;
+    --popover: 40 100% 98%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 338 78% 44%; /* Magenta */
     --primary-foreground: 36 100% 98%; /* Off-white text on magenta */
@@ -96,9 +96,9 @@
 
 .manuscript-card {
   background-color: hsl(var(--card));
-  border: 2px solid hsl(var(--border));
+  border: 1px solid hsl(var(--border));
   font-family: 'Noto Serif Devanagari', serif;
-  box-shadow: 0 0 20px hsla(var(--primary) / 0.15);
+  box-shadow: 0 0 20px hsla(var(--primary) / 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -112,7 +112,7 @@
 }
 
 .manuscript-card:hover {
-  box-shadow: 0 0 30px hsla(var(--primary) / 0.3);
+  box-shadow: 0 0 30px hsla(var(--primary) / 0.2);
   transform: translateY(-3px);
   transition: all 0.3s ease;
 }
