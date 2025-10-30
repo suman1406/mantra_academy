@@ -57,8 +57,8 @@ const CourseCard = ({ course }: { course: typeof courses[0] }) => {
         </CardHeader>
         <CardContent className="p-6 flex-grow">
           <Badge variant="default" className="mb-2 bg-primary text-primary-foreground border border-primary-foreground">{course.category}</Badge>
-          <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
-          <p className="text-card-foreground/70 mt-2">{course.description}</p>
+          <CardTitle className="font-headline text-xl md:text-2xl text-card-foreground">{course.title}</CardTitle>
+          <p className="text-card-foreground/70 mt-2 text-sm md:text-base">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
            <Button variant="outline" className="w-full group" asChild>
@@ -94,9 +94,9 @@ export function FeaturedCourses() {
 
   return (
     <section className="w-full max-w-6xl">
-      <div className="text-center mb-12">
+      <div className="text-center mb-8 md:mb-12">
         <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Featured Courses</h2>
-        <p className="text-foreground/80 mt-2">Handpicked for your spiritual journey</p>
+        <p className="text-foreground/80 mt-2 text-base md:text-lg">Handpicked for your spiritual journey</p>
       </div>
       <Carousel
         setApi={setApi}
@@ -108,17 +108,17 @@ export function FeaturedCourses() {
       >
         <CarouselContent>
           {courses.map((course, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+            <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
               <div className="p-1 h-full">
                 <CourseCard course={course} />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden sm:inline-flex" />
+        <CarouselNext className="hidden sm:inline-flex" />
       </Carousel>
-       <div className="flex justify-center gap-2 mt-4">
+       <div className="flex sm:hidden justify-center gap-2 mt-4">
         {Array.from({ length: count }).map((_, index) => (
           <Button
             key={index}

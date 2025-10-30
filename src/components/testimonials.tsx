@@ -101,15 +101,15 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
                   <QuoteIcon />
               </CardHeader>
               <CardContent className="p-0 flex-grow">
-                <p className="text-card-foreground/80 italic">"{testimonial.quote}"</p>
+                <p className="text-card-foreground/80 italic text-sm md:text-base">"{testimonial.quote}"</p>
               </CardContent>
               <div className="flex items-center mt-6 p-0">
-                <Avatar className="h-16 w-16 mr-4 overflow-hidden">
+                <Avatar className="h-12 w-12 md:h-16 md:w-16 mr-4 overflow-hidden">
                   <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-500" />
                   <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-bold text-card-foreground">{testimonial.name}</p>
+                  <p className="font-bold text-card-foreground text-sm md:text-base">{testimonial.name}</p>
                   <p className="text-sm text-card-foreground/60">{testimonial.title}</p>
                 </div>
               </div>
@@ -138,9 +138,9 @@ export function Testimonials() {
 
   return (
     <section className="w-full max-w-6xl">
-      <div className="text-center mb-12">
+      <div className="text-center mb-8 md:mb-12">
         <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Words of Power</h2>
-        <p className="text-foreground/80 mt-2">What our students say about us</p>
+        <p className="text-foreground/80 mt-2 text-base md:text-lg">What our students say about us</p>
       </div>
       <Carousel
         setApi={setApi}
@@ -152,24 +152,24 @@ export function Testimonials() {
       >
         <CarouselContent>
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
                  <div className="p-1 h-full">
                     <TestimonialCard testimonial={testimonial} />
                  </div>
               </CarouselItem>
             ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden sm:inline-flex" />
+        <CarouselNext className="hidden sm:inline-flex" />
       </Carousel>
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex sm:hidden justify-center gap-2 mt-4">
         {Array.from({ length: count }).map((_, index) => (
           <Button
             key={index}
             variant="ghost"
             size="icon"
             className={cn(
-              "h-4 w-4 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
+              "h-3 w-3 rounded-full p-0 bg-primary/20 hover:bg-primary/40",
               index === current && "bg-primary"
             )}
             onClick={() => api?.scrollTo(index)}

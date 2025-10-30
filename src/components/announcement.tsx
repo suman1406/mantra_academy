@@ -50,7 +50,7 @@ const AnnouncementCard = ({ announcement, index }: { announcement: typeof announ
                 {announcement.title}
             </h3>
           </div>
-          <p className="text-card-foreground/80 mt-2 flex-grow">
+          <p className="text-card-foreground/80 mt-2 flex-grow text-sm md:text-base">
             {announcement.description}
           </p>
           <div className="w-full mt-6">
@@ -85,9 +85,9 @@ export function Announcement() {
 
   return (
     <section className="w-full max-w-6xl">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Announcements</h2>
-            <p className="text-foreground/80 mt-2">Stay up to date with our latest news and events</p>
+            <p className="text-foreground/80 mt-2 text-base md:text-lg">Stay up to date with our latest news and events</p>
         </div>
         <Carousel
             setApi={setApi}
@@ -99,17 +99,17 @@ export function Announcement() {
         >
             <CarouselContent>
                 {announcements.map((item, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
                         <div className="p-1 h-full">
                             <AnnouncementCard announcement={item} index={index} />
                         </div>
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden sm:inline-flex" />
+            <CarouselNext className="hidden sm:inline-flex" />
       </Carousel>
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex sm:hidden justify-center gap-2 mt-4">
         {Array.from({ length: count }).map((_, index) => (
           <Button
             key={index}

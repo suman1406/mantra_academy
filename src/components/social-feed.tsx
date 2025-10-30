@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const feedItems = [
   { platform: "Instagram", image: "https://placehold.co/400x400.png", aiHint: "spiritual quote", handle: "@mantr.academy", link: "https://www.instagram.com/mantr.academy/" },
@@ -17,9 +18,10 @@ const feedItems = [
 
 const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
         const { left, top, width, height } = cardRef.current.getBoundingClientRect();
         const x = (e.clientX - left - width / 2) / (width / 2);
         const y = (e.clientY - top - height / 2) / (height / 2);
@@ -27,12 +29,12 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
     };
 
     const onMouseLeave = () => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
         cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
     };
 
     const Icon = () => {
-        const iconProps = { className: "w-20 h-20 text-card-foreground/80 group-hover:text-card-foreground transition-colors duration-300" };
+        const iconProps = { className: "w-12 h-12 md:w-20 md:h-20 text-card-foreground/80 group-hover:text-card-foreground transition-colors duration-300" };
         switch(item.platform) {
             case "Instagram": return <Instagram {...iconProps} />;
             case "YouTube": return <Youtube {...iconProps} />;
@@ -57,7 +59,7 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
                 <Card className="overflow-hidden group relative border-border/40 bg-card backdrop-blur-sm aspect-square">
                     <CardContent className="p-4 flex flex-col items-center justify-center h-full gap-4 text-center">
                         <Icon />
-                        <span className="font-semibold text-lg text-card-foreground">{item.handle}</span>
+                        <span className="font-semibold text-base md:text-lg text-card-foreground">{item.handle}</span>
                     </CardContent>
                 </Card>
             </Link>
@@ -68,11 +70,11 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
 export function SocialFeed() {
   return (
     <section className="w-full max-w-6xl">
-      <div className="text-center mb-12">
+      <div className="text-center mb-8 md:mb-12">
         <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Connect With Us</h2>
-        <p className="text-foreground/80 mt-2">Follow our journey and get daily inspiration</p>
+        <p className="text-foreground/80 mt-2 text-base md:text-lg">Follow our journey and get daily inspiration</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {feedItems.map((item, index) => (
             <SocialCard key={index} item={item} index={index} />
         ))}

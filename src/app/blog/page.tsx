@@ -32,7 +32,7 @@ const BlogPostCard = ({
     <Card
       className={`h-full flex flex-col md:flex-row group manuscript-card rounded-none overflow-hidden ${devanagari.className}`}
     >
-      <div className="relative md:w-1/3 w-full h-56 md:h-auto">
+      <div className="relative md:w-1/3 w-full h-56 md:h-auto min-h-[250px]">
          <Image
           src={post.image}
           alt={post.title}
@@ -43,18 +43,18 @@ const BlogPostCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent md:bg-gradient-to-r" />
       </div>
       <div className="md:w-2/3 flex flex-col">
-        <CardContent className="flex-grow flex flex-col p-8">
-          <CardTitle className="text-2xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors">
+        <CardContent className="flex-grow flex flex-col p-6 md:p-8">
+          <CardTitle className="text-xl md:text-3xl font-bold text-primary group-hover:text-primary/80 transition-colors">
             {post.title}
           </CardTitle>
           <div className="text-sm manuscript-subtext mt-2 mb-4">
             By {post.author} on {post.date}
           </div>
-          <p className="manuscript-text manuscript-dropcap flex-grow leading-relaxed">
+          <p className="manuscript-text manuscript-dropcap flex-grow leading-relaxed text-base">
             {post.excerpt}
           </p>
         </CardContent>
-        <CardFooter className="p-8 pt-0">
+        <CardFooter className="p-6 md:p-8 pt-0">
             <Button
               variant="link"
               asChild
@@ -77,27 +77,27 @@ export default function BlogPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className={`py-16 sm:py-24 space-y-16 ${devanagari.className}`}
+      className={`py-12 sm:py-16 md:py-24 space-y-12 md:space-y-16 ${devanagari.className}`}
     >
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center flex flex-col items-center"
+        className="text-center flex flex-col items-center px-4"
       >
         <div className="p-4 bg-primary/20 rounded-full inline-block mb-4 border-2 border-primary">
-            <BookText className="h-10 w-10 text-primary" />
+            <BookText className="h-8 w-8 md:h-10 md:w-10 text-primary" />
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold text-primary drop-shadow">
+        <h1 className="text-3xl md:text-5xl font-bold text-primary drop-shadow">
           From the Scribe's Desk
         </h1>
-        <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/80">
+        <p className="mt-4 max-w-2xl mx-auto text-base md:text-lg text-foreground/80">
           Exploring the timeless wisdom of sound, consciousness, and the sacred sciences.
         </p>
       </motion.section>
 
-      <section className="w-full max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 gap-16">
+      <section className="w-full max-w-5xl mx-auto px-4 sm:px-0">
+        <div className="grid grid-cols-1 gap-12 md:gap-16">
           {blogPosts.map((post, index) => (
             <BlogPostCard key={post.slug} post={post} index={index} />
           ))}

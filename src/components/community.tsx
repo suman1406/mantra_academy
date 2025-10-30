@@ -55,10 +55,10 @@ const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: index * 0.15 }}
         >
-            <Card className="p-8 border-border/40 bg-card backdrop-blur-sm flex flex-col items-center text-center h-full text-card-foreground">
-                <feature.icon className="h-12 w-12 text-card-foreground mb-4"/>
-                <h3 className="text-2xl font-headline text-card-foreground mb-2">{feature.title}</h3>
-                <p className="text-card-foreground/70 flex-grow">{feature.description}</p>
+            <Card className="p-6 md:p-8 border-border/40 bg-card backdrop-blur-sm flex flex-col items-center text-center h-full text-card-foreground">
+                <feature.icon className="h-10 w-10 md:h-12 md:w-12 text-card-foreground mb-4"/>
+                <h3 className="text-xl md:text-2xl font-headline text-card-foreground mb-2">{feature.title}</h3>
+                <p className="text-card-foreground/70 flex-grow text-sm md:text-base">{feature.description}</p>
             </Card>
         </motion.div>
     )
@@ -67,16 +67,16 @@ const CommunityCard = ({ feature, index }: { feature: typeof communityFeatures[0
 export function Community() {
   return (
     <section className="w-full max-w-6xl">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Join Our Vibrant Community</h2>
-            <p className="text-foreground/80 mt-2">Grow and share your journey with others</p>
+            <p className="text-foreground/80 mt-2 text-base md:text-lg">Grow and share your journey with others</p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
             {communityFeatures.map((feature, index) => (
                  <CommunityCard key={index} feature={feature} index={index} />
             ))}
         </div>
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 md:mt-12">
             <Button size="lg" className="group" asChild>
                 <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n" target="_blank" rel="noopener noreferrer">
                     Become a Member

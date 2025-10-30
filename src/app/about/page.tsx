@@ -12,7 +12,7 @@ const LotusDivider = () => (
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true }}
     transition={{ duration: 1 }}
-    className="flex justify-center my-12"
+    className="flex justify-center my-8 sm:my-12"
   >
     <svg width="50" height="50" viewBox="0 0 24 24" fill="none" className="text-primary">
       <path
@@ -77,7 +77,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0]; inde
       <motion.div
         whileHover={{ scale: 1.05, rotate: 1 }}
         transition={{ type: "spring", stiffness: 200 }}
-        className="relative w-40 h-40 mx-auto mb-4"
+        className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-4"
       >
         <Image
           src={member.image}
@@ -89,11 +89,11 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0]; inde
         />
       </motion.div>
       <CardHeader className="p-2">
-        <CardTitle className="font-headline text-2xl text-card-foreground">{member.name}</CardTitle>
-        <p className="text-card-foreground/80 font-semibold">{member.role}</p>
+        <CardTitle className="font-headline text-xl md:text-2xl text-card-foreground">{member.name}</CardTitle>
+        <p className="text-card-foreground/80 font-semibold text-sm md:text-base">{member.role}</p>
       </CardHeader>
       <CardContent>
-        <p className="text-card-foreground/70 text-left text-sm md:text-base">{member.bio}</p>
+        <p className="text-card-foreground/70 text-left text-sm">{member.bio}</p>
       </CardContent>
     </Card>
   </motion.div>
@@ -104,7 +104,7 @@ export default function AboutPage() {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="py-16 sm:py-24 space-y-24"
+      className="py-12 sm:py-16 md:py-24 space-y-16 md:space-y-24"
     >
       {/* Mission Section */}
       <motion.section
@@ -113,18 +113,18 @@ export default function AboutPage() {
         initial="hidden"
         animate="visible"
       >
-        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm p-8 md:p-12 text-center">
+        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm p-6 md:p-12 text-center">
           <motion.h1
             variants={fadeUp}
             custom={0.2}
-            className="text-4xl md:text-6xl font-headline font-bold text-card-foreground"
+            className="text-3xl md:text-5xl font-headline font-bold text-card-foreground"
           >
             Our Sacred Mission
           </motion.h1>
           <motion.div
             variants={fadeUp}
             custom={0.4}
-            className="text-card-foreground/80 mt-6 space-y-4 text-base md:text-lg max-w-4xl mx-auto"
+            className="text-card-foreground/80 mt-4 md:mt-6 space-y-4 text-base md:text-lg max-w-4xl mx-auto"
           >
             <p>
               To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
@@ -141,7 +141,7 @@ export default function AboutPage() {
       >
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="relative h-64 md:h-full min-h-[400px] overflow-hidden"
+          className="relative h-64 md:h-auto min-h-[300px] md:min-h-[400px] overflow-hidden"
         >
           <Image
             src="https://placehold.co/600x800.png"
@@ -157,12 +157,12 @@ export default function AboutPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="p-8 md:p-12 md:col-span-2"
+          className="p-6 md:p-12 md:col-span-2"
         >
-          <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Inspiration</h2>
-          <h3 className="text-xl md:text-2xl font-headline font-semibold text-card-foreground/80 mt-2">Acharya Dr. Ramachandra Bhat Kotemane</h3>
+          <h2 className="text-2xl md:text-4xl font-headline font-bold text-card-foreground">Our Inspiration</h2>
+          <h3 className="text-lg md:text-xl font-headline font-semibold text-card-foreground/80 mt-2">Acharya Dr. Ramachandra Bhat Kotemane</h3>
           <p className="font-semibold text-card-foreground/70 mb-4">Scholar - Mystic - Visionary Guide</p>
-          <div className="text-card-foreground/80 mt-4 space-y-4 text-sm md:text-md">
+          <div className="text-card-foreground/80 mt-4 space-y-4 text-sm md:text-base">
             <p>At the heart of Mantra Academy’s vision stands our revered Acharya, Dr. Ramachandra Bhat Kotemane, fondly known simply as Acharya. A shining beacon in the world of Vedic, Vedantic, and Yogic wisdom, Acharya is the Pradhana Acharya of Veda Vijnana Gurukulam, Founder of Veda Vijnana Shodha Samsthanam, and former Vice-Chancellor of SVYASA Yoga University, Bengaluru.</p>
             <p>With decades of deep sādhanā, scholarship, and compassion, Acharya has guided countless seekers into the profound inner world of the Vedas and Upanishads. His unwavering emphasis on preserving the purity of Yoga and Vedic knowledge has shaped the very soul of modern traditional education.</p>
             <p>For us at Mantra Academy, an online extension of the Gurukula spirit, Acharya is not just a mentor, he is the root inspiration and spiritual backbone of every initiative we carry forward. His teachings, silent presence, and unshakable commitment to Sanātana Dharma pulse through every course, every chant, and every student we serve. We humbly walk this path, holding his blessing and vision close to our hearts.</p>
@@ -174,9 +174,9 @@ export default function AboutPage() {
 
       {/* Team Section */}
       <motion.section className="w-full max-w-6xl mx-auto">
-        <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-12">
+        <motion.div variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Meet Our Team</h2>
-          <p className="text-foreground/80 mt-2">The dedicated guides of Mantra Academy</p>
+          <p className="text-foreground/80 mt-2 text-base md:text-lg">The dedicated guides of Mantra Academy</p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {teamMembers.map((member, index) => (

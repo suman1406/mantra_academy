@@ -37,9 +37,9 @@ export function Philosophy() {
         transition={{ duration: 0.8 }}
       >
         <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
-          <div className="p-8 md:p-12">
+          <div className="p-6 md:p-12">
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Philosophy</h2>
-            <div className="text-card-foreground/80 mt-4 space-y-4 text-lg">
+            <div className="text-card-foreground/80 mt-4 space-y-4 text-base md:text-lg">
               <p>
                 At Mantra Academy, we bring the ancient wisdom of Bharat’s spiritual heritage into today’s world. Rooted in the timeless teachings of the Vedas, Upanishads, Itihasas, and Puranas, our goal is to make these profound truths clear, relatable, and practical for modern life.
               </p>

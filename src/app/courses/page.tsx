@@ -57,8 +57,8 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
           </div>
         </CardHeader>
         <CardContent className="p-6 flex-grow flex flex-col">
-          <CardTitle className="font-headline text-2xl text-card-foreground">{course.title}</CardTitle>
-          <p className="text-card-foreground/70 mt-2 flex-grow">{course.description}</p>
+          <CardTitle className="font-headline text-xl md:text-2xl text-card-foreground">{course.title}</CardTitle>
+          <p className="text-card-foreground/70 mt-2 flex-grow text-sm md:text-base">{course.description}</p>
         </CardContent>
         <CardFooter className="p-6 pt-0">
           <Button variant="outline" className="w-full group" asChild>
@@ -76,23 +76,23 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
 
 export default function CoursesPage() {
   return (
-    <div className="py-12 space-y-16 relative flex flex-col items-center">
+    <div className="py-12 md:py-16 space-y-12 md:space-y-16 relative flex flex-col items-center">
       <motion.section
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center"
+        className="text-center px-4"
       >
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
           Tune Your Vibration
         </h1>
-        <p className="mt-6 max-w-3xl mx-auto space-y-4 text-lg text-foreground/80">
+        <p className="mt-4 md:mt-6 max-w-3xl mx-auto space-y-4 text-base md:text-lg text-foreground/80">
           Our courses are designed to guide you through the ancient science of mantras.
         </p>
       </motion.section>
 
-      <section className="w-full max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
+      <section className="w-full max-w-6xl px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8 md:mt-12">
           <AnimatePresence>
             {courses.map((course, i) => (
               <CourseCard key={course.title} course={course} i={i} />

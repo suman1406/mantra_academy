@@ -37,7 +37,7 @@ export function Vision() {
         transition={{ duration: 0.8 }}
       >
         <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
-           <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden">
+           <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden order-1 md:order-2">
              <Image
               src="https://placehold.co/600x800.png"
               alt="A vibrant cosmic nebula"
@@ -46,9 +46,9 @@ export function Vision() {
               data-ai-hint="stars galaxy"
             />
           </div>
-          <div className="p-8 md:p-12">
+          <div className="p-6 md:p-12 order-2 md:order-1">
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Vision</h2>
-            <div className="text-card-foreground/80 mt-4 space-y-4 text-lg">
+            <div className="text-card-foreground/80 mt-4 space-y-4 text-base md:text-lg">
                 <p>
                     To revive and nurture the timeless Yogic and Vedic culture in the heart of every Bharatiya by creating a global space for authentic learning rooted in the Gurukula tradition. Mantra Academy envisions a vibrant community connected to its spiritual roots, where mantra, knowledge, and devotion come alive to inspire self-transformation, cultural pride, and harmonious living for generations to come.
                 </p>

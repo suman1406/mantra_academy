@@ -38,6 +38,7 @@ export default function Home() {
               width={180}
               height={180}
               className="h-32 w-32 md:h-44 md:w-44 object-contain drop-shadow-lg"
+              priority
             />
           <h1
             className="mt-4 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
@@ -55,7 +56,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="space-y-16 md:space-y-24 py-16 md:py-24">
+      <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"

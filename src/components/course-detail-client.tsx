@@ -64,10 +64,10 @@ const InfoCard = ({
 }) => (
   <Card className="bg-background p-4 shadow-md rounded-xl border border-primary/20">
     <div className="flex items-center gap-3">
-      <Icon className="h-8 w-8 text-primary" />
+      <Icon className="h-6 w-6 md:h-8 md:w-8 text-primary" />
       <div>
-        <p className="font-semibold text-muted-foreground">{title}</p>
-        <p className="text-lg font-bold text-foreground">{text}</p>
+        <p className="font-semibold text-muted-foreground text-sm">{title}</p>
+        <p className="text-base md:text-lg font-bold text-foreground">{text}</p>
       </div>
     </div>
   </Card>
@@ -110,22 +110,22 @@ export function CourseDetailClient({ course }: { course: Course }) {
   };
 
   return (
-    <div className="py-12 md:py-16">
+    <div className="py-8 md:py-16">
       {/* Hero Section */}
       <section className="container mx-auto">
         <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary">
+          <div className="lg:col-span-2 space-y-4 md:space-y-6">
+            <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary">
               {title}
             </h1>
-            <p className="text-xl text-foreground/90">{description}</p>
+            <p className="text-lg md:text-xl text-foreground/90">{description}</p>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
       <div className="container mx-auto mt-8">
-        <div className="grid lg:grid-cols-3 gap-12">
+        <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
           <main className="lg:col-span-2">
             
             {/* Mobile-only Timer */}
@@ -181,7 +181,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {highlights && (
                  <section className="mb-12">
                     <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
-                        <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
+                        <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
                             Course Highlights
                         </h2>
                         <ul className="space-y-4">
@@ -194,7 +194,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                                         </div>
                                         <div>
                                             <h3 className="font-bold text-lg text-foreground">{highlight.title}</h3>
-                                            <p className="text-foreground/80">{highlight.description}</p>
+                                            <p className="text-foreground/80 text-sm md:text-base">{highlight.description}</p>
                                         </div>
                                     </li>
                                 );
@@ -207,7 +207,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {/* About */}
             <section className="mb-12">
               <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
-                <h2 className="text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
+                <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
                   Course Overview
                 </h2>
                 <div className="prose prose-lg max-w-none text-foreground/90 whitespace-pre-wrap">
@@ -219,7 +219,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             {/* Who Can Attend */}
             {whoCanAttend && (
                 <section className="mb-12">
-                    <h2 className="text-3xl font-headline text-center text-primary mb-8 font-semibold">
+                    <h2 className="text-2xl md:text-3xl font-headline text-center text-primary mb-8 font-semibold">
                         Who Can Attend?
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -241,7 +241,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* Curriculum */}
             <section className="mb-12">
-              <h2 className="text-3xl font-headline text-primary mb-4 font-semibold">
+              <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
                 Course Curriculum
               </h2>
               <Accordion
@@ -255,9 +255,9 @@ export function CourseDetailClient({ course }: { course: Course }) {
                     key={index}
                     className="bg-background border border-border rounded-xl px-4"
                   >
-                    <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">
+                    <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline text-left">
                       <div className="flex items-center gap-4">
-                        <BookOpen className="h-5 w-5 text-primary" />
+                        <BookOpen className="h-5 w-5 text-primary shrink-0" />
                         {section.title}
                       </div>
                     </AccordionTrigger>
@@ -286,7 +286,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* FAQs */}
             <section>
-              <h2 className="text-3xl font-headline text-primary mb-4 font-semibold">
+              <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
                 Frequently Asked Questions
               </h2>
               <Accordion
