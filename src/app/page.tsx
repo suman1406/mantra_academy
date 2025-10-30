@@ -56,7 +56,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="space-y-16 md:space-y-24 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="w-full space-y-16 md:space-y-24 py-16 md:py-24">
         <motion.div
           initial="hidden"
           whileInView="visible"

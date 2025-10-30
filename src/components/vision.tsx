@@ -25,7 +25,7 @@ export function Vision() {
   };
   
   return (
-    <section className="w-full max-w-6xl">
+    <section className="w-full max-w-6xl mx-auto px-4">
       <motion.div
         ref={cardRef}
         onMouseMove={onMouseMove}

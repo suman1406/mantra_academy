@@ -38,8 +38,8 @@ export default function RootLayout({
         <div className="relative flex flex-col min-h-screen">
           {!isAdminPage && <Header />}
           <main className={cn(
-            "flex-grow pt-16",
-            !isAdminPage && "container mx-auto px-4"
+            "flex-grow pt-16 w-full",
+            !isAdminPage && "container mx-auto"
           )}>
             {children}
           </main>

@@ -69,7 +69,7 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
 
 export function SocialFeed() {
   return (
-    <section className="w-full max-w-6xl">
+    <section className="w-full max-w-6xl mx-auto px-4">
       <div className="text-center mb-8 md:mb-12">
         <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Connect With Us</h2>
         <p className="text-foreground/80 mt-2 text-base md:text-lg">Follow our journey and get daily inspiration</p>
