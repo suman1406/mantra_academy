@@ -8,17 +8,15 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { courses as allCourses } from "@/lib/course-data";
+import { useAppData } from "@/context/AppDataContext";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useRef } from "react";
 
 
-const courses = allCourses.slice(0, 4);
-
-const CourseCard = ({ course }: { course: typeof courses[0] }) => {
+const CourseCard = ({ course }: { course: ReturnType<typeof useAppData>['courses'][0] }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -75,6 +73,9 @@ const CourseCard = ({ course }: { course: typeof courses[0] }) => {
 
 
 export function FeaturedCourses() {
+  const { courses } = useAppData();
+  const featuredCourses = courses.slice(0, 4);
+
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
@@ -107,7 +108,7 @@ export function FeaturedCourses() {
         className="w-full"
       >
         <CarouselContent>
-          {courses.map((course, index) => (
+          {featuredCourses.map((course, index) => (
             <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
               <div className="p-1 h-full">
                 <CourseCard course={course} />

@@ -1,7 +1,7 @@
 
 "use client";
 
-import type { Course } from "@/lib/course-data";
+import type { Course } from "@/context/AppDataContext";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -112,7 +112,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
   return (
     <div className="py-8 md:py-16">
       {/* Hero Section */}
-      <section className="container mx-auto">
+      <section className="container mx-auto px-4">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4 md:space-y-6">
             <h1 className="text-3xl md:text-5xl font-headline font-bold text-primary">
@@ -124,7 +124,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto mt-8">
+      <div className="container mx-auto mt-8 px-4">
         <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
           <main className="lg:col-span-2">
             
@@ -178,7 +178,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
 
             {/* Course Highlights */}
-            {highlights && (
+            {highlights && highlights.length > 0 && (
                  <section className="mb-12">
                     <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
                         <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
@@ -217,7 +217,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             </section>
             
             {/* Who Can Attend */}
-            {whoCanAttend && (
+            {whoCanAttend && whoCanAttend.length > 0 && (
                 <section className="mb-12">
                     <h2 className="text-2xl md:text-3xl font-headline text-center text-primary mb-8 font-semibold">
                         Who Can Attend?
@@ -240,76 +240,80 @@ export function CourseDetailClient({ course }: { course: Course }) {
             )}
 
             {/* Curriculum */}
-            <section className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
-                Course Curriculum
-              </h2>
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full space-y-3"
-              >
-                {curriculum.map((section, index) => (
-                  <AccordionItem
-                    value={`item-${index}`}
-                    key={index}
-                    className="bg-background border border-border rounded-xl px-4"
-                  >
-                    <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline text-left">
-                      <div className="flex items-center gap-4">
-                        <BookOpen className="h-5 w-5 text-primary shrink-0" />
-                        {section.title}
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2 pt-2">
-                        {section.lessons.map((lesson, i) => (
-                          <li
-                            key={i}
-                            className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
-                          >
-                            <span className="flex items-center gap-2 text-foreground/80">
-                              <BadgeCheck className="h-4 w-4 text-primary" />
-                              {lesson.title}
-                            </span>
-                            <span className="text-sm text-muted-foreground">
-                              {lesson.duration}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </section>
+            {curriculum && curriculum.length > 0 && (
+                <section className="mb-12">
+                <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
+                    Course Curriculum
+                </h2>
+                <Accordion
+                    type="single"
+                    collapsible
+                    className="w-full space-y-3"
+                >
+                    {curriculum.map((section, index) => (
+                    <AccordionItem
+                        value={`item-${index}`}
+                        key={index}
+                        className="bg-background border border-border rounded-xl px-4"
+                    >
+                        <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline text-left">
+                        <div className="flex items-center gap-4">
+                            <BookOpen className="h-5 w-5 text-primary shrink-0" />
+                            {section.title}
+                        </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                        <ul className="space-y-2 pt-2">
+                            {section.lessons.map((lesson, i) => (
+                            <li
+                                key={i}
+                                className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
+                            >
+                                <span className="flex items-center gap-2 text-foreground/80">
+                                <BadgeCheck className="h-4 w-4 text-primary" />
+                                {lesson.title}
+                                </span>
+                                <span className="text-sm text-muted-foreground">
+                                {lesson.duration}
+                                </span>
+                            </li>
+                            ))}
+                        </ul>
+                        </AccordionContent>
+                    </AccordionItem>
+                    ))}
+                </Accordion>
+                </section>
+            )}
 
             {/* FAQs */}
-            <section>
-              <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
-                Frequently Asked Questions
-              </h2>
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full space-y-3"
-              >
-                {faqs.map((faq, index) => (
-                  <AccordionItem
-                    value={`faq-${index}`}
-                    key={index}
-                    className="bg-background border border-border rounded-xl px-4"
-                  >
-                    <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-foreground/80 text-base">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </section>
+            {faqs && faqs.length > 0 && (
+                <section>
+                <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
+                    Frequently Asked Questions
+                </h2>
+                <Accordion
+                    type="single"
+                    collapsible
+                    className="w-full space-y-3"
+                >
+                    {faqs.map((faq, index) => (
+                    <AccordionItem
+                        value={`faq-${index}`}
+                        key={index}
+                        className="bg-background border border-border rounded-xl px-4"
+                    >
+                        <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
+                        {faq.question}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-foreground/80 text-base">
+                        {faq.answer}
+                        </AccordionContent>
+                    </AccordionItem>
+                    ))}
+                </Accordion>
+                </section>
+            )}
           </main>
 
           {/* Sidebar */}

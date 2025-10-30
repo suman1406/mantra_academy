@@ -2,10 +2,9 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, FileText } from "lucide-react";
+import { BookOpen, FileText, Megaphone } from "lucide-react";
 import { motion } from "framer-motion";
-import { courses } from "@/lib/course-data";
-import { blogPosts } from "@/lib/blog-data";
+import { useAppData } from "@/context/AppDataContext";
 
 const RupeeIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -19,6 +18,7 @@ const RupeeIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function AdminDashboard() {
+  const { courses, blogPosts, announcements } = useAppData();
 
   return (
     <motion.div
@@ -32,21 +32,11 @@ export default function AdminDashboard() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <RupeeIcon className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">₹3,775,423</div>
-            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Courses</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+{courses.length}</div>
+            <div className="text-2xl font-bold">{courses.length}</div>
             <p className="text-xs text-muted-foreground">courses currently offered</p>
           </CardContent>
         </Card>
@@ -56,8 +46,18 @@ export default function AdminDashboard() {
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+{blogPosts.length}</div>
+            <div className="text-2xl font-bold">{blogPosts.length}</div>
             <p className="text-xs text-muted-foreground">posts published</p>
+          </CardContent>
+        </Card>
+         <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Announcements</CardTitle>
+            <Megaphone className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{announcements.length}</div>
+            <p className="text-xs text-muted-foreground">active announcements</p>
           </CardContent>
         </Card>
       </div>
@@ -66,7 +66,7 @@ export default function AdminDashboard() {
             <CardTitle>Welcome, Admin!</CardTitle>
         </CardHeader>
         <CardContent>
-            <p className="text-muted-foreground">You can manage your courses and blog posts from the navigation on the left.</p>
+            <p className="text-muted-foreground">You can manage your courses, blog posts, and announcements from the navigation on the left.</p>
         </CardContent>
       </Card>
     </motion.div>

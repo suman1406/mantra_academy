@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { courses as initialCourses, Course, instructors as allInstructors } from "@/lib/course-data";
+import { useAppData, Course, instructors as allInstructors } from "@/context/AppDataContext";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -23,7 +23,7 @@ const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
 };
 
 export default function AdminCoursesPage() {
-  const [courses, setCourses] = useState(initialCourses);
+  const { courses, setCourses } = useAppData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState<Course | Omit<Course, 'rating' | 'reviews'> | null>(null);
 
@@ -51,7 +51,7 @@ export default function AdminCoursesPage() {
     } else {
       const newCourse: Course = {
         ...editingCourse,
-        slug: editingCourse.title.toLowerCase().replace(/\s+/g, '-'),
+        slug: editingCourse.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
         rating: 0,
         reviews: 0,
       } as Course;
@@ -64,7 +64,8 @@ export default function AdminCoursesPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!editingCourse) return;
     const { name, value } = e.target;
-    setEditingCourse({ ...editingCourse, [name]: value });
+    const isNumber = ['price', 'lectures', 'resources'].includes(name);
+    setEditingCourse({ ...editingCourse, [name]: isNumber ? Number(value) : value });
   };
   
   const handleSelectChange = (name: string, value: string) => {
@@ -82,50 +83,58 @@ export default function AdminCoursesPage() {
     index: number,
     field: string,
     value: string,
-    lessonIndex?: number
+    subSection?: 'lessons',
+    subIndex?: number
   ) => {
     if (!editingCourse) return;
-    const updatedSection = [...(editingCourse as any)[section]];
+    
+    // Create a deep copy to avoid direct state mutation
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
 
-    if (section === 'curriculum' && lessonIndex !== undefined) {
-      updatedSection[index].lessons[lessonIndex][field] = value;
+    if (subSection && subIndex !== undefined) {
+        newEditingCourse[section][index][subSection][subIndex][field] = value;
     } else {
-      updatedSection[index][field] = value;
+        newEditingCourse[section][index][field] = value;
     }
     
-    setEditingCourse({ ...editingCourse, [section]: updatedSection });
+    setEditingCourse(newEditingCourse);
   };
 
   const addNestedItem = (section: 'curriculum' | 'faqs' | 'highlights' | 'whoCanAttend') => {
     if (!editingCourse) return;
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    
     const newItem = section === 'curriculum' 
       ? { title: "", lessons: [{ title: "", duration: "" }] }
       : section === 'faqs'
       ? { question: "", answer: "" }
-      : { title: "", description: "" };
-    
-    const updatedSection = [...(editingCourse as any)[section], newItem];
-    setEditingCourse({ ...editingCourse, [section]: updatedSection });
+      : section === 'highlights' || section === 'whoCanAttend'
+      ? { title: "", description: "" }
+      : {}; // Fallback for safety
+
+    newEditingCourse[section].push(newItem);
+    setEditingCourse(newEditingCourse);
   };
   
   const removeNestedItem = (section: 'curriculum' | 'faqs' | 'highlights' | 'whoCanAttend', index: number) => {
     if (!editingCourse) return;
-    const updatedSection = (editingCourse as any)[section].filter((_:any, i:number) => i !== index);
-    setEditingCourse({ ...editingCourse, [section]: updatedSection });
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    newEditingCourse[section].splice(index, 1);
+    setEditingCourse(newEditingCourse);
   };
   
   const addLesson = (sectionIndex: number) => {
     if (!editingCourse) return;
-    const updatedCurriculum = [...editingCourse.curriculum];
-    updatedCurriculum[sectionIndex].lessons.push({ title: "", duration: "" });
-    setEditingCourse({ ...editingCourse, curriculum: updatedCurriculum });
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    newEditingCourse.curriculum[sectionIndex].lessons.push({ title: "", duration: "" });
+    setEditingCourse(newEditingCourse);
   }
 
   const removeLesson = (sectionIndex: number, lessonIndex: number) => {
     if (!editingCourse) return;
-    const updatedCurriculum = [...editingCourse.curriculum];
-    updatedCurriculum[sectionIndex].lessons = updatedCurriculum[sectionIndex].lessons.filter((_:any, i:number) => i !== lessonIndex);
-    setEditingCourse({ ...editingCourse, curriculum: updatedCurriculum });
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    newEditingCourse.curriculum[sectionIndex].lessons.splice(lessonIndex, 1);
+    setEditingCourse(newEditingCourse);
   }
 
   return (
@@ -276,12 +285,12 @@ export default function AdminCoursesPage() {
                             <Input
                                 placeholder="Lesson Title"
                                 value={lesson.title}
-                                onChange={(e) => handleNestedChange('curriculum', sectionIndex, 'title', e.target.value, lessonIndex)}
+                                onChange={(e) => handleNestedChange('curriculum', sectionIndex, 'title', e.target.value, 'lessons', lessonIndex)}
                             />
                             <Input
                                 placeholder="Duration (e.g., 30:00)"
                                 value={lesson.duration}
-                                onChange={(e) => handleNestedChange('curriculum', sectionIndex, 'duration', e.target.value, lessonIndex)}
+                                onChange={(e) => handleNestedChange('curriculum', sectionIndex, 'duration', e.target.value, 'lessons', lessonIndex)}
                                 className="w-32"
                             />
                             <Button variant="ghost" size="icon" onClick={() => removeLesson(sectionIndex, lessonIndex)}><X className="h-4 w-4 text-destructive" /></Button>
@@ -301,7 +310,7 @@ export default function AdminCoursesPage() {
                       <AccordionItem value="item-1">
                           <AccordionTrigger className="font-semibold capitalize">{sectionName.replace(/([A-Z])/g, ' $1')}</AccordionTrigger>
                           <AccordionContent className="space-y-2 pt-4">
-                               {editingCourse[sectionName]?.map((item, index) => (
+                               {editingCourse[sectionName]?.map((item: any, index: number) => (
                                 <Card key={index} className="p-4 bg-muted/50">
                                     <div className="flex justify-end">
                                       <Button variant="ghost" size="icon" onClick={() => removeNestedItem(sectionName, index)}><X className="h-4 w-4 text-destructive" /></Button>

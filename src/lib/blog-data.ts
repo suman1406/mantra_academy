@@ -15,7 +15,7 @@ export const blogPosts: BlogPost[] = [
     slug: "the-primordial-sound-om",
     title: "The Primordial Sound: Unpacking the Meaning of 'Om'",
     author: "Rishi Varma",
-    date: "July 26, 2024",
+    date: "2024-07-26",
     excerpt:
       "The syllable 'Om' is said to be the primordial sound from which the entire universe emanated. We explore its profound significance and the science of its vibration.",
     content: `
@@ -40,7 +40,7 @@ Chanting Om allows us to experience these states consciously. The vibration of t
     slug: "five-mantras-for-inner-peace",
     title: "Five Mantras to Cultivate Inner Peace",
     author: "Anjali Devi",
-    date: "July 20, 2024",
+    date: "2024-07-20",
     excerpt:
       "In a world of constant noise, finding tranquility can be a challenge. Here are five powerful, yet simple, mantras to help you cultivate a state of inner peace and calm.",
     content: `
@@ -65,7 +65,7 @@ Choose one mantra that resonates with you and try chanting it for 5-10 minutes e
     slug: "the-role-of-intention-in-mantra",
     title: "The Role of Intention in Mantra Practice",
     author: "Sanjay Rao",
-    date: "July 15, 2024",
+    date: "2024-07-15",
     excerpt:
       "A mantra is more than just sound; it is an intention given form. Learn how 'sankalpa' (intention) can amplify the effects of your chanting practice exponentially.",
     content: `

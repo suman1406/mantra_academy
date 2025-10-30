@@ -3,8 +3,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Settings, BookOpen, LogOut, FileText, ShieldCheck } from "lucide-react";
-import { Logo } from "./logo";
+import { Home, BookOpen, LogOut, FileText, ShieldCheck, Megaphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
@@ -12,12 +11,12 @@ const navLinks = [
   { href: "/admin/dashboard", label: "Dashboard", icon: Home },
   { href: "/admin/courses", label: "Courses", icon: BookOpen },
   { href: "/admin/blog", label: "Blog", icon: FileText },
-  { href: "#", label: "Settings", icon: Settings },
+  { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
 ];
 
 const NavLink = ({ href, label, icon: Icon }: { href: string; label: string; icon: React.ElementType }) => {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(href) && (href !== '/admin/dashboard' || pathname === href);
+  const isActive = pathname === href;
 
 
   return (

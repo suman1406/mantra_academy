@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { courses } from "@/lib/course-data";
+import { useAppData } from "@/context/AppDataContext";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => {
+const CourseCard = ({ course, i }: { course: ReturnType<typeof useAppData>['courses'][0], i: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -75,6 +75,8 @@ const CourseCard = ({ course, i }: { course: typeof courses[0], i: number }) => 
 
 
 export default function CoursesPage() {
+  const { courses } = useAppData();
+
   return (
     <div className="py-12 md:py-16 space-y-12 md:space-y-16 relative flex flex-col items-center">
       <motion.section
@@ -91,7 +93,7 @@ export default function CoursesPage() {
         </p>
       </motion.section>
 
-      <section className="w-full max-w-6xl px-4">
+      <section className="w-full max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8 md:mt-12">
           <AnimatePresence>
             {courses.map((course, i) => (

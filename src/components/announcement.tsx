@@ -7,34 +7,34 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Megaphone } from "lucide-react";
 import Link from "next/link";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import React from "react";
+import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useAppData } from "@/context/AppDataContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-const announcements = [
-    {
-        title: "New Workshop: The Healing Power of Sound",
-        description: "Join us for a transformative 3-day live workshop with Rishi Varma. Limited spots available.",
-        link: "#"
-    },
-    {
-        title: "Early-Bird Discount for Foundations Course",
-        description: "Enroll in our Foundations of Mantra Science course by the end of the month and receive a 20% discount.",
-        link: "/courses"
-    },
-     {
-        title: "Community Meditation This Sunday",
-        description: "Join our free global community meditation session this Sunday at 11:00 AM EST. All are welcome.",
-        link: "#"
-    },
-    {
-        title: "Advanced Chanting Techniques Webinar",
-        description: "A new webinar for our advanced students is scheduled for next month. Sign up now!",
-        link: "#"
-    }
-];
+const AnnouncementCard = ({ announcement, index }: { announcement: ReturnType<typeof useAppData>['announcements'][0], index: number }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
-const AnnouncementCard = ({ announcement, index }: { announcement: typeof announcements[0], index: number }) => (
+    const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current || isMobile) return;
+        const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - left - width / 2) / (width / 2);
+        const y = (e.clientY - top - height / 2) / (height / 2);
+        cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
+    };
+
+    const onMouseLeave = () => {
+        if (!cardRef.current || isMobile) return;
+        cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+    };
+
+    return (
      <motion.div
+        ref={cardRef}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        style={{ transition: 'transform 0.2s ease-out' }}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -63,9 +63,11 @@ const AnnouncementCard = ({ announcement, index }: { announcement: typeof announ
           </div>
         </Card>
       </motion.div>
-)
+    )
+}
 
 export function Announcement() {
+  const { announcements } = useAppData();
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
@@ -82,6 +84,10 @@ export function Announcement() {
       setCurrent(api.selectedScrollSnap())
     })
   }, [api])
+  
+  if (!announcements || announcements.length === 0) {
+    return null;
+  }
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4">

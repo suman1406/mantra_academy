@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer";
 import { AIChatbot } from "@/components/ai-chatbot";
 import { Toaster } from "@/components/ui/toaster";
 import { usePathname } from "next/navigation";
+import { AppProvider } from "@/context/AppDataContext";
 
 // export const metadata: Metadata = {
 //   title: "Mantra Academy",
@@ -23,6 +24,8 @@ export default function RootLayout({
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith('/admin');
 
+  const LayoutWrapper = isAdminPage ? React.Fragment : AppProvider;
+
   return (
     <html lang="en">
       <head>
@@ -35,18 +38,20 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
       <body className={cn("font-body antialiased bg-background text-foreground")}>
-        <div className="relative flex flex-col min-h-screen">
-          {!isAdminPage && <Header />}
-          <main className={cn(
-            "flex-grow pt-16 w-full",
-            !isAdminPage && "container mx-auto"
-          )}>
-            {children}
-          </main>
-          {!isAdminPage && <Footer />}
-        </div>
-        {!isAdminPage && <AIChatbot />}
-        <Toaster />
+        <LayoutWrapper>
+          <div className="relative flex flex-col min-h-screen">
+            {!isAdminPage && <Header />}
+            <main className={cn(
+              "flex-grow pt-16 w-full",
+              !isAdminPage && "container mx-auto px-0"
+            )}>
+              {children}
+            </main>
+            {!isAdminPage && <Footer />}
+          </div>
+          {!isAdminPage && <AIChatbot />}
+          <Toaster />
+        </LayoutWrapper>
       </body>
     </html>
   );

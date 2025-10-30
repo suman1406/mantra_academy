@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { blogPosts as initialBlogPosts, BlogPost } from "@/lib/blog-data";
+import { useAppData, BlogPost } from "@/context/AppDataContext";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -24,7 +24,7 @@ const emptyPost: Omit<BlogPost, "slug"> = {
 };
 
 export default function AdminBlogPage() {
-  const [posts, setPosts] = useState(initialBlogPosts);
+  const { blogPosts, setBlogPosts } = useAppData();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | Omit<BlogPost, 'slug'> | null>(null);
 
@@ -39,22 +39,22 @@ export default function AdminBlogPage() {
   };
 
   const handleDelete = (slug: string) => {
-    setPosts(posts.filter(p => p.slug !== slug));
+    setBlogPosts(blogPosts.filter(p => p.slug !== slug));
   };
 
   const handleSave = () => {
     if (!editingPost) return;
 
-    const isEditing = 'slug' in editingPost && posts.some(p => p.slug === editingPost.slug);
+    const isEditing = 'slug' in editingPost && blogPosts.some(p => p.slug === editingPost.slug);
 
     if (isEditing) {
-      setPosts(posts.map(p => (p.slug === (editingPost as BlogPost).slug ? (editingPost as BlogPost) : p)));
+      setBlogPosts(blogPosts.map(p => (p.slug === (editingPost as BlogPost).slug ? (editingPost as BlogPost) : p)));
     } else {
       const newPost: BlogPost = {
         ...editingPost,
-        slug: editingPost.title.toLowerCase().replace(/\s+/g, '-'),
+        slug: editingPost.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
       } as BlogPost;
-      setPosts([newPost, ...posts]);
+      setBlogPosts([newPost, ...blogPosts]);
     }
     setIsDialogOpen(false);
     setEditingPost(null);
@@ -89,7 +89,7 @@ export default function AdminBlogPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {posts.map((post) => (
+              {blogPosts.map((post) => (
                 <TableRow key={post.slug}>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell>{post.author}</TableCell>
@@ -108,7 +108,7 @@ export default function AdminBlogPage() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-3xl">
           <DialogHeader>
-            <DialogTitle>{editingPost && 'slug' in editingPost && posts.some(p => p.slug === editingPost.slug) ? 'Edit Post' : 'Add New Post'}</DialogTitle>
+            <DialogTitle>{editingPost && 'slug' in editingPost && editingPost.slug ? 'Edit Post' : 'Add New Post'}</DialogTitle>
           </DialogHeader>
           {editingPost && (
              <ScrollArea className="max-h-[70vh] pr-6">

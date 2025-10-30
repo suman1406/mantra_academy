@@ -7,7 +7,7 @@ import { ArrowRight, BookText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Noto_Serif_Devanagari } from "next/font/google";
-import { blogPosts } from "@/lib/blog-data";
+import { useAppData } from "@/context/AppDataContext";
 import Image from "next/image";
 
 const devanagari = Noto_Serif_Devanagari({
@@ -20,7 +20,7 @@ const BlogPostCard = ({
   post,
   index,
 }: {
-  post: typeof blogPosts[0];
+  post: ReturnType<typeof useAppData>['blogPosts'][0];
   index: number;
 }) => (
   <motion.div
@@ -72,6 +72,8 @@ const BlogPostCard = ({
 );
 
 export default function BlogPage() {
+  const { blogPosts } = useAppData();
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
