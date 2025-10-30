@@ -133,6 +133,14 @@ export default function AdminBlogPage() {
                     <Label htmlFor="content" className="text-right">Content</Label>
                     <Textarea id="content" name="content" value={editingPost.content} onChange={handleChange} className="col-span-3 h-48" />
                 </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="image" className="text-right">Image URL</Label>
+                    <Input id="image" name="image" value={editingPost.image} onChange={handleChange} className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="aiHint" className="text-right">AI Hint</Label>
+                    <Input id="aiHint" name="aiHint" value={editingPost.aiHint} onChange={handleChange} className="col-span-3" />
+                </div>
                 </div>
              </ScrollArea>
           )}

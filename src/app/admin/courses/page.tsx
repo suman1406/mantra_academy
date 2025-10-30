@@ -49,9 +49,10 @@ export default function AdminCoursesPage() {
     if (isEditing) {
       setCourses(courses.map(c => (c.slug === (editingCourse as Course).slug ? (editingCourse as Course) : c)));
     } else {
+       const slug = editingCourse.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
       const newCourse: Course = {
         ...editingCourse,
-        slug: editingCourse.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+        slug: slug,
         rating: 0,
         reviews: 0,
       } as Course;
@@ -91,7 +92,7 @@ export default function AdminCoursesPage() {
     // Create a deep copy to avoid direct state mutation
     const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
 
-    if (subSection && subIndex !== undefined) {
+    if (subSection && subIndex !== undefined && newEditingCourse[section][index][subSection]) {
         newEditingCourse[section][index][subSection][subIndex][field] = value;
     } else {
         newEditingCourse[section][index][field] = value;
@@ -206,6 +207,14 @@ export default function AdminCoursesPage() {
                       <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="fullDescription" className="text-right">Full Desc</Label>
                         <Textarea id="fullDescription" name="fullDescription" value={editingCourse.fullDescription} onChange={handleChange} className="col-span-3 h-32" />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="image" className="text-right">Image URL</Label>
+                        <Input id="image" name="image" value={editingCourse.image} onChange={handleChange} className="col-span-3" />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="aiHint" className="text-right">AI Hint</Label>
+                        <Input id="aiHint" name="aiHint" value={editingCourse.aiHint} onChange={handleChange} className="col-span-3" />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="grid grid-cols-2 items-center gap-2">
