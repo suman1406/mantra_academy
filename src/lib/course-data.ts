@@ -43,7 +43,7 @@ export type Course = {
   startDate?: string;
 };
 
-const instructors = {
+export const instructors = {
   rishi: {
     name: "Rishi Varma",
     title: "Founder & Lead Instructor",
