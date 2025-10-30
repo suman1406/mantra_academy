@@ -2,10 +2,21 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, BookOpen, FileText } from "lucide-react";
+import { BookOpen, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import { courses } from "@/lib/course-data";
 import { blogPosts } from "@/lib/blog-data";
+
+const RupeeIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M6 3h12" />
+        <path d="M6 8h12" />
+        <path d="M6 13h10" />
+        <path d="m14 13 5 8" />
+        <path d="M6 21h12" />
+    </svg>
+)
+
 
 export default function AdminDashboard() {
 
@@ -22,10 +33,10 @@ export default function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <RupeeIcon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
+            <div className="text-2xl font-bold">₹3,775,423</div>
             <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           </CardContent>
         </Card>
