@@ -33,7 +33,7 @@ export default function Home() {
         {/* Content */}
         <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
             <Image
-              src="/images/Logo.png"
+              src="/images/bh-removebg.png"
               alt="Mantra Academy Logo"
               width={180}
               height={180}
