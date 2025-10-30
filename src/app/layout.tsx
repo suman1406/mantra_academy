@@ -1,6 +1,7 @@
 
 "use client";
 
+import * as React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -43,7 +44,7 @@ export default function RootLayout({
             {!isAdminPage && <Header />}
             <main className={cn(
               "flex-grow pt-16 w-full",
-              !isAdminPage && "container mx-auto px-0"
+              !isAdminPage && "container mx-auto px-4 sm:px-6 lg:px-8"
             )}>
               {children}
             </main>
