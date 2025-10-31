@@ -60,7 +60,7 @@ export function AIChatbot() {
           size="icon"
           className="fixed bottom-6 right-6 h-16 w-16 rounded-full bg-accent text-accent-foreground shadow-lg hover:bg-accent/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 animate-pulse"
         >
-          <HelpCircle className="h-8 w-8" />
+          <HelpCircle className="h-10 w-10" />
           <span className="sr-only">Open AI Assistant</span>
         </Button>
       </SheetTrigger>
