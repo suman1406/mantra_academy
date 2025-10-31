@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,13 @@ export default function AdminLoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
   const { toast } = useToast();
+
+  useEffect(() => {
+    // If the user is already authenticated, redirect them to the dashboard.
+    if (sessionStorage.getItem("isAdminAuthenticated") === "true") {
+      router.replace('/admin/dashboard');
+    }
+  }, [router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
