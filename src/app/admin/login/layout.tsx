@@ -1,18 +1,15 @@
 
 "use client";
 
-import { AppProvider } from "@/context/AppDataContext";
-
+// This layout is intentionally simple to avoid including the AdminSidebar on the login page.
 export default function LoginLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <AppProvider>
-        <div className="min-h-screen">
-            {children}
-        </div>
-    </AppProvider>
+    <div className="min-h-screen">
+        {children}
+    </div>
   );
 }

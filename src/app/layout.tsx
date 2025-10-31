@@ -2,7 +2,6 @@
 "use client";
 
 import * as React from "react";
-import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/header";
@@ -24,8 +23,12 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith('/admin');
+  const isLoginPage = pathname === '/admin/login';
+  
+  // Conditionally wrap with AppProvider. Admin pages have their own provider.
+  // The login page also shouldn't be wrapped by the main AppProvider initially.
+  const LayoutWrapper = (isAdminPage && !isLoginPage) ? React.Fragment : AppProvider;
 
-  const LayoutWrapper = isAdminPage ? React.Fragment : AppProvider;
 
   return (
     <html lang="en">
@@ -40,16 +43,20 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased bg-background text-foreground")}>
         <LayoutWrapper>
-          <div className="relative flex flex-col min-h-screen">
-            {!isAdminPage && <Header />}
-            <main className={cn(
-              "flex-grow pt-16 w-full",
-              !isAdminPage && "container mx-auto px-4 sm:px-6 lg:px-8"
-            )}>
-              {children}
-            </main>
-            {!isAdminPage && <Footer />}
-          </div>
+          {isLoginPage ? (
+            children
+          ) : (
+            <div className="relative flex flex-col min-h-screen">
+              {!isAdminPage && <Header />}
+              <main className={cn(
+                "flex-grow pt-16 w-full",
+                !isAdminPage && "container mx-auto px-4 sm:px-6 lg:px-8"
+              )}>
+                {children}
+              </main>
+              {!isAdminPage && <Footer />}
+            </div>
+          )}
           {!isAdminPage && <AIChatbot />}
           <Toaster />
         </LayoutWrapper>

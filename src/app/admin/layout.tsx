@@ -39,11 +39,9 @@ export default function AdminLayout({
   if (!isAuthenticated) {
     // Render a loading state or nothing while redirecting
     return (
-        <AppProvider>
-            <div className="flex min-h-screen items-center justify-center bg-background">
-                <p>Redirecting to login...</p>
-            </div>
-        </AppProvider>
+        <div className="flex min-h-screen items-center justify-center bg-background">
+            <p>Redirecting to login...</p>
+        </div>
     );
   }
 
