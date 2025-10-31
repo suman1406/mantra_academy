@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Image from "next/image";
 
 const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
   slug: "", title: "", category: "", image: "https://placehold.co/600x400.png", aiHint: "", description: "",
@@ -79,6 +80,16 @@ export default function AdminCoursesPage() {
      }
   }
   
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!editingCourse || !e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setEditingCourse({ ...editingCourse, image: reader.result as string });
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleNestedChange = (
     section: 'curriculum' | 'faqs' | 'highlights' | 'whoCanAttend',
     index: number,
@@ -208,9 +219,12 @@ export default function AdminCoursesPage() {
                         <Label htmlFor="fullDescription" className="text-right">Full Desc</Label>
                         <Textarea id="fullDescription" name="fullDescription" value={editingCourse.fullDescription} onChange={handleChange} className="col-span-3 h-32" />
                       </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="image" className="text-right">Image URL</Label>
-                        <Input id="image" name="image" value={editingCourse.image} onChange={handleChange} className="col-span-3" />
+                      <div className="grid grid-cols-4 items-start gap-4">
+                        <Label className="text-right pt-2">Image</Label>
+                        <div className="col-span-3 flex items-center gap-4">
+                            <Image src={editingCourse.image} alt="Course image preview" width={128} height={80} className="rounded-md object-cover" />
+                            <Input id="image" name="image" type="file" onChange={handleImageChange} accept="image/*" className="col-span-3 file:text-primary file:font-semibold" />
+                        </div>
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="aiHint" className="text-right">AI Hint</Label>
@@ -356,3 +370,5 @@ export default function AdminCoursesPage() {
     </div>
   );
 }
+
+    
