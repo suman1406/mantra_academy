@@ -1,5 +1,5 @@
 
-import { Instagram, Youtube, Twitter, Facebook, Send } from "lucide-react";
+import { Instagram, Youtube, Facebook } from "lucide-react";
 import { Logo } from "./logo";
 import { AmbientAudio } from "./ambient-audio";
 import { Button } from "./ui/button";
@@ -13,6 +13,11 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
 );
 
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.847h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.153h7.594l5.243 7.184L18.901 1.153Zm-1.61 19.98h2.544L6.03 2.9h-2.7L17.29 21.133Z" />
+    </svg>
+)
 
 export function Footer() {
   return (
@@ -42,7 +47,7 @@ export function Footer() {
              <div className="flex space-x-4">
                 <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Instagram /></a>
                 <a href="https://www.youtube.com/@MantrAcademy24" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Youtube /></a>
-                <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Twitter /></a>
+                <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><XIcon className="h-6 w-6" /></a>
                 <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Facebook /></a>
             </div>
           </div>

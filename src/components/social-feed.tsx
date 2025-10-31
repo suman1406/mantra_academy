@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { Instagram, Youtube, Twitter, Facebook } from "lucide-react";
+import { Instagram, Youtube, Facebook } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useRef } from "react";
 import { motion } from "framer-motion";
@@ -15,6 +15,12 @@ const feedItems = [
   { platform: "X", image: "https://placehold.co/400x400.png", aiHint: "yoga pose", handle: "@namaste_mantra", link: "https://x.com/namaste_mantra" },
   { platform: "Facebook", image: "https://placehold.co/400x400.png", aiHint: "mandala art", handle: "Mantra Academy", link: "https://www.facebook.com/profile.php?id=61566345014729" },
 ];
+
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.847h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.153h7.594l5.243 7.184L18.901 1.153Zm-1.61 19.98h2.544L6.03 2.9h-2.7L17.29 21.133Z" />
+    </svg>
+)
 
 const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
@@ -38,7 +44,7 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
         switch(item.platform) {
             case "Instagram": return <Instagram {...iconProps} />;
             case "YouTube": return <Youtube {...iconProps} />;
-            case "X": return <Twitter {...iconProps} />;
+            case "X": return <XIcon {...iconProps} />;
             case "Facebook": return <Facebook {...iconProps} />;
             default: return null;
         }
