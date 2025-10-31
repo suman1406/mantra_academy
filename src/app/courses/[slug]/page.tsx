@@ -4,7 +4,6 @@
 import { useAppData } from "@/context/AppDataContext";
 import { notFound } from "next/navigation";
 import { CourseDetailClient } from "@/components/course-detail-client";
-import { useEffect, useState } from "react";
 import type { Course } from "@/context/AppDataContext";
 
 
@@ -14,19 +13,8 @@ export default function CourseDetailPage({
   params: { slug: string };
 }) {
   const { courses } = useAppData();
-  const [course, setCourse] = useState<Course | undefined>(undefined);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const foundCourse = courses.find((c) => c.slug === params.slug);
-    setCourse(foundCourse);
-    setLoading(false);
-  }, [courses, params.slug]);
-
-  if (loading) {
-    // You can return a loading spinner here
-    return <div>Loading...</div>;
-  }
+  
+  const course = courses.find((c) => c.slug === params.slug);
 
   if (!course) {
     notFound();

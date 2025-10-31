@@ -4,7 +4,6 @@
 import { useAppData } from "@/context/AppDataContext";
 import { notFound } from "next/navigation";
 import { BlogPostContent } from "@/components/blog-post";
-import { useEffect, useState } from "react";
 import type { BlogPost } from "@/context/AppDataContext";
 
 export default function BlogPostPage({
@@ -13,19 +12,8 @@ export default function BlogPostPage({
   params: { slug: string };
 }) {
   const { blogPosts } = useAppData();
-  const [post, setPost] = useState<BlogPost | undefined>(undefined);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const foundPost = blogPosts.find((p) => p.slug === params.slug);
-    setPost(foundPost);
-    setLoading(false);
-  }, [blogPosts, params.slug]);
-
-  if (loading) {
-    // You can return a loading spinner here
-    return <div>Loading...</div>;
-  }
+  
+  const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) {
     notFound();
