@@ -41,24 +41,24 @@ export function Footer() {
           <div>
             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-primary-foreground/80 transition-colors">Home</Link></li>
-              <li><Link href="/courses" className="hover:text-primary-foreground/80 transition-colors">Courses</Link></li>
-              <li><Link href="/blog" className="hover:text-primary-foreground/80 transition-colors">Blog</Link></li>
-              <li><Link href="/about" className="hover:text-primary-foreground/80 transition-colors">About Us</Link></li>
+              <li><Link href="/" className="hover:text-primary-foreground transition-colors">Home</Link></li>
+              <li><Link href="/courses" className="hover:text-primary-foreground transition-colors">Courses</Link></li>
+              <li><Link href="/blog" className="hover:text-primary-foreground transition-colors">Blog</Link></li>
+              <li><Link href="/about" className="hover:text-primary-foreground transition-colors">About Us</Link></li>
             </ul>
           </div>
           
           {/* Contact */}
           <div>
             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Contact Us</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 text-primary-foreground/80">
                 <li className="flex items-center gap-2">
                     <Phone className="h-4 w-4" />
-                    <a href="tel:+919108787550" className="hover:text-primary-foreground/80 transition-colors">+91 91087 87550</a>
+                    <a href="tel:+919108787550" className="hover:text-primary-foreground transition-colors">+91 91087 87550</a>
                 </li>
                 <li className="flex items-center gap-2">
                     <Mail className="h-4 w-4" />
-                    <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground/80 transition-colors">namaste.mantracademy@gmail.com</a>
+                    <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground transition-colors">namaste.mantracademy@gmail.com</a>
                 </li>
             </ul>
           </div>
@@ -67,10 +67,10 @@ export function Footer() {
           <div>
              <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Connect With Us</h3>
              <div className="flex space-x-4">
-                <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Instagram /></a>
-                <a href="https://www.youtube.com/@MantrAcademy24" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Youtube /></a>
-                <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><XIcon className="h-6 w-6" /></a>
-                <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground"><Facebook /></a>
+                <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Instagram /></a>
+                <a href="https://www.youtube.com/@MantrAcademy24" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Youtube /></a>
+                <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><XIcon className="h-6 w-6" /></a>
+                <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Facebook /></a>
             </div>
           </div>
           
