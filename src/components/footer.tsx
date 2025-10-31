@@ -1,9 +1,6 @@
-
 import { Instagram, Youtube, Facebook, Phone, Mail } from "lucide-react";
 import { Logo } from "./logo";
-import { AmbientAudio } from "./ambient-audio";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import Link from "next/link";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -19,30 +16,37 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" {...props}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    {...props}
+  >
     <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.847h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.153h7.594l5.243 7.184L18.901 1.153Zm-1.61 19.98h2.544L6.03 2.9h-2.7L17.29 21.133Z" />
   </svg>
-)
+);
 
 export function Footer() {
   return (
     <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
-      <div className="container mx-auto px-4 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-
-          {/* About Section */}
-          <div className="md:col-span-2 space-y-4">
+      <div className="container mx-auto px-4 py-10 sm:py-14">
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
+          
+          {/* Column 1: About */}
+          <div className="space-y-4">
             <Logo className="[&>span]:text-primary-foreground" />
-            <p className="text-sm max-w-md">
+            <p className="text-sm leading-relaxed max-w-sm">
               Unlock the power of sound and vibration. Discover ancient mantras and transform your life.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Column 2: Quick Links */}
           <div>
-            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Quick Links</h3>
+            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               <li><Link href="/" className="hover:text-primary-foreground transition-colors">Home</Link></li>
               <li><Link href="/courses" className="hover:text-primary-foreground transition-colors">Courses</Link></li>
@@ -51,72 +55,39 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Connect With Us */}
+          {/* Column 3: Connect */}
           <div>
             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
               Connect With Us
             </h3>
-
-            {/* Social Icons */}
             <div className="flex space-x-4 mb-4">
-              <a
-                href="https://www.instagram.com/mantr.academy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                aria-label="Instagram"
-              >
+              <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 <Instagram className="h-6 w-6" />
               </a>
-
-              <a
-                href="https://www.youtube.com/@MantrAcademy24"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                aria-label="YouTube"
-              >
+              <a href="https://www.youtube.com/@MantrAcademy24" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 <Youtube className="h-6 w-6" />
               </a>
-
-              <a
-                href="https://x.com/namaste_mantra"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                aria-label="X (Twitter)"
-              >
+              <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 <XIcon className="h-6 w-6" />
               </a>
-
-              <a
-                href="https://www.facebook.com/profile.php?id=61566345014729"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                aria-label="Facebook"
-              >
+              <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 <Facebook className="h-6 w-6" />
               </a>
             </div>
+          </div>
 
-          <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
+          {/* Column 4: Contact */}
+          <div>
+            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
               Contact Us
             </h3>
-          {/* Contact Info */}
             <div className="space-y-3 text-primary-foreground/80">
-              <a
-                href="tel:+919108787550"
-                className="flex items-center gap-2 hover:text-primary-foreground transition-colors"
-              >
+              <a href="tel:+919108787550" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Phone className="h-5 w-5" />
                 <span>+91 91087 87550</span>
               </a>
 
-              <a
-                href="mailto:namaste.mantracademy@gmail.com"
-                className="flex items-center gap-2 hover:text-primary-foreground transition-colors break-all"
-              >
+              <a href="mailto:namaste.mantracademy@gmail.com" className="flex items-center gap-2 hover:text-primary-foreground transition-colors break-all">
                 <Mail className="h-5 w-5" />
                 <span>namaste.mantracademy@gmail.com</span>
               </a>
@@ -125,17 +96,17 @@ export function Footer() {
                 href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 py-1 rounded-md hover:text-primary-foreground transition-colors leading-none"
+                className="flex items-center gap-2 hover:text-primary-foreground transition-colors leading-none"
               >
-                <WhatsAppIcon className="h-5 w-5" />
+                <WhatsAppIcon className="h-5 w-5 relative top-[0.5px]" />
                 <span>Join on WhatsApp</span>
               </a>
-
             </div>
+          </div>
         </div>
 
-        </div>
-        <div className="text-center text-sm border-t border-primary-foreground/20 mt-8 pt-6">
+        {/* Footer Bottom */}
+        <div className="text-center text-sm border-t border-primary-foreground/20 mt-10 pt-6">
           <p>&copy; {new Date().getFullYear()} Mantra Academy. All rights reserved.</p>
         </div>
       </div>
