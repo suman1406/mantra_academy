@@ -1,7 +1,8 @@
+
 "use client";
 
 import { useState, useTransition, useRef, useEffect } from "react";
-import { Gem, Bot, User, Loader2, Send } from "lucide-react";
+import { HelpCircle, Bot, User, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -59,7 +60,7 @@ export function AIChatbot() {
           size="icon"
           className="fixed bottom-6 right-6 h-16 w-16 rounded-full bg-accent text-accent-foreground shadow-lg hover:bg-accent/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 animate-pulse"
         >
-          <Gem className="h-8 w-8" />
+          <HelpCircle className="h-8 w-8" />
           <span className="sr-only">Open AI Assistant</span>
         </Button>
       </SheetTrigger>
