@@ -100,10 +100,6 @@ export function Footer() {
               </a>
             </div>
 
-          </div>
-
-        <div>
-
           <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
               Contact Us
             </h3>
