@@ -36,11 +36,10 @@ export function Header() {
 
   return (
     <header className="sticky top-0 left-0 w-full z-50 border-b border-primary/20 bg-primary shadow-lg">
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-16 items-center px-4 sm:px-6 lg:px-8">
         <div className="flex-1 md:flex-none">
-          <Link href="/">
+          <Link href="/" aria-label="Mantra Academy Home">
             <Logo className="[&>span]:text-2xl [&>span]:text-primary-foreground [&>span]:hover:text-primary-foreground" />
-            <span className="sr-only">Mantra Academy Home</span>
           </Link>
         </div>
         <div className="hidden md:flex flex-1 items-center justify-end gap-6">
