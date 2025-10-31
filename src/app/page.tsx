@@ -47,7 +47,7 @@ export default function Home() {
           </h1>
 
           <p
-            className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto text-base sm:text-lg md:text-2xl text-foreground/80"
+            className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto text-sm sm:text-base md:text-xl text-foreground/80 leading-snug"
           >
             Unlock the power of sound and vibration. Discover ancient mantras
             and transform your life through our expert-led courses and vibrant
