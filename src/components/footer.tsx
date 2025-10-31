@@ -1,5 +1,5 @@
 
-import { Instagram, Youtube, Facebook } from "lucide-react";
+import { Instagram, Youtube, Facebook, Phone, Mail } from "lucide-react";
 import { Logo } from "./logo";
 import { AmbientAudio } from "./ambient-audio";
 import { Button } from "./ui/button";
@@ -30,7 +30,7 @@ export function Footer() {
   return (
     <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
       <div className="container mx-auto px-4 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
           
           {/* About Section */}
           <div className="md:col-span-1 space-y-4">
@@ -45,6 +45,21 @@ export function Footer() {
               <li><Link href="/courses" className="hover:text-primary-foreground/80 transition-colors">Courses</Link></li>
               <li><Link href="/blog" className="hover:text-primary-foreground/80 transition-colors">Blog</Link></li>
               <li><Link href="/about" className="hover:text-primary-foreground/80 transition-colors">About Us</Link></li>
+            </ul>
+          </div>
+          
+          {/* Contact */}
+          <div>
+            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Contact Us</h3>
+            <ul className="space-y-3">
+                <li className="flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    <a href="tel:+919108787550" className="hover:text-primary-foreground/80 transition-colors">+91 91087 87550</a>
+                </li>
+                <li className="flex items-center gap-2">
+                    <Mail className="h-4 w-4" />
+                    <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground/80 transition-colors">namaste.mantracademy@gmail.com</a>
+                </li>
             </ul>
           </div>
 
