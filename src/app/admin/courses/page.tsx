@@ -223,12 +223,8 @@ export default function AdminCoursesPage() {
                         <Label className="text-right pt-2">Image</Label>
                         <div className="col-span-3 flex items-center gap-4">
                             <Image src={editingCourse.image} alt="Course image preview" width={128} height={80} className="rounded-md object-cover" />
-                            <Input id="image" name="image" type="file" onChange={handleImageChange} accept="image/*" className="col-span-3 file:text-primary file:font-semibold" />
+                            <Input id="image-upload" name="image-upload" type="file" onChange={handleImageChange} accept="image/*" className="col-span-3 file:text-primary file:font-semibold" />
                         </div>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="aiHint" className="text-right">AI Hint</Label>
-                        <Input id="aiHint" name="aiHint" value={editingCourse.aiHint} onChange={handleChange} className="col-span-3" />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="grid grid-cols-2 items-center gap-2">
@@ -370,5 +366,3 @@ export default function AdminCoursesPage() {
     </div>
   );
 }
-
-    
