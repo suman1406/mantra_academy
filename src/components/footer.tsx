@@ -62,14 +62,14 @@ export function Footer() {
             </div>
             <ul className="space-y-3 text-primary-foreground/80">
                 <li className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
+                    <Phone className="h-5 w-5" />
                     <a href="tel:+919108787550" className="hover:text-primary-foreground transition-colors">+91 91087 87550</a>
                 </li>
                 <li className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" />
+                    <Mail className="h-5 w-5" />
                     <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground transition-colors break-all">namaste.mantracademy@gmail.com</a>
                 </li>
-                 <li className="flex items-center gap-2 pt-2">
+                 <li className="pt-2">
                      <Button asChild variant="secondary" size="sm">
                         <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n" target="_blank" rel="noopener noreferrer">
                             <WhatsAppIcon className="mr-2 h-4 w-4" />
@@ -88,5 +88,3 @@ export function Footer() {
     </footer>
   );
 }
-
-    
