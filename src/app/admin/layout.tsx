@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/admin-sidebar";
 import { AppProvider } from "@/context/AppDataContext";
 import { useToast } from "@/hooks/use-toast";
@@ -13,19 +13,20 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { toast } = useToast();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     try {
       const authStatus = sessionStorage.getItem("isAdminAuthenticated") === "true";
       setIsAuthenticated(authStatus);
 
-      if (!authStatus) {
+      if (!authStatus && pathname !== '/admin/login') {
         router.replace('/admin/login');
       }
     } catch (error) {
-      // This can happen if sessionStorage is not available (e.g., in SSR or private browsing)
       console.error("Could not access session storage:", error);
       toast({
         variant: "destructive",
@@ -33,12 +34,28 @@ export default function AdminLayout({
         description: "Could not verify authentication status. Please enable browser storage.",
       });
       router.replace('/admin/login');
+    } finally {
+      setIsLoading(false);
     }
-  }, [router, toast]);
+  }, [pathname, router, toast]);
 
-  if (!isAuthenticated) {
-    // Render a loading state or nothing while redirecting
+  if (isLoading) {
     return (
+        <div className="flex min-h-screen items-center justify-center bg-background">
+            <p>Loading...</p>
+        </div>
+    );
+  }
+
+  // The login page has its own simple layout, so we don't render the admin shell for it.
+  if (pathname === '/admin/login') {
+      return <AppProvider>{children}</AppProvider>;
+  }
+
+  // If we've determined the user is not authenticated and they somehow haven't been redirected yet,
+  // show a loading message instead of the broken layout.
+  if (!isAuthenticated) {
+     return (
         <div className="flex min-h-screen items-center justify-center bg-background">
             <p>Redirecting to login...</p>
         </div>
