@@ -61,14 +61,14 @@ export function Footer() {
                 <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Facebook /></a>
             </div>
             <div className="space-y-3 text-primary-foreground/80">
-                <div className="flex items-center gap-2">
+                <a href="tel:+919108787550" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                     <Phone className="h-5 w-5" />
-                    <a href="tel:+919108787550" className="hover:text-primary-foreground transition-colors">+91 91087 87550</a>
-                </div>
-                <div className="flex items-center gap-2">
+                    <span>+91 91087 87550</span>
+                </a>
+                <a href="mailto:namaste.mantracademy@gmail.com" className="flex items-center gap-2 hover:text-primary-foreground transition-colors break-all">
                     <Mail className="h-5 w-5" />
-                    <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground transition-colors break-all">namaste.mantracademy@gmail.com</a>
-                </div>
+                    <span>namaste.mantracademy@gmail.com</span>
+                </a>
                  <div className="pt-2">
                      <Button asChild variant="secondary" size="sm">
                         <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n" target="_blank" rel="noopener noreferrer">
