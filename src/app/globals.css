@@ -5,11 +5,11 @@
 
 @layer base {
   :root {
-    --background: 40 100% 98%; /* Half White */
+    --background: 0 0% 100%; /* Pure White */
     --foreground: 240 10% 3.9%; /* Dark Slate Gray */
     --card: 40 100% 96%; /* Lighter Off-white */
     --card-foreground: 240 10% 3.9%;
-    --popover: 40 100% 98%;
+    --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 338 78% 44%; /* Magenta */
     --primary-foreground: 36 100% 98%; /* Off-white text on magenta */
