@@ -40,7 +40,7 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
     };
 
     const Icon = () => {
-        const iconProps = { className: "w-12 h-12 md:w-20 md:h-20 text-card-foreground/80 group-hover:text-card-foreground transition-colors duration-300" };
+        const iconProps = { className: "w-10 h-10 md:w-20 md:h-20 text-card-foreground/80 group-hover:text-card-foreground transition-colors duration-300" };
         switch(item.platform) {
             case "Instagram": return <Instagram {...iconProps} />;
             case "YouTube": return <Youtube {...iconProps} />;
@@ -65,7 +65,7 @@ const SocialCard = ({ item, index }: { item: typeof feedItems[0], index: number 
                 <Card className="overflow-hidden group relative border-border/40 bg-card backdrop-blur-sm aspect-square">
                     <CardContent className="p-4 flex flex-col items-center justify-center h-full gap-4 text-center">
                         <Icon />
-                        <span className="font-semibold text-base md:text-lg text-card-foreground">{item.handle}</span>
+                        <span className="font-semibold text-sm md:text-lg text-card-foreground">{item.handle}</span>
                     </CardContent>
                 </Card>
             </Link>
