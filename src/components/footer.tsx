@@ -32,7 +32,7 @@ export function Footer() {
     <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
       <div className="container mx-auto px-4 py-8 sm:py-12">
         {/* Grid layout — 4 columns, last column wider */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_1fr_1.5fr] gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.5fr_1.5fr_1.5fr] gap-8">
 
           {/* About Section */}
           <div className="space-y-4">
