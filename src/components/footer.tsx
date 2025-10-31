@@ -30,23 +30,21 @@ const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export function Footer() {
   return (
     <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
-      <div className="container mx-auto px-4 py-10 sm:py-14">
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
-          
-          {/* Column 1: About */}
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        {/* Grid layout — 4 columns, last column wider */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_1fr_1fr_1.5fr] gap-8">
+
+          {/* About Section */}
           <div className="space-y-4">
             <Logo className="[&>span]:text-primary-foreground" />
-            <p className="text-sm leading-relaxed max-w-sm">
+            <p className="text-sm max-w-md">
               Unlock the power of sound and vibration. Discover ancient mantras and transform your life.
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* Quick Links */}
           <div>
-            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
-              Quick Links
-            </h3>
+            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="hover:text-primary-foreground transition-colors">Home</Link></li>
               <li><Link href="/courses" className="hover:text-primary-foreground transition-colors">Courses</Link></li>
@@ -55,11 +53,22 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Connect */}
+          {/* Maybe something else here */}
           <div>
+            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Explore</h3>
+            <ul className="space-y-2">
+              <li><Link href="/privacy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
+              <li><Link href="/faq" className="hover:text-primary-foreground transition-colors">FAQs</Link></li>
+            </ul>
+          </div>
+
+          {/* Connect With Us (wider column) */}
+          <div className="space-y-3">
             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
               Connect With Us
             </h3>
+
             <div className="flex space-x-4 mb-4">
               <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                 <Instagram className="h-6 w-6" />
@@ -74,14 +83,12 @@ export function Footer() {
                 <Facebook className="h-6 w-6" />
               </a>
             </div>
-          </div>
 
-          {/* Column 4: Contact */}
-          <div>
-            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
+            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-2">
               Contact Us
             </h3>
-            <div className="space-y-3 text-primary-foreground/80">
+
+            <div className="space-y-3">
               <a href="tel:+919108787550" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Phone className="h-5 w-5" />
                 <span>+91 91087 87550</span>
@@ -96,17 +103,17 @@ export function Footer() {
                 href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-primary-foreground transition-colors leading-none"
+                className="inline-flex items-center gap-2 py-1 rounded-md hover:text-primary-foreground transition-colors leading-none"
               >
-                <WhatsAppIcon className="h-5 w-5 relative top-[0.5px]" />
+                <WhatsAppIcon className="h-5 w-5" />
                 <span>Join on WhatsApp</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="text-center text-sm border-t border-primary-foreground/20 mt-10 pt-6">
+        {/* Bottom note */}
+        <div className="text-center text-sm border-t border-primary-foreground/20 mt-8 pt-6">
           <p>&copy; {new Date().getFullYear()} Mantra Academy. All rights reserved.</p>
         </div>
       </div>
