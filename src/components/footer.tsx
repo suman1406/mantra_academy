@@ -33,9 +33,9 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           
           {/* About Section */}
-          <div className="md:col-span-1 space-y-4">
+          <div className="md:col-span-2 space-y-4">
             <Logo className="[&>span]:text-primary-foreground" />
-             <p className="text-sm">
+             <p className="text-sm max-w-md">
               Unlock the power of sound and vibration. Discover ancient mantras and transform your life.
             </p>
           </div>
@@ -69,19 +69,15 @@ export function Footer() {
                     <Mail className="h-4 w-4" />
                     <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground transition-colors break-all">namaste.mantracademy@gmail.com</a>
                 </li>
+                 <li className="flex items-center gap-2 pt-2">
+                     <Button asChild variant="secondary" size="sm">
+                        <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n" target="_blank" rel="noopener noreferrer">
+                            <WhatsAppIcon className="mr-2 h-4 w-4" />
+                            Join on WhatsApp
+                        </Link>
+                    </Button>
+                </li>
             </ul>
-          </div>
-          
-          {/* Community */}
-          <div>
-            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Join Our Community</h3>
-            <p className="text-sm mb-3">Connect with fellow seekers and get instant updates.</p>
-             <Button asChild variant="secondary">
-                <Link href="https://whatsapp.com/channel/0029Vb43WtE7T8bcZN2cyX1n" target="_blank" rel="noopener noreferrer">
-                    <WhatsAppIcon className="mr-2 h-5 w-5" />
-                    Join on WhatsApp
-                </Link>
-            </Button>
           </div>
 
         </div>
@@ -92,3 +88,5 @@ export function Footer() {
     </footer>
   );
 }
+
+    
