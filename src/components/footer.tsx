@@ -100,7 +100,14 @@ export function Footer() {
               </a>
             </div>
 
-            {/* Contact Info */}
+          </div>
+
+        <div>
+
+          <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">
+              Contact Us
+            </h3>
+          {/* Contact Info */}
             <div className="space-y-3 text-primary-foreground/80">
               <a
                 href="tel:+919108787550"
@@ -129,7 +136,7 @@ export function Footer() {
               </a>
 
             </div>
-          </div>
+        </div>
 
         </div>
         <div className="text-center text-sm border-t border-primary-foreground/20 mt-8 pt-6">
