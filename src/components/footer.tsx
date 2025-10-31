@@ -32,7 +32,7 @@ export function Footer() {
     <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
       <div className="container mx-auto px-4 py-8 sm:py-12">
         {/* Grid layout — 4 columns, last column wider */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_1fr_1fr_1.5fr] gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.2fr_1fr_1.5fr] gap-8">
 
           {/* About Section */}
           <div className="space-y-4">
@@ -54,14 +54,14 @@ export function Footer() {
           </div>
 
           {/* Maybe something else here */}
-          <div>
+          {/* <div>
             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Explore</h3>
             <ul className="space-y-2">
               <li><Link href="/privacy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
               <li><Link href="/faq" className="hover:text-primary-foreground transition-colors">FAQs</Link></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Connect With Us (wider column) */}
           <div className="space-y-3">
