@@ -10,6 +10,7 @@ import { Announcement } from "@/components/announcement";
 import { Testimonials } from "@/components/testimonials";
 import Image from "next/image";
 import { SocialFeed } from "@/components/social-feed";
+import { WhatsappPopup } from "@/components/whatsapp-popup";
 
 export default function Home() {
   const sectionVariants = {
@@ -27,6 +28,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center">
+      <WhatsappPopup />
       <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center p-4">
         <div className="absolute inset-0 celestial-background" />
 
