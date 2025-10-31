@@ -30,11 +30,14 @@ export function Footer() {
   return (
     <footer className="z-10 border-t border-primary-foreground/20 bg-primary text-primary-foreground/80">
       <div className="container mx-auto px-4 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           
           {/* About Section */}
           <div className="md:col-span-1 space-y-4">
             <Logo className="[&>span]:text-primary-foreground" />
+             <p className="text-sm">
+              Unlock the power of sound and vibration. Discover ancient mantras and transform your life.
+            </p>
           </div>
 
           {/* Quick Links */}
@@ -48,9 +51,15 @@ export function Footer() {
             </ul>
           </div>
           
-          {/* Contact */}
+          {/* Connect With Us */}
           <div>
-            <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Contact Us</h3>
+             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Connect With Us</h3>
+             <div className="flex space-x-4 mb-4">
+                <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Instagram /></a>
+                <a href="https://www.youtube.com/@MantrAcademy24" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Youtube /></a>
+                <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><XIcon className="h-6 w-6" /></a>
+                <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Facebook /></a>
+            </div>
             <ul className="space-y-3 text-primary-foreground/80">
                 <li className="flex items-center gap-2">
                     <Phone className="h-4 w-4" />
@@ -58,20 +67,9 @@ export function Footer() {
                 </li>
                 <li className="flex items-center gap-2">
                     <Mail className="h-4 w-4" />
-                    <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground transition-colors">namaste.mantracademy@gmail.com</a>
+                    <a href="mailto:namaste.mantracademy@gmail.com" className="hover:text-primary-foreground transition-colors break-all">namaste.mantracademy@gmail.com</a>
                 </li>
             </ul>
-          </div>
-
-          {/* Social Media */}
-          <div>
-             <h3 className="font-headline text-lg font-semibold text-primary-foreground mb-4">Connect With Us</h3>
-             <div className="flex space-x-4">
-                <a href="https://www.instagram.com/mantr.academy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Instagram /></a>
-                <a href="https://www.youtube.com/@MantrAcademy24" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Youtube /></a>
-                <a href="https://x.com/namaste_mantra" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><XIcon className="h-6 w-6" /></a>
-                <a href="https://www.facebook.com/profile.php?id=61566345014729" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/80 hover:text-primary-foreground"><Facebook /></a>
-            </div>
           </div>
           
           {/* Community */}
