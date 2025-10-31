@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useEffect } from "react";
 import type { Course } from "@/context/AppDataContext";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,8 @@ import {
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CourseCountdown } from "./course-countdown";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 // Custom Dharma Wheel Icon
 const DharmaIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -91,6 +94,7 @@ const highlightIcons: Record<string, React.ElementType> = {
 }
 
 export function CourseDetailClient({ course }: { course: Course }) {
+  const { toast } = useToast();
   const {
     title,
     description,
@@ -103,6 +107,19 @@ export function CourseDetailClient({ course }: { course: Course }) {
     whoCanAttend,
     startDate,
   } = course;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+        toast({
+            title: "Reserve Your Slot!",
+            description: `Seats for '${title}' are filling up. Enroll today!`,
+            action: <ToastAction altText="Enroll Now">Enroll Now</ToastAction>,
+            duration: 8000,
+        });
+    }, 2000); // 2-second delay
+
+    return () => clearTimeout(timer);
+  }, [toast, title]);
 
   const getStartDateText = () => {
     if (!startDate) return "Yet to announce";
@@ -344,3 +361,5 @@ export function CourseDetailClient({ course }: { course: Course }) {
     </div>
   );
 }
+
+    
