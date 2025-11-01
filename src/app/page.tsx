@@ -32,33 +32,30 @@ export default async function Home() {
     <div className="flex flex-col items-center justify-center">
       <WhatsappPopup />
       <ScrollToTop />
-      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center p-4">
+      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center p-4 -mt-16">
         <div className="absolute inset-0 celestial-background" />
 
-        {/* Content */}
-        <div className="z-10 flex flex-col items-center justify-center text-center space-y-4 md:space-y-6">
-            <Image
-              src="/images/bh-removebg.png"
-              alt="Mantra Academy Logo"
-              width={180}
-              height={180}
-              className="h-32 w-32 md:h-44 md:w-44 object-contain drop-shadow-lg"
-              priority
-            />
-          <h1
-            className="mt-4 text-4xl sm:text-5xl md:text-7xl font-headline font-bold tracking-tight text-primary drop-shadow-[0_2px_10px_hsla(var(--primary-foreground),0.1)]"
-          >
-            Welcome to Mantra Academy
-          </h1>
-
-          <p
-            className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto text-sm sm:text-base md:text-xl text-foreground/80 leading-snug"
-          >
-            Unlock the power of sound and vibration. Discover ancient mantras
-            and transform your life through our expert-led courses and vibrant
-            community.
-          </p>
-        </div>
+        {/* Content: centered semi-transparent card */}
+        <div className="z-10 flex flex-col items-center justify-center text-center bg-white/0 backdrop-blur-sm p-6 rounded-2xl">
+          <div className="max-w-2xl mx-auto">
+              <Image
+                src="/images/bh-removebg.png"
+                alt="Mantra Academy Logo"
+                width={176}
+                height={176}
+                className="w-36 h-36 md:w-44 md:h-44 object-contain mb-1 mx-auto"
+                priority
+              />
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-[hsl(var(--primary))] text-center">
+                Welcome to Mantra Academy
+              </h1>
+              <p className="mt-3 text-sm sm:text-base md:text-lg text-[hsl(var(--foreground))] max-w-xl">
+                Unlock the power of sound and vibration. Discover ancient mantras
+                and transform your life through our expert-led courses and vibrant
+                community.
+              </p>
+            </div>
+          </div>
       </section>
 
   <div className="w-full space-y-16 md:space-y-24 py-16 md:py-24">

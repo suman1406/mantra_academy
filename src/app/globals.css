@@ -94,6 +94,11 @@
 	}
 }
 
+@keyframes mandala-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .manuscript-card {
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
@@ -144,4 +149,20 @@
   background-size: 200% 200%;
   animation: background-pan 25s ease-in-out infinite;
   z-index: -2;
+}
+
+.celestial-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/mandala.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  opacity: 1;
+  transform-origin: center center;
+  will-change: transform;
+  animation: mandala-rotate 120s linear infinite;
+  z-index: -1;
+  pointer-events: none;
 }
