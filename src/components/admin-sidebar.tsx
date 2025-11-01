@@ -69,7 +69,7 @@ export function AdminSidebar() {
             <Button
               variant="ghost"
               onClick={handleSignOut}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary w-full justify-start"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-destructive/10 hover:text-destructive w-full justify-start"
             >
               <LogOut className="h-4 w-4" />
               Sign Out
