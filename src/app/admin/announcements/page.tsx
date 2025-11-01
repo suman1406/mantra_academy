@@ -1,8 +1,9 @@
 
 "use client";
 
-import { useState } from "react";
-import { useAppData, Announcement } from "@/context/AppDataContext";
+import { useState, useEffect } from "react";
+import { Announcement } from "@/context/AppDataContext";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -19,10 +20,24 @@ const emptyAnnouncement: Announcement = {
 };
 
 export default function AdminAnnouncementsPage() {
-  const { announcements, setAnnouncements } = useAppData();
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingAnnouncement, setEditingAnnouncement] = useState<Announcement | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const { toast } = useToast();
+  const [isSaving, setIsSaving] = useState(false);
+  const [deletingTitles, setDeletingTitles] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const resp = await fetch('/api/announcements');
+        if (resp.ok) setAnnouncements(await resp.json());
+      } catch (err) {
+        console.error('Failed to load announcements', err);
+      }
+    })();
+  }, []);
 
   const handleAdd = () => {
     setEditingAnnouncement({ ...emptyAnnouncement });
@@ -37,26 +52,59 @@ export default function AdminAnnouncementsPage() {
   };
 
   const handleDelete = (title: string) => {
+    const previous = announcements;
     setAnnouncements(announcements.filter(a => a.title !== title));
+    setDeletingTitles(prev => ({ ...prev, [title]: true }));
+    (async () => {
+      try {
+        const resp = await fetch(`/api/announcements/${encodeURIComponent(title)}`, { method: 'DELETE', credentials: 'same-origin' });
+        if (!resp.ok) throw new Error(await resp.text());
+        toast({ title: 'Deleted', description: 'Announcement removed' });
+      } catch (err) {
+        console.error('Delete error', err);
+        setAnnouncements(previous);
+        toast({ title: 'Delete failed', description: 'Could not remove announcement' });
+      } finally {
+        setDeletingTitles(prev => {
+          const copy = { ...prev };
+          delete copy[title];
+          return copy;
+        });
+      }
+    })();
   };
 
   const handleSave = () => {
     if (!editingAnnouncement) return;
-
-    if (isEditing) {
-      setAnnouncements(announcements.map(a => (a.title === editingAnnouncement.title ? editingAnnouncement : a)));
-    } else {
-      // Simple way to check for duplicates, assumes title is unique
-      const existing = announcements.find(a => a.title === editingAnnouncement.title);
-      if (existing) {
-        // In a real app, show an error to the user
-        alert("An announcement with this title already exists.");
-        return;
-      }
-      setAnnouncements([editingAnnouncement, ...announcements]);
+    // validation
+    if (!editingAnnouncement.title || editingAnnouncement.title.trim() === '') {
+      toast({ title: 'Validation', description: 'Title is required' });
+      return;
     }
-    setIsDialogOpen(false);
-    setEditingAnnouncement(null);
+    (async () => {
+      setIsSaving(true);
+      try {
+        if (isEditing) {
+          const title = editingAnnouncement.title;
+          const resp = await fetch(`/api/announcements/${encodeURIComponent(title)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingAnnouncement) });
+          if (!resp.ok) throw new Error('Update failed');
+          toast({ title: 'Updated', description: 'Announcement updated' });
+        } else {
+          const resp = await fetch('/api/announcements', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingAnnouncement) });
+          if (!resp.ok) throw new Error('Create failed');
+          toast({ title: 'Created', description: 'Announcement created' });
+        }
+        const refreshed = await fetch('/api/announcements');
+        if (refreshed.ok) setAnnouncements(await refreshed.json());
+        setIsDialogOpen(false);
+        setEditingAnnouncement(null);
+      } catch (err) {
+        console.error('Save error', err);
+        toast({ title: 'Save failed', description: 'Could not save announcement' });
+      } finally {
+        setIsSaving(false);
+      }
+    })();
   };
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -92,8 +140,8 @@ export default function AdminAnnouncementsPage() {
                   <TableCell className="font-medium">{announcement.title}</TableCell>
                   <TableCell>{announcement.description}</TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="icon" onClick={() => handleEdit(announcement)}><Edit className="h-4 w-4" /></Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleDelete(announcement.title)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleEdit(announcement)} disabled={isSaving}><Edit className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleDelete(announcement.title)} disabled={Boolean(deletingTitles[announcement.title])}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -144,7 +192,7 @@ export default function AdminAnnouncementsPage() {
           )}
           <DialogFooter>
             <DialogClose asChild><Button variant="outline">Cancel</Button></DialogClose>
-            <Button onClick={handleSave}>Save</Button>
+            <Button onClick={handleSave} disabled={isSaving}>{isSaving ? 'Saving...' : 'Save'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

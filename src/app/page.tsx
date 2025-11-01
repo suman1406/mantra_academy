@@ -1,31 +1,32 @@
 
-"use client";
-
 import { FeaturedCourses } from "@/components/featured-courses";
 import { Philosophy } from "@/components/philosophy";
 import { Vision } from "@/components/vision";
 import { Community } from "@/components/community";
-import { motion } from "framer-motion";
+// framer-motion is client-only. Avoid using it directly in this server component.
 import { Announcement } from "@/components/announcement";
+import { AnimatedSection } from "@/components/animated-section";
 import { Testimonials } from "@/components/testimonials";
 import Image from "next/image";
 import { SocialFeed } from "@/components/social-feed";
 import { WhatsappPopup } from "@/components/whatsapp-popup";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
-export default function Home() {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1.5,
-        ease: "easeInOut",
-        staggerChildren: 0.3,
-      },
-    },
-  };
+import { getAllCourses } from "../services/courseService";
+import { getAnnouncements } from "../services/announcementService";
+
+export default async function Home() {
+  // Fetch live data from DB on the server and pass to client components
+  const [coursesRaw, announcementsRaw] = await Promise.all([getAllCourses(), getAnnouncements()]);
+
+  // Next.js disallows passing objects with toJSON methods (like Mongo ObjectId/Date) directly to client components.
+  // Convert to plain JSON-safe objects first.
+  const courses = JSON.parse(JSON.stringify(coursesRaw || []));
+  const announcements = JSON.parse(JSON.stringify(announcementsRaw || []));
+
+  // Animation wrappers were removed because framer-motion is a client-side lib.
+  // If you want entrance animations, wrap these sections in a client component
+  // that uses framer-motion.
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -60,69 +61,34 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="w-full space-y-16 md:space-y-24 py-16 md:py-24">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+  <div className="w-full space-y-16 md:space-y-24 py-16 md:py-24">
+        <AnimatedSection delay={0}>
           <Philosophy />
-        </motion.div>
-        
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
           <Vision />
-        </motion.div>
+        </AnimatedSection>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <Announcement />
-        </motion.div>
+        <AnimatedSection delay={0.2}>
+          <Announcement announcements={announcements} />
+        </AnimatedSection>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-          <FeaturedCourses />
-        </motion.div>
+        <AnimatedSection delay={0.3}>
+          <FeaturedCourses courses={courses} />
+        </AnimatedSection>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        <AnimatedSection delay={0.4}>
           <Testimonials />
-        </motion.div>
+        </AnimatedSection>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
-            <SocialFeed />
-        </motion.div>
+    <AnimatedSection delay={0.5}>
+      <SocialFeed />
+    </AnimatedSection>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-        >
+        <AnimatedSection delay={0.6}>
           <Community />
-        </motion.div>
+        </AnimatedSection>
       </div>
     </div>
   );

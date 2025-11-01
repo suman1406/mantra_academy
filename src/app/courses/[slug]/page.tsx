@@ -1,24 +1,20 @@
-
-"use client";
-
-import { useAppData } from "@/context/AppDataContext";
 import { notFound } from "next/navigation";
 import { CourseDetailClient } from "@/components/course-detail-client";
-import type { Course } from "@/context/AppDataContext";
+import { getCourseBySlug } from "@/services/courseService";
 
-
-export default function CourseDetailPage({
+export default async function CourseDetailPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { courses } = useAppData();
-  
-  const course = courses.find((c) => c.slug === params.slug);
+  const courseDoc = await getCourseBySlug(params.slug);
 
-  if (!course) {
+  if (!courseDoc) {
     notFound();
   }
+
+  // Serialize Mongoose document to plain JSON before passing to client component
+  const course = JSON.parse(JSON.stringify(courseDoc));
 
   return <CourseDetailClient course={course} />;
 }

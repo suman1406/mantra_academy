@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, BookOpen, LogOut, FileText, ShieldCheck, Megaphone } from "lucide-react";
+import { Home, BookOpen, LogOut, FileText, ShieldCheck, Megaphone, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/admin/courses", label: "Courses", icon: BookOpen },
   { href: "/admin/blog", label: "Blog", icon: FileText },
   { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
+  { href: "/admin/instructors", label: "Instructors", icon: Users },
 ];
 
 const NavLink = ({ href, label, icon: Icon }: { href: string; label: string; icon: React.ElementType }) => {
@@ -37,12 +38,15 @@ export function AdminSidebar() {
   const router = useRouter();
 
   const handleSignOut = () => {
-    try {
-        sessionStorage.removeItem("isAdminAuthenticated");
+    (async () => {
+      try {
+        await fetch('/api/admin/logout', { method: 'POST', credentials: 'same-origin' });
+      } catch (err) {
+        console.error('Logout request failed:', err);
+      } finally {
         router.push('/');
-    } catch (error) {
-        console.error("Could not clear session storage:", error);
-    }
+      }
+    })();
   };
 
   return (

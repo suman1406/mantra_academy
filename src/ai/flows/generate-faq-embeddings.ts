@@ -58,7 +58,26 @@ const generateFaqEmbeddingsFlow = ai.defineFlow(
     const embeddings: number[][] = [];
 
     for (const faq of faqs) {
-      const {embedding} = await ai.embed({text: faq});
+      // genkit/embedder return shapes vary by provider/version. Use a tolerant extraction
+      // strategy and fall back to an empty vector if nothing sensible is found.
+      // Use `any` to avoid tight typing issues with the external lib.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const res: any = await ai.embed(({ input: faq } as any));
+
+      let embedding: number[] = [];
+
+      if (Array.isArray(res) && Array.isArray(res[0]) && typeof res[0][0] === 'number') {
+        // e.g. [[0.1, 0.2, ...]]
+        embedding = res[0];
+      } else if (Array.isArray(res) && typeof res[0] === 'number') {
+        // e.g. [0.1, 0.2, ...]
+        embedding = res as number[];
+      } else if (res && Array.isArray(res.embedding)) {
+        embedding = res.embedding;
+      } else if (res && Array.isArray(res.data) && Array.isArray(res.data[0]?.embedding)) {
+        embedding = res.data[0].embedding;
+      }
+
       embeddings.push(embedding);
     }
 

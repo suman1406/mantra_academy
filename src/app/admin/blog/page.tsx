@@ -1,8 +1,9 @@
 
 "use client";
 
-import { useState } from "react";
-import { useAppData, BlogPost } from "@/context/AppDataContext";
+import { useState, useEffect } from "react";
+import { BlogPost } from "@/context/AppDataContext";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -12,21 +13,38 @@ import { Textarea } from "@/components/ui/textarea";
 import { PlusCircle, Edit, Trash2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import ProgressBar from "@/components/ui/progress";
 
 const emptyPost: Omit<BlogPost, "slug"> = {
   title: "",
   author: "",
-  date: new Date().toISOString().split('T')[0],
+    date: new Date().toISOString().split('T')[0],
   excerpt: "",
   content: "",
   image: "https://placehold.co/800x600.png",
-  aiHint: "",
 };
 
 export default function AdminBlogPage() {
-  const { blogPosts, setBlogPosts } = useAppData();
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | Omit<BlogPost, 'slug'> | null>(null);
+  const { toast } = useToast();
+  const [isSaving, setIsSaving] = useState(false);
+  const [deletingSlugs, setDeletingSlugs] = useState<Record<string, boolean>>({});
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const resp = await fetch('/api/blogs');
+        if (resp.ok) setBlogPosts(await resp.json());
+      } catch (err) {
+        console.error('Failed to load blog posts', err);
+      }
+    })();
+  }, []);
 
   const handleAdd = () => {
     setEditingPost({ ...emptyPost, date: new Date().toLocaleDateString('en-CA') });
@@ -35,35 +53,110 @@ export default function AdminBlogPage() {
 
   const handleEdit = (post: BlogPost) => {
     setEditingPost(post);
+    // preview existing image
+    const img = (post as any).image;
+    if (!img) setPreviewSrc(null);
+    else if (typeof img === 'string') setPreviewSrc(img);
+    else setPreviewSrc(img?.url || img?.secure_url || null);
     setIsDialogOpen(true);
   };
 
   const handleDelete = (slug: string) => {
+    // optimistic
+    const previous = blogPosts;
     setBlogPosts(blogPosts.filter(p => p.slug !== slug));
+    setDeletingSlugs(prev => ({ ...prev, [slug]: true }));
+    (async () => {
+      try {
+        const resp = await fetch(`/api/blogs/${encodeURIComponent(slug)}`, { method: 'DELETE', credentials: 'same-origin' });
+        if (!resp.ok) throw new Error(await resp.text());
+        toast({ title: 'Deleted', description: 'Post removed' });
+      } catch (err) {
+        console.error('Delete error', err);
+        setBlogPosts(previous);
+        toast({ title: 'Delete failed', description: 'Could not remove post' });
+      } finally {
+        setDeletingSlugs(prev => {
+          const copy = { ...prev };
+          delete copy[slug];
+          return copy;
+        });
+      }
+    })();
   };
 
   const handleSave = () => {
     if (!editingPost) return;
-
-    const isEditing = 'slug' in editingPost && blogPosts.some(p => p.slug === editingPost.slug);
-
-    if (isEditing) {
-      setBlogPosts(blogPosts.map(p => (p.slug === (editingPost as BlogPost).slug ? (editingPost as BlogPost) : p)));
-    } else {
-      const newPost: BlogPost = {
-        ...editingPost,
-        slug: editingPost.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-      } as BlogPost;
-      setBlogPosts([newPost, ...blogPosts]);
+    // simple validation
+    if (!editingPost.title || editingPost.title.trim() === '') {
+      toast({ title: 'Validation', description: 'Title is required' });
+      return;
     }
-    setIsDialogOpen(false);
-    setEditingPost(null);
+    (async () => {
+      setIsSaving(true);
+      try {
+        const isEditing = 'slug' in editingPost && !!(editingPost as any).slug;
+        if (isEditing) {
+          const slug = (editingPost as BlogPost).slug;
+          const resp = await fetch(`/api/blogs/${encodeURIComponent(slug)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingPost) });
+          if (!resp.ok) {
+            const text = await resp.text();
+            console.error('Update failed:', resp.status, text);
+            throw new Error(text || 'Update failed');
+          }
+          toast({ title: 'Updated', description: 'Post updated' });
+        } else {
+          const newPost = { ...(editingPost as any), slug: (editingPost as any).title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') };
+          const resp = await fetch('/api/blogs', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newPost) });
+          if (!resp.ok) {
+            const text = await resp.text();
+            console.error('Create failed:', resp.status, text);
+            throw new Error(text || 'Create failed');
+          }
+          toast({ title: 'Created', description: 'Post created' });
+        }
+        // refresh list
+        const refreshed = await fetch('/api/blogs');
+        if (refreshed.ok) setBlogPosts(await refreshed.json());
+        setIsDialogOpen(false);
+        setEditingPost(null);
+      } catch (err) {
+        console.error('Save failed', err);
+        toast({ title: 'Save failed', description: 'Could not save post' });
+      } finally {
+        setIsSaving(false);
+      }
+    })();
   };
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!editingPost) return;
     const { name, value } = e.target;
     setEditingPost({ ...editingPost, [name]: value });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const dataUrl = reader.result as string;
+      setPreviewSrc(dataUrl);
+      setIsUploadingImage(true);
+      setUploadProgress(0);
+      try {
+  const json = await import('@/lib/uploadClient').then(m => m.uploadFileToCloudinary(file, { onProgress: (p) => setUploadProgress(p) }));
+  setEditingPost((prev: any) => ({ ...prev, image: { url: json.secure_url || json.url, publicId: json.public_id, format: json.format, width: json.width, height: json.height, bytes: json.bytes } } as any));
+        toast({ title: 'Image uploaded', description: 'Image uploaded successfully' });
+      } catch (err) {
+        console.error('Upload error', err);
+        toast({ title: 'Upload failed', description: 'Could not upload image' });
+      } finally {
+        setIsUploadingImage(false);
+        setUploadProgress(0);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -93,10 +186,10 @@ export default function AdminBlogPage() {
                 <TableRow key={post.slug}>
                   <TableCell className="font-medium">{post.title}</TableCell>
                   <TableCell>{post.author}</TableCell>
-                  <TableCell>{post.date}</TableCell>
+                  <TableCell>{new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium' }).format(new Date(post.date))}</TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="icon" onClick={() => handleEdit(post)}><Edit className="h-4 w-4" /></Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleDelete(post.slug)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleEdit(post)} disabled={isSaving}><Edit className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleDelete(post.slug)} disabled={Boolean(deletingSlugs[post.slug])}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -134,15 +227,27 @@ export default function AdminBlogPage() {
                     <Textarea id="content" name="content" value={editingPost.content} onChange={handleChange} className="col-span-3 h-48" />
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="image" className="text-right">Image URL</Label>
-                    <Input id="image" name="image" value={editingPost.image} onChange={handleChange} className="col-span-3" />
+                    <Label htmlFor="imageFile" className="text-right">Image</Label>
+                    <div className="col-span-3 flex items-center gap-4">
+                      <input id="imageFile" type="file" accept="image/*" onChange={handleFileChange} />
+                      {isUploadingImage ? (
+                        <div className="flex items-center gap-3">
+                          <ProgressBar percent={uploadProgress} />
+                          <span className="text-sm">{uploadProgress}%</span>
+                        </div>
+                      ) : (
+                        previewSrc ? <img src={previewSrc} alt="preview" className="h-24 w-32 object-cover rounded" /> : (
+                          editingPost?.image ? <img src={typeof editingPost.image === 'string' ? editingPost.image : (editingPost as any).image?.url} alt="current" className="h-24 w-32 object-cover rounded" /> : null
+                        )
+                      )}
+                    </div>
                 </div>
                 </div>
              </ScrollArea>
           )}
           <DialogFooter>
-            <DialogClose asChild><Button variant="outline">Cancel</Button></DialogClose>
-            <Button onClick={handleSave}>Save</Button>
+            <DialogClose asChild><Button variant="outline" disabled={isSaving}>Cancel</Button></DialogClose>
+            <Button onClick={handleSave} disabled={isSaving}>{isSaving ? 'Saving...' : 'Save'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

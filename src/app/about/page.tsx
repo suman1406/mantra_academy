@@ -33,14 +33,12 @@ const teamMembers = [
     name: "Karthik Sharma",
     role: "Co-Founder & Lead Instructor",
     image: "https://placehold.co/400x400.png",
-    aiHint: "indian scholar man",
     bio: "Karthik Sharma is a dedicated scholar, shaped by over 13 years of immersive learning in the traditional Gurukula system, with a firm grounding in the Indian Knowledge Systems (IKS). Introduced to the Vedic tradition at the age of 10, he studied Krishna Yajurveda, along with the Upanishads, Bhagavad Gītā, Brahmasūtras, Yogasūtras, and key shastras like Vyākaraṇa, Kāvya, and Mīmāṁsā. Under the guidance of Dr. Ramachandra Bhat Kotemane, a leading Vedic scholar, he developed a deeply experiential and contemplative approach to Vedānta. Karthik holds Vidwat (M.A.) in Advaita Vedanta and an M.Phil, and is currently pursuing doctoral research. With a heartfelt commitment to preserving India’s sacred wisdom, he continues to share the Gurukula way of learning bridging ancient heritage and modern seekers through teaching, reflection, and practice.",
   },
   {
     name: "Jyothi Sharma",
     role: "Co-Founder & Instructor",
     image: "https://placehold.co/400x400.png",
-    aiHint: "indian scholar woman",
     bio: "Jyothi M. Bhat is a dedicated scholar and teacher deeply grounded in the timeless wisdom of the Indian Knowledge System (IKS). Trained in the traditional Gurukula way, she embodies the living heritage of oral transmission, disciplined study, and spiritual practice that form the heart of Bharat’s sacred teachings. Her profound understanding of Advaita Vedānta and Sanskrit scriptures is enriched by immersive Gurukula education, where learning merges scholarship with heartfelt experience. Committed to preserving and sharing this wisdom, Jyothi integrates authentic classical knowledge with contemporary inquiry, making the ancient teachings accessible and relevant for today’s seekers. At Mantra Academy, she brings this unique blend of tradition and modern insight to guide learners gently but deeply on their spiritual path, nurturing not just knowledge but transformation through sound, meaning, and devotion.",
   },
 ];
@@ -84,7 +82,6 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0]; inde
           alt={member.name}
           width={400}
           height={400}
-          data-ai-hint={member.aiHint}
           className="rounded-full object-cover ring-4 ring-offset-4 ring-offset-background ring-accent/50"
         />
       </motion.div>
@@ -114,22 +111,22 @@ export default function AboutPage() {
         animate="visible"
       >
         <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm p-6 md:p-12 text-center">
-          <motion.h1
-            variants={fadeUp}
-            custom={0.2}
-            className="text-3xl md:text-5xl font-headline font-bold text-card-foreground"
-          >
-            Our Sacred Mission
-          </motion.h1>
           <motion.div
-            variants={fadeUp}
-            custom={0.4}
-            className="text-card-foreground/80 mt-4 md:mt-6 space-y-4 text-base md:text-lg max-w-4xl mx-auto"
+            whileHover={{ scale: 1.05 }}
+            className="relative h-64 md:h-auto min-h-[300px] md:min-h-[400px] overflow-hidden"
           >
+            <Image
+              src="https://placehold.co/600x800.png"
+              alt="Acharya Dr. Ramachandra Bhat Kotemane"
+              fill
+              className="object-cover object-top"
+            />
+          </motion.div>
+          <div className="mt-6">
             <p>
               To preserve, embody, and transmit the authentic wisdom of the Vedas, Sanskrit, and Indian Knowledge Systems through accessible, immersive, and heartfelt teaching. Mantra Academy is dedicated to nurturing deep understanding, skillful chanting, and spiritual transformation by blending traditional Gurukula methods with modern learning, inspiring seekers worldwide to connect with Sanātana Dharma’s timeless truths and sacred practices.
             </p>
-          </motion.div>
+          </div>
         </Card>
       </motion.section>
 
@@ -148,7 +145,6 @@ export default function AboutPage() {
             alt="Acharya Dr. Ramachandra Bhat Kotemane"
             fill
             className="object-cover object-top"
-            data-ai-hint="indian scholar portrait"
           />
         </motion.div>
         <motion.div

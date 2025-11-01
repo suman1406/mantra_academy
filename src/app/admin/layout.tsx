@@ -19,24 +19,30 @@ export default function AdminLayout({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const authStatus = sessionStorage.getItem("isAdminAuthenticated") === "true";
-      setIsAuthenticated(authStatus);
-
-      if (!authStatus && pathname !== '/admin/login') {
-        router.replace('/admin/login');
+    (async () => {
+      try {
+  const resp = await fetch('/api/admin/me', { credentials: 'same-origin' });
+        if (!resp.ok) {
+          // not authenticated
+          if (pathname !== '/admin/login') router.replace('/admin/login');
+          setIsAuthenticated(false);
+        } else {
+          const data = await resp.json();
+          setIsAuthenticated(Boolean(data?.authenticated));
+        }
+      } catch (error) {
+        console.error('Auth check failed', error);
+        toast({
+          variant: 'destructive',
+          title: 'Session Error',
+          description: 'Could not verify authentication status. Please try again.',
+        });
+        if (pathname !== '/admin/login') router.replace('/admin/login');
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Could not access session storage:", error);
-      toast({
-        variant: "destructive",
-        title: "Session Error",
-        description: "Could not verify authentication status. Please enable browser storage.",
-      });
-      router.replace('/admin/login');
-    } finally {
-      setIsLoading(false);
-    }
+    })();
   }, [pathname, router, toast]);
 
   if (isLoading) {

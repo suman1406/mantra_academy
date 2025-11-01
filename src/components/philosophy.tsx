@@ -57,7 +57,6 @@ export function Philosophy() {
               alt="A serene sanctuary with soft light"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
-              data-ai-hint="sound waves abstract"
             />
           </div>
         </Card>

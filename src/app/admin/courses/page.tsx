@@ -1,8 +1,9 @@
 
 "use client";
 
-import { useState } from "react";
-import { useAppData, Course, instructors as allInstructors } from "@/context/AppDataContext";
+import { useState, useEffect, useRef } from "react";
+import { Course } from "@/context/AppDataContext";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from "@/components/ui/dialog";
@@ -15,18 +16,47 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
+import ProgressBar from "@/components/ui/progress";
 
 const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
-  slug: "", title: "", category: "", image: "https://placehold.co/600x400.png", aiHint: "", description: "",
+  slug: "", title: "", category: "", image: "https://placehold.co/600x400.png", description: "",
   fullDescription: "", price: 0, duration: "", lectures: 0, level: "All Levels", language: "English",
-  resources: 0, instructor: allInstructors.rishi, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
-  startDate: new Date().toISOString().split('T')[0],
+  resources: 0, instructor: { name: '', title: '', image: 'https://placehold.co/100x100.png' }, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
+  startDate: new Date().toISOString().split('T')[0]
 };
 
 export default function AdminCoursesPage() {
-  const { courses, setCourses } = useAppData();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [instructors, setInstructors] = useState<any[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState<Course | Omit<Course, 'rating' | 'reviews'> | null>(null);
+  const { toast } = useToast();
+  const [isSaving, setIsSaving] = useState(false);
+  const [deletingSlugs, setDeletingSlugs] = useState<Record<string, boolean>>({});
+  const nestedDebounceRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const resp = await fetch('/api/courses');
+        if (resp.ok) setCourses(await resp.json());
+      } catch (err) {
+        console.error('Failed to load courses', err);
+      }
+    })();
+    // fetch instructors
+    (async () => {
+      try {
+        const resp = await fetch('/api/instructors');
+        if (resp.ok) setInstructors(await resp.json());
+      } catch (err) {
+        console.error('Failed to load instructors', err);
+      }
+    })();
+  }, []);
 
   const handleAdd = () => {
     setEditingCourse(JSON.parse(JSON.stringify(emptyCourse)));
@@ -39,28 +69,77 @@ export default function AdminCoursesPage() {
   };
 
   const handleDelete = (slug: string) => {
+    // optimistic delete
+    const previous = courses;
     setCourses(courses.filter(c => c.slug !== slug));
+    setDeletingSlugs(prev => ({ ...prev, [slug]: true }));
+    (async () => {
+      try {
+        const resp = await fetch(`/api/courses/${encodeURIComponent(slug)}`, { method: 'DELETE', credentials: 'same-origin' });
+        if (!resp.ok) {
+          throw new Error(await resp.text());
+        }
+        toast({ title: 'Deleted', description: 'Course removed', });
+      } catch (err) {
+        console.error('Delete error', err);
+        setCourses(previous);
+        toast({ title: 'Delete failed', description: 'Could not remove course', });
+      } finally {
+        setDeletingSlugs(prev => {
+          const copy = { ...prev };
+          delete copy[slug];
+          return copy;
+        });
+      }
+    })();
   };
 
   const handleSave = () => {
     if (!editingCourse) return;
 
-    const isEditing = 'slug' in editingCourse && editingCourse.slug && courses.some(c => c.slug === editingCourse.slug);
-
-    if (isEditing) {
-      setCourses(courses.map(c => (c.slug === (editingCourse as Course).slug ? (editingCourse as Course) : c)));
-    } else {
-       const slug = editingCourse.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      const newCourse: Course = {
-        ...editingCourse,
-        slug: slug,
-        rating: 0,
-        reviews: 0,
-      } as Course;
-      setCourses([newCourse, ...courses]);
+    // validation
+    if (!editingCourse.title || editingCourse.title.trim() === "") {
+      toast({ title: 'Validation', description: 'Title is required' });
+      return;
     }
-    setIsDialogOpen(false);
-    setEditingCourse(null);
+    if (Number(editingCourse.price) < 0) {
+      toast({ title: 'Validation', description: 'Price must be >= 0' });
+      return;
+    }
+
+    (async () => {
+      setIsSaving(true);
+      try {
+        const isEditing = 'slug' in editingCourse && editingCourse.slug && courses.some(c => c.slug === (editingCourse as Course).slug);
+        if (isEditing) {
+          const slug = (editingCourse as Course).slug;
+          const resp = await fetch(`/api/courses/${encodeURIComponent(slug)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingCourse) });
+          if (!resp.ok) throw new Error('Update failed');
+          toast({ title: 'Updated', description: 'Course updated' });
+        } else {
+          const slug = (editingCourse as any).title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+          const newCourse: Course = {
+            ...(editingCourse as any),
+            slug,
+            rating: 0,
+            reviews: 0,
+          } as Course;
+          const resp = await fetch('/api/courses', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newCourse) });
+          if (!resp.ok) throw new Error('Create failed');
+          toast({ title: 'Created', description: 'Course created' });
+        }
+        // refresh
+        const refreshed = await fetch('/api/courses');
+        if (refreshed.ok) setCourses(await refreshed.json());
+        setIsDialogOpen(false);
+        setEditingCourse(null);
+      } catch (err) {
+        console.error('Save failed', err);
+        toast({ title: 'Save failed', description: 'Could not save course' });
+      } finally {
+        setIsSaving(false);
+      }
+    })();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -73,8 +152,8 @@ export default function AdminCoursesPage() {
   const handleSelectChange = (name: string, value: string) => {
      if (!editingCourse) return;
      if (name === "instructor") {
-         const selectedInstructor = Object.values(allInstructors).find(inst => inst.name === value) || allInstructors.rishi;
-         setEditingCourse({ ...editingCourse, instructor: selectedInstructor });
+    const selectedInstructor = instructors.find((inst: any) => inst.name === value) || { name: value, title: '', image: 'https://placehold.co/100x100.png' };
+      setEditingCourse({ ...editingCourse, instructor: selectedInstructor });
      } else {
         setEditingCourse({ ...editingCourse, [name]: value });
      }
@@ -84,8 +163,21 @@ export default function AdminCoursesPage() {
     if (!editingCourse || !e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setEditingCourse({ ...editingCourse, image: reader.result as string });
+    reader.onload = async () => {
+      const dataUrl = reader.result as string;
+      setPreviewSrc(dataUrl);
+      setIsUploadingImage(true);
+      setUploadProgress(0);
+      try {
+        const json = await import('@/lib/uploadClient').then(m => m.uploadFileToCloudinary(file, { onProgress: (p) => setUploadProgress(p) }));
+        setEditingCourse((prev: any) => ({ ...prev, image: { url: json.secure_url || json.url, publicId: json.public_id, format: json.format, width: json.width, height: json.height, bytes: json.bytes } } as any));
+      } catch (err) {
+        console.error('Upload error', err);
+        // keep dataUrl as preview but do not set to model
+      } finally {
+        setIsUploadingImage(false);
+        setUploadProgress(0);
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -99,7 +191,6 @@ export default function AdminCoursesPage() {
     subIndex?: number
   ) => {
     if (!editingCourse) return;
-    
     // Create a deep copy to avoid direct state mutation
     const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
 
@@ -108,8 +199,18 @@ export default function AdminCoursesPage() {
     } else {
         newEditingCourse[section][index][field] = value;
     }
-    
-    setEditingCourse(newEditingCourse);
+
+    // debounce nested lesson title changes to reduce rerenders
+    if (subSection === 'lessons') {
+      const key = `${section}:${index}:${subIndex}:${field}`;
+      if (nestedDebounceRef.current[key]) clearTimeout(nestedDebounceRef.current[key]);
+      nestedDebounceRef.current[key] = setTimeout(() => {
+        setEditingCourse(newEditingCourse);
+        delete nestedDebounceRef.current[key];
+      }, 250);
+    } else {
+      setEditingCourse(newEditingCourse);
+    }
   };
 
   const addNestedItem = (section: 'curriculum' | 'faqs' | 'highlights' | 'whoCanAttend') => {
@@ -180,8 +281,8 @@ export default function AdminCoursesPage() {
                   <TableCell>{course.level}</TableCell>
                   <TableCell>₹{course.price}</TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="icon" onClick={() => handleEdit(course)}><Edit className="h-4 w-4" /></Button>
-                    <Button variant="ghost" size="icon" onClick={() => handleDelete(course.slug)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleEdit(course)} disabled={isSaving}><Edit className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleDelete(course.slug)} disabled={Boolean(deletingSlugs[course.slug])}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -222,8 +323,18 @@ export default function AdminCoursesPage() {
                       <div className="grid grid-cols-4 items-start gap-4">
                         <Label className="text-right pt-2">Image</Label>
                         <div className="col-span-3 flex items-center gap-4">
-                            <Image src={editingCourse.image} alt="Course image preview" width={128} height={80} className="rounded-md object-cover" />
-                            <Input id="image-upload" name="image-upload" type="file" onChange={handleImageChange} accept="image/*" className="col-span-3 file:text-primary file:font-semibold" />
+                            <div className="flex items-center gap-4">
+                              <Image src={typeof editingCourse.image === 'string' ? editingCourse.image : (editingCourse as any).image?.url || 'https://placehold.co/600x400.png'} alt="Course image preview" width={128} height={80} className="rounded-md object-cover" />
+                              <div className="flex flex-col">
+                                <Input id="image-upload" name="image-upload" type="file" onChange={handleImageChange} accept="image/*" className="file:text-primary file:font-semibold" />
+                                {isUploadingImage && (
+                                  <div className="mt-2 flex items-center gap-2">
+                                    <ProgressBar percent={uploadProgress} />
+                                    <span className="text-sm">{uploadProgress}%</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
@@ -251,12 +362,12 @@ export default function AdminCoursesPage() {
                           </div>
                           <div className="grid grid-cols-2 items-center gap-2">
                             <Label htmlFor="instructor" className="text-right">Instructor</Label>
-                            <Select name="instructor" value={editingCourse.instructor.name} onValueChange={(value) => handleSelectChange('instructor', value)}>
-                                <SelectTrigger><SelectValue/></SelectTrigger>
-                                <SelectContent>
-                                    {Object.values(allInstructors).map(inst => <SelectItem key={inst.name} value={inst.name}>{inst.name}</SelectItem>)}
-                                </SelectContent>
-                            </Select>
+              <Select name="instructor" value={editingCourse.instructor?.name || ''} onValueChange={(value) => handleSelectChange('instructor', value)}>
+                <SelectTrigger><SelectValue/></SelectTrigger>
+                <SelectContent>
+                  {instructors.map(inst => <SelectItem key={inst._id || inst.name} value={inst.name}>{inst.name}</SelectItem>)}
+                </SelectContent>
+              </Select>
                           </div>
                       </div>
                         <div className="grid grid-cols-2 gap-4">
@@ -288,7 +399,7 @@ export default function AdminCoursesPage() {
                 <AccordionItem value="item-1">
                     <AccordionTrigger className="font-semibold">Curriculum</AccordionTrigger>
                     <AccordionContent className="space-y-4 pt-4">
-                    {editingCourse.curriculum?.map((section, sectionIndex) => (
+                    {editingCourse.curriculum?.map((section: any, sectionIndex: number) => (
                         <Card key={sectionIndex} className="p-4 bg-muted/50">
                         <div className="flex justify-between items-center mb-2">
                             <Input
@@ -299,7 +410,7 @@ export default function AdminCoursesPage() {
                             />
                             <Button variant="ghost" size="icon" onClick={() => removeNestedItem('curriculum', sectionIndex)}><X className="h-4 w-4" /></Button>
                         </div>
-                        {section.lessons.map((lesson, lessonIndex) => (
+                        {section.lessons.map((lesson: any, lessonIndex: number) => (
                             <div key={lessonIndex} className="flex items-center gap-2 ml-4 mb-2">
                             <Input
                                 placeholder="Lesson Title"
@@ -358,8 +469,8 @@ export default function AdminCoursesPage() {
             </ScrollArea>
           )}
           <DialogFooter>
-            <DialogClose asChild><Button variant="outline">Cancel</Button></DialogClose>
-            <Button onClick={handleSave}>Save</Button>
+            <DialogClose asChild><Button variant="outline" disabled={isSaving}>Cancel</Button></DialogClose>
+            <Button onClick={handleSave} disabled={isSaving}>{isSaving ? 'Saving...' : 'Save'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

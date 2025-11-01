@@ -16,28 +16,24 @@ const testimonials = [
     title: "Mantra Student",
     quote: "The foundational course changed my life. I never understood the science behind mantras until now. The instructors are authentic and the teachings are profound.",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "woman portrait happy",
   },
   {
     name: "Rajesh Kumar",
     title: "Yoga Teacher",
     quote: "As a yoga teacher, I thought I knew about mantras. Mantra Academy took my understanding to a whole new level. My own teaching has become so much more powerful.",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "man portrait smiling",
   },
   {
     name: "Sunita Patel",
     title: "Spiritual Seeker",
     quote: "Mantra Academy is an incredible resource. The community is supportive, and the depth of knowledge shared is unparalleled. It's a must for any serious spiritual seeker.",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "woman portrait content",
   },
    {
     name: "David Chen",
     title: "Meditation Practitioner",
     quote: "The clarity and precision of the teachings here are exceptional. It has brought a new dimension to my daily meditation practice. Highly recommended!",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "asian man portrait",
   },
 ];
 
@@ -105,7 +101,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
               </CardContent>
               <div className="flex items-center mt-6 p-0">
                 <Avatar className="h-12 w-12 md:h-16 md:w-16 mr-4 overflow-hidden">
-                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} className="group-hover:scale-110 transition-transform duration-500" />
+                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="group-hover:scale-110 transition-transform duration-500" />
                   <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>

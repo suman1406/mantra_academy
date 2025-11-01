@@ -1,107 +1,27 @@
 
-"use client";
+import { getAllCourses } from "../../services/courseService";
+import CourseGridClient from "./CourseGridClient";
+import { AnimatedSection } from "@/components/animated-section";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useAppData } from "@/context/AppDataContext";
-import Link from "next/link";
-import { useIsMobile } from "@/hooks/use-mobile";
-
-const CourseCard = ({ course, i }: { course: ReturnType<typeof useAppData>['courses'][0], i: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || isMobile) return;
-    const { left, top, width, height } = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / (width/2);
-    const y = (e.clientY - top - height / 2) / (height/2);
-    cardRef.current.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale3d(1.05, 1.05, 1.05)`;
-  };
-
-  const onMouseLeave = () => {
-    if (!cardRef.current || isMobile) return;
-    cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
-  };
-
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5, delay: i * 0.1 }}
-      ref={cardRef}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      style={{ transition: 'transform 0.2s ease-out' }}
-      className="w-full"
-    >
-      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl text-card-foreground">
-        <CardHeader className="p-0">
-          <div className="relative h-56 w-full overflow-hidden">
-            <Image
-              src={course.image}
-              alt={course.title}
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-700"
-              data-ai-hint={course.aiHint}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 group-hover:from-black/60 transition-colors" />
-             <Badge variant="default" className="absolute top-4 right-4 bg-primary text-primary-foreground">{course.category}</Badge>
-          </div>
-        </CardHeader>
-        <CardContent className="p-6 flex-grow flex flex-col">
-          <CardTitle className="font-headline text-xl md:text-2xl text-card-foreground">{course.title}</CardTitle>
-          <p className="text-card-foreground/70 mt-2 flex-grow text-sm md:text-base">{course.description}</p>
-        </CardContent>
-        <CardFooter className="p-6 pt-0">
-          <Button variant="outline" className="w-full group" asChild>
-            <Link href={`/courses/${course.slug}`}>
-              Explore Now
-              <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
-        </CardFooter>
-      </Card>
-    </motion.div>
-  );
-};
-
-
-export default function CoursesPage() {
-  const { courses } = useAppData();
+export default async function CoursesPage() {
+  const courses = await getAllCourses();
+  // Convert Mongoose documents to plain JSON-safe objects before passing to client components
+  const coursesData = JSON.parse(JSON.stringify(courses || []));
 
   return (
     <div className="py-12 md:py-16 space-y-12 md:space-y-16 relative flex flex-col items-center">
-      <motion.section
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center px-4"
-      >
-        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
-          Tune Your Vibration
-        </h1>
-        <p className="mt-4 md:mt-6 max-w-3xl mx-auto space-y-4 text-base md:text-lg text-foreground/80">
-          Our courses are designed to guide you through the ancient science of mantras.
-        </p>
-      </motion.section>
+      <AnimatedSection>
+        <section className="text-center px-4">
+          <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary">
+            Tune Your Vibration
+          </h1>
+          <p className="mt-4 md:mt-6 max-w-3xl mx-auto space-y-4 text-base md:text-lg text-foreground/80">
+            Our courses are designed to guide you through the ancient science of mantras.
+          </p>
+        </section>
+      </AnimatedSection>
 
-      <section className="w-full max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8 md:mt-12">
-          <AnimatePresence>
-            {courses.map((course, i) => (
-              <CourseCard key={course.title} course={course} i={i} />
-            ))}
-          </AnimatePresence>
-        </div>
-      </section>
+      <CourseGridClient courses={coursesData} />
     </div>
   );
 }

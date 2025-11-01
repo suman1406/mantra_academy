@@ -12,37 +12,53 @@ import { LogIn, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState("admin@mantra.com");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
-    // If the user is already authenticated, redirect them to the dashboard.
-    if (sessionStorage.getItem("isAdminAuthenticated") === "true") {
-      router.replace('/admin/dashboard');
-    }
+    // If the user is already authenticated (server cookie), verify and redirect
+    (async () => {
+      try {
+        const resp = await fetch('/api/admin/me');
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data?.authenticated) router.replace('/admin/dashboard');
+        }
+      } catch (err) {
+        // ignore, user not authenticated
+      }
+    })();
   }, [router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    
-    if (email === "admin@mantra.com" && password === "password") {
+    (async () => {
       try {
-        sessionStorage.setItem("isAdminAuthenticated", "true");
-        toast({
-          title: "Login Successful",
-          description: "Welcome back, Admin!",
+        const resp = await fetch('/api/admin/login', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
         });
+
+        if (!resp.ok) {
+          const body = await resp.json().catch(() => ({}));
+          setError(body?.error || 'Invalid credentials');
+          return;
+        }
+
+        // Server sets an httpOnly cookie with the token. Redirect to dashboard.
+        toast({ title: 'Login Successful', description: 'Welcome back, Admin!' });
         router.push('/admin/dashboard');
-      } catch (error) {
-        setError("Could not save session. Please enable storage in your browser.");
+      } catch (err) {
+        console.error(err);
+        setError('Login failed. Please try again.');
       }
-    } else {
-      setError("Invalid email or password.");
-    }
+    })();
   };
 
   return (
@@ -52,7 +68,7 @@ export default function AdminLoginPage() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <Card className="w-full max-w-md shadow-2xl bg-card/90 backdrop-blur-sm border-primary/20 text-card-foreground">
+        <Card className="w-full max-w-md shadow-2xl bg-card/95 backdrop-blur-sm border border-primary/10 text-card-foreground">
           <CardHeader className="text-center space-y-4">
             <motion.div
               initial={{ scale: 0 }}
@@ -63,7 +79,7 @@ export default function AdminLoginPage() {
                 damping: 20,
                 delay: 0.3,
               }}
-              className="mx-auto bg-primary p-4 rounded-full w-fit mb-2 border-2 border-primary-foreground/50 shadow-lg"
+              className="mx-auto bg-gradient-to-br from-primary to-primary/80 p-4 rounded-full w-fit mb-2 border-2 border-primary-foreground/30 shadow-lg"
             >
               <ShieldCheck className="h-10 w-10 text-primary-foreground" />
             </motion.div>
@@ -90,11 +106,11 @@ export default function AdminLoginPage() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@mantra.com"
+                  placeholder="you@domain.com"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-card-foreground/10 border-card-foreground/30 text-card-foreground placeholder:text-card-foreground/50 focus:border-card-foreground/80 focus:ring-card-foreground/50"
+                  className="bg-card-foreground/6 border-card-foreground/20 text-card-foreground placeholder:text-card-foreground/50 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-md"
                 />
               </div>
               <div className="space-y-2">
@@ -102,17 +118,17 @@ export default function AdminLoginPage() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="password"
+                  placeholder="Enter your password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="bg-card-foreground/10 border-card-foreground/30 text-card-foreground placeholder:text-card-foreground/50 focus:border-card-foreground/80 focus:ring-card-foreground/50"
+                  className="bg-card-foreground/6 border-card-foreground/20 text-card-foreground placeholder:text-card-foreground/50 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-md"
                 />
               </div>
-              {error && <p className="text-sm text-center font-medium text-destructive-foreground">{error}</p>}
+              {error && <p className="text-sm text-center font-medium text-destructive-foreground bg-destructive/5 py-2 rounded">{error}</p>}
             </CardContent>
             <CardFooter className="px-8 pb-8 pt-4">
-               <Button type="submit" variant="outline" size="lg" className="w-full group text-lg font-bold transition-all duration-300 transform hover:scale-105">
+               <Button type="submit" size="lg" className="w-full group text-lg font-bold transition-all duration-150 transform bg-primary text-primary-foreground hover:opacity-95">
                     Sign In
                     <LogIn className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
                 </Button>

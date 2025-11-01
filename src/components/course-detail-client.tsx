@@ -3,7 +3,7 @@
 
 import { useEffect } from "react";
 import type { Course } from "@/context/AppDataContext";
-import Image from "next/image";
+import ResponsiveImage from "@/components/ui/responsive-image";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -100,7 +100,6 @@ export function CourseDetailClient({ course }: { course: Course }) {
     description,
     fullDescription,
     image,
-    aiHint,
     curriculum,
     faqs,
     highlights,
@@ -149,13 +148,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
             <div className="block lg:hidden mb-8">
               <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20 bg-background">
                  <div className="relative aspect-video">
-                    <Image
-                      src={image}
-                      alt={title}
-                      fill
-                      className="object-cover"
-                      data-ai-hint={aiHint}
-                    />
+                    <ResponsiveImage image={image} alt={title} className="object-cover w-full h-full" />
                   </div>
                 <CardContent className="p-6 bg-background">
                   <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
@@ -202,7 +195,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                             Course Highlights
                         </h2>
                         <ul className="space-y-4">
-                            {highlights.map((highlight, index) => {
+                            {highlights.map((highlight: any, index: number) => {
                                 const Icon = highlightIcons[highlight.title as keyof typeof highlightIcons] || BadgeCheck;
                                 return (
                                     <li key={index} className="flex items-start gap-4">
@@ -240,7 +233,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         Who Can Attend?
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {whoCanAttend.map((attendee, index) => {
+                        {whoCanAttend.map((attendee: any, index: number) => {
                              const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || Users;
                             return (
                                 <Card key={index} className="bg-background shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
@@ -267,7 +260,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                     collapsible
                     className="w-full space-y-3"
                 >
-                    {curriculum.map((section, index) => (
+                    {curriculum.map((section: any, index: number) => (
                     <AccordionItem
                         value={`item-${index}`}
                         key={index}
@@ -281,7 +274,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         </AccordionTrigger>
                         <AccordionContent>
                         <ul className="space-y-2 pt-2">
-                            {section.lessons.map((lesson, i) => (
+                            {section.lessons.map((lesson: any, i: number) => (
                             <li
                                 key={i}
                                 className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
@@ -314,7 +307,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                     collapsible
                     className="w-full space-y-3"
                 >
-                    {faqs.map((faq, index) => (
+                    {faqs.map((faq: any, index: number) => (
                     <AccordionItem
                         value={`faq-${index}`}
                         key={index}
@@ -337,14 +330,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
           <aside className="hidden lg:block lg:sticky lg:top-24 h-fit">
             <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20 bg-background">
               <div className="relative aspect-video">
-                <Image
-                  src={image}
-                  alt={title}
-                  fill
-                  className="object-cover"
-                  data-ai-hint={aiHint}
-                />
-              </div>
+                  <ResponsiveImage image={image} alt={title} className="object-cover w-full h-full" />
+                </div>
               <CardContent className="p-6 bg-background">
                 <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                 <Button

@@ -10,10 +10,10 @@ import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const feedItems = [
-  { platform: "Instagram", image: "https://placehold.co/400x400.png", aiHint: "spiritual quote", handle: "@mantr.academy", link: "https://www.instagram.com/mantr.academy/" },
-  { platform: "YouTube", image: "https://placehold.co/400x400.png", aiHint: "meditation guide", handle: "@MantraAcademy24", link: "https://www.youtube.com/@MantrAcademy24" },
-  { platform: "X", image: "https://placehold.co/400x400.png", aiHint: "yoga pose", handle: "@namaste_mantra", link: "https://x.com/namaste_mantra" },
-  { platform: "Facebook", image: "https://placehold.co/400x400.png", aiHint: "mandala art", handle: "Mantra Academy", link: "https://www.facebook.com/profile.php?id=61566345014729" },
+  { platform: "Instagram", image: "https://placehold.co/400x400.png", handle: "@mantr.academy", link: "https://www.instagram.com/mantr.academy/" },
+  { platform: "YouTube", image: "https://placehold.co/400x400.png", handle: "@MantraAcademy24", link: "https://www.youtube.com/@MantrAcademy24" },
+  { platform: "X", image: "https://placehold.co/400x400.png", handle: "@namaste_mantra", link: "https://x.com/namaste_mantra" },
+  { platform: "Facebook", image: "https://placehold.co/400x400.png", handle: "Mantra Academy", link: "https://www.facebook.com/profile.php?id=61566345014729" },
 ];
 
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (

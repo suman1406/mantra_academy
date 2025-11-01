@@ -43,7 +43,6 @@ export function Vision() {
               alt="A vibrant cosmic nebula"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
-              data-ai-hint="stars galaxy"
             />
           </div>
           <div className="p-6 md:p-12 order-2 md:order-1">

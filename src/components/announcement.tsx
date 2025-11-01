@@ -9,12 +9,11 @@ import Link from "next/link";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
-import { useAppData } from "@/context/AppDataContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const AnnouncementCard = ({ announcement, index }: { announcement: ReturnType<typeof useAppData>['announcements'][0], index: number }) => {
+const AnnouncementCard = ({ announcement, index }: { announcement: any, index: number }) => {
     const cardRef = useRef<HTMLDivElement>(null);
-    const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
 
     const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!cardRef.current || isMobile) return;
@@ -66,8 +65,7 @@ const AnnouncementCard = ({ announcement, index }: { announcement: ReturnType<ty
     )
 }
 
-export function Announcement() {
-  const { announcements } = useAppData();
+export function Announcement({ announcements }: { announcements: any[] }) {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)

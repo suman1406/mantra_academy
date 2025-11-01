@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Noto_Serif_Devanagari } from "next/font/google";
 import { Calendar, User } from "lucide-react";
+import { formatDateISO } from "@/lib/formatDate";
 import { Badge } from "./ui/badge";
 
 const devanagari = Noto_Serif_Devanagari({
@@ -14,7 +15,7 @@ const devanagari = Noto_Serif_Devanagari({
 });
 
 export function BlogPostContent({ post }: { post: BlogPost }) {
-  const { title, author, date, content, image, aiHint } = post;
+  const { title, author, date, content, image } = post;
 
   return (
     <motion.article
@@ -46,7 +47,7 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <span>{date}</span>
+              <span>{formatDateISO(date, 'en-GB', { dateStyle: 'long' })}</span>
             </div>
           </motion.div>
         </header>

@@ -1,14 +1,13 @@
 
 "use client";
 
-import Image from "next/image";
+import ResponsiveImage from "@/components/ui/responsive-image";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useAppData } from "@/context/AppDataContext";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -16,7 +15,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useRef } from "react";
 
 
-const CourseCard = ({ course }: { course: ReturnType<typeof useAppData>['courses'][0] }) => {
+const CourseCard = ({ course }: { course: any }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -44,13 +43,7 @@ const CourseCard = ({ course }: { course: ReturnType<typeof useAppData>['courses
       <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-lg text-card-foreground">
         <CardHeader className="p-0">
           <div className="relative h-56 w-full overflow-hidden">
-            <Image
-              src={course.image}
-              alt={course.title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
-              data-ai-hint={course.aiHint}
-            />
+            <ResponsiveImage image={course.image} alt={course.title} className="object-cover w-full h-full absolute inset-0 group-hover:scale-105 transition-transform duration-700" />
           </div>
         </CardHeader>
         <CardContent className="p-6 flex-grow">
@@ -72,9 +65,8 @@ const CourseCard = ({ course }: { course: ReturnType<typeof useAppData>['courses
 };
 
 
-export function FeaturedCourses() {
-  const { courses } = useAppData();
-  const featuredCourses = courses.slice(0, 4);
+export function FeaturedCourses({ courses }: { courses: any[] }) {
+  const featuredCourses = (courses || []).slice(0, 4);
 
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)

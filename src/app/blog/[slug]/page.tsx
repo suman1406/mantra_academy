@@ -1,23 +1,19 @@
-
-"use client";
-
-import { useAppData } from "@/context/AppDataContext";
 import { notFound } from "next/navigation";
 import { BlogPostContent } from "@/components/blog-post";
-import type { BlogPost } from "@/context/AppDataContext";
+import { getPostBySlug } from "@/services/blogService";
 
-export default function BlogPostPage({
+export default async function BlogPostPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { blogPosts } = useAppData();
-  
-  const post = blogPosts.find((p) => p.slug === params.slug);
+  const postDoc = await getPostBySlug(params.slug);
 
-  if (!post) {
+  if (!postDoc) {
     notFound();
   }
+
+  const post = JSON.parse(JSON.stringify(postDoc));
 
   return <BlogPostContent post={post} />;
 }

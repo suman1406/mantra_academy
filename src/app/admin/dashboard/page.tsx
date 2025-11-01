@@ -4,7 +4,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, FileText, Megaphone } from "lucide-react";
 import { motion } from "framer-motion";
-import { useAppData } from "@/context/AppDataContext";
+import { useEffect, useState } from "react";
 
 const RupeeIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -18,7 +18,26 @@ const RupeeIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export default function AdminDashboard() {
-  const { courses, blogPosts, announcements } = useAppData();
+  const [coursesCount, setCoursesCount] = useState(0);
+  const [postsCount, setPostsCount] = useState(0);
+  const [annCount, setAnnCount] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [c, b, a] = await Promise.all([
+          fetch('/api/courses').then(r => r.ok ? r.json() : []),
+          fetch('/api/blogs').then(r => r.ok ? r.json() : []),
+          fetch('/api/announcements').then(r => r.ok ? r.json() : []),
+        ]);
+        setCoursesCount(Array.isArray(c) ? c.length : 0);
+        setPostsCount(Array.isArray(b) ? b.length : 0);
+        setAnnCount(Array.isArray(a) ? a.length : 0);
+      } catch (err) {
+        console.error('Failed to load dashboard counts', err);
+      }
+    })();
+  }, []);
 
   return (
     <motion.div
@@ -36,7 +55,7 @@ export default function AdminDashboard() {
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{courses.length}</div>
+            <div className="text-2xl font-bold">{coursesCount}</div>
             <p className="text-xs text-muted-foreground">courses currently offered</p>
           </CardContent>
         </Card>
@@ -46,7 +65,7 @@ export default function AdminDashboard() {
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{blogPosts.length}</div>
+            <div className="text-2xl font-bold">{postsCount}</div>
             <p className="text-xs text-muted-foreground">posts published</p>
           </CardContent>
         </Card>
@@ -56,7 +75,7 @@ export default function AdminDashboard() {
             <Megaphone className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{announcements.length}</div>
+            <div className="text-2xl font-bold">{annCount}</div>
             <p className="text-xs text-muted-foreground">active announcements</p>
           </CardContent>
         </Card>
