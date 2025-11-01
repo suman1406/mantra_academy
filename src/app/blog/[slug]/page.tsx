@@ -7,7 +7,10 @@ export default async function BlogPostPage({
 }: {
   params: { slug: string };
 }) {
-  const postDoc = await getPostBySlug(params.slug);
+  // `params` can be a thenable in some Next.js runtimes — await it first
+  const { slug } = await params;
+
+  const postDoc = await getPostBySlug(slug);
 
   if (!postDoc) {
     notFound();

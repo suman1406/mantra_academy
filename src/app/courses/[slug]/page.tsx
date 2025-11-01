@@ -7,7 +7,10 @@ export default async function CourseDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const courseDoc = await getCourseBySlug(params.slug);
+  // `params` can be a thenable in some Next.js runtimes — await it first
+  const { slug } = await params;
+
+  const courseDoc = await getCourseBySlug(slug);
 
   if (!courseDoc) {
     notFound();
