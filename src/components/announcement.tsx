@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { renderMarkdownToHtml } from "@/lib/markdown";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const AnnouncementCard = ({ announcement, index }: { announcement: any, index: number }) => {
@@ -49,9 +50,9 @@ const AnnouncementCard = ({ announcement, index }: { announcement: any, index: n
                 {announcement.title}
             </h3>
           </div>
-          <p className="text-card-foreground/80 mt-2 flex-grow text-sm md:text-base">
-            {announcement.description}
-          </p>
+          <div className="text-card-foreground/80 mt-2 flex-grow text-sm md:text-base">
+            <div dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(announcement.description || '') }} />
+          </div>
           <div className="w-full mt-6">
             <Button variant="outline" className="w-full md:w-auto group" asChild>
                 <Link href={announcement.link}>

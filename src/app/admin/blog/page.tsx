@@ -1,8 +1,9 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BlogPost } from "@/context/AppDataContext";
+import { renderMarkdownToHtml } from "@/lib/markdown";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -135,6 +136,100 @@ export default function AdminBlogPage() {
     setEditingPost({ ...editingPost, [name]: value });
   };
 
+  // Markdown toolbar helpers
+  const contentRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const wrapSelection = (before: string, after?: string) => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end);
+    const wrapAfter = typeof after === 'undefined' ? before : after;
+    const newValue = ta.value.substring(0, start) + before + selected + wrapAfter + ta.value.substring(end);
+    setEditingPost({ ...editingPost, content: newValue });
+    // put caret after inserted text
+    requestAnimationFrame(() => {
+      const pos = start + before.length + selected.length + wrapAfter.length;
+      ta.focus();
+      ta.setSelectionRange(pos, pos);
+    });
+  };
+
+  const insertLink = () => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || 'link text';
+    const url = 'https://';
+    const newValue = ta.value.substring(0, start) + `[${selected}](${url})` + ta.value.substring(end);
+    setEditingPost({ ...editingPost, content: newValue });
+    requestAnimationFrame(() => {
+      const pos = start + (`[${selected}](${url})`).length;
+      ta.focus();
+      ta.setSelectionRange(pos, pos);
+    });
+  };
+
+  const insertUnorderedList = () => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || '';
+    const lines = selected.split(/\r?\n/);
+    const wrapped = lines.map(ln => ln.trim() ? `- ${ln}` : '').join('\n');
+    const newValue = ta.value.substring(0, start) + wrapped + ta.value.substring(end);
+    setEditingPost({ ...editingPost, content: newValue });
+  };
+
+  const insertOrderedList = () => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || '';
+    const lines = selected.split(/\r?\n/);
+    let counter = 1;
+    const wrapped = lines.map(ln => ln.trim() ? `${counter++}. ${ln}` : '').join('\n');
+    const newValue = ta.value.substring(0, start) + wrapped + ta.value.substring(end);
+    setEditingPost({ ...editingPost, content: newValue });
+  };
+
+  const insertBlockquote = () => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || '';
+    const lines = selected.split(/\r?\n/);
+    const wrapped = lines.map(ln => ln.trim() ? `> ${ln}` : '>').join('\n');
+    const newValue = ta.value.substring(0, start) + wrapped + ta.value.substring(end);
+    setEditingPost({ ...editingPost, content: newValue });
+  };
+
+  const insertCodeBlock = () => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end) || '';
+    const wrapped = '```\n' + selected + '\n```\n';
+    const newValue = ta.value.substring(0, start) + wrapped + ta.value.substring(end);
+    setEditingPost({ ...editingPost, content: newValue });
+  };
+
+  const insertHR = () => {
+    if (!contentRef.current || !editingPost) return;
+    const ta = contentRef.current;
+    const pos = ta.selectionEnd || ta.value.length;
+    const newValue = ta.value.substring(0, pos) + '\n---\n' + ta.value.substring(pos);
+    setEditingPost({ ...editingPost, content: newValue });
+  };
+
+  const [previewVisible, setPreviewVisible] = useState(false);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
@@ -222,9 +317,26 @@ export default function AdminBlogPage() {
                     <Label htmlFor="excerpt" className="text-right">Excerpt</Label>
                     <Textarea id="excerpt" name="excerpt" value={editingPost.excerpt} onChange={handleChange} className="col-span-3" />
                 </div>
-                <div className="grid grid-cols-4 items-center gap-4">
+                <div className="grid grid-cols-4 items-start gap-4">
                     <Label htmlFor="content" className="text-right">Content</Label>
-                    <Textarea id="content" name="content" value={editingPost.content} onChange={handleChange} className="col-span-3 h-48" />
+                    <div className="col-span-3">
+                                      <div className="flex items-center gap-2 mb-2">
+                                        <Button size="sm" variant="ghost" onClick={() => wrapSelection('**', '**')}>Bold</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => wrapSelection('*', '*')}>Italic</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => wrapSelection('### ', '\n')}>Heading</Button>
+                                        <Button size="sm" variant="ghost" onClick={insertLink}>Link</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => insertUnorderedList()}>UL</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => insertOrderedList()}>OL</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => insertBlockquote()}>Quote</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => insertCodeBlock()}>Code</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => insertHR()}>HR</Button>
+                                        <Button size="sm" variant="ghost" onClick={() => setPreviewVisible(v => !v)}>{previewVisible ? 'Edit' : 'Preview'}</Button>
+                                      </div>
+                      <Textarea id="content" name="content" ref={contentRef as any} value={editingPost.content} onChange={handleChange} className="h-48" />
+                      {previewVisible && (
+                        <div className="mt-3 prose max-w-none p-4 rounded bg-muted/5 border border-border" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(editingPost.content || '') }} />
+                      )}
+                    </div>
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                     <Label htmlFor="imageFile" className="text-right">Image</Label>

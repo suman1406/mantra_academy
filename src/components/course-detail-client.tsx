@@ -32,6 +32,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CourseCountdown } from "./course-countdown";
 import { useToast } from "@/hooks/use-toast";
+import { renderMarkdownToHtml } from "@/lib/markdown";
 import { ToastAction } from "@/components/ui/toast";
 
 // Custom Dharma Wheel Icon
@@ -204,7 +205,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                                         </div>
                                         <div>
                                             <h3 className="font-bold text-lg text-foreground">{highlight.title}</h3>
-                                            <p className="text-foreground/80 text-sm md:text-base">{highlight.description}</p>
+                                            <div className="text-foreground/80 text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(highlight.description || '') }} />
                                         </div>
                                     </li>
                                 );
@@ -221,7 +222,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   Course Overview
                 </h2>
                 <div className="prose prose-lg max-w-none text-foreground/90 whitespace-pre-wrap">
-                  <p>{fullDescription}</p>
+                  <div dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(fullDescription || '') }} />
                 </div>
               </Card>
             </section>
@@ -241,7 +242,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                                         <Icon className="h-8 w-8 text-primary" />
                                     </div>
                                     <h3 className="text-xl font-bold text-foreground mb-2">{attendee.title}</h3>
-                                    <p className="text-foreground/80 text-sm">{attendee.description}</p>
+                                    <div className="text-foreground/80 text-sm" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(attendee.description || '') }} />
                                 </Card>
                             )
                         })}
@@ -317,7 +318,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         {faq.question}
                         </AccordionTrigger>
                         <AccordionContent className="text-foreground/80 text-base">
-                        {faq.answer}
+                        <div dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(faq.answer || '') }} />
                         </AccordionContent>
                     </AccordionItem>
                     ))}

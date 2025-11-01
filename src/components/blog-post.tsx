@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Noto_Serif_Devanagari } from "next/font/google";
 import { Calendar, User } from "lucide-react";
 import { formatDateISO } from "@/lib/formatDate";
+import { renderMarkdownToHtml } from "@/lib/markdown";
 import { Badge } from "./ui/badge";
 
 const devanagari = Noto_Serif_Devanagari({
@@ -54,7 +55,7 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
 
         {/* Manuscript-style content */}
         <div className="manuscript-card p-6 md:p-12 lg:p-16">
-          <div className="prose prose-base md:prose-lg lg:prose-xl max-w-none manuscript-text manuscript-dropcap">
+            <div className="prose prose-base md:prose-lg lg:prose-xl max-w-none manuscript-text manuscript-dropcap">
             <style jsx global>{`
               .prose h3 {
                 color: hsl(var(--card-foreground));
@@ -69,7 +70,7 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
                 }
               }
             `}</style>
-             <p>{content}</p>
+         <div dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(content || '') }} />
           </div>
         </div>
       </div>
