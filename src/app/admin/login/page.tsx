@@ -125,7 +125,7 @@ export default function AdminLoginPage() {
                   className="bg-card-foreground/6 border-card-foreground/20 text-card-foreground placeholder:text-card-foreground/50 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-md"
                 />
               </div>
-              {error && <p className="text-sm text-center font-medium text-destructive-foreground bg-destructive/5 py-2 rounded">{error}</p>}
+              {error && <p className="text-sm text-center font-medium text-destructive-foreground bg-destructive py-2 rounded">{error}</p>}
             </CardContent>
             <CardFooter className="px-8 pb-8 pt-4">
                <Button type="submit" size="lg" className="w-full group text-lg font-bold transition-all duration-150 transform bg-primary text-primary-foreground hover:opacity-95">
