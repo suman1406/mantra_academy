@@ -106,6 +106,13 @@ export function CourseDetailClient({ course }: { course: Course }) {
     highlights,
     whoCanAttend,
     startDate,
+    price,
+    duration,
+    lectures,
+    level,
+    language,
+    instructor,
+    category,
   } = course;
 
   useEffect(() => {
@@ -136,6 +143,27 @@ export function CourseDetailClient({ course }: { course: Course }) {
               {title}
             </h1>
             <p className="text-lg md:text-xl text-foreground/90">{description}</p>
+            <div className="flex flex-wrap gap-3 mt-2 text-sm text-muted-foreground">
+              {category && <span className="px-2 py-1 bg-muted rounded">{category}</span>}
+              {level && <span className="px-2 py-1 bg-muted rounded">{level}</span>}
+              {language && <span className="px-2 py-1 bg-muted rounded">{language}</span>}
+              {typeof price !== 'undefined' && <span className="px-2 py-1 bg-muted rounded">₹{price}</span>}
+              {typeof duration !== 'undefined' && duration > 0 && <span className="px-2 py-1 bg-muted rounded">{Math.floor(duration/60)}h {duration%60}m</span>}
+              {typeof lectures !== 'undefined' && lectures > 0 && <span className="px-2 py-1 bg-muted rounded">{lectures} lectures</span>}
+              {instructor && <span className="px-2 py-1 bg-muted rounded">Instructor: {instructor.name}</span>}
+            </div>
+            {instructor && (
+              <div className="flex items-center gap-4 mt-4">
+                <Avatar>
+                  <AvatarImage src={typeof instructor.image === 'string' ? instructor.image : ((instructor as any).image?.url || (instructor as any).image?.secure_url || '')} alt={instructor.name} />
+                  <AvatarFallback>{instructor.name?.split(' ').map(n=>n[0]).join('')}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <div className="font-semibold">{instructor.name}</div>
+                  {instructor.title && <div className="text-sm text-muted-foreground">{instructor.title}</div>}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -275,7 +303,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                         </AccordionTrigger>
                         <AccordionContent>
                         <ul className="space-y-2 pt-2">
-                            {section.lessons.map((lesson: any, i: number) => (
+              {section.lessons.map((lesson: any, i: number) => (
                             <li
                                 key={i}
                                 className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
@@ -285,7 +313,11 @@ export function CourseDetailClient({ course }: { course: Course }) {
                                 {lesson.title}
                                 </span>
                                 <span className="text-sm text-muted-foreground">
-                                {lesson.duration}
+                {(() => {
+                  const mins = Number(lesson.durationMinutes ?? lesson.duration ?? 0);
+                  if (!mins) return null;
+                  return `${Math.floor(mins/60)}h ${mins%60}m`;
+                })()}
                                 </span>
                             </li>
                             ))}
@@ -335,6 +367,9 @@ export function CourseDetailClient({ course }: { course: Course }) {
                 </div>
               <CardContent className="p-6 bg-background">
                 <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
+                {typeof price !== 'undefined' && (
+                  <div className="mt-4 text-lg font-semibold">Price: ₹{price}</div>
+                )}
                 <Button
                   size="lg"
                   className="w-full text-lg mt-4"

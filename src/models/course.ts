@@ -10,7 +10,8 @@ export interface ICourse extends Document {
   price?: number;
   rating?: number;
   reviews?: number;
-  duration?: string;
+  // total duration in minutes
+  duration?: number;
   lectures?: number;
   level?: string;
   language?: string;
@@ -25,7 +26,8 @@ export interface ICourse extends Document {
 
 const LessonSchema = new Schema({
   title: String,
-  duration: String,
+  // store lesson duration as minutes (number)
+  durationMinutes: Number,
 }, { _id: false });
 
 const CurriculumSchema = new Schema({
@@ -42,24 +44,26 @@ const InstructorSchema = new Schema({
 const CourseSchema = new Schema<ICourse>({
   slug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
-  category: String,
-  image: Schema.Types.Mixed,
-  description: String,
-  fullDescription: String,
-  price: Number,
+  category: { type: String, required: true },
+  // Keep flexible for legacy string urls or cloudinary metadata
+  image: { type: Schema.Types.Mixed, required: true },
+  description: { type: String, required: true },
+  fullDescription: { type: String, required: true },
+  price: { type: Number, required: true },
   rating: Number,
   reviews: Number,
-  duration: String,
+  // total duration in minutes
+  duration: Number,
   lectures: Number,
-  level: String,
-  language: String,
+  level: { type: String, required: true },
+  language: { type: String, required: true },
   resources: Number,
   instructor: InstructorSchema,
   curriculum: [CurriculumSchema],
   faqs: [{ question: String, answer: String }],
   highlights: [{ title: String, description: String }],
   whoCanAttend: [{ title: String, description: String }],
-  startDate: Date,
+  startDate: { type: Date, required: true },
 }, { timestamps: true });
 
 // Replace cached model if it used the old image:String path

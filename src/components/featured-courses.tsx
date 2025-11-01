@@ -50,6 +50,17 @@ const CourseCard = ({ course }: { course: any }) => {
           <Badge variant="default" className="mb-2 bg-primary text-primary-foreground border border-primary-foreground">{course.category}</Badge>
           <CardTitle className="font-headline text-xl md:text-2xl text-card-foreground">{course.title}</CardTitle>
           <p className="text-card-foreground/70 mt-2 text-sm md:text-base">{course.description}</p>
+          <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
+            {typeof course.price !== 'undefined' && (
+              <div className="font-semibold">₹{course.price}</div>
+            )}
+            {typeof course.duration !== 'undefined' && Number(course.duration) > 0 && (
+              <div>{Math.floor(course.duration/60)}h {course.duration%60}m</div>
+            )}
+            {typeof course.lectures !== 'undefined' && course.lectures > 0 && (
+              <div>{course.lectures} lectures</div>
+            )}
+          </div>
         </CardContent>
         <CardFooter className="p-6 pt-0">
            <Button variant="outline" className="w-full group" asChild>

@@ -20,7 +20,8 @@ import ProgressBar from "@/components/ui/progress";
 
 const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
   slug: "", title: "", category: "", image: "https://placehold.co/600x400.png", description: "",
-  fullDescription: "", price: 0, duration: "", lectures: 0, level: "All Levels", language: "English",
+  fullDescription: "", price: 0, // duration stored as total minutes
+  duration: 0, lectures: 0, level: "Beginner", language: "English",
   resources: 0, instructor: { name: '', title: '', image: 'https://placehold.co/100x100.png' }, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
   startDate: new Date().toISOString().split('T')[0]
 };
@@ -102,8 +103,36 @@ export default function AdminCoursesPage() {
       toast({ title: 'Validation', description: 'Title is required' });
       return;
     }
-    if (Number(editingCourse.price) < 0) {
+    if (typeof editingCourse.price === 'undefined' || Number(editingCourse.price) < 0) {
       toast({ title: 'Validation', description: 'Price must be >= 0' });
+      return;
+    }
+    if (!editingCourse.category || editingCourse.category.trim() === '') {
+      toast({ title: 'Validation', description: 'Category is required' });
+      return;
+    }
+    if (!editingCourse.description || editingCourse.description.trim() === '') {
+      toast({ title: 'Validation', description: 'Short description is required' });
+      return;
+    }
+    if (!editingCourse.fullDescription || editingCourse.fullDescription.trim() === '') {
+      toast({ title: 'Validation', description: 'Full description is required' });
+      return;
+    }
+    if (!editingCourse.image) {
+      toast({ title: 'Validation', description: 'Image is required' });
+      return;
+    }
+    if (!editingCourse.level || editingCourse.level.trim() === '') {
+      toast({ title: 'Validation', description: 'Level is required' });
+      return;
+    }
+    if (!editingCourse.language || editingCourse.language.trim() === '') {
+      toast({ title: 'Validation', description: 'Language is required' });
+      return;
+    }
+    if (!editingCourse.startDate) {
+      toast({ title: 'Validation', description: 'Start date is required' });
       return;
     }
 
@@ -186,7 +215,7 @@ export default function AdminCoursesPage() {
     section: 'curriculum' | 'faqs' | 'highlights' | 'whoCanAttend',
     index: number,
     field: string,
-    value: string,
+    value: any,
     subSection?: 'lessons',
     subIndex?: number
   ) => {
@@ -194,8 +223,8 @@ export default function AdminCoursesPage() {
     // Create a deep copy to avoid direct state mutation
     const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
 
-    if (subSection && subIndex !== undefined && newEditingCourse[section][index][subSection]) {
-        newEditingCourse[section][index][subSection][subIndex][field] = value;
+  if (subSection && subIndex !== undefined && newEditingCourse[section][index][subSection]) {
+    newEditingCourse[section][index][subSection][subIndex][field] = value;
     } else {
         newEditingCourse[section][index][field] = value;
     }
@@ -218,7 +247,7 @@ export default function AdminCoursesPage() {
     const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
     
     const newItem = section === 'curriculum' 
-      ? { title: "", lessons: [{ title: "", duration: "" }] }
+      ? { title: "", lessons: [{ title: "", durationMinutes: 0 }] }
       : section === 'faqs'
       ? { question: "", answer: "" }
       : section === 'highlights' || section === 'whoCanAttend'
@@ -239,7 +268,7 @@ export default function AdminCoursesPage() {
   const addLesson = (sectionIndex: number) => {
     if (!editingCourse) return;
     const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
-    newEditingCourse.curriculum[sectionIndex].lessons.push({ title: "", duration: "" });
+    newEditingCourse.curriculum[sectionIndex].lessons.push({ title: "", durationMinutes: 0 });
     setEditingCourse(newEditingCourse);
   }
 
@@ -371,10 +400,21 @@ export default function AdminCoursesPage() {
                           </div>
                       </div>
                         <div className="grid grid-cols-2 gap-4">
-                         <div className="grid grid-cols-2 items-center gap-2">
-                            <Label htmlFor="duration" className="text-right">Duration</Label>
-                            <Input id="duration" name="duration" value={editingCourse.duration} onChange={handleChange} />
-                        </div>
+                           <div className="grid grid-cols-2 items-center gap-2">
+                              <Label htmlFor="duration" className="text-right">Duration (hrs / mins)</Label>
+                              <div className="flex gap-2">
+                                <Input id="durationHours" name="durationHours" type="number" value={String(Math.floor((editingCourse.duration || 0)/60))} onChange={(e) => {
+                                  const h = Number(e.target.value || 0);
+                                  const mins = Number(editingCourse.duration || 0) % 60;
+                                  setEditingCourse({ ...editingCourse, duration: h * 60 + mins });
+                                }} className="w-20" />
+                                <Input id="durationMins" name="durationMins" type="number" value={String((editingCourse.duration || 0) % 60)} onChange={(e) => {
+                                  const m = Number(e.target.value || 0);
+                                  const hrs = Math.floor((editingCourse.duration || 0)/60);
+                                  setEditingCourse({ ...editingCourse, duration: hrs * 60 + m });
+                                }} className="w-20" />
+                              </div>
+                          </div>
                          <div className="grid grid-cols-2 items-center gap-2">
                             <Label htmlFor="lectures" className="text-right">Lectures</Label>
                             <Input id="lectures" name="lectures" type="number" value={editingCourse.lectures} onChange={handleChange} />
@@ -410,22 +450,47 @@ export default function AdminCoursesPage() {
                             />
                             <Button variant="ghost" size="icon" onClick={() => removeNestedItem('curriculum', sectionIndex)}><X className="h-4 w-4" /></Button>
                         </div>
-                        {section.lessons.map((lesson: any, lessonIndex: number) => (
+                            {section.lessons.map((lesson: any, lessonIndex: number) => {
+                            const minutes = Number(lesson.durationMinutes || 0);
+                            const hours = Math.floor(minutes / 60);
+                            const mins = minutes % 60;
+                            return (
                             <div key={lessonIndex} className="flex items-center gap-2 ml-4 mb-2">
                             <Input
                                 placeholder="Lesson Title"
                                 value={lesson.title}
                                 onChange={(e) => handleNestedChange('curriculum', sectionIndex, 'title', e.target.value, 'lessons', lessonIndex)}
                             />
-                            <Input
-                                placeholder="Duration (e.g., 30:00)"
-                                value={lesson.duration}
-                                onChange={(e) => handleNestedChange('curriculum', sectionIndex, 'duration', e.target.value, 'lessons', lessonIndex)}
-                                className="w-32"
-                            />
+                            <div className="flex gap-1">
+                              <Input
+                                placeholder="hrs"
+                                type="number"
+                                min={0}
+                                value={String(hours)}
+                                onChange={(e) => {
+                                  const h = Number(e.target.value || 0);
+                                  const total = h * 60 + mins;
+                                  handleNestedChange('curriculum', sectionIndex, 'durationMinutes', total, 'lessons', lessonIndex);
+                                }}
+                                className="w-16"
+                              />
+                              <Input
+                                placeholder="mins"
+                                type="number"
+                                min={0}
+                                max={59}
+                                value={String(mins)}
+                                onChange={(e) => {
+                                  const m = Number(e.target.value || 0);
+                                  const total = hours * 60 + m;
+                                  handleNestedChange('curriculum', sectionIndex, 'durationMinutes', total, 'lessons', lessonIndex);
+                                }}
+                                className="w-20"
+                              />
+                            </div>
                             <Button variant="ghost" size="icon" onClick={() => removeLesson(sectionIndex, lessonIndex)}><X className="h-4 w-4 text-destructive" /></Button>
                             </div>
-                        ))}
+                            )})}
                         <Button variant="outline" size="sm" onClick={() => addLesson(sectionIndex)} className="ml-4 mt-2"><Plus className="h-4 w-4 mr-2" />Add Lesson</Button>
                         </Card>
                     ))}

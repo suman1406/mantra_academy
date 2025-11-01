@@ -9,7 +9,8 @@ export type Course = {
   price: number;
   rating: number;
   reviews: number;
-  duration: string;
+  // total duration in minutes
+  duration: number;
   lectures: number;
   level: "Beginner" | "Intermediate" | "Advanced" | "All Levels";
   language: string;
@@ -23,7 +24,8 @@ export type Course = {
     title: string;
     lessons: {
       title: string;
-      duration: string;
+      // duration in minutes
+      durationMinutes: number;
     }[];
   }[];
   faqs: {

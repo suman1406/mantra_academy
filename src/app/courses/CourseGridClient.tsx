@@ -40,11 +40,11 @@ const CourseCard = ({ course, i }: { course: any, i: number }) => {
       style={{ transition: 'transform 0.2s ease-out' }}
       className="w-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl text-card-foreground">
+            <Card className="h-full flex flex-col overflow-hidden border-border/40 bg-card backdrop-blur-sm transition-all duration-500 group hover:shadow-primary/20 hover:shadow-2xl text-card-foreground">
         <CardHeader className="p-0">
           <div className="relative h-56 w-full overflow-hidden">
             <Image
-              src={course.image}
+              src={typeof course.image === 'string' ? course.image : (course.image?.url || course.image?.secure_url || '/placeholder.png')}
               alt={course.title}
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -53,9 +53,20 @@ const CourseCard = ({ course, i }: { course: any, i: number }) => {
              <Badge variant="default" className="absolute top-4 right-4 bg-primary text-primary-foreground">{course.category}</Badge>
           </div>
         </CardHeader>
-        <CardContent className="p-6 flex-grow flex flex-col">
+            <CardContent className="p-6 flex-grow flex flex-col">
           <CardTitle className="font-headline text-xl md:text-2xl text-card-foreground">{course.title}</CardTitle>
           <p className="text-card-foreground/70 mt-2 flex-grow text-sm md:text-base">{course.description}</p>
+          <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
+            {typeof course.price !== 'undefined' && (
+              <div className="font-semibold">₹{course.price}</div>
+            )}
+            {typeof course.duration !== 'undefined' && Number(course.duration) > 0 && (
+              <div>{Math.floor(course.duration/60)}h {course.duration%60}m</div>
+            )}
+            {typeof course.lectures !== 'undefined' && course.lectures > 0 && (
+              <div>{course.lectures} lectures</div>
+            )}
+          </div>
         </CardContent>
         <CardFooter className="p-6 pt-0">
           <Button variant="outline" className="w-full group" asChild>
