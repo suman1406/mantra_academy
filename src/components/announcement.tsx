@@ -54,12 +54,27 @@ const AnnouncementCard = ({ announcement, index }: { announcement: any, index: n
             <div dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(announcement.description || '') }} />
           </div>
           <div className="w-full mt-6">
-            <Button variant="outline" className="w-full md:w-auto group" asChild>
-                <Link href={announcement.link}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                </Link>
-            </Button>
+            {announcement.link ? (
+              (() => {
+                const link = String(announcement.link || '');
+                const isExternal = /^(https?:)?\/\//i.test(link) || /^(mailto:|tel:)/i.test(link);
+                return (
+                  <Button variant="outline" className="w-full md:w-auto group" asChild>
+                    {isExternal ? (
+                      <a href={link} target="_blank" rel="noopener noreferrer">
+                        Learn More
+                        <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    ) : (
+                      <Link href={link}>
+                        Learn More
+                        <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    )}
+                  </Button>
+                );
+              })()
+            ) : null}
           </div>
         </Card>
       </motion.div>
