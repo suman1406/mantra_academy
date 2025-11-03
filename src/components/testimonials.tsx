@@ -10,32 +10,7 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const testimonials = [
-  {
-    name: "Priya Sharma",
-    title: "Mantra Student",
-    quote: "The foundational course changed my life. I never understood the science behind mantras until now. The instructors are authentic and the teachings are profound.",
-    avatar: "https://placehold.co/100x100.png",
-  },
-  {
-    name: "Rajesh Kumar",
-    title: "Yoga Teacher",
-    quote: "As a yoga teacher, I thought I knew about mantras. Mantra Academy took my understanding to a whole new level. My own teaching has become so much more powerful.",
-    avatar: "https://placehold.co/100x100.png",
-  },
-  {
-    name: "Sunita Patel",
-    title: "Spiritual Seeker",
-    quote: "Mantra Academy is an incredible resource. The community is supportive, and the depth of knowledge shared is unparalleled. It's a must for any serious spiritual seeker.",
-    avatar: "https://placehold.co/100x100.png",
-  },
-   {
-    name: "David Chen",
-    title: "Meditation Practitioner",
-    quote: "The clarity and precision of the teachings here are exceptional. It has brought a new dimension to my daily meditation practice. Highly recommended!",
-    avatar: "https://placehold.co/100x100.png",
-  },
-];
+const testimonials: any[] = [];
 
 const QuoteIcon = () => (
     <svg
@@ -63,7 +38,7 @@ const QuoteIcon = () => (
     </svg>
   );
 
-const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
+const TestimonialCard = ({ testimonial }: { testimonial: any }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
 
@@ -97,12 +72,12 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
                   <QuoteIcon />
               </CardHeader>
               <CardContent className="p-0 flex-grow">
-                <p className="text-card-foreground/80 italic text-sm md:text-base">"{testimonial.quote}"</p>
+                <p className="text-card-foreground/80 italic text-sm md:text-base">"{testimonial.quote || testimonial.feedback}"</p>
               </CardContent>
               <div className="flex items-center mt-6 p-0">
                 <Avatar className="h-12 w-12 md:h-16 md:w-16 mr-4 overflow-hidden">
-                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="group-hover:scale-110 transition-transform duration-500" />
-                  <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                  <AvatarImage src={typeof testimonial.avatar !== 'undefined' ? testimonial.avatar : (testimonial.image ? (typeof testimonial.image === 'string' ? testimonial.image : testimonial.image.url || testimonial.image.secure_url) : undefined)} alt={testimonial.name} className="group-hover:scale-110 transition-transform duration-500" />
+                  <AvatarFallback>{testimonial.name ? testimonial.name.charAt(0) : 'W'}</AvatarFallback>
                 </Avatar>
                 <div>
                   <p className="font-bold text-card-foreground text-sm md:text-base">{testimonial.name}</p>
@@ -132,10 +107,30 @@ export function Testimonials() {
     })
   }, [api])
 
+  const [items, setItems] = React.useState<any[]>(testimonials);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+  const resp = await fetch('/api/testimonies');
+        if (resp.ok) {
+          const json = await resp.json();
+          // show only featured testimonies on the homepage
+          const featured = Array.isArray(json) ? json.filter((x: any) => x.featured) : [];
+          const sorted = featured.sort((a: any, b: any) => (b.createdAt ? new Date(b.createdAt).getTime() : 0) - (a.createdAt ? new Date(a.createdAt).getTime() : 0));
+          setItems(sorted);
+        }
+      } catch (err) {
+        console.error('Failed to fetch testimonials', err);
+      }
+    })();
+  }, []);
+  if (!items || items.length === 0) return null;
+
   return (
     <section className="w-full max-w-6xl mx-auto px-4">
       <div className="text-center mb-8 md:mb-12">
-        <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Words of Power</h2>
+        <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary">Testimonies</h2>
         <p className="text-foreground/80 mt-2 text-base md:text-lg">What our students say about us</p>
       </div>
       <Carousel
@@ -146,15 +141,15 @@ export function Testimonials() {
         }}
         className="w-full"
       >
-        <CarouselContent>
-            {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="sm:basis-1/2 lg:basis-1/3">
-                 <div className="p-1 h-full">
-                    <TestimonialCard testimonial={testimonial} />
-                 </div>
-              </CarouselItem>
-            ))}
-        </CarouselContent>
+      <CarouselContent>
+        {items.map((testimonial, index) => (
+          <CarouselItem key={testimonial._id || index} className="sm:basis-1/2 lg:basis-1/3">
+            <div className="p-1 h-full">
+              <TestimonialCard testimonial={testimonial} />
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
         <CarouselPrevious className="hidden sm:inline-flex" />
         <CarouselNext className="hidden sm:inline-flex" />
       </Carousel>

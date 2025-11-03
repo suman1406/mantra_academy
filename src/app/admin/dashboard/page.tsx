@@ -2,7 +2,7 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, FileText, Megaphone } from "lucide-react";
+import { BookOpen, FileText, Megaphone, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -21,6 +21,8 @@ export default function AdminDashboard() {
   const [coursesCount, setCoursesCount] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
   const [annCount, setAnnCount] = useState(0);
+  const [wordsCount, setWordsCount] = useState(0);
+  const [featuredCount, setFeaturedCount] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -29,10 +31,23 @@ export default function AdminDashboard() {
           fetch('/api/courses').then(r => r.ok ? r.json() : []),
           fetch('/api/blogs').then(r => r.ok ? r.json() : []),
           fetch('/api/announcements').then(r => r.ok ? r.json() : []),
+          fetch('/api/words').then(r => r.ok ? r.json() : []),
         ]);
         setCoursesCount(Array.isArray(c) ? c.length : 0);
         setPostsCount(Array.isArray(b) ? b.length : 0);
         setAnnCount(Array.isArray(a) ? a.length : 0);
+        const wordsArr = Array.isArray(arguments[0][3]) ? arguments[0][3] : null;
+        // The above Promise.all returns an array; easier to re-fetch words separately for clarity
+        try {
+          const wResp = await fetch('/api/testimonies');
+          if (wResp.ok) {
+            const wjson = await wResp.json();
+            setWordsCount(Array.isArray(wjson) ? wjson.length : 0);
+            setFeaturedCount(Array.isArray(wjson) ? wjson.filter((x: any) => x.featured).length : 0);
+          }
+        } catch (e) {
+          console.error('Failed to load words count', e);
+        }
       } catch (err) {
         console.error('Failed to load dashboard counts', err);
       }
@@ -77,6 +92,16 @@ export default function AdminDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">{annCount}</div>
             <p className="text-xs text-muted-foreground">active announcements</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Testimonies</CardTitle>
+            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{wordsCount}</div>
+            <p className="text-xs text-muted-foreground">total testimonies ({featuredCount} featured)</p>
           </CardContent>
         </Card>
       </div>
