@@ -9,7 +9,6 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { AmbientAudio } from "./ambient-audio";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -48,10 +47,9 @@ export function Header() {
               <NavLink key={link.href} {...link} />
             ))}
           </nav>
-          <AmbientAudio />
         </div>
         <div className="md:hidden flex flex-1 justify-end items-center">
-            <AmbientAudio />
+            
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="hover:bg-primary/90 text-primary-foreground hover:text-primary-foreground">
