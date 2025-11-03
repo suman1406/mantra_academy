@@ -22,7 +22,7 @@ const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
   slug: "", title: "", category: "", image: "https://placehold.co/600x400.png", description: "",
   fullDescription: "", price: 0, // duration stored as total minutes
   duration: 0, lectures: 0, level: "Beginner", language: "English",
-  resources: 0, instructor: { name: '', title: '', image: 'https://placehold.co/100x100.png' }, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
+  instructor: { name: '', title: '', image: 'https://placehold.co/100x100.png' }, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
   startDate: new Date().toISOString().split('T')[0]
 };
 
@@ -174,7 +174,7 @@ export default function AdminCoursesPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (!editingCourse) return;
     const { name, value } = e.target;
-    const isNumber = ['price', 'lectures', 'resources'].includes(name);
+  const isNumber = ['price', 'lectures'].includes(name);
     setEditingCourse({ ...editingCourse, [name]: isNumber ? Number(value) : value });
   };
   
@@ -421,14 +421,10 @@ export default function AdminCoursesPage() {
                         </div>
                       </div>
                        <div className="grid grid-cols-2 gap-4">
-                         <div className="grid grid-cols-2 items-center gap-2">
-                            <Label htmlFor="language" className="text-right">Language</Label>
-                            <Input id="language" name="language" value={editingCourse.language} onChange={handleChange} />
-                        </div>
-                         <div className="grid grid-cols-2 items-center gap-2">
-                            <Label htmlFor="resources" className="text-right">Resources</Label>
-                            <Input id="resources" name="resources" type="number" value={editingCourse.resources} onChange={handleChange} />
-                        </div>
+             <div className="grid grid-cols-2 items-center gap-2">
+              <Label htmlFor="language" className="text-right">Language</Label>
+              <Input id="language" name="language" value={editingCourse.language} onChange={handleChange} />
+            </div>
                       </div>
                   </AccordionContent>
                 </AccordionItem>

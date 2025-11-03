@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import { CourseDetailClient } from "@/components/course-detail-client";
 import { getCourseBySlug } from "@/services/courseService";
 
+// Ensure course detail is always rendered dynamically (fresh data)
+export const dynamic = 'force-dynamic';
+
 export default async function CourseDetailPage({
   params,
 }: {

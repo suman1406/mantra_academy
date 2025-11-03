@@ -15,6 +15,9 @@ import { ScrollToTop } from "@/components/scroll-to-top";
 import { getAllCourses } from "../services/courseService";
 import { getAnnouncements } from "../services/announcementService";
 
+// Ensure this server page always fetches live data from the DB (no static cache)
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   // Fetch live data from DB on the server and pass to client components
   const [coursesRaw, announcementsRaw] = await Promise.all([getAllCourses(), getAnnouncements()]);

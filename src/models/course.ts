@@ -15,7 +15,7 @@ export interface ICourse extends Document {
   lectures?: number;
   level?: string;
   language?: string;
-  resources?: number;
+  // resources field removed
   instructor?: any;
   curriculum?: any[];
   faqs?: any[];
@@ -57,7 +57,7 @@ const CourseSchema = new Schema<ICourse>({
   lectures: Number,
   level: { type: String, required: true },
   language: { type: String, required: true },
-  resources: Number,
+  // resources field removed
   instructor: InstructorSchema,
   curriculum: [CurriculumSchema],
   faqs: [{ question: String, answer: String }],

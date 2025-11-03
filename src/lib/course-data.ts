@@ -14,7 +14,6 @@ export type Course = {
   lectures: number;
   level: "Beginner" | "Intermediate" | "Advanced" | "All Levels";
   language: string;
-  resources: number;
   instructor: {
     name: string;
     title: string;

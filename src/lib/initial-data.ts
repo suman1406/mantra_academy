@@ -27,7 +27,6 @@ export type Course = {
   lectures: number;
   level: string;
   language: string;
-  resources: number;
   instructor: {
     name: string;
     title: string;

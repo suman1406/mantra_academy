@@ -1,5 +1,7 @@
 
 import { getAllCourses } from "../../services/courseService";
+// Force dynamic rendering so courses list always reflects DB state
+export const dynamic = 'force-dynamic';
 import CourseGridClient from "./CourseGridClient";
 import { AnimatedSection } from "@/components/animated-section";
 
