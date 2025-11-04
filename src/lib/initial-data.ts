@@ -16,6 +16,7 @@ export type Course = {
   slug: string;
   title: string;
   category: string;
+  featured?: boolean;
   image: string;
   description: string;
   fullDescription: string;

@@ -77,7 +77,9 @@ const CourseCard = ({ course }: { course: any }) => {
 
 
 export function FeaturedCourses({ courses }: { courses: any[] }) {
-  const featuredCourses = (courses || []).slice(0, 4);
+  const featuredCourses = (courses || []).filter((c: any) => !!c.featured).slice(0, 4);
+
+  if (!featuredCourses || featuredCourses.length === 0) return null;
 
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)

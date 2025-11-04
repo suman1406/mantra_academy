@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PlusCircle, Edit, Trash2, Plus, X } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -19,7 +20,7 @@ import Image from "next/image";
 import ProgressBar from "@/components/ui/progress";
 
 const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
-  slug: "", title: "", category: "", image: "https://placehold.co/600x400.png", description: "",
+  slug: "", title: "", category: "", featured: false, image: "https://placehold.co/600x400.png", description: "",
   fullDescription: "", price: 0, // duration stored as total minutes
   duration: 0, lectures: 0, level: "Beginner", language: "English",
   instructor: { name: '', title: '', image: 'https://placehold.co/100x100.png' }, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
@@ -297,6 +298,7 @@ export default function AdminCoursesPage() {
               <TableRow>
                 <TableHead>Title</TableHead>
                 <TableHead>Category</TableHead>
+                <TableHead>Featured</TableHead>
                 <TableHead>Level</TableHead>
                 <TableHead>Price</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -307,6 +309,7 @@ export default function AdminCoursesPage() {
                 <TableRow key={course.slug}>
                   <TableCell className="font-medium">{course.title}</TableCell>
                   <TableCell>{course.category}</TableCell>
+                  <TableCell>{course.featured ? 'Yes' : 'No'}</TableCell>
                   <TableCell>{course.level}</TableCell>
                   <TableCell>₹{course.price}</TableCell>
                   <TableCell className="text-right">
@@ -336,6 +339,12 @@ export default function AdminCoursesPage() {
                      <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="title" className="text-right">Title</Label>
                         <Input id="title" name="title" value={editingCourse.title} onChange={handleChange} className="col-span-3" />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="featured" className="text-right">Feature on homepage</Label>
+                        <div className="col-span-3 flex items-center">
+                          <Switch id="featured" checked={Boolean((editingCourse as any).featured)} onCheckedChange={(val) => setEditingCourse({ ...(editingCourse as any), featured: val } as any)} />
+                        </div>
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="category" className="text-right">Category</Label>

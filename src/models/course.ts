@@ -4,6 +4,7 @@ export interface ICourse extends Document {
   slug: string;
   title: string;
   category?: string;
+  featured?: boolean;
   image?: string;
   description?: string;
   fullDescription?: string;
@@ -45,6 +46,7 @@ const CourseSchema = new Schema<ICourse>({
   slug: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   category: { type: String, required: true },
+  featured: { type: Boolean, default: false },
   // Keep flexible for legacy string urls or cloudinary metadata
   image: { type: Schema.Types.Mixed, required: true },
   description: { type: String, required: true },
