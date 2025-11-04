@@ -103,6 +103,7 @@ const highlightIcons: Record<string, React.ElementType> = {
 
 export function CourseDetailClient({ course }: { course: Course }) {
   const { toast } = useToast();
+  const ENROLL_FORM_URL = "https://forms.gle/weA9tXBK8jTb4GDP8";
   const {
     title,
     description,
@@ -173,14 +174,18 @@ export function CourseDetailClient({ course }: { course: Course }) {
   }, [instructor?.name, (instructor as any)?._id]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-        toast({
-            title: "Reserve Your Slot!",
-            description: `Seats for '${title}' are filling up. Enroll today!`,
-            action: <ToastAction altText="Enroll Now">Enroll Now</ToastAction>,
-            duration: 8000,
-        });
-    }, 2000); // 2-second delay
+  const timer = setTimeout(() => {
+    toast({
+      title: "Reserve Your Slot!",
+      description: `Seats for '${title}' are filling up. Enroll today!`,
+      action: (
+        <ToastAction asChild altText="Enroll Now">
+        <a href={ENROLL_FORM_URL} target="_blank" rel="noreferrer">Enroll Now</a>
+        </ToastAction>
+      ),
+      duration: 8000,
+    });
+  }, 2000); // 2-second delay
 
     return () => clearTimeout(timer);
   }, [toast, title]);
@@ -246,11 +251,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
                   </div>
                 <CardContent className="p-6 bg-background">
                   <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
-                  <Button
-                    size="lg"
-                    className="w-full text-lg mt-4"
-                  >
-                    Enroll Now
+                  <Button asChild size="lg" className="w-full text-lg mt-4">
+                    <a href={ENROLL_FORM_URL} target="_blank" rel="noreferrer">Enroll Now</a>
                   </Button>
                 </CardContent>
               </Card>
@@ -434,11 +436,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
                 {typeof price !== 'undefined' && (
                   <div className="mt-4 text-lg font-semibold">Price: ₹{price}</div>
                 )}
-                <Button
-                  size="lg"
-                  className="w-full text-lg mt-4"
-                >
-                  Enroll Now
+                <Button asChild size="lg" className="w-full text-lg mt-4">
+                  <a href={ENROLL_FORM_URL} target="_blank" rel="noreferrer">Enroll Now</a>
                 </Button>
               </CardContent>
             </Card>
