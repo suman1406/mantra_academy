@@ -117,7 +117,7 @@ export default function AboutPage() {
           >
             <Image
               src="https://placehold.co/600x800.png"
-              alt="Acharya Dr. Ramachandra Bhat Kotemane"
+              alt="Image representing our mission"
               fill
               className="object-cover object-top"
             />
@@ -141,7 +141,7 @@ export default function AboutPage() {
           className="relative h-64 md:h-auto min-h-[300px] md:min-h-[400px] overflow-hidden"
         >
           <Image
-            src="https://placehold.co/600x800.png"
+            src="/images/guru.jpg"
             alt="Acharya Dr. Ramachandra Bhat Kotemane"
             fill
             className="object-cover object-top"
