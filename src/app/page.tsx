@@ -51,7 +51,7 @@ export default async function Home() {
                 priority
               />
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-[hsl(var(--primary))]">
-                Welcome to Mantra Academy
+                Mantra Academy
               </h1>
               <p className="mt-3 text-sm sm:text-base md:text-lg text-[hsl(var(--foreground))] max-w-xl">
                 Unlock the power of sound and vibration. Discover ancient mantras
