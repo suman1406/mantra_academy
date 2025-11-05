@@ -16,7 +16,7 @@ export default function BlogListClient({ posts }: { posts: any[] }) {
             <BookText className="h-8 w-8 md:h-10 md:w-10 text-primary" />
         </div>
         <h1 className="text-3xl md:text-5xl font-bold text-primary drop-shadow">From the Scribe's Desk</h1>
-        <p className="mt-4 max-w-2xl mx-auto text-base md:text-lg text-foreground/80">
+        <p className="mt-2 max-w-2xl mx-auto text-base md:text-lg text-foreground/80">
           Exploring the timeless wisdom of sound, consciousness, and the sacred sciences.
         </p>
       </section>
