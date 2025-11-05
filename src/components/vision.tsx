@@ -39,7 +39,7 @@ export function Vision() {
       <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
         <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden order-1 md:order-1">
              <Image
-              src="/images/vision.jpg"
+              src="/images/vision_jyothi.jpg"
               alt="A vibrant cosmic nebula"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"

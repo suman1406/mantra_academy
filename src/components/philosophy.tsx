@@ -53,7 +53,7 @@ export function Philosophy() {
           </div>
           <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden">
              <Image
-              src="https://placehold.co/600x800.png"
+              src="/images/philosophy.jpg"
               alt="A serene sanctuary with soft light"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"

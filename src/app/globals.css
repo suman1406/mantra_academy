@@ -155,7 +155,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/images/mandala.png');
+  /* background-image: url('/images/mandala.png'); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;

@@ -35,21 +35,22 @@ export default async function Home() {
     <div className="flex flex-col items-center justify-center">
       <WhatsappPopup />
       <ScrollToTop />
-      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden flex flex-col items-center justify-center text-center p-4 -mt-16">
+      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden p-4 -mt-16">
         <div className="absolute inset-0 celestial-background" />
 
-        {/* Content: centered semi-transparent card */}
-        <div className="z-10 flex flex-col items-center justify-center text-center bg-white/0 backdrop-blur-sm p-6 rounded-2xl">
-          <div className="max-w-2xl mx-auto">
+        {/* Content: left text, right Sri Yantra image on md+ */}
+        <div className="z-10 mx-auto w-full max-w-6xl bg-white/0 backdrop-blur-sm p-6 rounded-2xl flex items-center h-full">
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+            <div className="flex flex-col items-start justify-center text-left px-4 md:px-8">
               <Image
                 src="/images/bh-removebg.png"
                 alt="Mantra Academy Logo"
-                width={176}
-                height={176}
-                className="w-36 h-36 md:w-44 md:h-44 object-contain mb-1 mx-auto"
+                width={140}
+                height={140}
+                className="w-28 h-28 md:w-36 md:h-36 object-contain mb-4"
                 priority
               />
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-[hsl(var(--primary))] text-center">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-[hsl(var(--primary))]">
                 Welcome to Mantra Academy
               </h1>
               <p className="mt-3 text-sm sm:text-base md:text-lg text-[hsl(var(--foreground))] max-w-xl">
@@ -58,10 +59,44 @@ export default async function Home() {
                 community.
               </p>
             </div>
+
+            <div className="flex items-center justify-center px-4 md:px-8 mt-8 md:mt-0">
+              <div className="relative w-[26rem] h-[26rem] md:w-[44rem] md:h-[44rem] flex items-center justify-center">
+
+                {/* Sri Yantra shifted up (4rem) and moved to the right */}
+                <div className="absolute inset-0 flex items-center justify-center -translate-y-16">
+                  <Image
+                    src="/images/sriyantra.png"
+                    alt="Sri Yantra"
+                    width={384}
+                    height={384}
+                    className="object-contain z-0 opacity-55 blur-sm scale-[1.22]"
+                    priority
+                  />
+                </div>
+
+                {/* Namaste overlay — perfectly centered */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                  <div className="relative w-[92%] h-[92%] md:w-[96%] md:h-[96%]">
+                    <Image
+                      src="/images/namaste.png"
+                      alt="Namaste"
+                      fill
+                      className="object-contain scale-[1.5] md:scale-[2.05] transition-transform duration-300 z-20"
+                      priority
+                    />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
           </div>
+        </div>
       </section>
 
-  <div className="w-full space-y-16 md:space-y-24 py-16 md:py-24">
+      <div className="w-full space-y-16 md:space-y-24 py-16 md:py-24">
         <AnimatedSection delay={0}>
           <Philosophy />
         </AnimatedSection>
@@ -82,9 +117,9 @@ export default async function Home() {
           <Testimonials />
         </AnimatedSection>
 
-    <AnimatedSection delay={0.5}>
-      <SocialFeed />
-    </AnimatedSection>
+        <AnimatedSection delay={0.5}>
+          <SocialFeed />
+        </AnimatedSection>
 
         <AnimatedSection delay={0.6}>
           <Community />
