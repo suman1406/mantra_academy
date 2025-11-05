@@ -102,6 +102,12 @@ export default function AboutPage() {
       animate="visible"
       className="py-12 sm:py-16 md:py-24 space-y-16 md:space-y-24"
     >
+      {/* Page heading */}
+      <div className="w-full max-w-6xl mx-auto text-center px-4">
+        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-2">About Us</h1>
+        <p className="text-foreground/80 max-w-3xl mx-auto">Learn about our mission, inspiration, and the team that guides Mantra Academy.</p>
+      </div>
+
       {/* Mission Section */}
       <motion.section
         variants={scaleIn}
