@@ -100,7 +100,7 @@ export default function AboutPage() {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="py-12 sm:py-16 md:py-24 space-y-8 md:space-y-16"
+      className="py-8 sm:py-12 md:py-18 space-y-8 md:space-y-14"
     >
       {/* Page heading */}
       <div className="w-full max-w-6xl mx-auto text-center px-4">

@@ -10,7 +10,7 @@ import { formatDateISO } from "@/lib/formatDate";
 
 export default function BlogListClient({ posts }: { posts: any[] }) {
   return (
-    <div className="py-12 sm:py-16 md:py-24">
+    <div className="py-6 sm:py-8 md:py-12">
       <section className="text-center flex flex-col items-center px-4 mb-4">
         <div className="p-4 bg-primary/20 rounded-full inline-block mb-4 border-2 border-primary">
             <BookText className="h-8 w-8 md:h-10 md:w-10 text-primary" />
