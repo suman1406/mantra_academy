@@ -36,16 +36,16 @@ export function Vision() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
-        <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
-           <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden order-1 md:order-2">
+      <Card className="border-border/40 bg-card text-card-foreground backdrop-blur-sm overflow-hidden md:grid md:grid-cols-2 items-center group">
+        <div className="relative h-64 md:h-full w-full min-h-[300px] overflow-hidden order-1 md:order-1">
              <Image
-              src="https://placehold.co/600x800.png"
+              src="/images/vision.jpg"
               alt="A vibrant cosmic nebula"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
-          <div className="p-6 md:p-12 order-2 md:order-1">
+          <div className="p-6 md:p-12 order-2 md:order-2">
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-card-foreground">Our Vision</h2>
             <div className="text-card-foreground/80 mt-4 space-y-4 text-base md:text-lg">
                 <p>
