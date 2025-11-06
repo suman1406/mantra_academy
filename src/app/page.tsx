@@ -35,7 +35,7 @@ export default async function Home() {
     <div className="flex flex-col items-center justify-center">
       <WhatsappPopup />
       <ScrollToTop />
-      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden p-4 -mt-16">
+      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden p-8 -mt-16">
         <div className="absolute inset-0 celestial-background" />
 
         {/* Content: left text, right Sri Yantra image on md+ */}
