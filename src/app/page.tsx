@@ -35,13 +35,13 @@ export default async function Home() {
     <div className="flex flex-col items-center justify-center">
       <WhatsappPopup />
       <ScrollToTop />
-      <section className="relative w-full h-[80vh] md:h-screen overflow-hidden p-8 -mt-16">
+  <section className="relative w-full h-[80vh] md:h-screen overflow-hidden pt-8 pb-4 px-4 md:-mt-16">
         <div className="absolute inset-0 celestial-background" />
 
         {/* Content: left text, right Sri Yantra image on md+ */}
         <div className="z-10 mx-auto w-full max-w-6xl bg-white/0 backdrop-blur-sm p-6 rounded-2xl flex items-center h-full">
           <div className="w-full grid grid-cols-1 md:grid-cols-2 items-center gap-6">
-            <div className="flex flex-col items-start justify-center text-left px-4 md:px-8">
+            <div className="flex flex-col items-start justify-center text-left px-4 md:px-8 pt-6 md:pt-0">
               <Image
                 src="/images/bh-removebg.png"
                 alt="Mantra Academy Logo"
