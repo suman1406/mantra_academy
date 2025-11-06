@@ -23,6 +23,7 @@ export default function AdminAnnouncementsPage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingAnnouncement, setEditingAnnouncement] = useState<Announcement | null>(null);
+  const [originalTitle, setOriginalTitle] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
@@ -43,12 +44,14 @@ export default function AdminAnnouncementsPage() {
     setEditingAnnouncement({ ...emptyAnnouncement });
     setIsEditing(false);
     setIsDialogOpen(true);
+    setOriginalTitle(null);
   };
 
   const handleEdit = (announcement: Announcement) => {
     setEditingAnnouncement({ ...announcement });
     setIsEditing(true);
     setIsDialogOpen(true);
+    setOriginalTitle(announcement.title);
   };
 
   const handleDelete = (title: string) => {
@@ -85,8 +88,9 @@ export default function AdminAnnouncementsPage() {
       setIsSaving(true);
       try {
         if (isEditing) {
-          const title = editingAnnouncement.title;
-          const resp = await fetch(`/api/announcements/${encodeURIComponent(title)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingAnnouncement) });
+          // Use the originalTitle to identify the announcement to update even if the title was edited
+          const target = originalTitle || editingAnnouncement.title;
+          const resp = await fetch(`/api/announcements/${encodeURIComponent(target)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingAnnouncement) });
           if (!resp.ok) throw new Error('Update failed');
           toast({ title: 'Updated', description: 'Announcement updated' });
         } else {
@@ -98,6 +102,7 @@ export default function AdminAnnouncementsPage() {
         if (refreshed.ok) setAnnouncements(await refreshed.json());
         setIsDialogOpen(false);
         setEditingAnnouncement(null);
+        setOriginalTitle(null);
       } catch (err) {
         console.error('Save error', err);
         toast({ title: 'Save failed', description: 'Could not save announcement' });
@@ -165,7 +170,6 @@ export default function AdminAnnouncementsPage() {
                   value={editingAnnouncement.title} 
                   onChange={handleChange} 
                   className="col-span-3"
-                  disabled={isEditing}
                 />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
