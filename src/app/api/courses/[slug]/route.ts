@@ -7,7 +7,8 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const course = await getCourseBySlug(params.slug);
+    const { slug } = await params;
+    const course = await getCourseBySlug(slug);
     if (!course) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(course);
   } catch (err) {
@@ -35,9 +36,11 @@ export async function PUT(
     const payload = verifyToken(token);
     if (!payload) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const body = await req.json();
+  const body = await req.json();
+  const { slug } = await params;
+  try { console.debug('API /api/courses/[slug] PUT body for', slug, ':', JSON.stringify({ title: body.title, slug: body.slug, badges: body.badges })); } catch (e) {}
     // ensure slug matches
-    body.slug = params.slug;
+    body.slug = slug;
     const created = await createOrUpdateCourse(body);
     const doc: any = created as any;
     const serialized = {
@@ -73,7 +76,8 @@ export async function DELETE(
     const payload = verifyToken(token);
     if (!payload) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    await deleteCourse(params.slug);
+    const { slug } = await params;
+    await deleteCourse(slug);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error(err);

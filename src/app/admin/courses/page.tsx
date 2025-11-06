@@ -24,7 +24,8 @@ const emptyCourse: Omit<Course, 'rating' | 'reviews'> = {
   fullDescription: "", price: 0, // duration stored as total minutes
   duration: 0, lectures: 0, level: "Beginner", language: "English",
   instructor: { name: '', title: '', image: 'https://placehold.co/100x100.png' }, curriculum: [], faqs: [], highlights: [], whoCanAttend: [],
-  startDate: new Date().toISOString().split('T')[0]
+  startDate: new Date().toISOString().split('T')[0],
+  badges: []
 };
 
 export default function AdminCoursesPage() {
@@ -143,7 +144,8 @@ export default function AdminCoursesPage() {
         const isEditing = 'slug' in editingCourse && editingCourse.slug && courses.some(c => c.slug === (editingCourse as Course).slug);
         if (isEditing) {
           const slug = (editingCourse as Course).slug;
-          const resp = await fetch(`/api/courses/${encodeURIComponent(slug)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editingCourse) });
+          const payload = { ...(editingCourse as any), badges: (editingCourse as any).badges || [] };
+          const resp = await fetch(`/api/courses/${encodeURIComponent(slug)}`, { method: 'PUT', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
           if (!resp.ok) throw new Error('Update failed');
           toast({ title: 'Updated', description: 'Course updated' });
         } else {
@@ -153,6 +155,7 @@ export default function AdminCoursesPage() {
             slug,
             rating: 0,
             reviews: 0,
+            badges: (editingCourse as any).badges || [],
           } as Course;
           const resp = await fetch('/api/courses', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newCourse) });
           if (!resp.ok) throw new Error('Create failed');
@@ -279,6 +282,31 @@ export default function AdminCoursesPage() {
     newEditingCourse.curriculum[sectionIndex].lessons.splice(lessonIndex, 1);
     setEditingCourse(newEditingCourse);
   }
+
+  // Badges (info-cards) helpers
+  const addBadge = (preset?: { title?: string; subtitle?: string; icon?: string }) => {
+    if (!editingCourse) return;
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    if (!Array.isArray(newEditingCourse.badges)) newEditingCourse.badges = [];
+    newEditingCourse.badges.push({ title: preset?.title || '', subtitle: preset?.subtitle || '', icon: preset?.icon || '' });
+    setEditingCourse(newEditingCourse);
+  };
+
+  const updateBadgeField = (index: number, field: string, value: any) => {
+    if (!editingCourse) return;
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    if (!Array.isArray(newEditingCourse.badges)) newEditingCourse.badges = [];
+    newEditingCourse.badges[index][field] = value;
+    setEditingCourse(newEditingCourse);
+  };
+
+  const removeBadge = (index: number) => {
+    if (!editingCourse) return;
+    const newEditingCourse = JSON.parse(JSON.stringify(editingCourse));
+    if (!Array.isArray(newEditingCourse.badges)) newEditingCourse.badges = [];
+    newEditingCourse.badges.splice(index, 1);
+    setEditingCourse(newEditingCourse);
+  };
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
@@ -535,6 +563,39 @@ export default function AdminCoursesPage() {
                   </Accordion>
               ))}
 
+              {/* Badges / Info Cards */}
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="font-semibold">Badges / Info Cards</AccordionTrigger>
+                  <AccordionContent className="space-y-4 pt-4">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm text-muted-foreground">Quick add:</p>
+                      <Button variant="outline" size="sm" onClick={() => addBadge({ title: 'Live Recordings', subtitle: 'Available for 30 days (1080P)', icon: '🎥' })}><Plus className="h-4 w-4 mr-2" />Recordings</Button>
+                      <Button variant="outline" size="sm" onClick={() => addBadge({ title: 'Live Practice Timings', subtitle: '7:00 PM - 8:15 PM IST', icon: '🕘' })}><Plus className="h-4 w-4 mr-2" />Timings</Button>
+                      <Button variant="outline" size="sm" onClick={() => addBadge({ title: 'If not Happy', subtitle: '100% money back*', icon: '✅' })}><Plus className="h-4 w-4 mr-2" />Guarantee</Button>
+                    </div>
+
+                    {(editingCourse.badges || []).map((b: any, i: number) => (
+                      <Card key={i} className="p-4 bg-muted/50">
+                        <div className="flex justify-between items-start mb-2">
+                          <div className="w-full grid grid-cols-3 gap-3">
+                            <Input placeholder="Title" value={b.title} onChange={e => updateBadgeField(i, 'title', e.target.value)} />
+                            <Input placeholder="Subtitle" value={b.subtitle || ''} onChange={e => updateBadgeField(i, 'subtitle', e.target.value)} />
+                            <Input placeholder="Icon (name)" value={b.icon || ''} onChange={e => updateBadgeField(i, 'icon', e.target.value)} />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Button variant="ghost" size="icon" onClick={() => removeBadge(i)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+
+                    <div className="flex gap-2">
+                      <Button variant="outline" onClick={() => addBadge()}><Plus className="h-4 w-4 mr-2" />Add Badge</Button>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
             </ScrollArea>
           )}

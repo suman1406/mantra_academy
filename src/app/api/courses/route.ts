@@ -35,7 +35,8 @@ export async function POST(req: Request) {
     const payload = verifyToken(token);
     if (!payload) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const body = await req.json();
+  const body = await req.json();
+  try { console.debug('API /api/courses POST body:', JSON.stringify({ title: body.title, slug: body.slug, badges: body.badges })); } catch (e) {}
     const created = await createOrUpdateCourse(body);
     const doc: any = created as any;
     const serialized = {

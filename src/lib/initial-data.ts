@@ -53,6 +53,11 @@ export type Course = {
     title: string;
     description: string;
   }[];
+  badges?: {
+    title: string;
+    subtitle?: string;
+    icon?: string;
+  }[];
   startDate?: string;
 };
 

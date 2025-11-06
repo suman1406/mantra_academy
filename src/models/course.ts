@@ -22,6 +22,8 @@ export interface ICourse extends Document {
   faqs?: any[];
   highlights?: any[];
   whoCanAttend?: any[];
+  // small badges/info cards shown on course page
+  badges?: { title: string; subtitle?: string; icon?: string }[];
   startDate?: Date;
 }
 
@@ -65,6 +67,7 @@ const CourseSchema = new Schema<ICourse>({
   faqs: [{ question: String, answer: String }],
   highlights: [{ title: String, description: String }],
   whoCanAttend: [{ title: String, description: String }],
+  badges: [{ title: String, subtitle: String, icon: String }],
   startDate: { type: Date, required: true },
 }, { timestamps: true });
 

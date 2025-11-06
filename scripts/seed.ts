@@ -43,6 +43,25 @@ async function seed() {
         await Announcement.updateOne({ title: a.title }, { $set: a }, { upsert: true });
       }
 
+      // Migration: ensure existing Course documents have a badges field
+      try {
+        console.log('Checking existing courses for badges...');
+        const dbCourses = await Course.find().lean();
+        for (const c of dbCourses) {
+          if (!Array.isArray(c.badges) || c.badges.length === 0) {
+            const defaultBadges = [
+              { title: 'Live Practice Timings', subtitle: '7:00 PM - 8:15 PM IST', icon: '🕘' },
+              { title: 'Live Recordings', subtitle: 'Available for 30 days (1080P)', icon: '🎥' },
+              { title: 'If not Happy', subtitle: '100% money back*', icon: '✅' },
+            ];
+            await Course.updateOne({ slug: c.slug }, { $set: { badges: defaultBadges } });
+            console.log(`Added default badges to course: ${c.slug}`);
+          }
+        }
+      } catch (e) {
+        console.error('Error while migrating badges for existing courses', e);
+      }
+
       // Optional admin seed if env provided
       const adminEmail = process.env.SEED_ADMIN_EMAIL;
       const adminPassword = process.env.SEED_ADMIN_PASSWORD;

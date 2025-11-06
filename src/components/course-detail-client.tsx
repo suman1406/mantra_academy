@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Course } from "@/context/AppDataContext";
 import ResponsiveImage from "@/components/ui/responsive-image";
 import { Button } from "@/components/ui/button";
@@ -65,17 +65,24 @@ const OmIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 // Info card styled for spiritual beige-maroon theme
 const InfoCard = ({
-  icon: Icon,
+  icon,
   title,
   text,
 }: {
-  icon: React.ElementType;
+  // icon can be a lucide React component or a direct emoji/text string
+  icon: React.ElementType | string;
   title: string;
   text: string;
 }) => (
   <Card className="bg-background p-4 shadow-md rounded-xl border border-primary/20">
     <div className="flex items-center gap-3">
-      <Icon className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+      {typeof icon === 'string' ? (
+        // Render emoji or text directly when provided as string
+        <div className="text-2xl md:text-3xl" aria-hidden>{icon}</div>
+      ) : (
+        // Render lucide icon component
+        React.createElement(icon as React.ElementType, { className: 'h-6 w-6 md:h-8 md:w-8 text-primary' })
+      )}
       <div>
         <p className="font-semibold text-muted-foreground text-sm">{title}</p>
         <p className="text-base md:text-lg font-bold text-foreground">{text}</p>
@@ -258,28 +265,44 @@ export function CourseDetailClient({ course }: { course: Course }) {
               </Card>
             </div>
             
-            {/* Info Cards */}
+            {/* Info Cards (from course.badges if present; fallback to defaults) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <InfoCard
-                icon={CalendarDays}
-                title="Starting from"
-                text={getStartDateText()}
-              />
-              <InfoCard
-                icon={Clock}
-                title="Live Practice Timings"
-                text="7:00 PM - 8:15 PM IST"
-              />
-              <InfoCard
-                icon={Video}
-                title="Live Recordings"
-                text="Available for 30 days (1080P)"
-              />
-              <InfoCard
-                icon={Smile}
-                title="If not Happy"
-                text="100% money back*"
-              />
+              {(() => {
+                const cards: { icon: React.ElementType; title: string; text: string }[] = [];
+                // Always include start date as first card
+                cards.push({ icon: CalendarDays, title: 'Starting from', text: getStartDateText() });
+
+                if (Array.isArray((course as any).badges) && (course as any).badges.length > 0) {
+                  const badges = (course as any).badges as any[];
+                  const iconMap: Record<string, React.ElementType> = { Clock, Video, Smile, CalendarDays, Gift, Users, School };
+                  for (const b of badges) {
+                    const rawIcon = b?.icon || '';
+                    // if admin entered a mapped name (e.g., "Video") use the lucide icon
+                    let iconEntry: React.ElementType | string = BadgeCheck;
+                    if (rawIcon && iconMap[rawIcon]) {
+                      iconEntry = iconMap[rawIcon];
+                    } else if (rawIcon && typeof rawIcon === 'string') {
+                      // detect emoji / non-ascii glyphs; prefer to render the raw string
+                      let isEmoji = false;
+                      try {
+                        isEmoji = /\p{Extended_Pictographic}/u.test(rawIcon);
+                      } catch (e) {
+                        isEmoji = /[^\x00-\x7F]/.test(rawIcon);
+                      }
+                      iconEntry = isEmoji || rawIcon.length <= 3 ? rawIcon : BadgeCheck;
+                    }
+                    cards.push({ icon: iconEntry as any, title: b.title || '', text: b.subtitle || '' });
+                  }
+                } 
+                // else {
+                //   // fallback to legacy hard-coded cards
+                //   cards.push({ icon: Clock, title: 'Live Practice Timings', text: '7:00 PM - 8:15 PM IST' });
+                //   cards.push({ icon: Video, title: 'Live Recordings', text: 'Available for 30 days (1080P)' });
+                //   cards.push({ icon: Smile, title: 'If not Happy', text: '100% money back*' });
+                // }
+
+                return cards.map((c, i) => <InfoCard key={i} icon={c.icon} title={c.title} text={c.text} />);
+              })()}
             </div>
 
 
