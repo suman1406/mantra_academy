@@ -1,14 +1,30 @@
 import connectToDatabase from "../lib/mongodb";
 import { BlogPost } from "../models/blog";
+import { blogPosts as staticBlogPosts } from "../lib/blog-data";
 
 export async function getAllPosts() {
-  await connectToDatabase();
-  return BlogPost.find().sort({ createdAt: -1 }).lean();
+  try {
+    await connectToDatabase();
+    return BlogPost.find().sort({ createdAt: -1 }).lean();
+  } catch (err) {
+    // If DB is not reachable (DNS/ECONNREFUSED), fall back to bundled static posts
+    // so the site remains usable in offline/local dev.
+    // eslint-disable-next-line no-console
+    console.error('blogService.getAllPosts: DB unavailable, falling back to staticBlogPosts', err);
+    return staticBlogPosts.map((p) => ({ ...p }));
+  }
 }
 
 export async function getPostBySlug(slug: string) {
-  await connectToDatabase();
-  return BlogPost.findOne({ slug }).lean();
+  try {
+    await connectToDatabase();
+    return BlogPost.findOne({ slug }).lean();
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(`blogService.getPostBySlug: DB unavailable for slug=${slug}, falling back to staticBlogPosts`, err);
+    const found = staticBlogPosts.find((p) => p.slug === slug);
+    return found ? { ...found } : null;
+  }
 }
 
 export async function createOrUpdatePost(data: any) {

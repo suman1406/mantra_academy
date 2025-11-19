@@ -8,6 +8,7 @@ import Link from "next/link";
 import ResponsiveImage from "@/components/ui/responsive-image";
 import { motion } from "framer-motion";
 import { formatDateISO } from "@/lib/formatDate";
+import { blogPosts as staticBlogPosts } from "@/lib/blog-data";
 
 export default function BlogListClient({ posts: initialPosts }: { posts: any[] }) {
   const [posts, setPosts] = useState<any[]>(initialPosts || []);
@@ -29,10 +30,16 @@ export default function BlogListClient({ posts: initialPosts }: { posts: any[] }
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         if (!mounted) return;
-        setPosts(Array.isArray(data) ? data : []);
+        if (Array.isArray(data) && data.length > 0) {
+          setPosts(data);
+        } else {
+          // API returned empty — fall back to bundled static posts
+          setPosts(staticBlogPosts.map((p) => ({ ...p })));
+        }
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.error('Client fetch /api/blogs failed', e);
+        console.error('Client fetch /api/blogs failed, using static fallback', e);
+        if (mounted) setPosts(staticBlogPosts.map((p) => ({ ...p })));
       } finally {
         if (mounted) setLoading(false);
       }
