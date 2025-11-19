@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
 import { ArrowRight, BookText } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,40 @@ import ResponsiveImage from "@/components/ui/responsive-image";
 import { motion } from "framer-motion";
 import { formatDateISO } from "@/lib/formatDate";
 
-export default function BlogListClient({ posts }: { posts: any[] }) {
+export default function BlogListClient({ posts: initialPosts }: { posts: any[] }) {
+  const [posts, setPosts] = useState<any[]>(initialPosts || []);
+  const [loading, setLoading] = useState(false);
+
+  // Keep local posts in sync when server provides them
+  useEffect(() => {
+    setPosts(initialPosts || []);
+  }, [initialPosts]);
+
+  // If there are no posts from the server (or stale build), fetch from the API on the client
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      if (posts && posts.length > 0) return;
+      setLoading(true);
+      try {
+        const res = await fetch('/api/blogs');
+        if (!res.ok) throw new Error('Failed to fetch');
+        const data = await res.json();
+        if (!mounted) return;
+        setPosts(Array.isArray(data) ? data : []);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Client fetch /api/blogs failed', e);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="py-6 sm:py-8 md:py-12">
       <section className="text-center flex flex-col items-center px-4 mb-4">
@@ -23,7 +57,7 @@ export default function BlogListClient({ posts }: { posts: any[] }) {
 
       <section className="w-full max-w-5xl mx-auto px-4 sm:px-0">
         <div className="grid grid-cols-1 gap-12 md:gap-16">
-          {posts.map((post, index) => (
+          {(posts || []).map((post, index) => (
             <motion.div
               key={post.slug}
               initial={{ opacity: 0, y: 50 }}
