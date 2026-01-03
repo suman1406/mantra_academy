@@ -37,22 +37,22 @@ import { ToastAction } from "@/components/ui/toast";
 
 // Custom Dharma Wheel Icon
 const DharmaIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="2" />
-        <path d="m12 14 1.8-5.4" />
-        <path d="m12 14-1.8-5.4" />
-        <path d="m14.24 16.24 3.52-1.2" />
-        <path d="m9.76 7.76-3.52 1.2" />
-        <path d="m16.24 9.76 1.2-3.52" />
-        <path d="m7.76 14.24-1.2 3.52" />
-        <path d="M12 2v2" />
-        <path d="M12 20v2" />
-        <path d="m4.93 4.93 1.41 1.41" />
-        <path d="m17.66 17.66 1.41 1.41" />
-        <path d="m4.93 19.07 1.41-1.41" />
-        <path d="m17.66 6.34 1.41-1.41" />
-    </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="2" />
+    <path d="m12 14 1.8-5.4" />
+    <path d="m12 14-1.8-5.4" />
+    <path d="m14.24 16.24 3.52-1.2" />
+    <path d="m9.76 7.76-3.52 1.2" />
+    <path d="m16.24 9.76 1.2-3.52" />
+    <path d="m7.76 14.24-1.2 3.52" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="m4.93 19.07 1.41-1.41" />
+    <path d="m17.66 6.34 1.41-1.41" />
+  </svg>
 );
 
 // OM glyph provided by user — use theme color via `currentColor`
@@ -101,11 +101,11 @@ const whoCanAttendIcons: Record<string, React.ElementType> = {
 };
 
 const highlightIcons: Record<string, React.ElementType> = {
-    "Master the Art of Chanting": AudioWaveform,
-    "Go Beyond the Words": BookHeart,
-    "Symbolism & Stories of the Devatās": Flower2,
-    "Free E-Guide for Daily Practice": Gift,
-    "Interactive Q&A + Personal Mentoring": MessageSquare,
+  "Master the Art of Chanting": AudioWaveform,
+  "Go Beyond the Words": BookHeart,
+  "Symbolism & Stories of the Devatās": Flower2,
+  "Free E-Guide for Daily Practice": Gift,
+  "Interactive Q&A + Personal Mentoring": MessageSquare,
 }
 
 export function CourseDetailClient({ course }: { course: Course }) {
@@ -176,23 +176,23 @@ export function CourseDetailClient({ course }: { course: Course }) {
         // ignore fetch errors
       }
     })();
-  // only run when course instructor changes
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // only run when course instructor changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [instructor?.name, (instructor as any)?._id]);
 
   useEffect(() => {
-  const timer = setTimeout(() => {
-    toast({
-      title: "Reserve Your Slot!",
-      description: `Seats for '${title}' are filling up. Enroll today!`,
-      action: (
-        <ToastAction asChild altText="Enroll Now">
-        <a href={ENROLL_FORM_URL} target="_blank" rel="noreferrer">Enroll Now</a>
-        </ToastAction>
-      ),
-      duration: 8000,
-    });
-  }, 2000); // 2-second delay
+    const timer = setTimeout(() => {
+      toast({
+        title: "Reserve Your Slot!",
+        description: `Seats for '${title}' are filling up. Enroll today!`,
+        action: (
+          <ToastAction asChild altText="Enroll Now">
+            <a href={ENROLL_FORM_URL} target="_blank" rel="noreferrer">Enroll Now</a>
+          </ToastAction>
+        ),
+        duration: 8000,
+      });
+    }, 2000); // 2-second delay
 
     return () => clearTimeout(timer);
   }, [toast, title]);
@@ -217,7 +217,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
               {level && <span className="px-2 py-1 bg-muted rounded">{level}</span>}
               {language && <span className="px-2 py-1 bg-muted rounded">{language}</span>}
               {typeof price !== 'undefined' && <span className="px-2 py-1 bg-muted rounded">₹{price}</span>}
-              {typeof duration !== 'undefined' && duration > 0 && <span className="px-2 py-1 bg-muted rounded">{Math.floor(duration/60)}h {duration%60}m</span>}
+              {typeof duration !== 'undefined' && duration > 0 && <span className="px-2 py-1 bg-muted rounded">{Math.floor(duration / 60)}h {duration % 60}m</span>}
               {typeof lectures !== 'undefined' && lectures > 0 && <span className="px-2 py-1 bg-muted rounded">{lectures} lectures</span>}
               {instructor && <span className="px-2 py-1 bg-muted rounded">Instructor: {instructor.name}</span>}
             </div>
@@ -249,22 +249,25 @@ export function CourseDetailClient({ course }: { course: Course }) {
       <div className="container mx-auto mt-8 px-4">
         <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
           <main className="lg:col-span-2">
-            
+
             {/* Mobile-only Timer */}
             <div className="block lg:hidden mb-8">
               <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20 bg-background">
-                 <div className="relative aspect-video">
-                    <ResponsiveImage image={image} alt={title} className="object-cover w-full h-full" />
-                  </div>
+                <div className="relative aspect-video">
+                  <ResponsiveImage image={image} alt={title} className="object-cover w-full h-full" />
+                </div>
                 <CardContent className="p-6 bg-background">
                   <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
+                  {typeof price !== 'undefined' && (
+                    <div className="mt-4 text-lg font-semibold">Price: ₹{price}</div>
+                  )}
                   <Button asChild size="lg" className="w-full text-lg mt-4">
                     <a href={ENROLL_FORM_URL} target="_blank" rel="noreferrer">Enroll Now</a>
                   </Button>
                 </CardContent>
               </Card>
             </div>
-            
+
             {/* Info Cards (from course.badges if present; fallback to defaults) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {(() => {
@@ -293,7 +296,7 @@ export function CourseDetailClient({ course }: { course: Course }) {
                     }
                     cards.push({ icon: iconEntry as any, title: b.title || '', text: b.subtitle || '' });
                   }
-                } 
+                }
                 // else {
                 //   // fallback to legacy hard-coded cards
                 //   cards.push({ icon: Clock, title: 'Live Practice Timings', text: '7:00 PM - 8:15 PM IST' });
@@ -308,29 +311,29 @@ export function CourseDetailClient({ course }: { course: Course }) {
 
             {/* Course Highlights */}
             {highlights && highlights.length > 0 && (
-                 <section className="mb-12">
-                    <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
-                        <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
-                            Course Highlights
-                        </h2>
-                        <ul className="space-y-4">
-                            {highlights.map((highlight: any, index: number) => {
-                                const Icon = highlightIcons[highlight.title as keyof typeof highlightIcons] || BadgeCheck;
-                                return (
-                                    <li key={index} className="flex items-start gap-4">
-                                        <div className="p-2 bg-primary/10 rounded-full mt-1">
-                                           <Icon className="h-5 w-5 text-primary" />
-                                        </div>
-                                        <div>
-                                            <h3 className="font-bold text-lg text-foreground">{highlight.title}</h3>
-                                            <div className="text-foreground/80 text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(highlight.description || '') }} />
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </Card>
-                </section>
+              <section className="mb-12">
+                <Card className="p-6 md:p-8 bg-background shadow-md rounded-xl border border-primary/20">
+                  <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 border-b border-border pb-2 font-semibold">
+                    Course Highlights
+                  </h2>
+                  <ul className="space-y-4">
+                    {highlights.map((highlight: any, index: number) => {
+                      const Icon = highlightIcons[highlight.title as keyof typeof highlightIcons] || BadgeCheck;
+                      return (
+                        <li key={index} className="flex items-start gap-4">
+                          <div className="p-2 bg-primary/10 rounded-full mt-1">
+                            <Icon className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-lg text-foreground">{highlight.title}</h3>
+                            <div className="text-foreground/80 text-sm md:text-base" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(highlight.description || '') }} />
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Card>
+              </section>
             )}
 
             {/* About */}
@@ -344,107 +347,107 @@ export function CourseDetailClient({ course }: { course: Course }) {
                 </div>
               </Card>
             </section>
-            
+
             {/* Who Can Attend */}
             {whoCanAttend && whoCanAttend.length > 0 && (
-                <section className="mb-12">
-                    <h2 className="text-2xl md:text-3xl font-headline text-center text-primary mb-8 font-semibold">
-                        Who Can Attend?
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whoCanAttend.map((attendee: any, index: number) => {
-               const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || OmIcon;
-                            return (
-                                <Card key={index} className="bg-background shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
-                                    <div className="p-3 bg-primary/10 rounded-full mb-4">
-                    <Icon className="h-8 w-8 text-primary" />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-foreground mb-2">{attendee.title}</h3>
-                                    <div className="text-foreground/80 text-sm" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(attendee.description || '') }} />
-                                </Card>
-                            )
-                        })}
-                    </div>
-                </section>
+              <section className="mb-12">
+                <h2 className="text-2xl md:text-3xl font-headline text-center text-primary mb-8 font-semibold">
+                  Who Can Attend?
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {whoCanAttend.map((attendee: any, index: number) => {
+                    const Icon = whoCanAttendIcons[attendee.title as keyof typeof whoCanAttendIcons] || OmIcon;
+                    return (
+                      <Card key={index} className="bg-background shadow-md rounded-xl border border-primary/20 text-center p-6 flex flex-col items-center">
+                        <div className="p-3 bg-primary/10 rounded-full mb-4">
+                          <Icon className="h-8 w-8 text-primary" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground mb-2">{attendee.title}</h3>
+                        <div className="text-foreground/80 text-sm" dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(attendee.description || '') }} />
+                      </Card>
+                    )
+                  })}
+                </div>
+              </section>
             )}
 
             {/* Curriculum */}
             {curriculum && curriculum.length > 0 && (
-                <section className="mb-12">
+              <section className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
-                    Course Curriculum
+                  Course Curriculum
                 </h2>
                 <Accordion
-                    type="single"
-                    collapsible
-                    className="w-full space-y-3"
+                  type="single"
+                  collapsible
+                  className="w-full space-y-3"
                 >
-                    {curriculum.map((section: any, index: number) => (
+                  {curriculum.map((section: any, index: number) => (
                     <AccordionItem
-                        value={`item-${index}`}
-                        key={index}
-                        className="bg-background border border-border rounded-xl px-4"
+                      value={`item-${index}`}
+                      key={index}
+                      className="bg-background border border-border rounded-xl px-4"
                     >
-                        <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline text-left">
-            <div className="flex items-center gap-4">
-              <span className="text-lg font-semibold text-foreground">{section.title}</span>
-            </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
+                      <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline text-left">
+                        <div className="flex items-center gap-4">
+                          <span className="text-lg font-semibold text-foreground">{section.title}</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
                         <ul className="space-y-2 pt-2">
-              {section.lessons.map((lesson: any, i: number) => (
+                          {section.lessons.map((lesson: any, i: number) => (
                             <li
-                                key={i}
-                                className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
+                              key={i}
+                              className="flex justify-between items-center p-2 rounded-md hover:bg-background/10"
                             >
-                                <span className="flex items-center gap-2 text-foreground/80">
+                              <span className="flex items-center gap-2 text-foreground/80">
                                 <OmIcon className="h-4 w-4 text-primary" />
                                 {lesson.title}
-                                </span>
-                                <span className="text-sm text-muted-foreground">
-                {(() => {
-                  const mins = Number(lesson.durationMinutes ?? lesson.duration ?? 0);
-                  if (!mins) return null;
-                  return `${Math.floor(mins/60)}h ${mins%60}m`;
-                })()}
-                                </span>
+                              </span>
+                              <span className="text-sm text-muted-foreground">
+                                {(() => {
+                                  const mins = Number(lesson.durationMinutes ?? lesson.duration ?? 0);
+                                  if (!mins) return null;
+                                  return `${Math.floor(mins / 60)}h ${mins % 60}m`;
+                                })()}
+                              </span>
                             </li>
-                            ))}
+                          ))}
                         </ul>
-                        </AccordionContent>
+                      </AccordionContent>
                     </AccordionItem>
-                    ))}
+                  ))}
                 </Accordion>
-                </section>
+              </section>
             )}
 
             {/* FAQs */}
             {faqs && faqs.length > 0 && (
-                <section>
+              <section>
                 <h2 className="text-2xl md:text-3xl font-headline text-primary mb-4 font-semibold">
-                    Frequently Asked Questions
+                  Frequently Asked Questions
                 </h2>
                 <Accordion
-                    type="single"
-                    collapsible
-                    className="w-full space-y-3"
+                  type="single"
+                  collapsible
+                  className="w-full space-y-3"
                 >
-                    {faqs.map((faq: any, index: number) => (
+                  {faqs.map((faq: any, index: number) => (
                     <AccordionItem
-                        value={`faq-${index}`}
-                        key={index}
-                        className="bg-background border border-border rounded-xl px-4"
+                      value={`faq-${index}`}
+                      key={index}
+                      className="bg-background border border-border rounded-xl px-4"
                     >
-                        <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
+                      <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                         {faq.question}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-foreground/80 text-base">
+                      </AccordionTrigger>
+                      <AccordionContent className="text-foreground/80 text-base">
                         <div dangerouslySetInnerHTML={{ __html: renderMarkdownToHtml(faq.answer || '') }} />
-                        </AccordionContent>
+                      </AccordionContent>
                     </AccordionItem>
-                    ))}
+                  ))}
                 </Accordion>
-                </section>
+              </section>
             )}
           </main>
 
@@ -452,8 +455,8 @@ export function CourseDetailClient({ course }: { course: Course }) {
           <aside className="hidden lg:block lg:sticky lg:top-24 h-fit">
             <Card className="shadow-lg rounded-xl overflow-hidden border border-primary/20 bg-background">
               <div className="relative aspect-video">
-                  <ResponsiveImage image={image} alt={title} className="object-cover w-full h-full" />
-                </div>
+                <ResponsiveImage image={image} alt={title} className="object-cover w-full h-full" />
+              </div>
               <CardContent className="p-6 bg-background">
                 <CourseCountdown targetDate={startDate ? new Date(startDate) : undefined} />
                 {typeof price !== 'undefined' && (
@@ -471,4 +474,3 @@ export function CourseDetailClient({ course }: { course: Course }) {
   );
 }
 
-    
